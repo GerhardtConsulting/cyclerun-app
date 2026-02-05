@@ -8,31 +8,31 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CycleRun — Kostenloses Indoor Training mit Kamera | Spinning & Laufband Simulator",
-  description: "CycleRun ist die kostenlose Zwift-Alternative für dein Heimtraining. Nutze deine Webcam statt teurer Sensoren — für Spinning, Ergometer, Laufband und alte Heimtrainer. Keine Hardware, kein Abo.",
-  keywords: "indoor cycling, spinning simulator, laufband simulator, zwift alternative kostenlos, ergometer app, heimtrainer webcam, indoor training, rouvy alternative, cycling app free, home trainer software",
+  title: "CycleRun — Free Indoor Training with Your Webcam | Cycling & Running Simulator",
+  description: "CycleRun is the free Zwift alternative for your home workout. Use your webcam instead of expensive sensors — for spinning bikes, ergometers, treadmills and old home trainers. No hardware, no subscription.",
+  keywords: "indoor cycling, spinning simulator, treadmill simulator, zwift alternative free, ergometer app, home trainer webcam, indoor training, rouvy alternative, cycling app free, home trainer software",
   authors: [{ name: "CycleRun.app" }],
   robots: "index, follow",
   metadataBase: new URL("https://cyclerun.app"),
   alternates: {
     canonical: "/",
     languages: {
-      de: "/",
-      en: "/en/",
+      en: "/",
+      de: "/de/",
     },
   },
   openGraph: {
-    title: "CycleRun — Kostenloses Indoor Training mit Kamera",
-    description: "Die kostenlose Zwift-Alternative: Nutze deine Webcam statt teurer Sensoren für Spinning, Ergometer & Laufband.",
+    title: "CycleRun — Free Indoor Training with Your Webcam",
+    description: "The free Zwift alternative: Use your webcam instead of expensive sensors for spinning, ergometer & treadmill.",
     type: "website",
     url: "https://cyclerun.app/",
-    locale: "de_DE",
+    locale: "en_US",
     siteName: "CycleRun",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CycleRun — Kostenloses Indoor Training mit Kamera",
-    description: "Die kostenlose Zwift-Alternative: Nutze deine Webcam statt teurer Sensoren.",
+    title: "CycleRun — Free Indoor Training with Your Webcam",
+    description: "The free Zwift alternative: Use your webcam instead of expensive sensors.",
   },
   other: {
     "theme-color": "#0A0A0B",
@@ -44,17 +44,17 @@ const jsonLdWebApp = {
   "@type": "WebApplication",
   name: "CycleRun",
   url: "https://cyclerun.app",
-  description: "Kostenlose kamerabasierte Indoor-Training-Plattform für Cycling und Running. Nutze deine Webcam statt teurer Sensoren.",
+  description: "Free camera-based indoor training platform for cycling and running. Use your webcam instead of expensive sensors.",
   applicationCategory: "SportsApplication",
   operatingSystem: "Web",
   offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
   featureList: [
-    "Webcam-basierte Bewegungserkennung",
-    "Spinning-Bike Kompatibilität",
-    "Ergometer Kompatibilität",
-    "Laufband Kompatibilität",
-    "Echtzeit-Video-Synchronisation",
-    "Keine zusätzliche Hardware nötig",
+    "Webcam-based motion detection",
+    "Spinning bike compatible",
+    "Ergometer compatible",
+    "Treadmill compatible",
+    "Real-time video synchronization",
+    "No additional hardware needed",
   ],
   softwareVersion: "1.0-beta",
   inLanguage: ["de", "en"],
@@ -64,13 +64,13 @@ const jsonLdFaq = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
-    { "@type": "Question", name: "Ist CycleRun wirklich kostenlos?", acceptedAnswer: { "@type": "Answer", text: "Ja, CycleRun ist ein Community-Projekt und vollständig kostenlos. Es gibt keine versteckten Kosten, kein Abo und keine Premium-Version. Du brauchst nur eine Webcam und einen Browser." } },
-    { "@type": "Question", name: "Welche Geräte sind mit CycleRun kompatibel?", acceptedAnswer: { "@type": "Answer", text: "CycleRun funktioniert mit jedem Heimtrainer, bei dem sich Pedale oder Beine sichtbar bewegen: Spinning-Bikes, Ergometer, alte Heimtrainer, Laufbänder und Indoor Bikes. Du brauchst keinen Smart Trainer und keine Bluetooth-Sensoren." } },
-    { "@type": "Question", name: "Wie funktioniert CycleRun ohne Sensoren?", acceptedAnswer: { "@type": "Answer", text: "CycleRun nutzt deine Webcam und KI-gestützte Bewegungserkennung, um deine Trittfrequenz (RPM) zu messen. Du platzierst Erkennungszonen über deinen Knien oder Pedalen, und die Software erkennt automatisch deine Bewegung." } },
-    { "@type": "Question", name: "Was ist der Unterschied zwischen CycleRun und Zwift?", acceptedAnswer: { "@type": "Answer", text: "Zwift erfordert einen Smart Trainer (ab €300) und ein monatliches Abo (€17,99/Monat). CycleRun ist kostenlos und nutzt nur deine vorhandene Webcam." } },
-    { "@type": "Question", name: "Funktioniert CycleRun auch mit einem Laufband?", acceptedAnswer: { "@type": "Answer", text: "Der Running-Modus ist aktuell in Entwicklung. Die Kamera-Erkennung wird auch Laufbewegungen unterstützen." } },
-    { "@type": "Question", name: "Werden meine Webcam-Bilder gespeichert oder übertragen?", acceptedAnswer: { "@type": "Answer", text: "Nein, absolut nicht. Die gesamte Bildverarbeitung findet lokal in deinem Browser statt." } },
-    { "@type": "Question", name: "Kann ich mein altes Ergometer oder Heimtrainer verwenden?", acceptedAnswer: { "@type": "Answer", text: "Ja! Egal ob dein Ergometer 5 oder 25 Jahre alt ist — solange sich deine Beine bewegen, kann CycleRun die Bewegung erkennen." } },
+    { "@type": "Question", name: "Is CycleRun really free?", acceptedAnswer: { "@type": "Answer", text: "Yes, CycleRun is a community project and completely free. No hidden costs, no subscription, no premium version. You just need a webcam and a browser." } },
+    { "@type": "Question", name: "Which devices are compatible with CycleRun?", acceptedAnswer: { "@type": "Answer", text: "CycleRun works with any home trainer where pedals or legs move visibly: spinning bikes, ergometers, old home trainers, treadmills and indoor bikes. No smart trainer or Bluetooth sensors needed." } },
+    { "@type": "Question", name: "How does CycleRun work without sensors?", acceptedAnswer: { "@type": "Answer", text: "CycleRun uses your webcam and AI-powered motion detection to measure your cadence (RPM). You place detection zones over your knees or pedals, and the software automatically detects your movement." } },
+    { "@type": "Question", name: "What is the difference between CycleRun and Zwift?", acceptedAnswer: { "@type": "Answer", text: "Zwift requires a smart trainer (from €300) and a monthly subscription (€17.99/month). CycleRun is free and only uses your existing webcam." } },
+    { "@type": "Question", name: "Does CycleRun work with a treadmill?", acceptedAnswer: { "@type": "Answer", text: "Running mode is currently in development. Camera detection will also support running movements." } },
+    { "@type": "Question", name: "Are my webcam images stored or transmitted?", acceptedAnswer: { "@type": "Answer", text: "No, absolutely not. All image processing happens locally in your browser." } },
+    { "@type": "Question", name: "Can I use my old ergometer or home trainer?", acceptedAnswer: { "@type": "Answer", text: "Yes! Whether your ergometer is 5 or 25 years old — as long as your legs move, CycleRun can detect the motion." } },
   ],
 };
 
@@ -79,7 +79,7 @@ const jsonLdOrg = {
   "@type": "Organization",
   name: "CycleRun",
   url: "https://cyclerun.app",
-  description: "Community-Projekt für kostenloses kamerabasiertes Indoor-Training",
+  description: "Community project for free camera-based indoor training",
   foundingDate: "2026",
 };
 
@@ -89,7 +89,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de">
+    <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
         <script

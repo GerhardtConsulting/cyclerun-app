@@ -192,6 +192,7 @@ export class CyclingSimulator {
     // Video
     document.getElementById("useDefaultVideo")?.addEventListener("click", () => this.loadDefaultVideo());
     document.getElementById("videoUpload")?.addEventListener("change", (e) => this.uploadVideo(e));
+    document.getElementById("loadVideoUrl")?.addEventListener("click", () => this.loadVideoFromUrl());
   }
 
   // ============ SCREEN MANAGEMENT ============
@@ -228,7 +229,7 @@ export class CyclingSimulator {
     const prevStep = document.getElementById("prevStep");
     if (prevStep) prevStep.style.display = step === 1 ? "none" : "";
     const wizBack = document.getElementById("wizardBack");
-    if (wizBack) wizBack.textContent = step === 1 ? "← Startseite" : "← Zurück";
+    if (wizBack) wizBack.textContent = step === 1 ? "← Home" : "← Back";
 
     // Step-specific init
     if (step === 3) {
@@ -260,7 +261,7 @@ export class CyclingSimulator {
   async requestCamera() {
     const status = document.getElementById("cameraStatus");
     if (status) {
-      status.textContent = "Kamera wird aktiviert...";
+      status.textContent = "Activating camera...";
       status.className = "status-message info";
     }
 
@@ -276,7 +277,7 @@ export class CyclingSimulator {
         video: { width: { ideal: 640 }, height: { ideal: 480 } },
       });
       if (status) {
-        status.textContent = "✓ Kamera aktiviert! Du siehst dein Kamerabild unten.";
+        status.textContent = "✓ Camera activated! You can see your feed below.";
         status.className = "status-message success";
       }
 
@@ -293,7 +294,7 @@ export class CyclingSimulator {
       if (nextBtn) nextBtn.style.display = "flex";
     } catch (err: unknown) {
       if (status) {
-        status.textContent = "Kamera-Zugriff verweigert: " + (err instanceof Error ? err.message : String(err));
+        status.textContent = "Camera access denied: " + (err instanceof Error ? err.message : String(err));
         status.className = "status-message error";
       }
     }
@@ -309,13 +310,13 @@ export class CyclingSimulator {
     this.detectionZones = [];
 
     if (type === "side") {
-      this.detectionZones.push({ x: 0.35, y: 0.25, w: 0.15, h: 0.15, id: 1, pair: 1, position: "oben", side: "links" });
-      this.detectionZones.push({ x: 0.35, y: 0.55, w: 0.15, h: 0.15, id: 2, pair: 1, position: "unten", side: "links" });
+      this.detectionZones.push({ x: 0.35, y: 0.25, w: 0.15, h: 0.15, id: 1, pair: 1, position: "top", side: "left" });
+      this.detectionZones.push({ x: 0.35, y: 0.55, w: 0.15, h: 0.15, id: 2, pair: 1, position: "bottom", side: "left" });
     } else if (type === "front") {
-      this.detectionZones.push({ x: 0.2, y: 0.25, w: 0.12, h: 0.12, id: 1, pair: 1, position: "oben", side: "links" });
-      this.detectionZones.push({ x: 0.2, y: 0.55, w: 0.12, h: 0.12, id: 2, pair: 1, position: "unten", side: "links" });
-      this.detectionZones.push({ x: 0.68, y: 0.25, w: 0.12, h: 0.12, id: 3, pair: 2, position: "oben", side: "rechts" });
-      this.detectionZones.push({ x: 0.68, y: 0.55, w: 0.12, h: 0.12, id: 4, pair: 2, position: "unten", side: "rechts" });
+      this.detectionZones.push({ x: 0.2, y: 0.25, w: 0.12, h: 0.12, id: 1, pair: 1, position: "top", side: "left" });
+      this.detectionZones.push({ x: 0.2, y: 0.55, w: 0.12, h: 0.12, id: 2, pair: 1, position: "bottom", side: "left" });
+      this.detectionZones.push({ x: 0.68, y: 0.25, w: 0.12, h: 0.12, id: 3, pair: 2, position: "top", side: "right" });
+      this.detectionZones.push({ x: 0.68, y: 0.55, w: 0.12, h: 0.12, id: 4, pair: 2, position: "bottom", side: "right" });
     }
 
     // Auto-advance to step 3
@@ -472,8 +473,8 @@ export class CyclingSimulator {
       h: 0.15,
       id: this.detectionZones.length + 1,
       pair: pairId,
-      position: "oben",
-      side: isLeft ? "links" : "rechts",
+      position: "top",
+      side: isLeft ? "left" : "right",
     });
 
     this.detectionZones.push({
@@ -483,8 +484,8 @@ export class CyclingSimulator {
       h: 0.15,
       id: this.detectionZones.length + 1,
       pair: pairId,
-      position: "unten",
-      side: isLeft ? "links" : "rechts",
+      position: "bottom",
+      side: isLeft ? "left" : "right",
     });
 
     this.updateZoneCount();
@@ -502,7 +503,7 @@ export class CyclingSimulator {
   updateZoneCount() {
     const el = document.getElementById("zoneCount");
     const pairs = Math.floor(this.detectionZones.length / 2);
-    if (el) el.textContent = `${pairs} von 2 Paaren`;
+    if (el) el.textContent = `${pairs} of 2 pairs`;
   }
 
   selectGear(btn: HTMLElement) {
@@ -585,8 +586,8 @@ export class CyclingSimulator {
     this.detectionZones.forEach((zone) => {
       const pairKey = String(zone.pair || 1);
       if (!pairs[pairKey]) pairs[pairKey] = {};
-      if (zone.position === "oben") pairs[pairKey].top = zone;
-      if (zone.position === "unten") pairs[pairKey].bottom = zone;
+      if (zone.position === "top") pairs[pairKey].top = zone;
+      if (zone.position === "bottom") pairs[pairKey].bottom = zone;
     });
 
     const numPairs = Object.keys(pairs).length;
@@ -737,7 +738,7 @@ export class CyclingSimulator {
 
     if (testRpm) testRpm.textContent = String(this.currentRPM);
     if (testSpeed) testSpeed.textContent = this.currentSpeed.toFixed(1);
-    if (testGear) testGear.textContent = ["", "Leicht", "Mittel", "Schwer"][this.gear];
+    if (testGear) testGear.textContent = ["", "Light", "Medium", "Heavy"][this.gear];
 
     const calSpeed = document.getElementById("calSpeedValue");
     const calRpm = document.getElementById("calRpmValue");
@@ -777,7 +778,7 @@ export class CyclingSimulator {
       if (this.currentSpeed >= target - 2 && this.currentSpeed <= target + 2) {
         card.classList.add("reached");
         card.classList.remove("active");
-        status.textContent = "✓ Erreicht!";
+        status.textContent = "✓ Reached!";
       } else if (this.currentSpeed < target && !card.classList.contains("reached")) {
         card.classList.add("active");
       } else {
@@ -804,7 +805,26 @@ export class CyclingSimulator {
     };
 
     video.onerror = () => {
-      alert("Video konnte nicht geladen werden.\n\nBitte lade ein eigenes Video hoch (MP4 empfohlen).\n\nHinweis: Google Drive Links funktionieren nicht direkt.");
+      alert("Video could not be loaded.\n\nPlease upload your own video (MP4 recommended).\n\nNote: Google Drive links don't work directly.");
+    };
+  }
+
+  loadVideoFromUrl() {
+    const urlInput = document.getElementById("videoUrlInput") as HTMLInputElement;
+    const url = urlInput?.value?.trim();
+    if (!url) return;
+
+    const video = document.getElementById("rideVideo") as HTMLVideoElement;
+    video.src = url;
+    video.load();
+
+    video.oncanplay = () => {
+      document.getElementById("videoModal")?.classList.remove("active");
+      this.beginRide(video);
+    };
+
+    video.onerror = () => {
+      alert("Could not load video from URL.\n\nMake sure it's a direct link to an MP4 or WebM file.\nStreaming URLs (YouTube, Vimeo) are not supported.");
     };
   }
 
