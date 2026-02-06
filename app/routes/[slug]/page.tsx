@@ -8,8 +8,9 @@ export function generateStaticParams() {
   return getAllRouteSlugs().map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const route = getRoute(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const route = getRoute(slug);
   if (!route) return {};
   return {
     title: `${route.name} — ${route.location} | Virtual Cycling Route | CycleRun`,
@@ -30,8 +31,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function RouteDetailPage({ params }: { params: { slug: string } }) {
-  const route = getRoute(params.slug);
+export default async function RouteDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const route = getRoute(slug);
   if (!route) notFound();
 
   const maxElev = Math.max(...route.elevationProfile);
