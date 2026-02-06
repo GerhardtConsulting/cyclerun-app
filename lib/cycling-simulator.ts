@@ -4,7 +4,8 @@
  */
 
 import { createClient } from "@supabase/supabase-js";
-import { t } from "@/lib/i18n";
+import { t, getLocale } from "@/lib/i18n";
+import { downloadShareCard, type RideMetrics } from "@/lib/share-card";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://yuxkujcnsrrkwbvftkvq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1eGt1amNuc3Jya3didmZ0a3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjAwNzgsImV4cCI6MjA4NTg5NjA3OH0.aQRnjS2lKDr0qQU9eKphynaHajdn5xWruAXnRx8zhZI";
@@ -65,11 +66,15 @@ export class CyclingSimulator {
   activeZone: DetectionZone | null;
   dragStart: { x: number; y: number };
   isRiding: boolean;
+  isPaused: boolean;
   distance: number;
   rideStartTime: number | null;
   physicsLoopRunning: boolean;
   defaultVideoUrl: string;
   selectedSport: string;
+  maxSpeed: number;
+  rpmSamples: number[];
+  speedSamples: number[];
   private _started: boolean;
 
   constructor() {
@@ -91,6 +96,10 @@ export class CyclingSimulator {
     this.registerPopupShown = false;
 
     this.gear = 2;
+    this.isPaused = false;
+    this.maxSpeed = 0;
+    this.rpmSamples = [];
+    this.speedSamples = [];
 
     this.riderWeight = 75;
     this.riderHeight = 175;
@@ -194,6 +203,11 @@ export class CyclingSimulator {
     document.getElementById("useDefaultVideo")?.addEventListener("click", () => this.loadDefaultVideo());
     document.getElementById("videoUpload")?.addEventListener("change", (e) => this.uploadVideo(e));
     document.getElementById("loadVideoUrl")?.addEventListener("click", () => this.loadVideoFromUrl());
+
+    // Post-ride summary
+    document.getElementById("summaryDone")?.addEventListener("click", () => this.closeSummary("welcome"));
+    document.getElementById("summaryRideAgain")?.addEventListener("click", () => this.closeSummary("ride"));
+    document.getElementById("downloadShareCard")?.addEventListener("click", () => this.handleShareCard());
   }
 
   // ============ SCREEN MANAGEMENT ============
@@ -863,6 +877,9 @@ export class CyclingSimulator {
     this.isRiding = true;
     this.rideStartTime = Date.now();
     this.distance = 0;
+    this.maxSpeed = 0;
+    this.rpmSamples = [];
+    this.speedSamples = [];
     this.previousFrame = null;
 
     video.play();
@@ -930,6 +947,13 @@ export class CyclingSimulator {
       this.activeRideTime += 1 / 60;
     }
 
+    // Track metrics for post-ride summary
+    if (this.currentSpeed > this.maxSpeed) this.maxSpeed = this.currentSpeed;
+    if (this.currentSpeed > 0.5) {
+      this.speedSamples.push(this.currentSpeed);
+      this.rpmSamples.push(this.currentRPM);
+    }
+
     if (!this.isRegistered && !this.registerPopupShown && this.activeRideTime >= 60) {
       this.showRegistrationPopup();
     }
@@ -963,21 +987,134 @@ export class CyclingSimulator {
     const video = document.getElementById("rideVideo") as HTMLVideoElement;
     const btn = document.getElementById("pauseRide");
 
-    if (video.paused) {
+    if (this.isPaused) {
+      this.isPaused = false;
       video.play();
-      if (btn) btn.textContent = "⏸️";
+      if (btn) btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
     } else {
+      this.isPaused = true;
       video.pause();
-      if (btn) btn.textContent = "▶️";
+      if (btn) btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
     }
   }
 
   stopRide() {
     this.isRiding = false;
+    this.isPaused = false;
     const video = document.getElementById("rideVideo") as HTMLVideoElement;
     video.pause();
     video.currentTime = 0;
-    this.showScreen("welcome");
+
+    // Calculate final metrics
+    const durationSeconds = this.rideStartTime ? Math.floor((Date.now() - this.rideStartTime) / 1000) : 0;
+    const avgRpm = this.rpmSamples.length > 0
+      ? Math.round(this.rpmSamples.reduce((a, b) => a + b, 0) / this.rpmSamples.length)
+      : 0;
+    const avgSpeed = this.speedSamples.length > 0
+      ? this.speedSamples.reduce((a, b) => a + b, 0) / this.speedSamples.length
+      : 0;
+    const totalMass = this.riderWeight + this.bikeWeight;
+    const calories = Math.round(durationSeconds / 3600 * avgSpeed * totalMass * 0.0175);
+
+    // Populate summary overlay
+    const setEl = (id: string, val: string) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = val;
+    };
+    setEl("summaryDistance", this.distance.toFixed(2));
+    const h = Math.floor(durationSeconds / 3600);
+    const m = Math.floor((durationSeconds % 3600) / 60);
+    const s = durationSeconds % 60;
+    setEl("summaryDuration", h > 0 ? `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}` : `${m}:${String(s).padStart(2, "0")}`);
+    setEl("summaryAvgSpeed", avgSpeed.toFixed(1));
+    setEl("summaryMaxSpeed", this.maxSpeed.toFixed(1));
+    setEl("summaryAvgRpm", String(avgRpm));
+    setEl("summaryCalories", `~${calories}`);
+
+    // Store metrics for share card
+    const metrics = {
+      sport: this.selectedSport,
+      distanceKm: this.distance,
+      durationSeconds,
+      avgSpeedKmh: avgSpeed,
+      maxSpeedKmh: this.maxSpeed,
+      avgRpm,
+      calories,
+      gear: this.gear,
+      date: new Date(),
+    };
+    (window as unknown as Record<string, unknown>).__cyclerunLastRide = metrics;
+
+    // Save session to Supabase if registered
+    const email = localStorage.getItem("cyclerun_email");
+    if (email && durationSeconds > 10) {
+      this.saveSession(metrics, email);
+    }
+
+    // Show save prompt only if not registered
+    const savePrompt = document.getElementById("summarySavePrompt");
+    if (savePrompt) savePrompt.style.display = this.isRegistered ? "none" : "";
+
+    // Show summary overlay
+    document.getElementById("rideSummary")?.classList.add("active");
+  }
+
+  async saveSession(metrics: Record<string, unknown>, email: string) {
+    try {
+      const sb = getSupabase();
+      if (!sb) return;
+
+      // Get user ID from email
+      const { data: user } = await sb.from("registrations")
+        .select("id")
+        .eq("email", email)
+        .single();
+
+      if (!user) return;
+
+      await sb.from("sessions").insert({
+        user_id: user.id,
+        sport_type: metrics.sport,
+        duration_seconds: metrics.durationSeconds,
+        distance_km: metrics.distanceKm,
+        avg_speed_kmh: metrics.avgSpeedKmh,
+        max_speed_kmh: metrics.maxSpeedKmh,
+        avg_rpm: metrics.avgRpm,
+        max_rpm: 0,
+        calories_estimated: metrics.calories,
+        gear: metrics.gear,
+      });
+
+      // Update profile totals
+      try {
+        await sb.rpc("increment_profile_stats", {
+          p_user_id: user.id,
+          p_distance: metrics.distanceKm,
+          p_duration: metrics.durationSeconds,
+        });
+      } catch { /* optional RPC, ignore errors */ }
+    } catch (err) {
+      console.error("Session save error:", err);
+    }
+  }
+
+  closeSummary(target: "welcome" | "ride") {
+    document.getElementById("rideSummary")?.classList.remove("active");
+    if (target === "welcome") {
+      this.showScreen("welcome");
+    } else {
+      this.startRide();
+    }
+  }
+
+  async handleShareCard() {
+    const metrics = (window as unknown as Record<string, unknown>).__cyclerunLastRide as RideMetrics | undefined;
+    if (!metrics) return;
+    try {
+      await downloadShareCard(metrics, getLocale());
+    } catch (err) {
+      console.error("Share card error:", err);
+    }
   }
 
   showCountdown(): Promise<void> {
@@ -1021,8 +1158,8 @@ export class CyclingSimulator {
     const speedStr = this.currentSpeed.toFixed(1);
     const regTitle = document.querySelector(".register-card h2");
     const regSub = document.querySelector(".register-subtitle");
-    if (regTitle) regTitle.textContent = "Starker Start!";
-    if (regSub) regSub.textContent = `Du bist gerade mit ${speedStr} km/h unterwegs. Registriere dich kostenlos, um dein Training zu speichern und alle Features freizuschalten.`;
+    if (regTitle) regTitle.textContent = t('reg.popup.title');
+    if (regSub) regSub.textContent = t('reg.popup.subtitle', { speed: speedStr });
 
     document.getElementById("registerOverlay")?.classList.add("active");
   }
@@ -1040,21 +1177,32 @@ export class CyclingSimulator {
     const submitBtn = (e.target as HTMLFormElement).querySelector('button[type="submit"]') as HTMLButtonElement;
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = "Wird registriert...";
+      submitBtn.textContent = t('reg.popup.saving');
     }
 
     try {
       const sb = getSupabase();
       if (!sb) throw new Error("Supabase not loaded");
+      const newsletterOpt = (document.getElementById("regNewsletter") as HTMLInputElement)?.checked || false;
       const { error } = await sb.from("registrations").insert({
         first_name: firstName,
         last_name: lastName || null,
         email: email,
-        preferred_sport: "cycling",
-        locale: navigator.language || "de",
+        preferred_sport: this.selectedSport || "cycling",
+        locale: navigator.language || "en",
         consent_privacy: consentPrivacy,
         consent_data_processing: consentPrivacy,
+        newsletter_opt_in: newsletterOpt,
       });
+
+      // Subscribe to newsletter if opted in
+      if (newsletterOpt) {
+        fetch("/api/newsletter", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, locale: navigator.language?.startsWith("de") ? "de" : "en" }),
+        }).catch(() => {});
+      }
 
       if (error && error.code === "23505") {
         // Duplicate email — user already registered, that's fine

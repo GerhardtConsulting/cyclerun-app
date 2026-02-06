@@ -622,6 +622,10 @@ export default function CycleRunApp() {
                 <input type="checkbox" id="regConsent" required />
                 <span>{t('reg.consent')} <Link href="/datenschutz" target="_blank">{t('reg.privacy')}</Link>{t('reg.consent.2')}</span>
               </label>
+              <label className="register-consent newsletter-opt">
+                <input type="checkbox" id="regNewsletter" />
+                <span>{t('newsletter.opt_in')}</span>
+              </label>
               <button type="submit" className="btn-primary btn-lg btn-full register-submit">
                 {t('reg.submit')}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
@@ -631,6 +635,70 @@ export default function CycleRunApp() {
             <p className="register-hint">{t('reg.hint')}</p>
           </div>
         </div>
+
+        {/* Post-Ride Summary */}
+        <div id="rideSummary" className="ride-summary-overlay">
+          <div className="ride-summary-card">
+            <div className="summary-header">
+              <div className="summary-logo">cyclerun<span className="header-logo-app">.app</span></div>
+              <h2>{t('ride.summary.title')}</h2>
+              <p className="summary-subtitle">{t('ride.summary.great')}</p>
+            </div>
+
+            <div className="summary-main-stat">
+              <span className="summary-main-value" id="summaryDistance">0.00</span>
+              <span className="summary-main-unit">km</span>
+            </div>
+
+            <div className="summary-stats-grid">
+              <div className="summary-stat">
+                <span className="summary-stat-label">{t('ride.summary.duration')}</span>
+                <span className="summary-stat-value" id="summaryDuration">0:00</span>
+              </div>
+              <div className="summary-stat">
+                <span className="summary-stat-label">{t('ride.summary.avg.speed')}</span>
+                <span className="summary-stat-value"><span id="summaryAvgSpeed">0.0</span> km/h</span>
+              </div>
+              <div className="summary-stat">
+                <span className="summary-stat-label">{t('ride.summary.max.speed')}</span>
+                <span className="summary-stat-value"><span id="summaryMaxSpeed">0.0</span> km/h</span>
+              </div>
+              <div className="summary-stat">
+                <span className="summary-stat-label">{t('ride.summary.avg.rpm')}</span>
+                <span className="summary-stat-value" id="summaryAvgRpm">0</span>
+              </div>
+              <div className="summary-stat">
+                <span className="summary-stat-label">{t('ride.summary.calories')}</span>
+                <span className="summary-stat-value" id="summaryCalories">~0</span>
+              </div>
+            </div>
+
+            <div className="summary-actions">
+              <button id="downloadShareCard" className="btn-primary btn-full">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+                {t('ride.summary.share')}
+              </button>
+              <p className="summary-share-hint">{t('ride.summary.share.hint')}</p>
+            </div>
+
+            <div id="summarySavePrompt" className="summary-save-prompt">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+              <div>
+                <strong>{t('ride.summary.save')}</strong>
+                <p>{t('ride.summary.save.hint')}</p>
+              </div>
+            </div>
+
+            <div className="summary-footer-actions">
+              <button id="summaryRideAgain" className="btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 102.13-9.36L1 10" /></svg>
+                {t('ride.summary.ride.again')}
+              </button>
+              <button id="summaryDone" className="btn-ghost">{t('ride.summary.done')}</button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       {/* Loading Overlay */}

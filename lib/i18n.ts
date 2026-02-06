@@ -151,6 +151,31 @@ const translations: Record<Locale, Record<string, string>> = {
     "footer.legal": "Legal Notice",
     "footer.copy": "© 2026 CycleRun.app — Community project, non-profit",
 
+    // Post-ride summary
+    "ride.summary.title": "Ride Complete!",
+    "ride.summary.great": "Great session",
+    "ride.summary.distance": "Distance",
+    "ride.summary.duration": "Duration",
+    "ride.summary.avg.speed": "Avg Speed",
+    "ride.summary.max.speed": "Max Speed",
+    "ride.summary.avg.rpm": "Avg RPM",
+    "ride.summary.calories": "Calories",
+    "ride.summary.share": "Download Share Card",
+    "ride.summary.share.hint": "9:16 transparent PNG — perfect for Instagram Stories",
+    "ride.summary.save": "Save your progress",
+    "ride.summary.save.hint": "Don't lose your stats! Register to keep your ride history.",
+    "ride.summary.done": "Back to Home",
+    "ride.summary.ride.again": "Ride Again",
+
+    // Registration popup (during ride)
+    "reg.popup.title": "Great start!",
+    "reg.popup.subtitle": "You're riding at {speed} km/h. Register for free to save your training and unlock all features.",
+    "reg.popup.saving": "Registering...",
+
+    // Newsletter
+    "newsletter.opt_in": "Keep me updated on new features (no spam, GDPR compliant)",
+    "newsletter.subscribed": "Check your email to confirm",
+
     // Loading
     "loading": "Loading...",
 
@@ -310,6 +335,31 @@ const translations: Record<Locale, Record<string, string>> = {
     "footer.privacy": "Datenschutz",
     "footer.legal": "Impressum",
     "footer.copy": "© 2026 CycleRun.app — Community-Projekt ohne Gewinnabsicht",
+
+    // Post-ride summary
+    "ride.summary.title": "Fahrt beendet!",
+    "ride.summary.great": "Starke Session",
+    "ride.summary.distance": "Distanz",
+    "ride.summary.duration": "Dauer",
+    "ride.summary.avg.speed": "\u2300 Geschw.",
+    "ride.summary.max.speed": "Max Geschw.",
+    "ride.summary.avg.rpm": "\u2300 RPM",
+    "ride.summary.calories": "Kalorien",
+    "ride.summary.share": "Share Card herunterladen",
+    "ride.summary.share.hint": "9:16 transparentes PNG \u2014 perfekt f\u00fcr Instagram Stories",
+    "ride.summary.save": "Fortschritt sichern",
+    "ride.summary.save.hint": "Verliere deine Statistiken nicht! Registriere dich, um deine Fahrten zu speichern.",
+    "ride.summary.done": "Zur\u00fcck zur Startseite",
+    "ride.summary.ride.again": "Nochmal fahren",
+
+    // Registration popup (during ride)
+    "reg.popup.title": "Starker Start!",
+    "reg.popup.subtitle": "Du f\u00e4hrst gerade {speed} km/h. Registriere dich kostenlos, um dein Training zu speichern.",
+    "reg.popup.saving": "Wird registriert...",
+
+    // Newsletter
+    "newsletter.opt_in": "\u00dcber neue Features informieren (kein Spam, DSGVO-konform)",
+    "newsletter.subscribed": "Pr\u00fcfe dein Postfach zur Best\u00e4tigung",
 
     // Loading
     "loading": "Lade...",
