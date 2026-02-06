@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export const metadata: Metadata = {
   title: "Become a Creator — Earn Money with Your Cycling Videos | CycleRun.app",
@@ -463,6 +464,58 @@ export default function CreatorPage() {
           </div>
         </section>
 
+        {/* Influencer Monetization */}
+        <section className="creator-section" id="influencer">
+          <h2>Earn Money as a <span className="gradient-text">Cycling Influencer</span></h2>
+          <p className="section-subtitle">
+            You don&apos;t need millions of followers. With CycleRun, even micro-creators with great routes can build a loyal audience and earn real income.
+          </p>
+          <div className="creator-benefits-grid">
+            <div className="creator-benefit">
+              <div className="benefit-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>
+              </div>
+              <h3>Sponsored Routes</h3>
+              <p>Brands pay to sponsor popular routes. Your &quot;Sponsored by Canyon&quot; Mallorca ride could earn you hundreds per month. We connect you with cycling brands looking for authentic content.</p>
+            </div>
+            <div className="creator-benefit">
+              <div className="benefit-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" /></svg>
+              </div>
+              <h3>Build Your Fanbase</h3>
+              <p>Every rider who loves your route sees your profile. Link your Instagram, YouTube, TikTok, and Strava. Convert riders into followers across all your platforms.</p>
+            </div>
+            <div className="creator-benefit">
+              <div className="benefit-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 9l6 6 6-6" /><path d="M12 3v12" /><rect x="3" y="17" width="18" height="4" rx="1" /></svg>
+              </div>
+              <h3>Premium Route Sales</h3>
+              <p>Set a price for your best routes. You keep 70% of every sale. One popular route can generate passive income for months — film once, earn forever.</p>
+            </div>
+            <div className="creator-benefit">
+              <div className="benefit-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="8" r="7" /><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12" /></svg>
+              </div>
+              <h3>Creator Badges &amp; Awards</h3>
+              <p>&quot;Official CycleRun Creator&quot; badge for your social profiles. Monthly &quot;Route of the Month&quot; award with featured placement and social shoutout to thousands of riders.</p>
+            </div>
+            <div className="creator-benefit">
+              <div className="benefit-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" /></svg>
+              </div>
+              <h3>Challenge Partnerships</h3>
+              <p>Create branded challenges: &quot;Ride 5 of my Alpine routes this month&quot;. Sponsors provide prizes (bikes, gear, vouchers). You get visibility, riders get motivation.</p>
+            </div>
+            <div className="creator-benefit">
+              <div className="benefit-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 20V10" /><path d="M18 20V4" /><path d="M6 20v-4" /></svg>
+              </div>
+              <h3>Analytics Dashboard</h3>
+              <p>See exactly how many riders chose your routes, average ride time, completion rate, and revenue. Data-driven insights to optimize your content strategy.</p>
+            </div>
+          </div>
+        </section>
+
         {/* Apply Section */}
         <section className="creator-section" id="apply">
           <h2>Ready to <span className="gradient-text">become a creator</span>?</h2>
@@ -504,18 +557,18 @@ export default function CreatorPage() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="creator-footer">
-          <div className="creator-footer-inner">
-            <div className="creator-footer-logo">cyclerun<span className="header-logo-app">.app</span></div>
-            <div className="creator-footer-links">
-              <Link href="/">Home</Link>
-              <Link href="/datenschutz">Privacy</Link>
-              <Link href="/impressum">Legal</Link>
-            </div>
-            <p className="creator-footer-copy">© 2026 CycleRun.app — Community project, non-profit</p>
+        <section style={{ maxWidth: '720px', margin: '0 auto 2rem', padding: '0 2rem', textAlign: 'center' as const }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem' }}>Explore CycleRun</h3>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' as const, justifyContent: 'center' }}>
+            <Link href="/" className="route-badge">Start Riding Free</Link>
+            <Link href="/routes" className="route-badge">Browse Routes</Link>
+            <Link href="/guide/virtual-cycling-videos" className="route-badge">Virtual Cycling Videos</Link>
+            <Link href="/blog" className="route-badge">Blog</Link>
+            <Link href="/guide" className="route-badge">All Guides</Link>
           </div>
-        </footer>
+        </section>
+
+        <SubpageFooter />
       </div>
     </>
   );

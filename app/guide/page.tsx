@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { seoPages, type SeoPage } from "@/lib/seo-pages-data";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export const metadata: Metadata = {
   title: "Indoor Cycling Guides & Resources — CycleRun.app",
@@ -54,20 +55,13 @@ export default function GuidesIndexPage() {
       <section className="seo-cta">
         <h2>Ready to Ride?</h2>
         <p>Open CycleRun in your browser — free, no signup, no download.</p>
-        <Link href="/" className="btn-primary btn-lg">Start Riding Free</Link>
+        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/" className="btn-primary btn-lg">Start Riding Free</Link>
+          <Link href="/creator" className="btn-ghost">Earn as Creator →</Link>
+        </div>
       </section>
 
-      <footer className="seo-page-footer">
-        <Link href="/">CycleRun.app</Link>
-        <span>·</span>
-        <Link href="/blog">Blog</Link>
-        <span>·</span>
-        <Link href="/routes">Routes</Link>
-        <span>·</span>
-        <Link href="/datenschutz">Privacy</Link>
-        <span>·</span>
-        <Link href="/impressum">Legal</Link>
-      </footer>
+      <SubpageFooter />
     </div>
   );
 }

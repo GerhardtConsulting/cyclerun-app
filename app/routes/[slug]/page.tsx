@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { routes, getRoute, getAllRouteSlugs } from "@/lib/route-data";
 import { notFound } from "next/navigation";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export function generateStaticParams() {
   return getAllRouteSlugs().map((slug) => ({ slug }));
@@ -154,19 +155,13 @@ export default function RouteDetailPage({ params }: { params: { slug: string } }
           </section>
         )}
 
-        <footer className="creator-footer">
-          <div className="creator-footer-inner">
-            <div className="creator-footer-logo">cyclerun<span className="header-logo-app">.app</span></div>
-            <div className="creator-footer-links">
-              <Link href="/">Home</Link>
-              <Link href="/routes">Routes</Link>
-              <Link href="/creator">Creators</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/datenschutz">Privacy</Link>
-            </div>
-            <p className="creator-footer-copy">© 2026 CycleRun.app — Community project</p>
-          </div>
-        </footer>
+        <section className="seo-cta" style={{ maxWidth: '640px', margin: '0 auto 2rem' }}>
+          <h3>Film Your Own Routes &amp; Build an Audience</h3>
+          <p>You&apos;re a cycling content creator? Film POV routes and reach thousands of indoor riders on CycleRun. Earn from sponsored routes.</p>
+          <Link href="/creator" className="btn-ghost">Learn About the Creator Program →</Link>
+        </section>
+
+        <SubpageFooter />
       </div>
     </>
   );

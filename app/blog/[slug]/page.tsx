@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { blogPosts, getBlogPost, getAllBlogSlugs } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({ slug }));
@@ -132,18 +133,16 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </section>
         )}
 
-        <footer className="creator-footer">
-          <div className="creator-footer-inner">
-            <div className="creator-footer-logo">cyclerun<span className="header-logo-app">.app</span></div>
-            <div className="creator-footer-links">
-              <Link href="/">Home</Link>
-              <Link href="/creator">Creators</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/datenschutz">Privacy</Link>
-            </div>
-            <p className="creator-footer-copy">© 2026 CycleRun.app — Community project</p>
+        <section className="seo-cta" style={{ maxWidth: '640px', margin: '2rem auto 0' }}>
+          <h2>Try It Yourself — Free</h2>
+          <p>Open CycleRun, point your webcam at your legs, and ride this route. No download, no signup.</p>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/" className="btn-primary btn-lg">Start Riding Free</Link>
+            <Link href="/creator" className="btn-ghost">Film &amp; Earn as Creator →</Link>
           </div>
-        </footer>
+        </section>
+
+        <SubpageFooter />
       </div>
     </>
   );

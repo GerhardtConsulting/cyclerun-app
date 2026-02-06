@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { blogPosts } from "@/lib/blog-data";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export const metadata: Metadata = {
   title: "Blog — Indoor Cycling Tips, Guides & Comparisons | CycleRun.app",
@@ -71,18 +72,27 @@ export default function BlogIndex() {
           ))}
         </section>
 
-        <footer className="creator-footer">
-          <div className="creator-footer-inner">
-            <div className="creator-footer-logo">cyclerun<span className="header-logo-app">.app</span></div>
-            <div className="creator-footer-links">
-              <Link href="/">Home</Link>
-              <Link href="/creator">Creators</Link>
-              <Link href="/datenschutz">Privacy</Link>
-              <Link href="/impressum">Legal</Link>
-            </div>
-            <p className="creator-footer-copy">© 2026 CycleRun.app — Community project</p>
+        <section className="seo-cta" style={{ maxWidth: '680px', margin: '2rem auto 0' }}>
+          <h2>Start Riding Now — It&apos;s Free</h2>
+          <p>Open CycleRun in your browser. No download, no signup, no smart trainer needed.</p>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/" className="btn-primary btn-lg">Start Riding Free</Link>
+            <Link href="/creator" className="btn-ghost">Become a Creator →</Link>
           </div>
-        </footer>
+        </section>
+
+        <section style={{ maxWidth: '680px', margin: '2rem auto', padding: '0 2rem' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem', textAlign: 'center' }}>Explore Guides</h3>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Link href="/guide/zwift-alternative-free" className="route-badge">Zwift Alternative</Link>
+            <Link href="/guide/rouvy-alternative" className="route-badge">Rouvy Alternative</Link>
+            <Link href="/guide/indoor-cycling-app" className="route-badge">Indoor Cycling App</Link>
+            <Link href="/guide/virtual-cycling-videos" className="route-badge">Virtual Cycling Videos</Link>
+            <Link href="/routes" className="route-badge">Browse Routes</Link>
+          </div>
+        </section>
+
+        <SubpageFooter />
       </div>
     </>
   );

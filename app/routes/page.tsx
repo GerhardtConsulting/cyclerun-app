@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { routes } from "@/lib/route-data";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export const metadata: Metadata = {
   title: "Virtual Cycling Routes — Ride the World from Home | CycleRun.app",
@@ -79,18 +80,26 @@ export default function RoutesIndex() {
           ))}
         </section>
 
-        <footer className="creator-footer">
-          <div className="creator-footer-inner">
-            <div className="creator-footer-logo">cyclerun<span className="header-logo-app">.app</span></div>
-            <div className="creator-footer-links">
-              <Link href="/">Home</Link>
-              <Link href="/creator">Creators</Link>
-              <Link href="/blog">Blog</Link>
-              <Link href="/datenschutz">Privacy</Link>
-            </div>
-            <p className="creator-footer-copy">© 2026 CycleRun.app — Community project</p>
+        <section className="seo-cta" style={{ maxWidth: '720px', margin: '2rem auto 0' }}>
+          <h2>Ride Any Route — Free</h2>
+          <p>Set up your webcam, pick a route, and start pedaling. No smart trainer, no subscription.</p>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link href="/" className="btn-primary btn-lg">Start Riding Free</Link>
+            <Link href="/creator" className="btn-ghost">Film Routes &amp; Earn →</Link>
           </div>
-        </footer>
+        </section>
+
+        <section style={{ maxWidth: '720px', margin: '2rem auto', padding: '0 2rem' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem', textAlign: 'center' }}>Learn More</h3>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Link href="/guide/virtual-cycling-videos" className="route-badge">Virtual Cycling Videos</Link>
+            <Link href="/guide/indoor-cycling-without-smart-trainer" className="route-badge">No Smart Trainer Needed</Link>
+            <Link href="/guide/zwift-alternative-free" className="route-badge">Zwift Alternative</Link>
+            <Link href="/blog" className="route-badge">Blog</Link>
+          </div>
+        </section>
+
+        <SubpageFooter />
       </div>
     </>
   );
