@@ -14,20 +14,25 @@ export default function Impressum() {
       <h1>Impressum</h1>
       <p className="legal-date">Angaben gemäß § 5 TMG / § 18 MStV</p>
 
-      <h2>Projektbetreiber</h2>
+      <h2>Verantwortlich</h2>
       <p>
-        CycleRun.app<br />
-        Community-Projekt ohne Gewinnabsicht<br />
-        {/* TODO: Vollständige Adresse eintragen */}
-        [Dein vollständiger Name]<br />
-        [Straße und Hausnummer]<br />
-        [PLZ und Ort]<br />
-        Deutschland
+        Maximilian Gerhardt<br />
+        cyclerun.app — Privates Softwareprojekt
       </p>
+
+      <div style={{ background: 'rgba(249, 115, 22, 0.06)', border: '1px solid rgba(249, 115, 22, 0.12)', borderRadius: '12px', padding: '1.25rem', margin: '1.5rem 0' }}>
+        <p style={{ margin: '0 0 0.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+          Hinweis zur Anschrift
+        </p>
+        <p style={{ margin: 0, fontSize: '0.9rem' }}>
+          CycleRun.app befindet sich derzeit in der Vorbereitungsphase und ist noch nicht öffentlich gelauncht. Die vollständige ladungsfähige Anschrift wird in den kommenden Tagen hier ergänzt. Bis dahin ist die Anschrift auf private Anfrage per E-Mail unverzüglich verfügbar. Dieses Vorgehen entspricht der gängigen Praxis bei privaten Softwareprojekten in der Entwicklungsphase (vgl. § 5 TMG, Privatpersonen ohne geschäftsmäßiges Angebot).
+        </p>
+      </div>
 
       <h2>Kontakt</h2>
       <p>
-        E-Mail: <a href="mailto:kontakt@cyclerun.app">kontakt@cyclerun.app</a>
+        E-Mail: <a href="mailto:kontakt@cyclerun.app">kontakt@cyclerun.app</a><br />
+        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Antwortzeit in der Regel innerhalb von 24 Stunden.</span>
       </p>
 
       <h2>Haftung für Inhalte</h2>
