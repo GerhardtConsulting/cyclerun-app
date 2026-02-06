@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { seoPages, type SeoPage } from "@/lib/seo-pages-data";
-import { t } from "@/lib/i18n";
+import { t, getLocale } from "@/lib/i18n";
 import { useLocale } from "@/lib/useLocale";
 import SubpageNav from "@/components/SubpageNav";
 import SubpageFooter from "@/components/SubpageFooter";
@@ -20,13 +20,16 @@ export default function GuideIndexContent() {
       </header>
 
       <div className="seo-guide-grid">
-        {seoPages.map((page: SeoPage) => (
-          <Link key={page.slug} href={`/guide/${page.slug}`} className="seo-guide-card">
-            <h2>{page.h1}</h2>
-            <p>{page.description}</p>
-            <span className="seo-guide-link">{t("sub.read_guide")}</span>
-          </Link>
-        ))}
+        {seoPages.map((page: SeoPage) => {
+          const isDE = getLocale() === "de";
+          return (
+            <Link key={page.slug} href={`/guide/${page.slug}`} className="seo-guide-card">
+              <h2>{isDE ? (page.h1_de || page.h1) : page.h1}</h2>
+              <p>{isDE ? (page.description_de || page.description) : page.description}</p>
+              <span className="seo-guide-link">{t("sub.read_guide")}</span>
+            </Link>
+          );
+        })}
       </div>
 
       <section className="seo-cta">

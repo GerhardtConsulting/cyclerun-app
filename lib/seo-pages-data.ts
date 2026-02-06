@@ -6,11 +6,16 @@ export interface SeoFaq {
 export interface SeoPage {
   slug: string;
   title: string;
+  title_de?: string;
   h1: string;
+  h1_de?: string;
   description: string;
+  description_de?: string;
   keywords: string;
   faqs: SeoFaq[];
+  faqs_de?: SeoFaq[];
   content: string;
+  content_de?: string;
 }
 
 import { seoPages } from "./seo-pages-content";

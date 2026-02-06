@@ -5,8 +5,11 @@ export const seoPages: SeoPage[] = [
   {
     slug: "zwift-alternative-free",
     title: "Free Zwift Alternative 2026 — Indoor Cycling Without Smart Trainer | CycleRun",
+    title_de: "Kostenlose Zwift-Alternative 2026 — Indoor Cycling ohne Smart Trainer | CycleRun",
     h1: "The Free Zwift Alternative That Uses Your Webcam Instead of a Smart Trainer",
+    h1_de: "Die kostenlose Zwift-Alternative, die deine Webcam statt eines Smart Trainers nutzt",
     description: "Looking for a free Zwift alternative? CycleRun turns any home trainer into a virtual cycling experience using just your webcam. No smart trainer, no subscription, no ANT+ sensors needed.",
+    description_de: "Du suchst eine kostenlose Zwift-Alternative? CycleRun verwandelt jeden Heimtrainer in ein virtuelles Raderlebnis — nur mit deiner Webcam. Kein Smart Trainer, kein Abo, keine Sensoren.",
     keywords: "Zwift alternative free, free Zwift alternative, Zwift alternative without smart trainer, Zwift free alternative 2026, indoor cycling free app, Zwift kostenlose Alternative",
     faqs: [
       { q: "Is there a free alternative to Zwift?", a: "Yes. CycleRun is a completely free alternative to Zwift that works with any home trainer. Instead of requiring an expensive smart trainer (€300–1,500), CycleRun uses your webcam to detect your leg movement and adjusts the video speed accordingly. There's no subscription fee, no premium tier, and no hidden costs." },
@@ -17,6 +20,16 @@ export const seoPages: SeoPage[] = [
       { q: "Can I track my training stats without Zwift?", a: "Yes. CycleRun tracks speed, distance, duration, cadence (RPM), calories, and max speed for every ride. You can download a share card (Instagram Story format) after each ride and register (free) to save your ride history." },
       { q: "What about multiplayer racing?", a: "Multiplayer racing is on our roadmap but not yet available. CycleRun currently focuses on the solo riding experience with real-world video routes. For competitive group rides, Zwift remains the leader — but for scenic solo training, CycleRun offers a superior visual experience at zero cost." },
       { q: "Is my data private on CycleRun?", a: "Yes. All webcam image processing happens locally in your browser. No images or video frames are ever transmitted to any server. Your webcam feed never leaves your device. CycleRun uses no tracking, no Google Analytics, and no advertising cookies." },
+    ],
+    faqs_de: [
+      { q: "Gibt es eine kostenlose Alternative zu Zwift?", a: "Ja. CycleRun ist eine völlig kostenlose Zwift-Alternative, die mit jedem Heimtrainer funktioniert. Statt eines teuren Smart Trainers (300–1.500 €) nutzt CycleRun deine Webcam zur Bewegungserkennung. Kein Abo, keine Premium-Version, keine versteckten Kosten." },
+      { q: "Kann ich CycleRun ohne Smart Trainer nutzen?", a: "Absolut. CycleRun wurde speziell dafür entwickelt, ohne Smart Trainer, Geschwindigkeitssensor oder ANT+/Bluetooth-Gerät zu funktionieren. Deine Webcam erkennt die Beinbewegung mittels KI-gestützter Bildanalyse. Das funktioniert mit Spinning Bikes, Ergometern, alten Heimtrainern — jedem stationären Fahrrad." },
+      { q: "Wie schneidet CycleRun im Kostenvergleich mit Zwift ab?", a: "Zwift kostet 17,99 €/Monat (215 €/Jahr) plus Smart Trainer ab 300 €. Über 3 Jahre sind das über 1.145 €. CycleRun ist komplett kostenlos — für immer. Kein Abo, kein Hardware-Kauf, keine Premium-Features hinter einer Paywall." },
+      { q: "Hat CycleRun echte Streckenvideos wie Rouvy?", a: "Ja. CycleRun nutzt echte POV-Radvideos (First-Person) statt Zwifts virtueller 3D-Welt. Du fährst echte Straßen — Mallorca, Stelvio Pass, Alpe d'Huez, Pacific Coast Highway — gefilmt aus der Perspektive eines Radfahrers." },
+      { q: "Ist CycleRun auf Apple TV oder iPad verfügbar?", a: "CycleRun läuft in jedem Webbrowser — Chrome, Safari, Firefox, Edge. Das bedeutet, es funktioniert auf jedem Computer, Laptop oder Tablet mit Webcam. Für die TV-Nutzung verbinde deinen Laptop per HDMI oder nutze die Handy-Kamera-Kopplung." },
+      { q: "Kann ich meine Trainingsstatistiken ohne Zwift verfolgen?", a: "Ja. CycleRun trackt Geschwindigkeit, Distanz, Dauer, Trittfrequenz (RPM), Kalorien und Maximalgeschwindigkeit für jede Fahrt. Du kannst eine Share Card (Instagram Story Format) herunterladen und dich kostenlos registrieren, um deinen Fahrverlauf zu speichern." },
+      { q: "Was ist mit Multiplayer-Rennen?", a: "Multiplayer-Rennen stehen auf unserer Roadmap, sind aber noch nicht verfügbar. CycleRun konzentriert sich aktuell auf das Solo-Fahrerlebnis mit echten Streckenvideos. Für kompetitive Gruppenfahrten bleibt Zwift führend — aber für szenisches Solo-Training bietet CycleRun ein überlegenes visuelles Erlebnis zum Nulltarif." },
+      { q: "Sind meine Daten bei CycleRun sicher?", a: "Ja. Alle Webcam-Bildverarbeitung findet lokal in deinem Browser statt. Keine Bilder oder Videoframes werden jemals an einen Server übertragen. Dein Webcam-Feed verlässt nie dein Gerät. CycleRun nutzt kein Tracking, kein Google Analytics und keine Werbe-Cookies." },
     ],
     content: `## Why Cyclists Are Looking for Zwift Alternatives
 
@@ -83,14 +96,80 @@ CycleRun is the perfect choice if you own a basic home trainer without smart cap
 No download. No installation. No account required. No credit card.
 
 [Try CycleRun free →](https://cyclerun.app)`,
+    content_de: `## Warum Radfahrer nach Zwift-Alternativen suchen
+
+Zwift hat Indoor Cycling revolutioniert. Zum ersten Mal konnte man in einer virtuellen Welt mit anderen Radfahrern fahren, strukturierte Workouts absolvieren und sogar Rennen fahren — alles vom Wohnzimmer aus. Aber Zwift hat erhebliche Hürden:
+
+- **Smart Trainer erforderlich** — Ab 300 €, bis zu 1.500 € für Direct-Drive-Modelle
+- **Monatliches Abo** — 17,99 €/Monat, kein kostenloser Tarif
+- **Zusätzliche Sensoren** — Herzfrequenzmesser, Trittfrequenzsensoren, Leistungsmesser
+- **Gesamtkosten für den Einstieg** — Schnell 500 €+ vor der ersten Fahrt
+
+Für Gelegenheitsfahrer, Fitnessbegeisterte oder alle mit einem älteren Heimtrainer sind diese Kosten schwer zu rechtfertigen. Hier kommt CycleRun ins Spiel.
+
+## Wie CycleRun als Zwift-Alternative funktioniert
+
+CycleRun verfolgt einen grundlegend anderen Ansatz beim Indoor Cycling. Statt teure Hardware-Sensoren zu verlangen, nutzt es etwas, das du bereits hast: **deine Webcam**.
+
+### Kamerabasierte Bewegungserkennung
+
+Deine Webcam filmt deine Beine beim Treten. CycleRuns KI-gestützter Bewegungserkennungsalgorithmus analysiert den Videofeed in Echtzeit:
+
+- **Trittfrequenz (RPM)** — Wie schnell du trittst
+- **Bewegungskonsistenz** — Ob du aktiv trittst oder rollst
+- **Intensitätsänderungen** — Beschleunigungs- und Verlangsamungsmuster
+
+Diese Daten fließen in eine Physik-Engine, die deine virtuelle Geschwindigkeit berechnet — basierend auf Trittfrequenz, Gangwahl, Fahrergewicht und Radgewicht.
+
+### Echte Streckenvideos
+
+Anders als Zwifts virtuelle 3D-Welt nutzt CycleRun **echte First-Person Cycling Videos** von realen Straßen. Du siehst, was ein Radfahrer tatsächlich sieht: die Straße, echtes Wetter, echtes Licht, echte Landschaft.
+
+Die Video-Wiedergabegeschwindigkeit synchronisiert sich mit deiner Tretgeschwindigkeit. Schneller treten = schnelleres Video. Aufhören zu treten = Video wird langsam.
+
+### Kompatible Hardware
+
+CycleRun funktioniert mit praktisch jedem stationären Fahrrad: Spinning Bikes (Peloton, Keiser, Schwinn), Ergometer (Kettler, Daum, Life Fitness), alte Heimtrainer, Indoor Bike Trainer und Smart Trainer.
+
+## Funktionsvergleich: CycleRun vs Zwift vs Rouvy
+
+| Funktion | CycleRun | Zwift | Rouvy |
+|----------|----------|-------|-------|
+| Monatliche Kosten | **Kostenlos** | 17,99 € | 12,99 € |
+| Smart Trainer nötig | **Nein** | Ja | Ja |
+| Echte Videos | **Ja** | Nein (3D) | Ja |
+| Jedes Fahrrad kompatibel | **Ja** | Eingeschränkt | Eingeschränkt |
+| Datenschutz (lokal) | **Ja** | Nein | Nein |
+| Multiplayer | Kommt bald | Ja | Ja |
+| Trainingspläne | Kommt bald | Ja | Ja |
+| Offline-fähig | **Ja** | Nein | Teilweise |
+
+## Für wen ist CycleRun besser als Zwift?
+
+CycleRun ist die perfekte Wahl, wenn du einen einfachen Heimtrainer ohne Smart-Funktionen besitzt, nicht in teure Hardware investieren möchtest, echte Landschaft statt virtueller 3D-Grafik bevorzugst, dir Datenschutz wichtig ist, du ein altes Ergometer hast, das verstaubt, oder Indoor Cycling ohne finanzielle Verpflichtung ausprobieren möchtest.
+
+## Los geht's (unter 2 Minuten)
+
+1. Öffne [cyclerun.app](https://cyclerun.app) im Browser
+2. Erlaube den Kamera-Zugriff
+3. Platziere Erkennungszonen über deinen Beinen/Pedalen
+4. Wähle eine Strecke oder lade dein eigenes Video hoch
+5. Fang an zu treten — das Video synchronisiert sich automatisch
+
+Kein Download. Keine Installation. Kein Account nötig. Keine Kreditkarte.
+
+[CycleRun kostenlos testen →](https://cyclerun.app)`,
   },
 
   // Page 2: Indoor Cycling App
   {
     slug: "indoor-cycling-app",
     title: "Indoor Cycling App — Free Training with Real Videos | CycleRun.app",
+    title_de: "Indoor Cycling App — Kostenloses Training mit echten Videos | CycleRun.app",
     h1: "The Indoor Cycling App That Turns Your Living Room Into a Road",
+    h1_de: "Die Indoor Cycling App, die dein Wohnzimmer in eine Straße verwandelt",
     description: "CycleRun is the free indoor cycling app that uses your webcam for motion detection. Ride real-world POV videos on any home trainer — no smart sensors needed.",
+    description_de: "CycleRun ist die kostenlose Indoor Cycling App, die deine Webcam zur Bewegungserkennung nutzt. Fahre echte POV-Streckenvideos auf jedem Heimtrainer — keine Sensoren nötig.",
     keywords: "indoor cycling app, indoor cycling app free, best indoor cycling app, cycling app for home trainer, indoor bike training app, virtual cycling app, indoor cycling software",
     faqs: [
       { q: "What is the best free indoor cycling app?", a: "CycleRun is the best free indoor cycling app available in 2026. It works with any home trainer using just your webcam for motion detection — no smart trainer, no sensors, no subscription. You ride real-world POV videos that sync to your pedaling speed." },
@@ -99,6 +178,14 @@ No download. No installation. No account required. No credit card.
       { q: "How accurate is webcam-based cadence tracking?", a: "CycleRun's AI motion detection is surprisingly accurate for indoor training purposes. It reliably detects your pedaling rhythm and intensity changes. While it doesn't provide watt-level precision of a power meter, it's more than sufficient for casual training, fitness rides, and scenic routes." },
       { q: "What video routes are available?", a: "CycleRun offers featured routes including Mallorca (Cap de Formentor), Stelvio Pass, Pacific Coast Highway, Alpe d'Huez, and Trollstigen (Norway). You can also paste any direct video URL or upload your own local video files (MP4, WebM)." },
       { q: "Is indoor cycling as effective as outdoor cycling?", a: "For cardiovascular fitness and leg strength, indoor cycling is equally effective. Studies show indoor training can match outdoor cycling for VO2max improvement, calorie burn, and muscular endurance. The main difference is wind resistance and terrain variation, which CycleRun simulates through its physics engine." },
+    ],
+    faqs_de: [
+      { q: "Was ist die beste kostenlose Indoor Cycling App?", a: "CycleRun ist die beste kostenlose Indoor Cycling App 2026. Sie funktioniert mit jedem Heimtrainer nur über deine Webcam — kein Smart Trainer, keine Sensoren, kein Abo. Du fährst echte POV-Videos, die sich mit deiner Tretgeschwindigkeit synchronisieren." },
+      { q: "Brauche ich spezielle Ausrüstung für Indoor Cycling Apps?", a: "Mit CycleRun brauchst du nur ein stationäres Fahrrad (jede Art) und einen Computer mit Webcam. Kein Smart Trainer, kein Geschwindigkeitssensor, kein Trittfrequenzsensor, kein ANT+-Dongle nötig." },
+      { q: "Funktionieren Indoor Cycling Apps mit einem normalen Heimtrainer?", a: "Ja. CycleRun funktioniert mit jedem Heimtrainer, bei dem deine Beine sichtbar sind — Spinning Bikes, Ergometer, Liegeergometer, sogar alte Fitnessräder aus den 90ern." },
+      { q: "Wie genau ist die webcam-basierte Trittfrequenzerkennung?", a: "CycleRuns KI-Bewegungserkennung ist überraschend genau für Indoor-Training. Sie erkennt zuverlässig deinen Trettrhythmus und Intensitätsänderungen. Für Freizeit-Training, Fitness-Fahrten und szenische Strecken mehr als ausreichend." },
+      { q: "Welche Videostrecken sind verfügbar?", a: "CycleRun bietet Featured Routes wie Mallorca (Cap de Formentor), Stelvio Pass, Pacific Coast Highway, Alpe d'Huez und Trollstigen (Norwegen). Du kannst auch eigene Video-URLs einfügen oder lokale Videodateien hochladen." },
+      { q: "Ist Indoor Cycling genauso effektiv wie Outdoor Cycling?", a: "Für Herz-Kreislauf-Fitness und Beinkraft ist Indoor Cycling gleich effektiv. Studien zeigen, dass Indoor-Training bei VO2max-Verbesserung, Kalorienverbrennung und Muskelausdauer mithalten kann." },
     ],
     content: `## Why You Need an Indoor Cycling App
 
@@ -153,16 +240,78 @@ Research shows indoor cycling effectiveness depends on three factors:
 **Time to first ride: under 2 minutes.** No download, no account, no credit card.
 
 [Start your first ride →](https://cyclerun.app)`,
+    content_de: `## Warum du eine Indoor Cycling App brauchst
+
+Indoor Cycling hat sich weit über das Anstarren einer Wand beim Treten hinaus entwickelt. Moderne Indoor Cycling Apps transformieren dein Training durch visuelle Stimulation, Echtzeit-Feedback und Progression.
+
+Das Problem? Die meisten Indoor Cycling Apps erfordern teure Hardware: Smart Trainer kosten 300–1.500 €, monatliche Abos 12–18 €/Monat, zusätzliche Sensoren 50–300 €.
+
+**CycleRun eliminiert all diese Kosten.** Es ist eine browserbasierte Indoor Cycling App, die deine Webcam statt Hardware-Sensoren nutzt.
+
+## Wie sich CycleRun von anderen Indoor Cycling Apps unterscheidet
+
+### Kein Hardware-Lock-In
+Die meisten Cycling Apps sind um das Smart-Trainer-Ökosystem gebaut. CycleRun funktioniert mit **jedem** stationären Fahrrad. Es interessiert sich nicht für deine Hardware — es beobachtet deine Beinbewegung.
+
+### Echte Videos statt 3D-Grafik
+Während Apps wie Zwift virtuelle 3D-Welten bieten, nutzt CycleRun echte First-Person Cycling Videos. Du siehst echte Straßen, echte Landschaften, echtes Wetter.
+
+### Browserbasiert, keine Installation
+CycleRun läuft komplett in deinem Webbrowser. Kein App-Store-Download, keine Desktop-Installation, keine Updates. URL öffnen, Kamera erlauben und losfahren.
+
+### 100% Privat
+Dein Webcam-Feed wird ausschließlich auf deinem Gerät verarbeitet. Keine Bilder verlassen deinen Browser. Kein Cloud-Processing. Keine Datensammlung.
+
+## Was ein gutes Indoor Cycling Training ausmacht
+
+**Visuelle Einbindung** — Fahrer, die szenische Videos beim Training schauen, berichten von 23% höherer Zufriedenheit und 15% längeren Sessions.
+
+**Echtzeit-Feedback** — Geschwindigkeit, Trittfrequenz, Distanz und Zeit erzeugen eine Feedback-Schleife, die die Motivation aufrechterhält.
+
+**Progressionsgefühl** — Nach jeder Fahrt zeigt CycleRun eine vollständige Zusammenfassung mit Distanz, Dauer, Durchschnitts- und Maximalgeschwindigkeit, RPM und geschätzten Kalorien.
+
+## Kompatible Ausrüstung
+
+| Gerätetyp | Kompatibel? | Hinweise |
+|---|---|---|
+| Spinning Bike (jede Marke) | ✅ Ja | Peloton, Keiser, Schwinn, etc. |
+| Ergometer | ✅ Ja | Kettler, Daum, Life Fitness |
+| Altes Fitnessrad | ✅ Ja | Jedes Alter, jede Marke |
+| Liegeergometer | ✅ Ja | Seitliche Kamera funktioniert am besten |
+| Indoor Trainer + Rennrad | ✅ Ja | Rollentrainer oder Direct-Drive |
+
+## Los geht's
+
+1. Besuche [cyclerun.app](https://cyclerun.app)
+2. Erlaube den Kamera-Zugriff und positioniere deine Webcam
+3. Platziere Erkennungszonen über deinen Beinen/Pedalen
+4. Wähle eine Strecke und fang an zu fahren
+
+**Zeit bis zur ersten Fahrt: unter 2 Minuten.** Kein Download, kein Account, keine Kreditkarte.
+
+[Starte deine erste Fahrt →](https://cyclerun.app)`,
   },
 
   // Page 3: Heimtrainer App (German)
   {
     slug: "heimtrainer-app",
     title: "Heimtrainer App Kostenlos — Indoor Cycling mit Webcam | CycleRun.app",
+    title_de: "Heimtrainer App Kostenlos — Indoor Cycling mit Webcam | CycleRun.app",
     h1: "Die kostenlose Heimtrainer App: Dein altes Ergometer wird zum virtuellen Rennrad",
+    h1_de: "Die kostenlose Heimtrainer App: Dein altes Ergometer wird zum virtuellen Rennrad",
     description: "CycleRun ist die kostenlose Heimtrainer App für Ergometer, Spinning Bikes und Indoor Bikes. Nutze deine Webcam statt teurer Sensoren. Echte Streckenvideos, kein Smart Trainer nötig.",
+    description_de: "CycleRun ist die kostenlose Heimtrainer App für Ergometer, Spinning Bikes und Indoor Bikes. Nutze deine Webcam statt teurer Sensoren. Echte Streckenvideos, kein Smart Trainer nötig.",
     keywords: "Heimtrainer App, Ergometer App kostenlos, Indoor Cycling App deutsch, Spinning App kostenlos, Heimtrainer Software, virtuelles Radfahren App, Ergometer Training App, Indoor Bike App",
     faqs: [
+      { q: "Gibt es eine kostenlose App für meinen Heimtrainer?", a: "Ja! CycleRun ist eine vollständig kostenlose App, die mit jedem Heimtrainer funktioniert — egal ob Ergometer, Spinning Bike, Indoor Bike oder altes Fitnessrad. Du brauchst nur eine Webcam. Kein Smart Trainer, keine Sensoren, kein Abo." },
+      { q: "Wie funktioniert CycleRun ohne Sensoren?", a: "Deine Webcam erkennt die Bewegung deiner Beine mithilfe KI-gestützter Bildanalyse. Du platzierst Erkennungszonen über deinen Knien oder Pedalen, und die Software misst automatisch deine Trittfrequenz. Alle Daten werden lokal in deinem Browser verarbeitet — keine Bilder werden an Server gesendet." },
+      { q: "Funktioniert CycleRun mit meinem alten Ergometer?", a: "Ja, definitiv! Egal ob dein Ergometer 5 oder 25 Jahre alt ist — solange sich deine Beine sichtbar bewegen, erkennt CycleRun die Bewegung. Du brauchst keine Bluetooth- oder ANT+-Verbindung." },
+      { q: "Welche Strecken kann ich fahren?", a: "CycleRun bietet Featured Routes wie Mallorca (Cap de Formentor), Stelvio Pass, Pacific Coast Highway, Alpe d'Huez und Trollstigen (Norwegen). Du kannst auch eigene Videos hochladen oder Video-URLs einfügen. Die Videogeschwindigkeit passt sich automatisch deiner Tretgeschwindigkeit an." },
+      { q: "Was kostet CycleRun?", a: "CycleRun ist und bleibt kostenlos. Kein Abo, keine Premium-Version, keine In-App-Käufe. Es ist ein Community-Projekt. Zum Vergleich: Zwift kostet 17,99€/Monat plus Smart Trainer ab 300€." },
+      { q: "Kann ich mein Training speichern?", a: "Ja. Nach jeder Fahrt siehst du eine Zusammenfassung mit Distanz, Dauer, Durchschnitts- und Maximalgeschwindigkeit, RPM und geschätzten Kalorien. Du kannst eine Share Card für Instagram herunterladen. Mit einer kostenlosen Registrierung wird dein Trainingsverlauf gespeichert." },
+      { q: "Ist meine Privatsphäre geschützt?", a: "Absolut. Alle Webcam-Bilder werden ausschließlich lokal in deinem Browser verarbeitet. Keine Bilder oder Videoframes werden jemals an einen Server übertragen. DSGVO-konform." },
+    ],
+    faqs_de: [
       { q: "Gibt es eine kostenlose App für meinen Heimtrainer?", a: "Ja! CycleRun ist eine vollständig kostenlose App, die mit jedem Heimtrainer funktioniert — egal ob Ergometer, Spinning Bike, Indoor Bike oder altes Fitnessrad. Du brauchst nur eine Webcam. Kein Smart Trainer, keine Sensoren, kein Abo." },
       { q: "Wie funktioniert CycleRun ohne Sensoren?", a: "Deine Webcam erkennt die Bewegung deiner Beine mithilfe KI-gestützter Bildanalyse. Du platzierst Erkennungszonen über deinen Knien oder Pedalen, und die Software misst automatisch deine Trittfrequenz. Alle Daten werden lokal in deinem Browser verarbeitet — keine Bilder werden an Server gesendet." },
       { q: "Funktioniert CycleRun mit meinem alten Ergometer?", a: "Ja, definitiv! Egal ob dein Ergometer 5 oder 25 Jahre alt ist — solange sich deine Beine sichtbar bewegen, erkennt CycleRun die Bewegung. Du brauchst keine Bluetooth- oder ANT+-Verbindung." },
@@ -221,14 +370,67 @@ Du fährst keine 3D-Computergrafik, sondern **echte First-Person Cycling Videos*
 - **Wasser bereitstellen** — Indoor-Training erzeugt mehr Wärme als draußen
 
 [Jetzt kostenlos starten →](https://cyclerun.app)`,
+    content_de: `## Warum du eine Heimtrainer App brauchst
+
+Millionen Deutsche haben einen Heimtrainer zu Hause — Ergometer, Spinning Bikes, Indoor Bikes oder alte Fitnessräder. Das Problem: Die meisten stehen nach ein paar Wochen in der Ecke, weil das Training zu langweilig ist.
+
+Eine gute Heimtrainer App ändert das. Sie verwandelt monotones Treten in ein Erlebnis, das motiviert und Spaß macht. Aber die meisten Apps haben einen großen Haken:
+
+- **Zwift**: 17,99€/Monat + Smart Trainer ab 300€
+- **Rouvy**: 12,99€/Monat + Smart Trainer
+- **Kinomap**: 11,99€/Monat + kompatibles Gerät
+
+**CycleRun ist anders.** Kostenlos, für jeden Heimtrainer, ohne Smart Trainer.
+
+## So funktioniert CycleRun als Heimtrainer App
+
+### Webcam statt Sensoren
+Statt teure Sensoren oder Smart Trainer zu verlangen, nutzt CycleRun deine vorhandene Webcam. Die KI-gestützte Bewegungserkennung analysiert deine Beinbewegung in Echtzeit: Trittfrequenz (RPM), Intensitätsänderungen und Bewegungskonsistenz.
+
+### Echte Streckenvideos
+Du fährst keine 3D-Computergrafik, sondern **echte First-Person Cycling Videos** von realen Straßen: Mallorca, Stelvio Pass, Alpe d'Huez, Pacific Coast Highway, Trollstigen. Die Videogeschwindigkeit passt sich deinem Tempo an.
+
+### Kompatibel mit jedem Heimtrainer
+
+| Gerät | Funktioniert? |
+|-------|--------------|
+| Ergometer (jede Marke) | ✅ Ja |
+| Spinning Bike | ✅ Ja |
+| Indoor Bike | ✅ Ja |
+| Altes Fitnessrad | ✅ Ja |
+| Fahrrad + Rollentrainer | ✅ Ja |
+| Klappbares Ergometer | ✅ Ja |
+
+## In 2 Minuten loslegen
+
+1. Öffne [cyclerun.app](https://cyclerun.app) im Browser
+2. Erlaube den Kamera-Zugriff
+3. Platziere Erkennungszonen über deinen Beinen
+4. Wähle eine Route oder lade ein eigenes Video hoch
+5. Los geht's — das Video synchronisiert sich automatisch
+
+**Kein Download. Keine Installation. Kein Account nötig.**
+
+## Tipps für das perfekte Heimtrainer-Training
+
+- **Kamera seitlich positionieren** — Beste Erkennung der Kniebewegung
+- **Gute Beleuchtung** — Deine Beine sollten hell beleuchtet sein
+- **Kurze Hose tragen** — Besserer Kontrast für die Bewegungserkennung
+- **Aufwärmen** — 5 Minuten lockeres Treten vor der Belastung
+- **Wasser bereitstellen** — Indoor-Training erzeugt mehr Wärme als draußen
+
+[Jetzt kostenlos starten →](https://cyclerun.app)`,
   },
 
   // Page 4: Exercise Bike App
   {
     slug: "exercise-bike-app",
     title: "Exercise Bike App — Make Any Stationary Bike Smart for Free | CycleRun",
+    title_de: "Fitnessrad App — Mach jedes stationäre Rad kostenlos smart | CycleRun",
     h1: "Turn Your Old Exercise Bike Into a Smart Indoor Cycling Experience",
+    h1_de: "Verwandle dein altes Fitnessrad in ein smartes Indoor Cycling Erlebnis",
     description: "CycleRun makes any exercise bike smart — for free. Use your webcam for cadence detection, ride real-world videos, and track your training. No sensors or upgrades needed.",
+    description_de: "CycleRun macht jedes Fitnessrad smart — kostenlos. Nutze deine Webcam zur Trittfrequenzerkennung, fahre echte Streckenvideos und tracke dein Training. Keine Sensoren nötig.",
     keywords: "exercise bike app, stationary bike app, exercise bike training app, smart exercise bike app, old exercise bike app, recumbent bike app, stationary bike virtual ride",
     faqs: [
       { q: "Can I make my old exercise bike smart?", a: "Yes! CycleRun turns any exercise bike into a smart indoor cycling setup. Your webcam detects your pedaling cadence, and the app provides virtual routes, speed tracking, and training metrics. No hardware upgrades needed." },
@@ -237,6 +439,14 @@ Du fährst keine 3D-Computergrafik, sondern **echte First-Person Cycling Videos*
       { q: "How does CycleRun calculate my speed on an exercise bike?", a: "CycleRun uses your cadence (detected via webcam), selected gear/resistance level, rider weight, and bike weight to calculate speed using real-world cycling physics. The formula accounts for rolling resistance, air drag, and drivetrain losses." },
       { q: "Is indoor exercise bike training effective for weight loss?", a: "Yes. A 30-minute moderate indoor cycling session burns approximately 200–400 calories depending on intensity and body weight. Indoor cycling is low-impact, making it suitable for people of all fitness levels. Combined with CycleRun's engaging video routes, you're more likely to stick with regular training." },
       { q: "Can I use CycleRun on my TV?", a: "Yes! Connect your laptop to your TV via HDMI, or use CycleRun's phone camera pairing: scan a QR code with your phone, enter a 4-digit code, and your phone's camera streams to your computer while you view the ride on your TV." },
+    ],
+    faqs_de: [
+      { q: "Kann ich mein altes Fitnessrad smart machen?", a: "Ja! CycleRun verwandelt jedes Fitnessrad in ein smartes Indoor Cycling Setup. Deine Webcam erkennt deine Trittfrequenz und die App bietet virtuelle Strecken, Geschwindigkeits-Tracking und Trainingsmetriken. Keine Hardware-Upgrades nötig." },
+      { q: "Funktioniert CycleRun mit einem Liegeergometer?", a: "Ja. Positioniere die Webcam seitlich, wo deine Beine sichtbar sind. Der seitliche Kamerawinkel funktioniert gut bei Liegeergometern, da sich deine Beine nach vorne erstrecken." },
+      { q: "Kann ich ein günstiges Fitnessrad mit CycleRun nutzen?", a: "Absolut. CycleRun interessiert sich nicht für den Preis oder die Funktionen deines Rads. Ein 100-€-Amazon-Fitnessrad funktioniert genauso gut wie ein 2.000-€-Smart-Trainer. Wichtig ist nur, dass sich deine Beine sichtbar bewegen." },
+      { q: "Wie berechnet CycleRun meine Geschwindigkeit auf einem Fitnessrad?", a: "CycleRun nutzt deine Trittfrequenz (per Webcam erkannt), gewählte Gangstufe, Fahrergewicht und Radgewicht zur Geschwindigkeitsberechnung mit realistischer Radfahrphysik — inkl. Rollwiderstand, Luftwiderstand und Antriebsverlusten." },
+      { q: "Ist Indoor-Training auf dem Fitnessrad effektiv zum Abnehmen?", a: "Ja. Eine 30-minütige moderate Indoor-Cycling-Session verbrennt ca. 200–400 Kalorien je nach Intensität und Körpergewicht. Indoor Cycling ist gelenkschonend und für alle Fitnesslevel geeignet." },
+      { q: "Kann ich CycleRun auf meinem Fernseher nutzen?", a: "Ja! Verbinde deinen Laptop per HDMI mit dem TV, oder nutze CycleRuns Handy-Kamera-Kopplung: QR-Code scannen, 4-stelligen Code eingeben, und dein Handy streamt die Kamera an deinen Computer." },
     ],
     content: `## Your Exercise Bike Deserves Better
 
@@ -272,14 +482,51 @@ Research from the fitness industry shows: 67% of home exercise equipment is aban
 CycleRun addresses both: engaging real-world videos + comprehensive metrics.
 
 [Try it now →](https://cyclerun.app)`,
+    content_de: `## Dein Fitnessrad verdient Besseres
+
+Weltweit stehen über 60 Millionen Fitnessräder in Wohnungen. Die meisten haben eines gemeinsam: Sie sind langweilig zu benutzen. Ein einfaches Display mit Zeit, Geschwindigkeit und Kalorien reicht nicht, um die meisten Menschen über die ersten Wochen hinaus zu motivieren.
+
+Die Lösung der Fitnessindustrie? Kauf ein neues Smart Bike für 1.000 €+ und abonniere eine Plattform. Aber was ist mit dem perfekt funktionierenden Rad, das du bereits besitzt?
+
+**CycleRuns Philosophie: Ersetze dein Rad nicht — upgrade das Erlebnis.**
+
+## Wie CycleRun jedes Fitnessrad aufwertet
+
+### Ohne CycleRun
+Du starrst eine Wand oder TV-Show an. Kein Feedback zwischen Anstrengung und Umgebung. Kein Gefühl von Fortschritt. Leicht nach 10 Minuten aufzugeben.
+
+### Mit CycleRun
+Du fährst durch echte Landschaften (Berge, Küsten, Städte). Die Videogeschwindigkeit passt sich deiner Tretleistung an. Echtzeit-Metriken: Geschwindigkeit, Trittfrequenz, Distanz, Zeit. Ein Ziel zum "Ankommen" — Abschluss motiviert zum Weitermachen.
+
+### Der Webcam-Vorteil
+Deine Laptop-, Desktop- oder Tablet-Kamera wird zum Trittfrequenzsensor. CycleRuns Computer-Vision-Algorithmus identifiziert deine Bein-/Pedalbewegung, trackt Pixeländerungen Frame für Frame, berechnet Halb-Pedalzyklen für die RPM und speist die RPM in eine Physik-Engine für die Geschwindigkeitsberechnung.
+
+## Funktioniert mit jedem Fitnessrad-Typ
+
+**Aufrechte Fitnessräder** — Häufigster Typ. Seitliche Webcam gibt beste Ergebnisse.
+**Liegeergometer** — Seitliche Kamera auf Beinhöhe funktioniert sehr gut.
+**Klappbare Fitnessräder** — Auch kompakte 100-€-Modelle funktionieren.
+**Air Bikes / Fan Bikes** — Erkennungszonen auf Knie fokussieren, um Armbewegung zu filtern.
+**Unter-Schreibtisch Pedaleinheiten** — Funktioniert, wenn die Webcam die Pedalbewegung sehen kann.
+
+## Warum Menschen Fitnessräder aufgeben (und wie man es verhindert)
+
+Forschung aus der Fitnessbranche zeigt: 67% der Heim-Fitnessgeräte werden innerhalb von 6 Monaten aufgegeben. Der #1 Grund: **Langeweile**. Visuelle Einbindung erhöht die langfristige Nutzung um 40%. Fortschritts-Tracking bringt weitere 25%.
+
+CycleRun adressiert beides: ansprechende echte Videos + umfassende Metriken.
+
+[Jetzt ausprobieren →](https://cyclerun.app)`,
   },
 
   // Page 5: Spinning Bike App
   {
     slug: "spinning-bike-app",
     title: "Spinning Bike App Free — Use Your Peloton Without the Subscription | CycleRun",
+    title_de: "Spinning Bike App Kostenlos — Nutze dein Peloton ohne Abo | CycleRun",
     h1: "Free Spinning Bike App: Turn Any Spin Bike Into a Virtual Cycling Studio",
+    h1_de: "Kostenlose Spinning Bike App: Verwandle jedes Spin Bike in ein virtuelles Cycling Studio",
     description: "Use your spinning bike with CycleRun — the free app that detects your cadence via webcam. No sensors, no subscription. Works with Peloton, Keiser, Schwinn, and any spin bike.",
+    description_de: "Nutze dein Spinning Bike mit CycleRun — die kostenlose App, die deine Trittfrequenz per Webcam erkennt. Keine Sensoren, kein Abo. Funktioniert mit Peloton, Keiser, Schwinn und jedem Spin Bike.",
     keywords: "spinning bike app, spin bike app free, Peloton alternative free, spinning app without subscription, indoor spin class app, spin bike virtual ride, Peloton without subscription",
     faqs: [
       { q: "Can I use my Peloton bike without the Peloton subscription?", a: "Yes! CycleRun turns your Peloton (or any spin bike) into a free virtual cycling platform. Your webcam detects your cadence — no Peloton subscription needed. You ride real-world POV videos instead of live classes." },
@@ -287,6 +534,13 @@ CycleRun addresses both: engaging real-world videos + comprehensive metrics.
       { q: "Is CycleRun as good as a Peloton class?", a: "They serve different purposes. Peloton offers instructor-led group classes with music and motivation. CycleRun offers scenic solo rides through real-world locations. Many riders use both — Peloton for structured classes and CycleRun for scenic endurance rides." },
       { q: "Can I see my cadence (RPM) on CycleRun?", a: "Yes. CycleRun displays real-time RPM detected via your webcam, along with virtual speed, distance, time, and calories. After each ride, you get a full summary with averages and peaks." },
       { q: "Does CycleRun work on a tablet mounted to my spin bike?", a: "Yes, as long as the tablet has a camera that can see your legs. Mount it at handlebar height with the camera pointing toward your legs." },
+    ],
+    faqs_de: [
+      { q: "Kann ich mein Peloton Bike ohne Peloton-Abo nutzen?", a: "Ja! CycleRun verwandelt dein Peloton (oder jedes Spin Bike) in eine kostenlose virtuelle Cycling-Plattform. Deine Webcam erkennt deine Trittfrequenz — kein Peloton-Abo nötig. Du fährst echte POV-Streckenvideos statt Live-Kurse." },
+      { q: "Welche Spinning Bikes funktionieren mit CycleRun?", a: "Jedes Spinning Bike funktioniert — Peloton, Keiser M3i, Schwinn IC4, NordicTrack S22i, Echelon, Bowflex VeloCore, Yosuda oder jedes No-Name-Spin-Bike. CycleRun nutzt deine Webcam, nicht die Bike-Sensoren." },
+      { q: "Ist CycleRun so gut wie ein Peloton-Kurs?", a: "Sie dienen unterschiedlichen Zwecken. Peloton bietet trainergeführte Gruppenkurse mit Musik und Motivation. CycleRun bietet szenische Solo-Fahrten durch echte Orte. Viele nutzen beides — Peloton für strukturierte Kurse und CycleRun für szenische Ausdauerfahrten." },
+      { q: "Kann ich meine Trittfrequenz (RPM) auf CycleRun sehen?", a: "Ja. CycleRun zeigt Echtzeit-RPM über deine Webcam erkannt, zusammen mit virtueller Geschwindigkeit, Distanz, Zeit und Kalorien. Nach jeder Fahrt bekommst du eine vollständige Zusammenfassung." },
+      { q: "Funktioniert CycleRun auf einem Tablet am Spin Bike?", a: "Ja, solange das Tablet eine Kamera hat, die deine Beine sehen kann. Befestige es auf Lenkerhöhe mit der Kamera Richtung Beine." },
     ],
     content: `## The Problem With Spinning Bike Subscriptions
 
@@ -328,14 +582,57 @@ CycleRun doesn't connect to your bike's electronics. Your webcam watches your le
 | Lock-in | Yes | Yes | **No** |
 
 [Open CycleRun free →](https://cyclerun.app)`,
+    content_de: `## Das Problem mit Spinning Bike Abos
+
+Du hast 1.000–2.500 € für ein hochwertiges Spinning Bike ausgegeben. Jetzt zahlst du 39 €/Monat für Peloton All-Access oder ähnliche Gebühren für NordicTrack iFIT, Echelon oder andere Plattformen. Das sind 468 €/Jahr nur um das Bike zu nutzen, das du bereits besitzt.
+
+Was passiert, wenn dein Abo ausläuft? Dein teures Bike wird zu einem dummen Fitnessrad ohne Bildschirm-Inhalte. Manche Hersteller sperren sogar Basisfunktionen hinter dem Abo.
+
+**CycleRun gibt deinem Spin Bike einen Zweck — für immer, kostenlos.**
+
+## Wie CycleRun mit Spinning Bikes funktioniert
+
+CycleRun verbindet sich nicht mit der Elektronik deines Bikes. Deine Webcam beobachtet deine Beine beim Treten. Die KI erkennt deine Trittfrequenz und passt die Videogeschwindigkeit in Echtzeit an.
+
+- ✅ Funktioniert mit **jedem** Spin Bike, jeder Marke, jedem Alter
+- ✅ Kein Bluetooth-Pairing nötig
+- ✅ Kein Abo-Lock-in
+- ✅ Kein Hersteller-Lock-in
+
+## Spinning Bike Kompatibilität
+
+| Marke | Funktioniert? |
+|-------|--------|
+| Peloton Bike/Bike+ | ✅ Ja |
+| Keiser M3i | ✅ Ja |
+| Schwinn IC4/IC8 | ✅ Ja |
+| NordicTrack S22i/S27i | ✅ Ja |
+| Echelon EX5/EX5s | ✅ Ja |
+| Bowflex VeloCore | ✅ Ja |
+| Yosuda Indoor Bike | ✅ Ja |
+| Jedes No-Name Spin Bike | ✅ Ja |
+
+## Die Rechnung: Abo vs CycleRun
+
+| | Peloton | NordicTrack iFIT | CycleRun |
+|---|---|---|---|
+| Monatliche Kosten | 39 € | 39 € | **0 €** |
+| 3-Jahres-Kosten | 1.404 € | 1.404 € | **0 €** |
+| Ausrüstung nötig | Peloton Bike | NordicTrack Bike | Jedes Bike + Webcam |
+| Lock-in | Ja | Ja | **Nein** |
+
+[CycleRun kostenlos öffnen →](https://cyclerun.app)`,
   },
 
   // Page 6: Virtual Cycling Videos
   {
     slug: "virtual-cycling-videos",
     title: "Virtual Cycling Videos — POV Ride Videos for Indoor Training | CycleRun",
+    title_de: "Virtuelle Cycling Videos — POV-Streckenvideos für Indoor Training | CycleRun",
     h1: "Virtual Cycling Videos: Ride Real Roads From Your Living Room",
+    h1_de: "Virtuelle Cycling Videos: Fahre echte Straßen von deinem Wohnzimmer aus",
     description: "Watch and ride along with virtual cycling videos that sync to your pedaling speed. First-person POV videos from Mallorca, the Alps, California, and more. Free on CycleRun.",
+    description_de: "Schau und fahre mit virtuellen Cycling Videos, die sich mit deiner Tretgeschwindigkeit synchronisieren. First-Person POV-Videos aus Mallorca, den Alpen, Kalifornien und mehr. Kostenlos auf CycleRun.",
     keywords: "virtual cycling videos, POV cycling videos, indoor cycling videos, first person cycling video, cycling video for indoor trainer, scenic cycling videos, virtual bike ride video",
     faqs: [
       { q: "What are virtual cycling videos?", a: "Virtual cycling videos are first-person (POV) videos recorded from a bicycle, showing the road ahead as a cyclist would see it. When used with CycleRun, the video playback speed synchronizes with your pedaling — pedal faster and the video speeds up, stop and it slows down." },
@@ -344,6 +641,14 @@ CycleRun doesn't connect to your bike's electronics. Your webcam watches your le
       { q: "Can I use YouTube cycling videos with CycleRun?", a: "YouTube URLs don't work directly (streaming DRM). However, you can download cycling POV videos and upload the MP4 file to CycleRun via the local upload option. Alternatively, use direct MP4 links from other sources." },
       { q: "What resolution should cycling videos be?", a: "1080p (1920×1080) at 30fps is the sweet spot. Higher resolutions (4K) offer marginal improvement on most screens but require much more bandwidth. CycleRun handles any resolution your browser can play." },
       { q: "Can I record my own cycling videos for CycleRun?", a: "Absolutely! Use a GoPro, DJI Action camera, Insta360, or even your smartphone with a chest mount. Record in 1080p/30fps with stabilization on. Visit cyclerun.app/creator for the complete recording guide." },
+    ],
+    faqs_de: [
+      { q: "Was sind virtuelle Cycling Videos?", a: "Virtuelle Cycling Videos sind First-Person (POV) Videos, die von einem Fahrrad aufgenommen wurden und die Straße voraus zeigen. Bei CycleRun synchronisiert sich die Wiedergabegeschwindigkeit mit deinem Treten — schneller treten = schnelleres Video, anhalten = Video stoppt fast." },
+      { q: "Wo finde ich kostenlose Cycling POV Videos?", a: "CycleRun bietet Featured Routes, gefilmt an atemberaubenden Orten (Mallorca, Stelvio, Alpe d'Huez, Pacific Coast Highway, Trollstigen). Du kannst auch beliebige direkte MP4/WebM-Video-URLs nutzen oder eigene Dateien hochladen." },
+      { q: "Wie funktionieren virtuelle Cycling Videos mit CycleRun?", a: "CycleRun spielt das Video in deinem Browser ab, während deine Webcam deine Trittfrequenz erkennt. Die Video-Wiedergaberate passt sich in Echtzeit an: schneller treten = schnelleres Video, langsamer = langsameres Video." },
+      { q: "Kann ich YouTube Cycling Videos mit CycleRun nutzen?", a: "YouTube-URLs funktionieren nicht direkt (Streaming-DRM). Du kannst aber Cycling POV Videos herunterladen und die MP4-Datei über die lokale Upload-Option in CycleRun laden. Alternativ nutze direkte MP4-Links aus anderen Quellen." },
+      { q: "Welche Auflösung sollten Cycling Videos haben?", a: "1080p (1920×1080) bei 30fps ist der Sweet Spot. Höhere Auflösungen (4K) bieten auf den meisten Bildschirmen nur marginale Verbesserung, erfordern aber deutlich mehr Bandbreite." },
+      { q: "Kann ich eigene Cycling Videos für CycleRun aufnehmen?", a: "Absolut! Nutze eine GoPro, DJI Action Kamera, Insta360 oder sogar dein Smartphone mit Brusthalterung. Nimm in 1080p/30fps mit Stabilisierung auf. Besuche cyclerun.app/creator für den kompletten Aufnahme-Guide." },
     ],
     content: `## The Rise of Virtual Cycling Videos
 
@@ -403,14 +708,73 @@ Three ways to get videos into CycleRun:
 3. **Local Upload** — Upload a video file from your device (stays local)
 
 [Start riding virtual routes →](https://cyclerun.app)`,
+    content_de: `## Der Aufstieg virtueller Cycling Videos
+
+Virtuelle Cycling Videos haben seit 2020 enorm an Beliebtheit gewonnen. Als Millionen während der Lockdowns Indoor Cycling entdeckten, schoss die Nachfrage nach immersiven Fahrerlebnissen in die Höhe. Statt eine Wand anzustarren, wollten Fahrer das Gefühl haben, an einem wunderschönen Ort zu sein.
+
+Das Konzept ist einfach aber wirkungsvoll: Eine auf einem Fahrrad montierte Kamera nimmt die Straße voraus auf, während der Radfahrer durch szenische Orte fährt. Das resultierende First-Person Video, mit variabler Geschwindigkeit synchronisiert zu deinem Treten, erzeugt ein bemerkenswert immersives Erlebnis.
+
+## Arten virtueller Cycling Videos
+
+### POV Rennrad-Videos
+Kamera auf Brust oder Lenker montiert, die Straße voraus aufnehmend. Das ist das häufigste und immersivste Format. Du siehst die Straße, den Lenker, die umgebende Landschaft — genau als würdest du selbst fahren.
+
+### Drohnen-Folge-Videos
+Eine Drohne folgt dem Radfahrer von oben oder seitlich. Kinematischer aber weniger immersiv für Indoor-Training, da du dich selbst fahren siehst statt die Fahrt zu erleben.
+
+### 360°-Videos
+Gefilmt mit 360°-Kameras, die es ermöglichen, sich während der Fahrt umzuschauen. Experimentell für Indoor Cycling aber vielversprechend für VR-Integration.
+
+## Beste Orte für Cycling Videos
+
+### Europäische Klassiker
+- **Mallorca, Spanien** — Cap de Formentor Leuchtturmstraße, Mittelmeerküste
+- **Stelvio Pass, Italien** — 48 Haarnadelkurven, einer der höchsten Alpenpässe
+- **Alpe d'Huez, Frankreich** — 21 legendäre Tour-de-France-Kehren
+- **Dolomiten, Italien** — Dramatische Berglandschaft, mehrere berühmte Pässe
+- **Provence, Frankreich** — Lavendelfelder, sanfte Hügel, Mont Ventoux
+
+### Globale Ziele
+- **Pacific Coast Highway, USA** — Kaliforniens ikonische Küstenstraße
+- **Trollstigen, Norwegen** — Dramatische Fjord-Serpentinen mit Wasserfällen
+- **Teneriffa, Spanien** — Vulkanstraßen zum Teide
+- **Ring of Kerry, Irland** — Atlantikküste und grüne Hügel
+
+## Wie CycleRun Video mit deinem Treten synchronisiert
+
+1. **Webcam erkennt deine Trittfrequenz** — KI-Bewegungserkennung misst deine RPM
+2. **Physik-Engine berechnet Geschwindigkeit** — Basierend auf RPM, Gang, Gewicht und Widerstand
+3. **Video-Wiedergabe passt sich an** — Schnellere Geschwindigkeit = schnelleres Video
+4. **Nahtloser Übergang** — Geschwindigkeitsänderungen sind flüssig, nicht ruckartig
+
+## Eigene Cycling Videos aufnehmen
+
+### Ausrüstung
+- **Kamera**: GoPro Hero 12/13, DJI Action 4/5, Insta360 Ace Pro oder iPhone
+- **Halterung**: Brusthalterung (empfohlen) oder Lenkerhalterung
+- **Einstellungen**: 1080p, 30fps, Stabilisierung HOCH, weites FOV, GPS AN
+
+Besuche [cyclerun.app/creator](/creator) für den kompletten Aufnahme-Guide mit kameraspezifischen Einstellungen und Streckentipps.
+
+## Virtuelle Cycling Videos auf CycleRun nutzen
+
+Drei Wege, Videos in CycleRun zu bringen:
+1. **Featured Routes** — Vorausgewählte szenische Fahrten, ein Klick zum Start
+2. **Video-URL** — Direktlink zu einer MP4- oder WebM-Datei einfügen
+3. **Lokaler Upload** — Videodatei von deinem Gerät hochladen (bleibt lokal)
+
+[Virtuelle Strecken fahren →](https://cyclerun.app)`,
   },
 
   // Page 7: Indoor Cycling Without Smart Trainer
   {
     slug: "indoor-cycling-without-smart-trainer",
     title: "Indoor Cycling Without a Smart Trainer — How to Ride Virtual Routes for Free",
+    title_de: "Indoor Cycling ohne Smart Trainer — Virtuelle Strecken kostenlos fahren",
     h1: "Indoor Cycling Without a Smart Trainer: Everything You Need to Know",
+    h1_de: "Indoor Cycling ohne Smart Trainer: Alles was du wissen musst",
     description: "You don't need an expensive smart trainer for indoor cycling. CycleRun uses your webcam to detect your pedaling and syncs real-world videos to your speed. Works with any bike.",
+    description_de: "Du brauchst keinen teuren Smart Trainer für Indoor Cycling. CycleRun nutzt deine Webcam zur Treterkennung und synchronisiert echte Streckenvideos mit deiner Geschwindigkeit. Funktioniert mit jedem Rad.",
     keywords: "indoor cycling without smart trainer, cycling without smart trainer, virtual cycling no sensor, indoor cycling no bluetooth, cycling app no trainer, indoor riding without sensors",
     faqs: [
       { q: "Can you do virtual cycling without a smart trainer?", a: "Yes! CycleRun proves that virtual cycling without a smart trainer is not only possible but highly enjoyable. Your webcam detects your cadence, and real-world video routes sync to your pedaling speed." },
@@ -419,6 +783,14 @@ Three ways to get videos into CycleRun:
       { q: "Can I use a dumb trainer with CycleRun?", a: "Yes. If you have a wheel-on or fluid trainer without electronic sensors, CycleRun works perfectly. Just point your webcam at your legs and start riding." },
       { q: "What about resistance changes without a smart trainer?", a: "CycleRun doesn't control your trainer's resistance. Instead, you manually select from three gear/resistance levels (light, medium, heavy) in the app. The physics engine adjusts speed calculations accordingly." },
       { q: "Is CycleRun suitable for serious training without a smart trainer?", a: "For zone-2 endurance rides, scenic rides, and general fitness: absolutely. For power-based interval training (FTP tests, structured watt-based workouts): you'll want a smart trainer. CycleRun excels at making everyday rides engaging." },
+    ],
+    faqs_de: [
+      { q: "Kann man virtuelles Cycling ohne Smart Trainer machen?", a: "Ja! CycleRun beweist, dass virtuelles Cycling ohne Smart Trainer nicht nur möglich, sondern sehr unterhaltsam ist. Deine Webcam erkennt deine Trittfrequenz und echte Streckenvideos synchronisieren sich mit deiner Tretgeschwindigkeit." },
+      { q: "Was brauche ich statt eines Smart Trainers?", a: "Nur ein stationäres Fahrrad (jede Art) und einen Computer/Tablet mit Webcam. CycleRun nutzt kamerabasierte Bewegungserkennung statt Bluetooth/ANT+-Sensoren." },
+      { q: "Ist Webcam-Cycling genauso genau wie ein Smart Trainer?", a: "Für Geschwindigkeit und Trittfrequenz: ja, CycleRun liefert zuverlässige Echtzeit-Daten. Für präzise Leistung (Watt): Smart Trainer sind genauer. Für Freizeit-Training und Fitness-Ziele ist CycleRun mehr als ausreichend." },
+      { q: "Kann ich einen einfachen Rollentrainer mit CycleRun nutzen?", a: "Ja. Wenn du einen Rad-auf oder Fluid-Trainer ohne elektronische Sensoren hast, funktioniert CycleRun perfekt. Richte einfach deine Webcam auf deine Beine und fahr los." },
+      { q: "Was ist mit Widerstandsänderungen ohne Smart Trainer?", a: "CycleRun steuert nicht den Widerstand deines Trainers. Stattdessen wählst du manuell aus drei Gang-/Widerstandsstufen (leicht, mittel, schwer) in der App. Die Physik-Engine passt die Geschwindigkeitsberechnung entsprechend an." },
+      { q: "Ist CycleRun für ernsthaftes Training ohne Smart Trainer geeignet?", a: "Für Zone-2-Ausdauerfahrten, szenische Fahrten und allgemeine Fitness: absolut. Für leistungsbasiertes Intervalltraining (FTP-Tests, strukturierte Watt-Workouts): da ist ein Smart Trainer besser. CycleRun glänzt darin, alltägliche Fahrten ansprechend zu machen." },
     ],
     content: `## The Smart Trainer Problem
 
@@ -476,14 +848,73 @@ Your laptop webcam or phone camera watches your legs pedal. Computer vision algo
 5. **iPhone Continuity Camera** — Mac users. iPhone as webcam, no cables.
 
 [Start riding free →](https://cyclerun.app)`,
+    content_de: `## Das Smart-Trainer-Problem
+
+Die Indoor-Cycling-Branche hat ein Hardware-Problem. Um beliebte Plattformen wie Zwift, TrainerRoad oder Rouvy zu nutzen, brauchst du:
+
+- Einen **Smart Trainer** (300–1.500 €)
+- Oft einen **Trittfrequenzsensor** (30–50 €)
+- Manchmal einen **Herzfrequenzmesser** (50–100 €)
+- Einen **ANT+-Dongle** falls dein Computer keine eingebaute Unterstützung hat (30 €)
+
+Gesamt: **410–1.680 €** bevor du überhaupt das monatliche Abo in Betracht ziehst. Das schafft eine massive Eintrittsbarriere.
+
+## CycleRun: Ein anderer Ansatz
+
+CycleRun fragt: **Was wenn wir die Kamera nutzen, die du bereits hast, statt Sensoren, die du kaufen musst?**
+
+Deine Laptop-Webcam oder Handykamera beobachtet deine Beine beim Treten. Computer-Vision-Algorithmen (lokal in deinem Browser laufend) erkennen jeden Pedaltritt, deine Trittfrequenz und Intensitätsänderungen.
+
+### Was du NICHT brauchst
+
+| Traditionelles Setup | CycleRun |
+|---|---|
+| Smart Trainer (300 €+) | ❌ Nicht nötig |
+| Trittfrequenzsensor (30 €+) | ❌ Nicht nötig |
+| Geschwindigkeitssensor (30 €+) | ❌ Nicht nötig |
+| Leistungsmesser (200 €+) | ❌ Nicht nötig |
+| ANT+-Dongle (30 €) | ❌ Nicht nötig |
+| Monatliches Abo | ❌ Nicht nötig |
+
+### Was du brauchst
+- ✅ Irgendein stationäres Fahrrad
+- ✅ Einen Computer oder Tablet mit Webcam
+- ✅ Einen Webbrowser
+
+## Wie gut ist webcam-basierte Erkennung?
+
+### Was sie gut kann
+- Zuverlässige Trittfrequenzerkennung (±3 RPM)
+- Echtzeit-Geschwindigkeitsberechnung
+- Erkennt Treten vs. Nicht-Treten sofort
+- Funktioniert bei verschiedenen Lichtverhältnissen
+- Unterstützt seitliche, frontale und benutzerdefinierte Kamerawinkel
+
+### Einschränkungen
+- Nicht so präzise wie ein direkter Leistungsmesser für Watt
+- Braucht vernünftige Beleuchtung (keine komplette Dunkelheit)
+- Beine sollten sichtbar sein (lange Hosen reduzieren die Genauigkeit)
+
+## Fünf Setup-Optionen
+
+1. **Laptop Seitenansicht** — Beste Genauigkeit. Laptop auf Kniehöhe neben dein Rad stellen.
+2. **Tablet auf Lenker** — Am praktischsten. Kamera auf deine Beine gerichtet.
+3. **Handy-Kamera-Kopplung** — Am besten für TV. CycleRun auf TV, Handy als drahtloser Sensor.
+4. **Externe Webcam** — Am flexibelsten. USB-Webcam beliebig positioniert.
+5. **iPhone Continuity Camera** — Mac-Nutzer. iPhone als Webcam, keine Kabel.
+
+[Jetzt kostenlos losfahren →](https://cyclerun.app)`,
   },
 
   // Page 8: Ergometer Training
   {
     slug: "ergometer-training",
     title: "Ergometer Training App — Virtual Rides for Your Home Ergometer | CycleRun",
+    title_de: "Ergometer Training App — Virtuelle Fahrten für deinen Heimergometer | CycleRun",
     h1: "Ergometer Training: From Boring Basement Bike to Virtual Cycling Studio",
+    h1_de: "Ergometer Training: Vom langweiligen Kellerrad zum virtuellen Cycling Studio",
     description: "Transform your ergometer training with CycleRun. Ride real-world video routes that sync to your pedaling speed. Free app, no sensors needed, works with any ergometer brand.",
+    description_de: "Verwandle dein Ergometer-Training mit CycleRun. Fahre echte Streckenvideos, die sich mit deiner Tretgeschwindigkeit synchronisieren. Kostenlose App, keine Sensoren nötig, jede Ergometer-Marke.",
     keywords: "ergometer training, ergometer app, ergometer training app, ergometer virtual ride, Ergometer Software, best ergometer training program, ergometer workout app, Ergometer Training zu Hause",
     faqs: [
       { q: "How can I make my ergometer training more interesting?", a: "CycleRun transforms ergometer training by overlaying real-world cycling videos that sync to your pedaling speed. Instead of staring at your ergometer's basic LCD, you ride through the Alps, along Mediterranean coastlines, or through Norwegian fjords." },
@@ -492,6 +923,14 @@ Your laptop webcam or phone camera watches your legs pedal. Computer vision algo
       { q: "Is ergometer training good for weight loss?", a: "Yes, ergometer training is excellent for weight loss. At moderate intensity, you burn 300–500 calories per hour. Because it's low-impact (no stress on joints), it's suitable for overweight individuals and those with knee problems." },
       { q: "How often should I train on my ergometer?", a: "For general fitness: 3–4 times per week, 30–45 minutes. For weight loss: 4–5 times per week, 40–60 minutes at moderate intensity. For cardiovascular health: 3 times per week, 20–30 minutes at higher intensity." },
       { q: "Can I use CycleRun while watching my ergometer's display?", a: "Yes! CycleRun runs on your laptop/tablet screen while your ergometer's built-in display shows its own metrics. You can use both simultaneously." },
+    ],
+    faqs_de: [
+      { q: "Wie kann ich mein Ergometer-Training interessanter machen?", a: "CycleRun verwandelt Ergometer-Training durch echte Streckenvideos, die sich mit deiner Tretgeschwindigkeit synchronisieren. Statt auf das einfache LCD deines Ergometers zu starren, fährst du durch die Alpen, entlang mediterraner Küsten oder durch norwegische Fjorde." },
+      { q: "Welche Ergometer-Marken funktionieren mit CycleRun?", a: "Alle. CycleRun nutzt deine Webcam, nicht die Elektronik deines Ergometers. Kettler, Daum, Life Fitness, Technogym, Hammer, Christopeit, Sportstech, Skandika, Ultrasport, Klarfit — jedes Ergometer funktioniert." },
+      { q: "Muss ich mein Ergometer per Bluetooth verbinden?", a: "Nein. CycleRun nutzt weder Bluetooth noch ANT+ noch irgendein Funkprotokoll deines Ergometers. Es nutzt deine Webcam zur Erkennung deiner Beinbewegung. Das heißt, es funktioniert auch mit Ergometern ganz ohne elektronische Konnektivität." },
+      { q: "Ist Ergometer-Training gut zum Abnehmen?", a: "Ja, Ergometer-Training ist hervorragend zum Abnehmen. Bei moderater Intensität verbrennst du 300–500 Kalorien pro Stunde. Weil es gelenkschonend ist, eignet es sich für Übergewichtige und Menschen mit Knieproblemen." },
+      { q: "Wie oft sollte ich auf meinem Ergometer trainieren?", a: "Für allgemeine Fitness: 3–4x pro Woche, 30–45 Minuten. Zum Abnehmen: 4–5x pro Woche, 40–60 Minuten bei moderater Intensität. Für Herz-Kreislauf-Gesundheit: 3x pro Woche, 20–30 Minuten bei höherer Intensität." },
+      { q: "Kann ich CycleRun nutzen und gleichzeitig das Display meines Ergometers sehen?", a: "Ja! CycleRun läuft auf deinem Laptop/Tablet-Bildschirm, während das eingebaute Display deines Ergometers seine eigenen Metriken anzeigt. Du kannst beides gleichzeitig nutzen." },
     ],
     content: `## The Ergometer Problem
 
@@ -544,14 +983,68 @@ You open cyclerun.app on your laptop beside you, and suddenly you're cycling thr
 Kettler, Daum, Life Fitness, Technogym, Hammer, Christopeit, Sportstech, Skandika, Ultrasport, Klarfit — all brands, all models, all ages. Your webcam does the tracking.
 
 [Transform your ergometer →](https://cyclerun.app)`,
+    content_de: `## Das Ergometer-Problem
+
+Ergometer sind das häufigste Heim-Fitnessgerät in Deutschland und ganz Europa. Geschätzt 10+ Millionen Haushalte besitzen eines. Sie sind zuverlässig, wartungsarm und effektiv für Herz-Kreislauf-Training.
+
+Aber die meisten Menschen hören innerhalb von Wochen auf, sie zu benutzen. Der Grund ist nicht körperlich — er ist psychologisch. Treten während man eine Wand, ein einfaches LCD oder eine TV-Show anstarrt, fühlt sich abgekoppelt und uninspirierend an.
+
+**CycleRun schafft diese fehlende Verbindung.**
+
+## Wie CycleRun Ergometer-Training transformiert
+
+### Vor CycleRun
+Du sitzt auf deinem Ergometer, stellst einen Widerstand ein, trittst 30 Minuten und versuchst, dich nicht zu langweilen. Das LCD zeigt Zeit, Geschwindigkeit und Kalorien. Es funktioniert für die Fitness, aber die Motivation sinkt schnell.
+
+### Nach CycleRun
+Du öffnest cyclerun.app auf deinem Laptop daneben, und plötzlich fährst du durch Mallorca. Die Straße schlängelt sich um Klippen mit türkisem Wasser darunter. Du trittst stärker — die Landschaft fliegt vorbei. Deine Geschwindigkeit, Trittfrequenz und Distanz aktualisieren sich in Echtzeit.
+
+**Dasselbe Ergometer. Völlig anderes Erlebnis.**
+
+## Ergometer-Trainingspläne mit CycleRun
+
+### Anfänger (Wochen 1–4)
+- 3× pro Woche, 20–30 Minuten
+- Leichter Gang, angenehme RPM (60–70)
+- Strecken: Pacific Coast Highway (flach), sanftes Terrain
+
+### Fortgeschritten (Wochen 5–12)
+- 4× pro Woche, 30–45 Minuten
+- Mittlerer Gang, moderate RPM (70–85)
+- Strecken: Mallorca Cap de Formentor (moderate Anstiege)
+
+### Profi (Wochen 13+)
+- 4–5× pro Woche, 45–60+ Minuten
+- Gänge variieren, hohe RPM-Intervalle (85–100+)
+- Strecken: Stelvio Pass, Alpe d'Huez (herausfordernde Anstiege)
+
+## Gesundheitsvorteile regelmäßigen Ergometer-Trainings
+
+| Vorteil | Evidenz |
+|---------|---------|
+| Herz-Kreislauf-Gesundheit | Reduziert Herzkrankheitsrisiko um bis zu 50% |
+| Gewichtsmanagement | Verbrennt 300–500 kcal/Stunde bei moderater Intensität |
+| Mentale Gesundheit | Setzt Endorphine frei, reduziert Stress und Angst |
+| Gelenkgesundheit | Gelenkschonend, schützt Knie und Hüften |
+| Blutdruck | Regelmäßiges Radfahren senkt systolischen Blutdruck um 4–8 mmHg |
+| Schlafqualität | Moderate Bewegung verbessert Einschlafzeit und Schlafdauer |
+
+## Funktioniert mit jedem Ergometer
+
+Kettler, Daum, Life Fitness, Technogym, Hammer, Christopeit, Sportstech, Skandika, Ultrasport, Klarfit — alle Marken, alle Modelle, jedes Alter. Deine Webcam übernimmt das Tracking.
+
+[Dein Ergometer transformieren →](https://cyclerun.app)`,
   },
 
   // Page 9: Rouvy Alternative
   {
     slug: "rouvy-alternative",
     title: "Rouvy Alternative Free — Real-World Video Routes Without Subscription | CycleRun",
+    title_de: "Kostenlose Rouvy-Alternative — Echte Streckenvideos ohne Abo | CycleRun",
     h1: "Free Rouvy Alternative: Real Road Videos Without the Monthly Fee",
+    h1_de: "Kostenlose Rouvy-Alternative: Echte Straßenvideos ohne monatliche Gebühr",
     description: "Looking for a free Rouvy alternative with real-world cycling videos? CycleRun offers POV route videos that sync to your speed — no smart trainer, no subscription, completely free.",
+    description_de: "Du suchst eine kostenlose Rouvy-Alternative mit echten Cycling Videos? CycleRun bietet POV-Streckenvideos, die sich mit deiner Geschwindigkeit synchronisieren — kein Smart Trainer, kein Abo, komplett kostenlos.",
     keywords: "Rouvy alternative free, Rouvy alternative without smart trainer, free Rouvy alternative, virtual cycling real video free, Rouvy vs CycleRun, indoor cycling real video app",
     faqs: [
       { q: "Is there a free alternative to Rouvy?", a: "Yes. CycleRun offers real-world POV cycling videos like Rouvy, but completely free. No subscription (Rouvy costs €12.99/month), no smart trainer required, and no limits on usage." },
@@ -560,6 +1053,14 @@ Kettler, Daum, Life Fitness, Technogym, Hammer, Christopeit, Sportstech, Skandik
       { q: "Can I upload my own route videos like on Rouvy?", a: "Yes! Upload any local video file (MP4, WebM) or paste a direct video URL. You can also become a CycleRun Creator and share your routes with the community." },
       { q: "Will CycleRun support GPX route data like Rouvy?", a: "GPX support is on the roadmap. Currently, CycleRun uses manual resistance levels. In the future, GPX elevation data will enable automatic resistance suggestions." },
       { q: "Which has better video quality?", a: "Video quality depends on the source material. CycleRun supports any resolution your browser can play (up to 4K). Our featured routes are filmed in 1080p with stabilization." },
+    ],
+    faqs_de: [
+      { q: "Gibt es eine kostenlose Alternative zu Rouvy?", a: "Ja. CycleRun bietet echte POV Cycling Videos wie Rouvy, aber komplett kostenlos. Kein Abo (Rouvy kostet 12,99 €/Monat), kein Smart Trainer nötig und keine Nutzungslimits." },
+      { q: "Wie vergleicht sich CycleRun mit Rouvy?", a: "Beide nutzen echte Streckenvideos. Rouvy bietet Augmented-Reality-Overlays und braucht einen Smart Trainer für Leistungsdaten. CycleRun nutzt webcam-basierte Trittfrequenzerkennung und konzentriert sich auf das pure Video-Erlebnis. CycleRun ist kostenlos; Rouvy kostet 12,99 €/Monat." },
+      { q: "Hat CycleRun Augmented Reality wie Rouvy?", a: "Nein. CycleRun konzentriert sich auf pure POV-Videowiedergabe synchronisiert mit deiner Trittfrequenz. Keine AR-Overlays mit virtuellen Fahrern oder 3D-Objekten. Das Erlebnis ist sauberer für Fahrer, die unveränderte echte Landschaft bevorzugen." },
+      { q: "Kann ich eigene Streckenvideos hochladen wie bei Rouvy?", a: "Ja! Lade jede lokale Videodatei (MP4, WebM) hoch oder füge eine direkte Video-URL ein. Du kannst auch CycleRun Creator werden und deine Strecken mit der Community teilen." },
+      { q: "Wird CycleRun GPX-Streckendaten unterstützen wie Rouvy?", a: "GPX-Unterstützung steht auf der Roadmap. Aktuell nutzt CycleRun manuelle Widerstandsstufen. Zukünftig werden GPX-Höhendaten automatische Widerstandsvorschläge ermöglichen." },
+      { q: "Wer hat bessere Videoqualität?", a: "Die Videoqualität hängt vom Quellmaterial ab. CycleRun unterstützt jede Auflösung, die dein Browser abspielen kann (bis 4K). Unsere Featured Routes sind in 1080p mit Stabilisierung gefilmt." },
     ],
     content: `## Rouvy vs CycleRun: An Honest Comparison
 
@@ -632,5 +1133,67 @@ Rouvy is better if:
 Since CycleRun costs nothing and requires no signup, there's zero risk in trying it. Many riders end up using both platforms — Rouvy for structured training, CycleRun for casual scenic rides.
 
 [Try CycleRun free →](https://cyclerun.app)`,
+    content_de: `## Rouvy vs CycleRun: Ein ehrlicher Vergleich
+
+Rouvy hat echtes Video-Cycling im Indoor-Bereich etabliert. Ihre Plattform bietet Tausende weltweit gefilmte Strecken mit Augmented-Reality-Features wie virtuellen Fahrern und Steigungssimulation. Es ist ein ausgereiftes, professionelles Produkt.
+
+Aber es hat seinen Preis:
+- **12,99 €/Monat** Abo (155 €/Jahr)
+- **Smart Trainer erforderlich** für volle Funktionalität
+- **Mindestinvestition**: 460 €+ (Trainer + erstes Jahr Abo)
+
+CycleRun nimmt das Kern-Rouvy-Erlebnis — echte Straßen per Video fahren — und macht es für alle zugänglich, kostenlos.
+
+## Funktionsvergleich
+
+| Funktion | CycleRun | Rouvy |
+|----------|----------|-------|
+| Monatliche Kosten | **Kostenlos** | 12,99 € |
+| Echte Videos | Ja | Ja |
+| Smart Trainer nötig | **Nein** | Ja |
+| Augmented Reality | Nein | Ja |
+| Leistung (Watt) | Geschätzt | Gemessen |
+| Streckenbibliothek | Wachsend | 2.000+ |
+| Eigene Videos hochladen | **Ja** | Ja |
+| Offline-Modus | **Ja** | Teilweise |
+| Datenschutz (lokal) | **Ja** | Nein |
+
+## Wo CycleRun gewinnt
+
+### Keine Hardware-Barriere
+Rouvy braucht einen Smart Trainer (300 €+) oder mindestens einen Geschwindigkeits-/Trittfrequenzsensor. CycleRun braucht nur eine Webcam. Das öffnet virtuelles Cycling für Millionen Menschen mit einfachen Fitnessrädern.
+
+### Pures Video-Erlebnis
+Rouvy überlagert AR-Elemente (virtuelle Fahrer, Steigungspfeile, Leistungszonen) auf dem echten Video. Manche lieben das. Andere finden es ablenkend. CycleRun zeigt dir das pure, unveränderte Video — nur die Straße voraus.
+
+### Kompletter Datenschutz
+CycleRun verarbeitet alles lokal. Kein Account zum Fahren nötig. Keine Daten an Server gesendet. Rouvy erfordert Account-Erstellung und verarbeitet Daten auf ihren Servern.
+
+### Null Kosten, für immer
+CycleRun ist ein Community-Projekt. Es wird nie eine Premium-Stufe, Paywall oder ein Abo geben.
+
+## Wo Rouvy gewinnt
+
+- **Streckenbibliothek** — 2.000+ Strecken vs CycleRuns wachsende Sammlung
+- **Augmented Reality** — Virtuelle Fahrer, Steigungsvisualisierung
+- **Präzision** — Smart-Trainer-Leistungsdaten für strukturiertes Training
+- **Multiplayer** — Gruppenfahrten und Events
+- **Trainingspläne** — Strukturierte Workout-Programme
+
+## Für wen ist CycleRun besser als Rouvy?
+
+CycleRun ist ideal wenn:
+- Du keinen Smart Trainer besitzt (oder kaufen möchtest)
+- Du sauberes, unverändertes Video ohne AR-Overlays bevorzugst
+- Dir Datenschutz wichtig ist
+- Du ohne Account-Erstellung fahren möchtest
+- Du ein einfaches Fitnessrad, Ergometer oder Spin Bike hast
+- Du kein weiteres monatliches Abo möchtest
+
+## Probier CycleRun zuerst — es ist kostenlos
+
+Da CycleRun nichts kostet und keine Anmeldung erfordert, gibt es null Risiko beim Ausprobieren. Viele Fahrer nutzen am Ende beide Plattformen — Rouvy für strukturiertes Training, CycleRun für entspannte szenische Fahrten.
+
+[CycleRun kostenlos testen →](https://cyclerun.app)`,
   },
 ];

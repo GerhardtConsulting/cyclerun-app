@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { seoPages, type SeoPage } from "@/lib/seo-pages-data";
-import { t } from "@/lib/i18n";
+import { t, getLocale } from "@/lib/i18n";
 import { useLocale } from "@/lib/useLocale";
 import SubpageNav from "@/components/SubpageNav";
 import SubpageFooter from "@/components/SubpageFooter";
@@ -37,6 +37,12 @@ interface GuideDetailContentProps {
 
 export default function GuideDetailContent({ page }: GuideDetailContentProps) {
   useLocale();
+  const isDE = getLocale() === "de";
+
+  const h1 = isDE ? (page.h1_de || page.h1) : page.h1;
+  const description = isDE ? (page.description_de || page.description) : page.description;
+  const content = isDE ? (page.content_de || page.content) : page.content;
+  const faqs = isDE ? (page.faqs_de || page.faqs) : page.faqs;
 
   const relatedPages: SeoPage[] = seoPages.filter((p: SeoPage) => p.slug !== page.slug).slice(0, 3);
 
@@ -49,20 +55,20 @@ export default function GuideDetailContent({ page }: GuideDetailContentProps) {
         <span>/</span>
         <Link href="/guide">{t("sub.guide.guides")}</Link>
         <span>/</span>
-        <span>{page.h1.length > 50 ? page.h1.substring(0, 50) + '...' : page.h1}</span>
+        <span>{h1.length > 50 ? h1.substring(0, 50) + '...' : h1}</span>
       </nav>
 
       <header className="seo-hero">
-        <h1>{page.h1}</h1>
-        <p className="seo-hero-desc">{page.description}</p>
+        <h1>{h1}</h1>
+        <p className="seo-hero-desc">{description}</p>
       </header>
 
-      <article className="seo-content" dangerouslySetInnerHTML={{ __html: markdownToHtml(page.content) }} />
+      <article className="seo-content" dangerouslySetInnerHTML={{ __html: markdownToHtml(content) }} />
 
       <section className="seo-faq">
         <h2>{t("sub.guide.faq")}</h2>
         <div className="faq-list">
-          {page.faqs.map((faq, i) => (
+          {faqs.map((faq, i) => (
             <details key={i} className="faq-item" open={i === 0}>
               <summary>{faq.q}</summary>
               <p>{faq.a}</p>
@@ -84,12 +90,16 @@ export default function GuideDetailContent({ page }: GuideDetailContentProps) {
         <section className="seo-related">
           <h2>{t("sub.guide.related")}</h2>
           <div className="seo-related-grid">
-            {relatedPages.map((rp) => (
-              <Link key={rp.slug} href={`/guide/${rp.slug}`} className="seo-related-card">
-                <h3>{rp.h1.length > 80 ? rp.h1.substring(0, 80) + '...' : rp.h1}</h3>
-                <p>{rp.description.length > 120 ? rp.description.substring(0, 120) + '...' : rp.description}</p>
-              </Link>
-            ))}
+            {relatedPages.map((rp) => {
+              const rpH1 = isDE ? (rp.h1_de || rp.h1) : rp.h1;
+              const rpDesc = isDE ? (rp.description_de || rp.description) : rp.description;
+              return (
+                <Link key={rp.slug} href={`/guide/${rp.slug}`} className="seo-related-card">
+                  <h3>{rpH1.length > 80 ? rpH1.substring(0, 80) + '...' : rpH1}</h3>
+                  <p>{rpDesc.length > 120 ? rpDesc.substring(0, 120) + '...' : rpDesc}</p>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

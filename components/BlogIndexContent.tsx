@@ -7,6 +7,13 @@ import { useLocale } from "@/lib/useLocale";
 import SubpageNav from "@/components/SubpageNav";
 import SubpageFooter from "@/components/SubpageFooter";
 
+function formatDate(dateStr: string, locale: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString(locale === "de" ? "de-DE" : "en-US", {
+    year: "numeric", month: "short", day: "numeric"
+  });
+}
+
 export default function BlogIndexContent() {
   const locale = useLocale();
   const isDE = locale === "de";
@@ -28,7 +35,7 @@ export default function BlogIndexContent() {
             <h2>{isDE ? (post.title_de || post.title) : post.title}</h2>
             <p>{isDE ? (post.description_de || post.description) : post.description}</p>
             <div className="blog-card-meta">
-              <span>{post.date}</span>
+              <span>{formatDate(post.date, locale)}</span>
               <span>&middot;</span>
               <span>{isDE ? (post.readTime_de || post.readTime) : post.readTime} {t("sub.blog.read")}</span>
             </div>

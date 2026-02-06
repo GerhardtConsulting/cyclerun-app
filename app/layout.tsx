@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import LocaleSync from "@/components/LocaleSync";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://cyclerun.app/",
     locale: "en_US",
+    alternateLocale: "de_DE",
     siteName: "CycleRun",
   },
   twitter: {
@@ -86,10 +88,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="alternate" hrefLang="en" href="https://cyclerun.app" />
+        <link rel="alternate" hrefLang="de" href="https://cyclerun.app" />
+        <link rel="alternate" hrefLang="x-default" href="https://cyclerun.app" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebApp) }}
@@ -104,6 +109,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <LocaleSync />
         {children}
       </body>
     </html>

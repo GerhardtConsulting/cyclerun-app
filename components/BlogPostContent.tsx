@@ -7,6 +7,13 @@ import { useLocale } from "@/lib/useLocale";
 import SubpageNav from "@/components/SubpageNav";
 import SubpageFooter from "@/components/SubpageFooter";
 
+function formatDate(dateStr: string, locale: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString(locale === "de" ? "de-DE" : "en-US", {
+    year: "numeric", month: "short", day: "numeric"
+  });
+}
+
 function markdownToHtml(md: string): string {
   return md
     .replace(/^### (.+)$/gm, '<h3>$1</h3>')
@@ -54,7 +61,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
         <header className="blog-article-header">
           <div className="blog-article-meta">
             <span className="blog-card-category">{category}</span>
-            <span>{post.date}</span>
+            <span>{formatDate(post.date, locale)}</span>
             <span>&middot;</span>
             <span>{readTime} {t("sub.blog.read")}</span>
           </div>
@@ -78,7 +85,7 @@ export default function BlogPostContent({ post }: BlogPostContentProps) {
                 <h2>{isDE ? (p.title_de || p.title) : p.title}</h2>
                 <p>{isDE ? (p.description_de || p.description) : p.description}</p>
                 <div className="blog-card-meta">
-                  <span>{p.date}</span>
+                  <span>{formatDate(p.date, locale)}</span>
                   <span>&middot;</span>
                   <span>{isDE ? (p.readTime_de || p.readTime) : p.readTime} {t("sub.blog.read")}</span>
                 </div>
