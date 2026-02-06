@@ -806,12 +806,48 @@ export default function CycleRunApp() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="site-footer" id="siteFooter">
-        <div className="footer-links">
-          <Link href="/datenschutz">{t('footer.privacy')}</Link>
-          <Link href="/impressum">{t('footer.legal')}</Link>
-          <span className="footer-divider">·</span>
+      {/* Extended Footer with Deep Links */}
+      <footer className="site-footer site-footer-extended" id="siteFooter">
+        <div className="footer-grid">
+          <div className="footer-col">
+            <strong className="footer-col-title">Guides</strong>
+            <Link href="/guide/zwift-alternative-free">Free Zwift Alternative</Link>
+            <Link href="/guide/rouvy-alternative">Rouvy Alternative</Link>
+            <Link href="/guide/indoor-cycling-app">Indoor Cycling App</Link>
+            <Link href="/guide/spinning-bike-app">Spinning Bike App</Link>
+            <Link href="/guide/exercise-bike-app">Exercise Bike App</Link>
+          </div>
+          <div className="footer-col">
+            <strong className="footer-col-title">Resources</strong>
+            <Link href="/guide/virtual-cycling-videos">Virtual Cycling Videos</Link>
+            <Link href="/guide/indoor-cycling-without-smart-trainer">Cycling Without Smart Trainer</Link>
+            <Link href="/guide/ergometer-training">Ergometer Training</Link>
+            <Link href="/guide/heimtrainer-app">Heimtrainer App (DE)</Link>
+            <Link href="/guide">All Guides</Link>
+          </div>
+          <div className="footer-col">
+            <strong className="footer-col-title">Routes</strong>
+            <Link href="/routes/mallorca-cap-de-formentor">Mallorca</Link>
+            <Link href="/routes/stelvio-pass-italy">Stelvio Pass</Link>
+            <Link href="/routes/alpe-d-huez-france">Alpe d&apos;Huez</Link>
+            <Link href="/routes/pacific-coast-highway-california">Pacific Coast Highway</Link>
+            <Link href="/routes">All Routes</Link>
+          </div>
+          <div className="footer-col">
+            <strong className="footer-col-title">Blog</strong>
+            <Link href="/blog/best-indoor-cycling-routes-2026">Best Routes 2026</Link>
+            <Link href="/blog/gopro-settings-pov-cycling-video">GoPro Settings</Link>
+            <Link href="/blog/cyclerun-vs-zwift-comparison">CycleRun vs Zwift</Link>
+            <Link href="/blog">All Articles</Link>
+          </div>
+          <div className="footer-col">
+            <strong className="footer-col-title">CycleRun</strong>
+            <Link href="/creator">Creator Hub</Link>
+            <Link href="/datenschutz">{t('footer.privacy')}</Link>
+            <Link href="/impressum">{t('footer.legal')}</Link>
+          </div>
+        </div>
+        <div className="footer-bottom">
           <span className="footer-copy">{t('footer.copy')}</span>
         </div>
       </footer>
