@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   description: "CycleRun is the free Zwift alternative for your home workout. Use your webcam instead of expensive sensors — for spinning bikes, ergometers, treadmills and old home trainers. No hardware, no subscription.",
   keywords: "indoor cycling, spinning simulator, treadmill simulator, zwift alternative free, ergometer app, home trainer webcam, indoor training, rouvy alternative, cycling app free, home trainer software",
   authors: [{ name: "CycleRun.app" }],
-  robots: "index, follow",
+  // TODO: Change back to "index, follow" after Search Console + Analytics setup
+  robots: "noindex, nofollow",
   metadataBase: new URL("https://cyclerun.app"),
   alternates: {
     canonical: "/",

@@ -1,14 +1,13 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  // TODO: Re-enable crawling after Google Search Console + Analytics are set up
   return {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: ["/"],
       },
     ],
-    sitemap: "https://cyclerun.app/sitemap.xml",
   };
 }
