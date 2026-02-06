@@ -67,9 +67,7 @@
    - **Action**: Re-enable once Google Search Console + Analytics are set up
    - Change robots.ts to `allow: ["/"]` and metadata to `"index, follow"`
 
-4. **Impressum address** — Placeholder text ("Adresse folgt in den nächsten Tagen")
-   - User bought a physical address but is waiting on delivery
-   - Update `app/impressum/page.tsx` with full address once received
+4. ~~**Impressum address**~~ ✅ DONE — Updated with c/o Impressumservice Dein-Impressum, Stettiner Straße 41, 35410 Hungen
 
 ### 🟡 MEDIUM PRIORITY
 

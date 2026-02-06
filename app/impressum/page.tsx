@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Impressum — CycleRun.app",
-  description: "Impressum von CycleRun.app — Angaben gemäß § 5 TMG. Verantwortlich: Maximilian Gerhardt.",
+  description: "Impressum von CycleRun.app — Angaben gemäß § 5 DDG. Verantwortlich: Maximilian Gerhardt.",
   alternates: { canonical: "/impressum" },
   openGraph: {
     title: "Impressum — CycleRun.app",
-    description: "Angaben gemäß § 5 TMG / § 18 MStV.",
+    description: "Angaben gemäß § 5 DDG.",
     url: "https://cyclerun.app/impressum",
   },
 };
@@ -18,22 +18,15 @@ export default function Impressum() {
       <Link href="/" className="legal-back">← Zurück zu CycleRun</Link>
 
       <h1>Impressum</h1>
-      <p className="legal-date">Angaben gemäß § 5 TMG / § 18 MStV</p>
+      <p className="legal-date">Angaben gemäß § 5 DDG</p>
 
       <h2>Verantwortlich</h2>
       <p>
         Maximilian Gerhardt<br />
-        cyclerun.app — Privates Softwareprojekt
+        c/o Impressumservice Dein-Impressum<br />
+        Stettiner Straße 41<br />
+        35410 Hungen
       </p>
-
-      <div style={{ background: 'rgba(249, 115, 22, 0.06)', border: '1px solid rgba(249, 115, 22, 0.12)', borderRadius: '12px', padding: '1.25rem', margin: '1.5rem 0' }}>
-        <p style={{ margin: '0 0 0.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>
-          Hinweis zur Anschrift
-        </p>
-        <p style={{ margin: 0, fontSize: '0.9rem' }}>
-          CycleRun.app befindet sich derzeit in der Vorbereitungsphase und ist noch nicht öffentlich gelauncht. Die vollständige ladungsfähige Anschrift wird in den kommenden Tagen hier ergänzt. Bis dahin ist die Anschrift auf private Anfrage per E-Mail unverzüglich verfügbar. Dieses Vorgehen entspricht der gängigen Praxis bei privaten Softwareprojekten in der Entwicklungsphase (vgl. § 5 TMG, Privatpersonen ohne geschäftsmäßiges Angebot).
-        </p>
-      </div>
 
       <h2>Kontakt</h2>
       <p>
@@ -42,7 +35,7 @@ export default function Impressum() {
       </p>
 
       <h2>Haftung für Inhalte</h2>
-      <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+      <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 DDG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
       <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
 
       <h2>Haftung für Links</h2>

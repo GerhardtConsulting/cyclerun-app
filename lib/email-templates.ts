@@ -4,10 +4,10 @@
  * Bilingual: EN + DE based on locale
  */
 
-const BRAND = {
+export const BRAND = {
   logo: `<span style="color:#fafaf9;font-weight:800;font-size:1.5rem;letter-spacing:-0.03em;">cyclerun</span><span style="font-weight:800;font-size:1.5rem;letter-spacing:-0.03em;background:linear-gradient(135deg,#fbbf24,#f97316,#dc2626);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">.</span><span style="font-weight:800;font-size:1.5rem;letter-spacing:-0.03em;color:#f97316;">app</span>`,
   baseUrl: "https://cyclerun.app",
-  from: "CycleRun.app <noreply@cyclerun.app>",
+  from: "CycleRun.app <noreply@mail.cyclerun.app>",
 };
 
 function wrapper(content: string, locale: string, unsubscribeUrl?: string): string {
@@ -49,7 +49,7 @@ function wrapper(content: string, locale: string, unsubscribeUrl?: string): stri
       </a>
     </p>` : ""}
     <p class="text-muted" style="margin-bottom:0;">
-      cyclerun.app · Maximilian Gerhardt · ${isDE ? "Deutschland" : "Germany"}<br>
+      cyclerun.app · Maximilian Gerhardt · Stettiner Straße 41 · 35410 Hungen · ${isDE ? "Deutschland" : "Germany"}<br>
       <a href="${BRAND.baseUrl}/datenschutz" style="color:#78716c;">${isDE ? "Datenschutz" : "Privacy Policy"}</a>
        · 
       <a href="${BRAND.baseUrl}/impressum" style="color:#78716c;">${isDE ? "Impressum" : "Legal Notice"}</a>
@@ -211,4 +211,3 @@ export function creatorApplicationEmail(locale: string, name: string): { subject
   };
 }
 
-export { BRAND };
