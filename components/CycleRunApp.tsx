@@ -1,10 +1,48 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
+import { initLocale, setLocale, getLocale, onLocaleChange, t, type Locale } from "@/lib/i18n";
+
+function FlagEN() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 60 42" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="42" fill="#012169" />
+      <path d="M0 0L60 42M60 0L0 42" stroke="#fff" strokeWidth="7" />
+      <path d="M0 0L60 42M60 0L0 42" stroke="#C8102E" strokeWidth="4" />
+      <path d="M30 0v42M0 21h60" stroke="#fff" strokeWidth="10" />
+      <path d="M30 0v42M0 21h60" stroke="#C8102E" strokeWidth="6" />
+    </svg>
+  );
+}
+
+function FlagDE() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 60 42" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="14" fill="#000" />
+      <rect y="14" width="60" height="14" fill="#D00" />
+      <rect y="28" width="60" height="14" fill="#FFCE00" />
+    </svg>
+  );
+}
 
 export default function CycleRunApp() {
+  const [locale, setLocaleState] = useState<Locale>("en");
+
+  const switchLang = useCallback((lang: Locale) => {
+    setLocale(lang);
+    setLocaleState(lang);
+  }, []);
+
   useEffect(() => {
+    const detected = initLocale();
+    setLocaleState(detected);
+    document.documentElement.lang = detected;
+
+    const unsub = onLocaleChange(() => {
+      setLocaleState(getLocale());
+    });
+
     // Import and initialize CyclingSimulator after mount
     import("@/lib/cycling-simulator").then(({ CyclingSimulator }) => {
       new CyclingSimulator();
@@ -18,6 +56,8 @@ export default function CycleRunApp() {
       localStorage.setItem("cyclerun_cookie_consent", "true");
       document.getElementById("cookieConsent")?.classList.remove("active");
     });
+
+    return unsub;
   }, []);
 
   return (
@@ -27,12 +67,17 @@ export default function CycleRunApp() {
         <div className="splash">
           <div className="splash-glow"></div>
 
-          <div className="splash-logo">
-            <span className="splash-logo-text">CycleRun</span>
-            <span className="splash-logo-dot"></span>
+          {/* Language Switcher — top right on splash */}
+          <div className="lang-switcher splash-lang">
+            <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} onClick={() => switchLang('en')} title="English"><FlagEN /></button>
+            <button className={`lang-btn${locale === 'de' ? ' active' : ''}`} onClick={() => switchLang('de')} title="Deutsch"><FlagDE /></button>
           </div>
 
-          <p className="splash-tagline">No smart trainer. No subscription. Just your webcam.</p>
+          <div className="splash-logo">
+            <span className="splash-logo-text">cyclerun<span className="splash-logo-app">.app</span></span>
+          </div>
+
+          <p className="splash-tagline">{t('splash.tagline')}</p>
 
           <div className="sport-cards">
             <button className="sport-card" data-sport="cycling" id="startCycling">
@@ -44,7 +89,7 @@ export default function CycleRunApp() {
                   <path d="M9 4h3l3 4" />
                 </svg>
                 <span className="sport-card-label">CYCLE</span>
-                <span className="sport-card-sub">Spinning · Ergometer · Indoor Bike</span>
+                <span className="sport-card-sub">{t('splash.cycle.sub')}</span>
               </div>
             </button>
 
@@ -58,22 +103,22 @@ export default function CycleRunApp() {
                   <path d="M14 14l2-2 4 1" />
                 </svg>
                 <span className="sport-card-label">RUN</span>
-                <span className="sport-card-sub">Treadmill · Coming Soon</span>
-                <span className="sport-card-badge">Soon</span>
+                <span className="sport-card-sub">{t('splash.run.sub')}</span>
+                <span className="sport-card-badge">{t('splash.run.badge')}</span>
               </div>
             </button>
           </div>
 
           <div className="splash-trust">
-            <span>60 FPS Tracking</span>
+            <span>{t('splash.trust.fps')}</span>
             <span className="splash-trust-dot"></span>
-            <span>100% Local</span>
+            <span>{t('splash.trust.local')}</span>
             <span className="splash-trust-dot"></span>
-            <span>Free forever</span>
+            <span>{t('splash.trust.free')}</span>
           </div>
 
           <button className="splash-scroll" id="scrollToFaq">
-            <span>Learn more</span>
+            <span>{t('splash.learn')}</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
           </button>
         </div>
@@ -82,59 +127,59 @@ export default function CycleRunApp() {
         <div className="splash-below" id="splashBelow">
           <div className="splash-below-inner">
             <section className="info-section">
-              <h2>Your living room. <span className="gradient-text">Your route.</span></h2>
-              <p>CycleRun transforms every home trainer workout into an immersive experience. Your webcam detects your movement — no smart trainer, no sensors, no subscription. Perfect for spinning bikes, ergometers, old home trainers and soon treadmills too.</p>
+              <h2>{t('info.title.1')} <span className="gradient-text">{t('info.title.2')}</span></h2>
+              <p>{t('info.desc')}</p>
 
               <div className="info-grid">
                 <div className="info-card">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="3" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2" /></svg>
-                  <h3>Motion Tracking</h3>
-                  <p>AI-powered motion detection measures your cadence in real-time — right in your browser.</p>
+                  <h3>{t('info.motion.title')}</h3>
+                  <p>{t('info.motion.desc')}</p>
                 </div>
                 <div className="info-card">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" /></svg>
-                  <h3>Physics Engine</h3>
-                  <p>Realistic acceleration, inertia and gear shifting. Feels like riding outdoors.</p>
+                  <h3>{t('info.physics.title')}</h3>
+                  <p>{t('info.physics.desc')}</p>
                 </div>
                 <div className="info-card">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M10 9l5 3-5 3V9z" /></svg>
-                  <h3>Any Video</h3>
-                  <p>Use your own POV videos or browse featured routes. Your pace controls the speed.</p>
+                  <h3>{t('info.video.title')}</h3>
+                  <p>{t('info.video.desc')}</p>
                 </div>
               </div>
             </section>
 
             <section className="faq-section">
-              <h2 className="faq-title">Frequently Asked Questions</h2>
+              <h2 className="faq-title">{t('faq.title')}</h2>
 
               <details className="faq-item">
-                <summary>Is CycleRun really free?</summary>
-                <p>Yes, CycleRun is a community project and completely free. No subscription, no premium version, no hidden costs. You just need a webcam and a browser.</p>
+                <summary>{t('faq.q1')}</summary>
+                <p>{t('faq.a1')}</p>
               </details>
 
               <details className="faq-item">
-                <summary>Which devices are compatible?</summary>
-                <p>CycleRun works with any home trainer where legs move visibly: spinning bikes, ergometers, old home trainers, indoor bikes — even devices without Bluetooth or smart features. Running mode for treadmills is in development.</p>
+                <summary>{t('faq.q2')}</summary>
+                <p>{t('faq.a2')}</p>
               </details>
 
               <details className="faq-item">
-                <summary>How does it work without sensors?</summary>
-                <p>Your webcam detects your leg movement using AI-powered image analysis. You place detection zones over your knees or pedals — the software automatically recognizes your cadence. All processing runs locally in your browser.</p>
+                <summary>{t('faq.q3')}</summary>
+                <p>{t('faq.a3')}</p>
               </details>
 
               <details className="faq-item">
-                <summary>How is this different from Zwift or Rouvy?</summary>
-                <p>Zwift requires a smart trainer (from €300) and costs €17.99/month. Rouvy is similar. CycleRun is free and only uses your webcam — ideal if you want to upgrade your existing home trainer without investing in expensive hardware.</p>
+                <summary>{t('faq.q4')}</summary>
+                <p>{t('faq.a4')}</p>
               </details>
 
               <details className="faq-item">
-                <summary>Are my webcam images stored?</summary>
-                <p>No. All image processing happens exclusively locally in your browser. No images or videos are transmitted to our servers. Your privacy matters to us.</p>
+                <summary>{t('faq.q5')}</summary>
+                <p>{t('faq.a5')}</p>
               </details>
 
               <details className="faq-item">
-                <summary>Can I use my old ergometer?</summary>
-                <p>Yes! Whether your ergometer is 5 or 25 years old — as long as your legs move, CycleRun detects the motion. No smart trainer or sensors needed.</p>
+                <summary>{t('faq.q6')}</summary>
+                <p>{t('faq.a6')}</p>
               </details>
             </section>
           </div>
@@ -148,9 +193,17 @@ export default function CycleRunApp() {
 
       {/* Setup Wizard */}
       <div id="setupScreen" className="screen">
+        {/* Header with logo + lang switcher on wizard */}
+        <header className="app-header">
+          <div className="header-logo">cyclerun<span className="header-logo-app">.app</span></div>
+          <div className="lang-switcher">
+            <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} onClick={() => switchLang('en')} title="English"><FlagEN /></button>
+            <button className={`lang-btn${locale === 'de' ? ' active' : ''}`} onClick={() => switchLang('de')} title="Deutsch"><FlagDE /></button>
+          </div>
+        </header>
         <div className="wizard-wrapper">
           <nav className="wizard-nav">
-            <button className="nav-back" id="wizardBack">← Back</button>
+            <button className="nav-back" id="wizardBack">{t('wizard.back')}</button>
             <div className="step-indicator">
               <div className="step-dot active" data-step="1"></div>
               <div className="step-dot" data-step="2"></div>
@@ -168,9 +221,9 @@ export default function CycleRunApp() {
             {/* Step 1: Camera & Profile */}
             <div className="wizard-step active" id="step1">
               <div className="step-header">
-                <span className="step-label">Step 1</span>
-                <h2>Let&apos;s get started</h2>
-                <p>We need access to your camera and some info for the physics calculation.</p>
+                <span className="step-label">{t('step1.label')}</span>
+                <h2>{t('step1.title')}</h2>
+                <p>{t('step1.desc')}</p>
               </div>
 
               <div className="bento-form">
@@ -180,12 +233,12 @@ export default function CycleRunApp() {
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" /><circle cx="12" cy="13" r="4" /></svg>
                     </div>
                     <div>
-                      <h4>Camera Access</h4>
-                      <p>For motion detection</p>
+                      <h4>{t('step1.camera.title')}</h4>
+                      <p>{t('step1.camera.desc')}</p>
                     </div>
                   </div>
                   <button id="requestCamera" className="btn-primary btn-full">
-                    <span>Enable Camera</span>
+                    <span>{t('step1.camera.btn')}</span>
                   </button>
                   <div id="cameraStatus" className="form-status"></div>
                   <div id="cameraPreview" className="camera-preview" style={{ display: "none" }}>
@@ -194,35 +247,35 @@ export default function CycleRunApp() {
                 </div>
 
                 <div className="form-card">
-                  <label className="form-label">Weight</label>
+                  <label className="form-label">{t('step1.weight')}</label>
                   <div className="input-with-unit">
                     <input type="number" id="riderWeight" defaultValue={75} min={40} max={150} step={1} />
                     <span className="input-unit">kg</span>
                   </div>
-                  <span className="form-hint">For inertia calculation</span>
+                  <span className="form-hint">{t('step1.weight.hint')}</span>
                 </div>
 
                 <div className="form-card">
-                  <label className="form-label">Height</label>
+                  <label className="form-label">{t('step1.height')}</label>
                   <div className="input-with-unit">
                     <input type="number" id="riderHeight" defaultValue={175} min={140} max={220} step={1} />
                     <span className="input-unit">cm</span>
                   </div>
-                  <span className="form-hint">For air resistance</span>
+                  <span className="form-hint">{t('step1.height.hint')}</span>
                 </div>
 
                 <div className="form-card">
-                  <label className="form-label">Bike</label>
+                  <label className="form-label">{t('step1.bike')}</label>
                   <div className="input-with-unit">
                     <input type="number" id="bikeWeight" defaultValue={10} min={5} max={25} step={0.5} />
                     <span className="input-unit">kg</span>
                   </div>
-                  <span className="form-hint">Total mass</span>
+                  <span className="form-hint">{t('step1.bike.hint')}</span>
                 </div>
               </div>
 
               <button id="step1Next" className="btn-primary btn-lg btn-full step-action" style={{ display: "none" }}>
-                Next
+                {t('wizard.next')}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>
             </div>
@@ -230,9 +283,9 @@ export default function CycleRunApp() {
             {/* Step 2: Camera Position */}
             <div className="wizard-step" id="step2">
               <div className="step-header">
-                <span className="step-label">Step 2</span>
-                <h2>Camera Position</h2>
-                <p>Choose the perspective of your webcam.</p>
+                <span className="step-label">{t('step2.label')}</span>
+                <h2>{t('step2.title')}</h2>
+                <p>{t('step2.desc')}</p>
               </div>
 
               <div className="position-cards">
@@ -251,8 +304,8 @@ export default function CycleRunApp() {
                         <rect x="58" y="26" width="5" height="8" rx="1" stroke="var(--text-muted)" strokeWidth="1" />
                       </svg>
                     </div>
-                    <span className="position-card-label">SIDE</span>
-                    <span className="position-card-tag">Recommended</span>
+                    <span className="position-card-label">{t('step2.side')}</span>
+                    <span className="position-card-tag">{t('step2.side.tag')}</span>
                   </div>
                 </button>
 
@@ -271,8 +324,8 @@ export default function CycleRunApp() {
                         <rect x="28" y="58" width="8" height="5" rx="1" stroke="var(--text-muted)" strokeWidth="1" />
                       </svg>
                     </div>
-                    <span className="position-card-label">FRONT</span>
-                    <span className="position-card-tag">Both legs</span>
+                    <span className="position-card-label">{t('step2.front')}</span>
+                    <span className="position-card-tag">{t('step2.front.tag')}</span>
                   </div>
                 </button>
 
@@ -290,21 +343,21 @@ export default function CycleRunApp() {
                         <circle cx="32" cy="32" r="3" fill="currentColor" opacity="0.3" />
                       </svg>
                     </div>
-                    <span className="position-card-label">MANUAL</span>
-                    <span className="position-card-tag">Flexible</span>
+                    <span className="position-card-label">{t('step2.manual')}</span>
+                    <span className="position-card-tag">{t('step2.manual.tag')}</span>
                   </div>
                 </button>
               </div>
 
-              <p className="step-hint">Side view recommended — knee movement is more clearly visible.</p>
+              <p className="step-hint">{t('step2.hint')}</p>
             </div>
 
             {/* Step 3: Zone Setup */}
             <div className="wizard-step" id="step3">
               <div className="step-header">
-                <span className="step-label">Step 3</span>
-                <h2>Detection Zones</h2>
-                <p>Position the zones over your knees or pedals. They flash when motion is detected.</p>
+                <span className="step-label">{t('step3.label')}</span>
+                <h2>{t('step3.title')}</h2>
+                <p>{t('step3.desc')}</p>
               </div>
 
               <div className="zone-editor">
@@ -325,63 +378,63 @@ export default function CycleRunApp() {
 
                 <div className="zone-sidebar">
                   <div className="sidebar-section">
-                    <h4>Zones</h4>
+                    <h4>{t('step3.zones')}</h4>
                     <div className="zone-actions">
                       <button id="addZone" className="btn-icon">
-                        <span>+</span> Add pair
+                        <span>+</span> {t('step3.add')}
                       </button>
                       <button id="clearZones" className="btn-icon btn-ghost">
-                        <span>×</span> Clear all
+                        <span>×</span> {t('step3.clear')}
                       </button>
                     </div>
-                    <div id="zoneCount" className="zone-counter">0 of 2 pairs</div>
+                    <div id="zoneCount" className="zone-counter">{t('sim.zones.count', { n: 0 })}</div>
                   </div>
 
                   <div className="sidebar-section">
-                    <h4>Resistance</h4>
+                    <h4>{t('step3.resistance')}</h4>
                     <div className="gear-selector">
                       <button className="gear-btn" data-gear="1">
                         <span className="gear-num">1</span>
-                        <span>Light</span>
+                        <span>{t('step3.light')}</span>
                       </button>
                       <button className="gear-btn active" data-gear="2">
                         <span className="gear-num">2</span>
-                        <span>Medium</span>
+                        <span>{t('step3.medium')}</span>
                       </button>
                       <button className="gear-btn" data-gear="3">
                         <span className="gear-num">3</span>
-                        <span>Heavy</span>
+                        <span>{t('step3.heavy')}</span>
                       </button>
                     </div>
-                    <span id="testGear" className="gear-hint">Higher resistance = more power needed for same speed</span>
+                    <span id="testGear" className="gear-hint">{t('step3.gear.hint')}</span>
                   </div>
 
                   <div className="sidebar-section">
-                    <h4>Speed Calibration</h4>
+                    <h4>{t('step3.speed.title')}</h4>
                     <div className="calibration-slider">
                       <input type="range" id="speedScaleSlider" min={0.3} max={2.0} step={0.1} defaultValue={1.0} className="strength-slider" />
                       <div className="slider-labels">
-                        <span>Slower</span>
+                        <span>{t('step3.slower')}</span>
                         <span id="speedScaleValue">1.0x</span>
-                        <span>Faster</span>
+                        <span>{t('step3.faster')}</span>
                       </div>
                     </div>
-                    <span className="gear-hint">Adjust if speed feels too high or too low</span>
+                    <span className="gear-hint">{t('step3.speed.hint')}</span>
                   </div>
 
                   <div className="sidebar-help">
-                    <div className="help-title">How it works:</div>
+                    <div className="help-title">{t('step3.help.title')}</div>
                     <ul className="help-list">
-                      <li>Drag zones with your mouse</li>
-                      <li>Corner dot = resize</li>
-                      <li>Pedal to test detection</li>
+                      <li>{t('step3.help.1')}</li>
+                      <li>{t('step3.help.2')}</li>
+                      <li>{t('step3.help.3')}</li>
                     </ul>
                   </div>
                 </div>
               </div>
 
               <button id="step3Next" className="btn-primary btn-lg btn-full step-action">
-                Next
+                {t('wizard.next')}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>
             </div>
@@ -389,9 +442,9 @@ export default function CycleRunApp() {
             {/* Step 4: Ready */}
             <div className="wizard-step" id="step4">
               <div className="step-header">
-                <span className="step-label">Step 4</span>
-                <h2>Ready to ride!</h2>
-                <p>Test your setup with a few pedal strokes. The display should respond to your movement.</p>
+                <span className="step-label">{t('step4.label')}</span>
+                <h2>{t('step4.title')}</h2>
+                <p>{t('step4.desc')}</p>
               </div>
 
               <div className="ready-preview">
@@ -414,22 +467,22 @@ export default function CycleRunApp() {
                 <div className="ready-checklist">
                   <div className="check-item" id="check-zones">
                     <span className="check-icon">○</span>
-                    <span>Zones placed</span>
+                    <span>{t('step4.zones')}</span>
                   </div>
                   <div className="check-item" id="check-motion">
                     <span className="check-icon">○</span>
-                    <span>Motion detected</span>
+                    <span>{t('step4.motion')}</span>
                   </div>
                   <div className="check-item" id="check-speed">
                     <span className="check-icon">○</span>
-                    <span>Speed &gt; 0</span>
+                    <span>{t('step4.speed')}</span>
                   </div>
                 </div>
               </div>
 
               <div className="ready-actions">
                 <button id="startRideBtn" className="btn-primary btn-lg btn-full">
-                  <span>Start ride</span>
+                  <span>{t('step4.start')}</span>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
                 </button>
               </div>
@@ -437,8 +490,8 @@ export default function CycleRunApp() {
           </div>
 
           <div className="wizard-footer">
-            <button id="prevStep" className="btn-ghost">← Back</button>
-            <button id="nextStep" className="btn-primary" style={{ display: "none" }}>Next →</button>
+            <button id="prevStep" className="btn-ghost">{t('wizard.back')}</button>
+            <button id="nextStep" className="btn-primary" style={{ display: "none" }}>{t('wizard.next')} →</button>
           </div>
         </div>
       </div>
@@ -459,11 +512,11 @@ export default function CycleRunApp() {
                 <div className="stat-value" id="rpmValue">0</div>
               </div>
               <div className="stat-item">
-                <div className="stat-label">Distance</div>
+                <div className="stat-label">{t('hud.distance')}</div>
                 <div className="stat-value" id="distanceValue">0.0</div>
               </div>
               <div className="stat-item">
-                <div className="stat-label">Time</div>
+                <div className="stat-label">{t('hud.time')}</div>
                 <div className="stat-value" id="timeValue">00:00</div>
               </div>
             </div>
@@ -471,7 +524,7 @@ export default function CycleRunApp() {
 
           <div className="hud-controls">
             <div className="strength-control">
-              <label>Strength</label>
+              <label>{t('hud.strength')}</label>
               <input type="range" id="strengthSlider" min={1} max={10} defaultValue={5} className="strength-slider" />
               <span id="strengthValue">5</span>
             </div>
@@ -490,35 +543,35 @@ export default function CycleRunApp() {
 
         <div id="videoModal" className="modal">
           <div className="modal-content">
-            <h3>Choose your route</h3>
+            <h3>{t('video.title')}</h3>
             <div className="video-options">
               {/* Marketplace Routes — coming soon */}
               <div className="video-section">
-                <div className="video-section-label">Featured Routes</div>
-                <button id="useDefaultVideo" className="btn-primary btn-full">Demo Route (Sample Video)</button>
-                <p className="video-hint">More routes coming soon — creators can submit POV videos.</p>
+                <div className="video-section-label">{t('video.featured')}</div>
+                <button id="useDefaultVideo" className="btn-primary btn-full">{t('video.demo')}</button>
+                <p className="video-hint">{t('video.coming')}</p>
               </div>
 
-              <div className="divider">or use your own video</div>
+              <div className="divider">{t('video.or')}</div>
 
               {/* URL Input */}
               <div className="video-section">
-                <div className="video-section-label">Paste Video URL</div>
+                <div className="video-section-label">{t('video.url.label')}</div>
                 <div className="video-url-input">
-                  <input type="url" id="videoUrlInput" placeholder="https://example.com/ride.mp4" className="input-url" />
-                  <button id="loadVideoUrl" className="btn-secondary">Load</button>
+                  <input type="url" id="videoUrlInput" placeholder={t('video.url.placeholder')} className="input-url" />
+                  <button id="loadVideoUrl" className="btn-secondary">{t('video.url.load')}</button>
                 </div>
-                <p className="video-hint">Direct link to MP4 or WebM file</p>
+                <p className="video-hint">{t('video.url.hint')}</p>
               </div>
 
               {/* Local Upload */}
               <div className="video-section">
-                <div className="video-section-label">Upload from Device</div>
+                <div className="video-section-label">{t('video.upload.label')}</div>
                 <input type="file" id="videoUpload" accept="video/*" className="file-input" />
-                <label htmlFor="videoUpload" className="btn-secondary btn-full">Choose local video file</label>
+                <label htmlFor="videoUpload" className="btn-secondary btn-full">{t('video.upload.btn')}</label>
                 <p className="video-privacy-notice">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
-                  Your video stays on your device. Nothing is uploaded to our servers.
+                  {t('video.privacy')}
                 </p>
               </div>
             </div>
@@ -531,32 +584,32 @@ export default function CycleRunApp() {
             <div className="register-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
             </div>
-            <h2>Keep riding for free</h2>
-            <p className="register-subtitle">Register now to continue your training and save your stats.</p>
+            <h2>{t('reg.title')}</h2>
+            <p className="register-subtitle">{t('reg.subtitle')}</p>
 
             <form id="registerForm" className="register-form">
               <div className="register-row">
                 <div className="register-field">
-                  <input type="text" id="regName" placeholder="First name" required />
+                  <input type="text" id="regName" placeholder={t('reg.first')} required />
                 </div>
                 <div className="register-field">
-                  <input type="text" id="regLastName" placeholder="Last name (optional)" />
+                  <input type="text" id="regLastName" placeholder={t('reg.last')} />
                 </div>
               </div>
               <div className="register-field">
-                <input type="email" id="regEmail" placeholder="Email address" required />
+                <input type="email" id="regEmail" placeholder={t('reg.email')} required />
               </div>
               <label className="register-consent">
                 <input type="checkbox" id="regConsent" required />
-                <span>I agree to the <Link href="/datenschutz" target="_blank">Privacy Policy</Link>. My data will only be used to improve the product.</span>
+                <span>{t('reg.consent')} <Link href="/datenschutz" target="_blank">{t('reg.privacy')}</Link>{t('reg.consent.2')}</span>
               </label>
               <button type="submit" className="btn-primary btn-lg btn-full register-submit">
-                Register for free &amp; continue riding
+                {t('reg.submit')}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>
             </form>
 
-            <p className="register-hint">No password needed. No costs. Community project, non-profit.</p>
+            <p className="register-hint">{t('reg.hint')}</p>
           </div>
         </div>
       </div>
@@ -564,18 +617,18 @@ export default function CycleRunApp() {
       {/* Loading Overlay */}
       <div id="loadingOverlay" className="loading-overlay hidden">
         <div className="loading-spinner"></div>
-        <p id="loadingText">Loading...</p>
+        <p id="loadingText">{t('loading')}</p>
       </div>
 
       {/* Cookie Consent Banner */}
       <div id="cookieConsent" className="cookie-banner">
         <div className="cookie-content">
           <div className="cookie-text">
-            <strong>Your privacy matters.</strong>
-            <p>CycleRun only uses technically necessary cookies and localStorage. No tracking, no ads, no Google Analytics. <Link href="/datenschutz">Learn more</Link></p>
+            <strong>{t('cookie.title')}</strong>
+            <p>{t('cookie.text')} <Link href="/datenschutz">{t('cookie.learn')}</Link></p>
           </div>
           <div className="cookie-actions">
-            <button id="cookieAccept" className="btn-primary btn-sm">Got it</button>
+            <button id="cookieAccept" className="btn-primary btn-sm">{t('cookie.accept')}</button>
           </div>
         </div>
       </div>
@@ -583,10 +636,10 @@ export default function CycleRunApp() {
       {/* Footer */}
       <footer className="site-footer" id="siteFooter">
         <div className="footer-links">
-          <Link href="/datenschutz">Privacy Policy</Link>
-          <Link href="/impressum">Legal Notice</Link>
+          <Link href="/datenschutz">{t('footer.privacy')}</Link>
+          <Link href="/impressum">{t('footer.legal')}</Link>
           <span className="footer-divider">·</span>
-          <span className="footer-copy">© 2026 CycleRun.app — Community project, non-profit</span>
+          <span className="footer-copy">{t('footer.copy')}</span>
         </div>
       </footer>
     </>

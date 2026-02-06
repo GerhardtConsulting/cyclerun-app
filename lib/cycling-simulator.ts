@@ -4,6 +4,7 @@
  */
 
 import { createClient } from "@supabase/supabase-js";
+import { t } from "@/lib/i18n";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://yuxkujcnsrrkwbvftkvq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1eGt1amNuc3Jya3didmZ0a3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjAwNzgsImV4cCI6MjA4NTg5NjA3OH0.aQRnjS2lKDr0qQU9eKphynaHajdn5xWruAXnRx8zhZI";
@@ -229,7 +230,7 @@ export class CyclingSimulator {
     const prevStep = document.getElementById("prevStep");
     if (prevStep) prevStep.style.display = step === 1 ? "none" : "";
     const wizBack = document.getElementById("wizardBack");
-    if (wizBack) wizBack.textContent = step === 1 ? "← Home" : "← Back";
+    if (wizBack) wizBack.textContent = step === 1 ? t('wizard.home') : t('wizard.back');
 
     // Step-specific init
     if (step === 3) {
@@ -261,7 +262,7 @@ export class CyclingSimulator {
   async requestCamera() {
     const status = document.getElementById("cameraStatus");
     if (status) {
-      status.textContent = "Activating camera...";
+      status.textContent = t('sim.camera.activating');
       status.className = "status-message info";
     }
 
@@ -277,7 +278,7 @@ export class CyclingSimulator {
         video: { width: { ideal: 640 }, height: { ideal: 480 } },
       });
       if (status) {
-        status.textContent = "✓ Camera activated! You can see your feed below.";
+        status.textContent = t('sim.camera.success');
         status.className = "status-message success";
       }
 
@@ -294,7 +295,7 @@ export class CyclingSimulator {
       if (nextBtn) nextBtn.style.display = "flex";
     } catch (err: unknown) {
       if (status) {
-        status.textContent = "Camera access denied: " + (err instanceof Error ? err.message : String(err));
+        status.textContent = t('sim.camera.denied') + (err instanceof Error ? err.message : String(err));
         status.className = "status-message error";
       }
     }
@@ -503,7 +504,7 @@ export class CyclingSimulator {
   updateZoneCount() {
     const el = document.getElementById("zoneCount");
     const pairs = Math.floor(this.detectionZones.length / 2);
-    if (el) el.textContent = `${pairs} of 2 pairs`;
+    if (el) el.textContent = t('sim.zones.count', { n: pairs });
   }
 
   selectGear(btn: HTMLElement) {
@@ -738,7 +739,7 @@ export class CyclingSimulator {
 
     if (testRpm) testRpm.textContent = String(this.currentRPM);
     if (testSpeed) testSpeed.textContent = this.currentSpeed.toFixed(1);
-    if (testGear) testGear.textContent = ["", "Light", "Medium", "Heavy"][this.gear];
+    if (testGear) testGear.textContent = ["", t('sim.gear.light'), t('sim.gear.medium'), t('sim.gear.heavy')][this.gear];
 
     const calSpeed = document.getElementById("calSpeedValue");
     const calRpm = document.getElementById("calRpmValue");
@@ -778,7 +779,7 @@ export class CyclingSimulator {
       if (this.currentSpeed >= target - 2 && this.currentSpeed <= target + 2) {
         card.classList.add("reached");
         card.classList.remove("active");
-        status.textContent = "✓ Reached!";
+        status.textContent = t('sim.target.reached');
       } else if (this.currentSpeed < target && !card.classList.contains("reached")) {
         card.classList.add("active");
       } else {
@@ -805,7 +806,7 @@ export class CyclingSimulator {
     };
 
     video.onerror = () => {
-      alert("Video could not be loaded.\n\nPlease upload your own video (MP4 recommended).\n\nNote: Google Drive links don't work directly.");
+      alert(t('sim.video.error'));
     };
   }
 
@@ -824,7 +825,7 @@ export class CyclingSimulator {
     };
 
     video.onerror = () => {
-      alert("Could not load video from URL.\n\nMake sure it's a direct link to an MP4 or WebM file.\nStreaming URLs (YouTube, Vimeo) are not supported.");
+      alert(t('sim.video.url.error'));
     };
   }
 
