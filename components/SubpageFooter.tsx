@@ -18,7 +18,7 @@ export default function SubpageFooter() {
               <Link href="/">Start Riding</Link>
               <Link href="/routes">Routes</Link>
               <Link href="/creator">Creator Program</Link>
-              <Link href="/pair">Phone Pairing</Link>
+              <Link href="/roadmap">Roadmap</Link>
             </div>
             <div className="subpage-footer-col">
               <strong>Guides</strong>

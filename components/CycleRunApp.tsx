@@ -843,6 +843,7 @@ export default function CycleRunApp() {
           <div className="footer-col">
             <strong className="footer-col-title">CycleRun</strong>
             <Link href="/creator">Creator Hub</Link>
+            <Link href="/roadmap">Roadmap</Link>
             <Link href="/datenschutz">{t('footer.privacy')}</Link>
             <Link href="/impressum">{t('footer.legal')}</Link>
           </div>

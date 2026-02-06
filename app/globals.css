@@ -4007,6 +4007,301 @@ body {
 }
 
 /* ============================================
+   ROADMAP PAGE
+   ============================================ */
+
+.roadmap-page {
+    min-height: 100vh;
+    background: var(--bg-base);
+    color: var(--text-primary);
+}
+
+.roadmap-hero {
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.roadmap-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin: 1rem 0;
+}
+
+.roadmap-hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.roadmap-hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.roadmap-section {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.roadmap-section h2 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+}
+
+.roadmap-section-dark {
+    background: rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    padding: 3rem 2rem;
+}
+
+.roadmap-section-dark > * {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Tags */
+.roadmap-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.roadmap-tag-launch { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+.roadmap-tag-feature { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.roadmap-tag-improvement { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+.roadmap-tag-content { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+.roadmap-status-next { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+.roadmap-status-planned { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.roadmap-status-exploring { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+
+/* Changelog Timeline */
+.changelog-timeline {
+    position: relative;
+    margin-top: 2rem;
+    padding-left: 1rem;
+}
+
+.changelog-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent-1) 0%, rgba(249, 115, 22, 0.1) 100%);
+}
+
+.changelog-entry {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.changelog-dot {
+    position: absolute;
+    left: -5px;
+    top: 0.35rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-1);
+    border: 2px solid var(--bg-base);
+}
+
+.changelog-date {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.02em;
+}
+
+.changelog-card {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem;
+}
+
+.changelog-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0.5rem 0 0.35rem;
+    color: var(--text-primary);
+}
+
+.changelog-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* Upcoming Features */
+.upcoming-group {
+    margin-top: 2rem;
+}
+
+.upcoming-group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.upcoming-count {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.upcoming-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1rem;
+}
+
+.upcoming-card {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+}
+
+.upcoming-card:hover {
+    border-color: rgba(249, 115, 22, 0.15);
+}
+
+.upcoming-category {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.upcoming-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0.35rem 0;
+}
+
+.upcoming-card p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Feature Voting */
+.vote-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.vote-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.2s;
+}
+
+.vote-card:hover {
+    border-color: rgba(249, 115, 22, 0.12);
+}
+
+.vote-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 48px;
+}
+
+.vote-btn:hover {
+    border-color: var(--accent-1);
+    color: var(--accent-1);
+    background: rgba(249, 115, 22, 0.06);
+}
+
+.vote-count {
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.vote-info {
+    flex: 1;
+}
+
+.vote-info h4 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 0.15rem;
+}
+
+.vote-register-cta {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(234, 88, 12, 0.04) 100%);
+    border: 1px solid rgba(249, 115, 22, 0.1);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.vote-register-cta p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+    .roadmap-hero { padding: 3rem 1.25rem 2rem; }
+    .roadmap-section { padding: 2rem 1.25rem; }
+    .upcoming-grid { grid-template-columns: 1fr; }
+    .changelog-entry { padding-left: 1.5rem; }
+}
+
+/* ============================================
    SEO GUIDE PAGES
    ============================================ */
 
