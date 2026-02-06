@@ -75,6 +75,9 @@ export class CyclingSimulator {
   maxSpeed: number;
   rpmSamples: number[];
   speedSamples: number[];
+  nudgeTimer: ReturnType<typeof setInterval> | null;
+  nudgeSeconds: number;
+  pairCode: string;
   private _started: boolean;
 
   constructor() {
@@ -100,6 +103,9 @@ export class CyclingSimulator {
     this.maxSpeed = 0;
     this.rpmSamples = [];
     this.speedSamples = [];
+    this.nudgeTimer = null;
+    this.nudgeSeconds = 30;
+    this.pairCode = '';
 
     this.riderWeight = 75;
     this.riderHeight = 175;
@@ -174,6 +180,15 @@ export class CyclingSimulator {
     document.getElementById("requestCamera")?.addEventListener("click", () => this.requestCamera());
     document.getElementById("camPermDeny")?.addEventListener("click", () => this.denyCameraPermission());
     document.getElementById("camSelect")?.addEventListener("change", (e) => this.switchCamera((e.target as HTMLSelectElement).value));
+
+    // Phone pairing
+    document.getElementById("startPhonePair")?.addEventListener("click", () => this.showPhonePairing());
+    document.getElementById("cancelPair")?.addEventListener("click", () => this.hidePhonePairing());
+
+    // Registration nudge + disconnect badge
+    document.getElementById("nudgeRegister")?.addEventListener("click", () => this.nudgeOpenRegister());
+    document.getElementById("nudgeDismiss")?.addEventListener("click", () => this.dismissNudge());
+    document.getElementById("disconnectBadge")?.addEventListener("click", () => this.nudgeOpenRegister());
 
     // Step 2: Setup type - auto advance on selection
     document.querySelectorAll(".setup-option, .position-card").forEach((btn) => {
@@ -1230,9 +1245,58 @@ export class CyclingSimulator {
 
   showRegistrationPopup() {
     this.registerPopupShown = true;
+    this.showNudge();
+  }
 
+  // ============ REGISTRATION NUDGE ============
+
+  showNudge() {
+    const nudge = document.getElementById("regNudge");
+    if (!nudge) return;
+
+    this.nudgeSeconds = 30;
+    nudge.classList.add("active");
+
+    const countdownEl = document.getElementById("nudgeCountdown");
+    const ringEl = document.getElementById("nudgeRingFg");
+    const circumference = 2 * Math.PI * 16; // r=16
+    if (ringEl) {
+      ringEl.style.strokeDasharray = `${circumference}`;
+      ringEl.style.strokeDashoffset = '0';
+    }
+
+    this.nudgeTimer = setInterval(() => {
+      this.nudgeSeconds--;
+      if (countdownEl) countdownEl.textContent = String(this.nudgeSeconds);
+      if (ringEl) {
+        const progress = (30 - this.nudgeSeconds) / 30;
+        ringEl.style.strokeDashoffset = `${circumference * progress}`;
+      }
+      if (this.nudgeSeconds <= 0) {
+        this.dismissNudge();
+      }
+    }, 1000);
+  }
+
+  dismissNudge() {
+    if (this.nudgeTimer) {
+      clearInterval(this.nudgeTimer);
+      this.nudgeTimer = null;
+    }
+    document.getElementById("regNudge")?.classList.remove("active");
+
+    // Show persistent disconnect badge if not registered
+    if (!this.isRegistered) {
+      document.getElementById("disconnectBadge")?.classList.add("visible");
+    }
+  }
+
+  nudgeOpenRegister() {
+    this.dismissNudge();
+
+    // Pause video slightly for registration
     const video = document.getElementById("rideVideo") as HTMLVideoElement;
-    if (video) video.playbackRate = 0.1;
+    if (video) video.playbackRate = 0.3;
 
     const speedStr = this.currentSpeed.toFixed(1);
     const regTitle = document.querySelector(".register-card h2");
@@ -1241,6 +1305,33 @@ export class CyclingSimulator {
     if (regSub) regSub.textContent = t('reg.popup.subtitle', { speed: speedStr });
 
     document.getElementById("registerOverlay")?.classList.add("active");
+  }
+
+  // ============ PHONE PAIRING ============
+
+  showPhonePairing() {
+    // Generate 4-digit code
+    this.pairCode = String(Math.floor(1000 + Math.random() * 9000));
+    const codeEl = document.getElementById("pairCode");
+    if (codeEl) codeEl.textContent = this.pairCode.split('').join(' ');
+
+    // Generate QR code as simple SVG placeholder
+    const qrEl = document.getElementById("pairQrCode");
+    if (qrEl) {
+      const pairUrl = `https://cyclerun.app/pair?code=${this.pairCode}`;
+      qrEl.innerHTML = `<div class="pair-qr-placeholder"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/><rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="4" height="4" rx="0.5"/><rect x="20" y="14" width="2" height="2" rx="0.5"/><rect x="14" y="20" width="2" height="2" rx="0.5"/><rect x="18" y="18" width="4" height="4" rx="0.5"/></svg><p class="pair-qr-url">${pairUrl}</p></div>`;
+    }
+
+    document.getElementById("phonePairPanel")!.style.display = "block";
+    document.getElementById("pairStatus")!.textContent = t('pair.waiting');
+
+    // TODO: In production, subscribe to Supabase Realtime channel
+    // for the pairing code and establish WebRTC connection
+    console.log(`Phone pairing initiated. Code: ${this.pairCode}`);
+  }
+
+  hidePhonePairing() {
+    document.getElementById("phonePairPanel")!.style.display = "none";
   }
 
   async handleRegistration(e: Event) {

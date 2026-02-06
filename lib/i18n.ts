@@ -186,6 +186,22 @@ const translations: Record<Locale, Record<string, string>> = {
     "reg.popup.subtitle": "You're riding at {speed} km/h. Register for free to save your training and unlock all features.",
     "reg.popup.saving": "Registering...",
 
+    // Registration nudge (gamification badge)
+    "nudge.title": "Save your ride?",
+    "nudge.desc": "Register free to keep your stats",
+    "nudge.cta": "Register",
+    "nudge.dismiss": "Not now",
+    "disconnect.tooltip": "Not registered — stats won't be saved",
+
+    // Phone pairing
+    "pair.title": "Connect Your Phone Camera",
+    "pair.desc": "Scan the QR code with your phone to use its camera for motion tracking.",
+    "pair.code.label": "Or enter this code at",
+    "pair.waiting": "Waiting for connection...",
+    "pair.connected": "Phone connected!",
+    "pair.use.phone": "Use Phone Camera",
+    "pair.skip": "Use webcam instead",
+
     // Newsletter
     "newsletter.opt_in": "Keep me updated on new features (no spam, GDPR compliant)",
     "newsletter.subscribed": "Check your email to confirm",
@@ -384,6 +400,22 @@ const translations: Record<Locale, Record<string, string>> = {
     "reg.popup.title": "Starker Start!",
     "reg.popup.subtitle": "Du f\u00e4hrst gerade {speed} km/h. Registriere dich kostenlos, um dein Training zu speichern.",
     "reg.popup.saving": "Wird registriert...",
+
+    // Registration nudge (gamification badge)
+    "nudge.title": "Fahrt speichern?",
+    "nudge.desc": "Kostenlos registrieren & Statistiken behalten",
+    "nudge.cta": "Registrieren",
+    "nudge.dismiss": "Sp\u00e4ter",
+    "disconnect.tooltip": "Nicht registriert \u2014 Statistiken werden nicht gespeichert",
+
+    // Phone pairing
+    "pair.title": "Handy-Kamera verbinden",
+    "pair.desc": "Scanne den QR-Code mit deinem Handy, um dessen Kamera f\u00fcr die Bewegungserkennung zu nutzen.",
+    "pair.code.label": "Oder gib diesen Code ein unter",
+    "pair.waiting": "Warte auf Verbindung...",
+    "pair.connected": "Handy verbunden!",
+    "pair.use.phone": "Handy-Kamera nutzen",
+    "pair.skip": "Webcam verwenden",
 
     // Newsletter
     "newsletter.opt_in": "\u00dcber neue Features informieren (kein Spam, DSGVO-konform)",

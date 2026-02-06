@@ -2417,6 +2417,241 @@ body {
 }
 
 /* ============================================
+   REGISTRATION NUDGE (gamification badge)
+   ============================================ */
+
+.reg-nudge {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-xl);
+    background: rgba(10, 10, 11, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(249, 115, 22, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 80;
+    transform: translateY(120%);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.reg-nudge.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.reg-nudge-timer {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+.nudge-ring {
+    width: 36px;
+    height: 36px;
+    transform: rotate(-90deg);
+}
+
+.nudge-ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.06);
+    stroke-width: 2;
+}
+
+.nudge-ring-fg {
+    fill: none;
+    stroke: var(--accent-1);
+    stroke-width: 2;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear;
+}
+
+.nudge-countdown {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-1);
+}
+
+.reg-nudge-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+}
+
+.reg-nudge-body strong {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.reg-nudge-body span {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.reg-nudge-close {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    padding: 0;
+}
+
+.reg-nudge-close:hover {
+    color: var(--text-primary);
+}
+
+/* Disconnect Badge */
+.disconnect-badge {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(10, 10, 11, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 75;
+    transition: all 0.3s ease;
+    padding: 0;
+    opacity: 0.6;
+}
+
+.disconnect-badge.visible {
+    display: flex;
+    animation: fadeInUp 0.4s ease;
+}
+
+.disconnect-badge:hover {
+    opacity: 1;
+    border-color: rgba(239, 68, 68, 0.4);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.15);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 0.6; transform: translateY(0); }
+}
+
+/* Phone Pairing Panel */
+.phone-pair-panel {
+    margin-top: 1rem;
+}
+
+.pair-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    margin-bottom: 1rem;
+}
+
+.phone-pair-panel h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+}
+
+.pair-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.pair-qr {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.pair-qr-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-muted);
+}
+
+.pair-qr-url {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    word-break: break-all;
+    text-align: center;
+    margin: 0;
+}
+
+.pair-code-section {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pair-code-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.pair-code-label strong {
+    color: var(--accent-1);
+}
+
+.pair-code-display {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    color: var(--text-primary);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.pair-status {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--accent-1);
+    margin-bottom: 0.75rem;
+    animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ============================================
    CAMERA PERMISSION OVERLAY (iPhone-style)
    ============================================ */
 
@@ -3437,6 +3672,130 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
+}
+
+/* ============================================
+   MOBILE PAIRING PAGE
+   ============================================ */
+
+.pair-mobile-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--bg-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.pair-mobile-card {
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+}
+
+.pair-mobile-logo {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+}
+
+.pair-mobile-page h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.pair-mobile-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+.pair-code-inputs {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.pair-digit {
+    width: 56px;
+    height: 64px;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    caret-color: var(--accent-1);
+}
+
+.pair-digit:focus {
+    border-color: var(--accent-1);
+    box-shadow: 0 0 16px rgba(249, 115, 22, 0.15);
+    background: rgba(249, 115, 22, 0.03);
+}
+
+.pair-mobile-status {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    min-height: 1.5rem;
+}
+
+.pair-mobile-status.info { color: var(--accent-1); }
+.pair-mobile-status.success { color: #22c55e; }
+.pair-mobile-status.error { color: #ef4444; }
+
+.pair-mobile-camera {
+    margin-top: 1.5rem;
+}
+
+.pair-mobile-camera video {
+    width: 100%;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pair-camera-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+.pair-connected-badge {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #22c55e;
+}
+
+.pair-mobile-privacy {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.pair-mobile-privacy svg {
+    flex-shrink: 0;
+    margin-top: 1px;
 }
 
 /* ============================================
