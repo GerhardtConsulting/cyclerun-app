@@ -6,6 +6,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { t, getLocale } from "@/lib/i18n";
 import { downloadShareCard, type RideMetrics } from "@/lib/share-card";
+import QRCode from "qrcode";
+import { PairingReceiver } from "@/lib/phone-pairing";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://yuxkujcnsrrkwbvftkvq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1eGt1amNuc3Jya3didmZ0a3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjAwNzgsImV4cCI6MjA4NTg5NjA3OH0.aQRnjS2lKDr0qQU9eKphynaHajdn5xWruAXnRx8zhZI";
@@ -78,6 +80,7 @@ export class CyclingSimulator {
   nudgeTimer: ReturnType<typeof setInterval> | null;
   nudgeSeconds: number;
   pairCode: string;
+  pairingReceiver: PairingReceiver | null;
   private _started: boolean;
 
   constructor() {
@@ -106,6 +109,7 @@ export class CyclingSimulator {
     this.nudgeTimer = null;
     this.nudgeSeconds = 30;
     this.pairCode = '';
+    this.pairingReceiver = null;
 
     this.riderWeight = 75;
     this.riderHeight = 175;
@@ -1309,29 +1313,106 @@ export class CyclingSimulator {
 
   // ============ PHONE PAIRING ============
 
-  showPhonePairing() {
+  async showPhonePairing() {
     // Generate 4-digit code
     this.pairCode = String(Math.floor(1000 + Math.random() * 9000));
     const codeEl = document.getElementById("pairCode");
     if (codeEl) codeEl.textContent = this.pairCode.split('').join(' ');
 
-    // Generate QR code as simple SVG placeholder
+    // Generate real QR code via qrcode library
     const qrEl = document.getElementById("pairQrCode");
+    const pairUrl = `https://cyclerun.app/pair?code=${this.pairCode}`;
     if (qrEl) {
-      const pairUrl = `https://cyclerun.app/pair?code=${this.pairCode}`;
-      qrEl.innerHTML = `<div class="pair-qr-placeholder"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="2" width="8" height="8" rx="1"/><rect x="14" y="2" width="8" height="8" rx="1"/><rect x="2" y="14" width="8" height="8" rx="1"/><rect x="14" y="14" width="4" height="4" rx="0.5"/><rect x="20" y="14" width="2" height="2" rx="0.5"/><rect x="14" y="20" width="2" height="2" rx="0.5"/><rect x="18" y="18" width="4" height="4" rx="0.5"/></svg><p class="pair-qr-url">${pairUrl}</p></div>`;
+      try {
+        const canvas = document.createElement("canvas");
+        await QRCode.toCanvas(canvas, pairUrl, {
+          width: 180,
+          margin: 2,
+          color: { dark: "#ffffffee", light: "#00000000" },
+        });
+        qrEl.innerHTML = "";
+        qrEl.appendChild(canvas);
+      } catch (err) {
+        console.error("QR generation failed", err);
+        qrEl.innerHTML = `<p class="pair-qr-url">${pairUrl}</p>`;
+      }
     }
 
-    document.getElementById("phonePairPanel")!.style.display = "block";
-    document.getElementById("pairStatus")!.textContent = t('pair.waiting');
+    const panel = document.getElementById("phonePairPanel");
+    const statusEl = document.getElementById("pairStatus");
+    if (panel) panel.style.display = "block";
+    if (statusEl) statusEl.textContent = t('pair.waiting');
 
-    // TODO: In production, subscribe to Supabase Realtime channel
-    // for the pairing code and establish WebRTC connection
-    console.log(`Phone pairing initiated. Code: ${this.pairCode}`);
+    // Start Supabase Realtime + WebRTC receiver
+    this.pairingReceiver?.destroy();
+    this.pairingReceiver = new PairingReceiver(this.pairCode);
+
+    this.pairingReceiver.onStatusChange = (status) => {
+      if (!statusEl) return;
+      switch (status) {
+        case "waiting":
+          statusEl.textContent = t('pair.waiting');
+          break;
+        case "phone-joined":
+          statusEl.textContent = "Phone found! Connecting camera...";
+          statusEl.style.color = "#22c55e";
+          break;
+        case "connecting":
+          statusEl.textContent = "Establishing video stream...";
+          break;
+        case "connected":
+          statusEl.textContent = t('pair.connected');
+          statusEl.style.color = "#22c55e";
+          break;
+        case "failed":
+          statusEl.textContent = "Connection failed. Try again.";
+          statusEl.style.color = "#ef4444";
+          break;
+        default:
+          if (status.startsWith("error:")) {
+            statusEl.textContent = "Error: " + status.split(":")[1];
+            statusEl.style.color = "#ef4444";
+          }
+      }
+    };
+
+    this.pairingReceiver.onRemoteStream = (stream) => {
+      // Show phone camera feed in the preview area
+      const preview = document.getElementById("camPermPreview");
+      const video = document.getElementById("step1Video") as HTMLVideoElement;
+      if (video && preview) {
+        video.srcObject = stream;
+        preview.style.display = "block";
+        // Store stream as webcamStream so the simulator uses it for detection
+        this.webcamStream = stream;
+      }
+
+      // Hide pairing panel, show success state
+      if (panel) panel.style.display = "none";
+
+      // Enable the camera select wrapper to show "Phone Camera" label
+      const selectWrapper = document.getElementById("camSelectWrapper");
+      const select = document.getElementById("camSelect") as HTMLSelectElement;
+      if (selectWrapper && select) {
+        select.innerHTML = '<option selected>Phone Camera (connected)</option>';
+        selectWrapper.style.display = "block";
+      }
+
+      // Auto-advance after a short delay so user can see the feed
+      setTimeout(() => {
+        const overlay = document.getElementById("cameraPermOverlay");
+        if (overlay) overlay.classList.remove("active");
+      }, 2000);
+    };
+
+    await this.pairingReceiver.start();
   }
 
   hidePhonePairing() {
-    document.getElementById("phonePairPanel")!.style.display = "none";
+    this.pairingReceiver?.destroy();
+    this.pairingReceiver = null;
+    const panel = document.getElementById("phonePairPanel");
+    if (panel) panel.style.display = "none";
   }
 
   async handleRegistration(e: Event) {

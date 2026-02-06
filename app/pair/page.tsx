@@ -1,12 +1,108 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Phone Camera Pairing — CycleRun.app",
-  description: "Connect your phone camera to CycleRun for motion tracking. Scan the QR code or enter your pairing code.",
-  robots: { index: false, follow: false },
-};
+import { useEffect, useRef, useState, useCallback, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { PairingSender } from "@/lib/phone-pairing";
 
-export default function PairPage() {
+function PairContent() {
+  const searchParams = useSearchParams();
+  const [digits, setDigits] = useState(["", "", "", ""]);
+  const [status, setStatus] = useState<{ text: string; type: string }>({ text: "", type: "" });
+  const [showCamera, setShowCamera] = useState(false);
+  const [connected, setConnected] = useState(false);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const senderRef = useRef<PairingSender | null>(null);
+
+  // Auto-fill code from URL param
+  useEffect(() => {
+    const urlCode = searchParams.get("code");
+    if (urlCode && urlCode.length === 4) {
+      setDigits(urlCode.split(""));
+    }
+  }, [searchParams]);
+
+  const handleDigit = useCallback((index: number, value: string) => {
+    if (!/^\d?$/.test(value)) return;
+    setDigits((prev) => {
+      const next = [...prev];
+      next[index] = value;
+      return next;
+    });
+    if (value && index < 3) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  }, []);
+
+  const handleKeyDown = useCallback((index: number, e: React.KeyboardEvent) => {
+    if (e.key === "Backspace" && !digits[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  }, [digits]);
+
+  const handleConnect = useCallback(async () => {
+    const code = digits.join("");
+    if (code.length !== 4) return;
+
+    setStatus({ text: "Starting camera...", type: "info" });
+
+    // Clean up previous sender
+    senderRef.current?.destroy();
+
+    const sender = new PairingSender(code);
+    senderRef.current = sender;
+
+    sender.onStatusChange = (s) => {
+      switch (s) {
+        case "camera-ready":
+          setStatus({ text: "Camera active! Connecting to your device...", type: "success" });
+          // Show local preview
+          if (videoRef.current && sender.stream) {
+            videoRef.current.srcObject = sender.stream;
+            setShowCamera(true);
+          }
+          break;
+        case "offer-sent":
+          setStatus({ text: "Waiting for your computer to respond...", type: "info" });
+          break;
+        case "connecting":
+          setStatus({ text: "Establishing video stream...", type: "info" });
+          break;
+        case "connected":
+          setStatus({ text: "Connected! Your camera is streaming to your device.", type: "success" });
+          setConnected(true);
+          break;
+        case "failed":
+          setStatus({ text: "Connection failed. Make sure the code is correct and try again.", type: "error" });
+          break;
+        case "error:camera":
+          setStatus({ text: "Camera access denied. Please allow camera access and reload.", type: "error" });
+          break;
+        case "error:no-supabase":
+          setStatus({ text: "Connection service unavailable. Please try again.", type: "error" });
+          break;
+        default:
+          if (s.startsWith("error:")) {
+            setStatus({ text: `Error: ${s.split(":")[1]}`, type: "error" });
+          }
+      }
+    };
+
+    await sender.start();
+  }, [digits]);
+
+  // Auto-connect when all 4 digits are filled
+  useEffect(() => {
+    if (digits.every((d) => d.length === 1)) {
+      handleConnect();
+    }
+  }, [digits, handleConnect]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => { senderRef.current?.destroy(); };
+  }, []);
+
   return (
     <div className="pair-mobile-page">
       <div className="pair-mobile-card">
@@ -20,110 +116,69 @@ export default function PairPage() {
         </p>
 
         <div className="pair-mobile-form">
-          <div className="pair-code-inputs" id="pairCodeInputs">
-            <input type="text" maxLength={1} pattern="[0-9]" inputMode="numeric" className="pair-digit" autoFocus />
-            <input type="text" maxLength={1} pattern="[0-9]" inputMode="numeric" className="pair-digit" />
-            <input type="text" maxLength={1} pattern="[0-9]" inputMode="numeric" className="pair-digit" />
-            <input type="text" maxLength={1} pattern="[0-9]" inputMode="numeric" className="pair-digit" />
+          <div className="pair-code-inputs">
+            {digits.map((d, i) => (
+              <input
+                key={i}
+                ref={(el) => { inputRefs.current[i] = el; }}
+                type="text"
+                maxLength={1}
+                inputMode="numeric"
+                pattern="[0-9]"
+                className="pair-digit"
+                autoFocus={i === 0}
+                value={d}
+                onChange={(e) => handleDigit(i, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(i, e)}
+              />
+            ))}
           </div>
 
-          <button id="pairConnect" className="btn-primary btn-lg btn-full">
+          <button className="btn-primary btn-lg btn-full" onClick={handleConnect}>
             Connect
           </button>
 
-          <div id="pairMobileStatus" className="pair-mobile-status"></div>
+          {status.text && (
+            <div className={`pair-mobile-status ${status.type}`}>{status.text}</div>
+          )}
         </div>
 
-        <div className="pair-mobile-camera" id="pairMobileCamera" style={{ display: "none" }}>
-          <video id="pairCameraFeed" autoPlay muted playsInline></video>
-          <p className="pair-camera-label">Camera is streaming to your device</p>
-          <div className="pair-connected-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5" /></svg>
-            Connected
+        {showCamera && (
+          <div className="pair-mobile-camera">
+            <video ref={videoRef} autoPlay muted playsInline></video>
+            <p className="pair-camera-label">
+              {connected ? "Camera is streaming to your device" : "Camera preview — connecting..."}
+            </p>
+            {connected && (
+              <div className="pair-connected-badge" style={{ display: "flex" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 6L9 17l-5-5" /></svg>
+                Connected
+              </div>
+            )}
           </div>
-        </div>
+        )}
 
         <p className="pair-mobile-privacy">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
           Your camera feed is sent directly to your computer via peer-to-peer connection. No images pass through our servers.
         </p>
       </div>
-
-      <PairClientScript />
     </div>
   );
 }
 
-function PairClientScript() {
-  const script = `
-    (function() {
-      const inputs = document.querySelectorAll('.pair-digit');
-      inputs.forEach((input, i) => {
-        input.addEventListener('input', function(e) {
-          if (e.target.value.length === 1 && i < inputs.length - 1) {
-            inputs[i + 1].focus();
-          }
-          // Auto-submit when all 4 digits entered
-          const code = Array.from(inputs).map(inp => inp.value).join('');
-          if (code.length === 4) {
-            document.getElementById('pairConnect').click();
-          }
-        });
-        input.addEventListener('keydown', function(e) {
-          if (e.key === 'Backspace' && !e.target.value && i > 0) {
-            inputs[i - 1].focus();
-          }
-        });
-      });
-
-      // Check for code in URL
-      const params = new URLSearchParams(window.location.search);
-      const urlCode = params.get('code');
-      if (urlCode && urlCode.length === 4) {
-        urlCode.split('').forEach((digit, i) => {
-          if (inputs[i]) inputs[i].value = digit;
-        });
-      }
-
-      document.getElementById('pairConnect').addEventListener('click', async function() {
-        const code = Array.from(inputs).map(inp => inp.value).join('');
-        if (code.length !== 4) return;
-
-        const status = document.getElementById('pairMobileStatus');
-        status.textContent = 'Connecting...';
-        status.className = 'pair-mobile-status info';
-
-        try {
-          // Request camera access
-          const stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: 'environment', width: { ideal: 640 }, height: { ideal: 480 } }
-          });
-
-          const video = document.getElementById('pairCameraFeed');
-          video.srcObject = stream;
-          document.getElementById('pairMobileCamera').style.display = 'block';
-
-          status.textContent = 'Camera active! Establishing connection...';
-          status.className = 'pair-mobile-status success';
-
-          // TODO: In production, use Supabase Realtime + WebRTC
-          // 1. Join channel with pairing code
-          // 2. Exchange SDP offers/answers via channel
-          // 3. Stream video via WebRTC data channel
-          console.log('Pairing code:', code, 'Camera stream ready');
-
-          setTimeout(() => {
-            status.textContent = 'Connected to your device!';
-            document.querySelector('.pair-connected-badge').style.display = 'flex';
-          }, 1500);
-
-        } catch (err) {
-          status.textContent = 'Camera access denied. Please allow camera access and try again.';
-          status.className = 'pair-mobile-status error';
-        }
-      });
-    })();
-  `;
-
-  return <script dangerouslySetInnerHTML={{ __html: script }} />;
+export default function PairPage() {
+  return (
+    <Suspense fallback={
+      <div className="pair-mobile-page">
+        <div className="pair-mobile-card">
+          <div className="pair-mobile-logo">cyclerun<span className="header-logo-app">.app</span></div>
+          <h1>Connect Camera</h1>
+          <p className="pair-mobile-desc">Loading...</p>
+        </div>
+      </div>
+    }>
+      <PairContent />
+    </Suspense>
+  );
 }
