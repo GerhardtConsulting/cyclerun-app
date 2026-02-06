@@ -3,7 +3,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Datenschutzerklärung — CycleRun.app",
-  description: "Datenschutzerklärung von CycleRun.app — Wie wir mit deinen Daten umgehen.",
+  description: "Datenschutzerklärung von CycleRun.app — Wie wir mit deinen Daten umgehen. Informationen zu Cookies, Webcam-Datenverarbeitung und deinen Rechten.",
+  alternates: { canonical: "/datenschutz" },
+  openGraph: {
+    title: "Datenschutzerklärung — CycleRun.app",
+    description: "Wie CycleRun.app mit deinen Daten umgeht. 100% lokal, keine Tracking-Cookies.",
+    url: "https://cyclerun.app/datenschutz",
+  },
 };
 
 export default function Datenschutz() {

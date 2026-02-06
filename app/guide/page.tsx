@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Indoor Cycling Guides & Resources — CycleRun.app",
   description: "Comprehensive guides on indoor cycling apps, virtual cycling videos, smart trainer alternatives, spinning bike apps, ergometer training, and more. Everything you need to know about indoor cycling.",
   keywords: "indoor cycling guide, virtual cycling guide, smart trainer alternative, indoor cycling tips, home trainer guide",
-  alternates: { canonical: "https://cyclerun.app/guide" },
+  alternates: { canonical: "/guide" },
   openGraph: {
     title: "Indoor Cycling Guides & Resources — CycleRun.app",
     description: "Comprehensive guides on indoor cycling apps, virtual cycling videos, smart trainer alternatives, and more.",

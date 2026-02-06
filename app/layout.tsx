@@ -17,10 +17,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://cyclerun.app"),
   alternates: {
     canonical: "/",
-    languages: {
-      en: "/",
-      de: "/de/",
-    },
   },
   openGraph: {
     title: "CycleRun — Free Indoor Training with Your Webcam",

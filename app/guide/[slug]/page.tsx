@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: page.description,
     keywords: page.keywords,
     alternates: {
-      canonical: `https://cyclerun.app/guide/${page.slug}`,
+      canonical: `/guide/${page.slug}`,
     },
     openGraph: {
       title: page.title,

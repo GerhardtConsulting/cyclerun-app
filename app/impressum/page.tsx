@@ -3,7 +3,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Impressum — CycleRun.app",
-  description: "Impressum von CycleRun.app — Angaben gemäß § 5 TMG.",
+  description: "Impressum von CycleRun.app — Angaben gemäß § 5 TMG. Verantwortlich: Maximilian Gerhardt.",
+  alternates: { canonical: "/impressum" },
+  openGraph: {
+    title: "Impressum — CycleRun.app",
+    description: "Angaben gemäß § 5 TMG / § 18 MStV.",
+    url: "https://cyclerun.app/impressum",
+  },
 };
 
 export default function Impressum() {
