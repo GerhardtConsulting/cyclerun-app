@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
+import { newsletterWelcomeEmail, BRAND } from "@/lib/email-templates";
 
 function getSupabase() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   );
+}
+
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
 }
 
 /**
@@ -27,7 +33,7 @@ export async function GET(req: NextRequest) {
     .update({ confirmed: true, confirmed_at: new Date().toISOString() })
     .eq("confirm_token", token)
     .eq("confirmed", false)
-    .select("email")
+    .select("email, locale")
     .single();
 
   if (error || !data) {
@@ -35,6 +41,25 @@ export async function GET(req: NextRequest) {
       errorPage("Link expired or already confirmed."),
       { status: 400, headers: { "Content-Type": "text/html" } }
     );
+  }
+
+  // Send welcome email (non-blocking — don't fail confirmation if this errors)
+  try {
+    const unsubscribeUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://cyclerun.app"}/api/newsletter/unsubscribe?email=${encodeURIComponent(data.email)}`;
+    const welcome = newsletterWelcomeEmail(data.locale || "en", unsubscribeUrl);
+    const resend = getResend();
+    await resend.emails.send({
+      from: BRAND.from,
+      to: data.email,
+      subject: welcome.subject,
+      html: welcome.html,
+      headers: {
+        "List-Unsubscribe": `<${unsubscribeUrl}>`,
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+      },
+    });
+  } catch (e) {
+    console.error("Welcome email error:", e);
   }
 
   return new NextResponse(successPage(), {

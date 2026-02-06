@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
+import { newsletterConfirmEmail, BRAND } from "@/lib/email-templates";
 
 function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
@@ -58,34 +59,14 @@ export async function POST(req: NextRequest) {
 
     // Send confirmation email via Resend
     const confirmUrl = `${process.env.NEXT_PUBLIC_APP_URL || "https://cyclerun.app"}/api/newsletter/confirm?token=${confirmToken}`;
+    const emailTemplate = newsletterConfirmEmail(locale, confirmUrl);
 
-    const isDE = locale === "de";
     const resend = getResend();
     const { error: mailError } = await resend.emails.send({
-      from: "CycleRun.app <noreply@cyclerun.app>",
+      from: BRAND.from,
       to: email.toLowerCase(),
-      subject: isDE
-        ? "Bestätige dein CycleRun Newsletter-Abo"
-        : "Confirm your CycleRun newsletter subscription",
-      html: `
-        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif; max-width: 480px; margin: 0 auto; padding: 2rem; background: #0a0a0a; color: #fafaf9; border-radius: 16px;">
-          <h2 style="margin: 0 0 0.5rem; font-size: 1.5rem;">
-            <span style="color: #fafaf9;">cyclerun</span><span style="color: #f97316;">.app</span>
-          </h2>
-          <p style="color: #a8a29e; margin: 0 0 1.5rem; font-size: 0.9rem;">
-            ${isDE ? "Nur Updates, kein Spam. Jederzeit abbestellbar." : "Only updates, no spam. Unsubscribe anytime."}
-          </p>
-          <p style="margin: 0 0 1.5rem;">
-            ${isDE ? "Bitte bestätige dein Newsletter-Abo:" : "Please confirm your newsletter subscription:"}
-          </p>
-          <a href="${confirmUrl}" style="display: inline-block; padding: 0.75rem 2rem; background: linear-gradient(135deg, #fbbf24, #f97316, #dc2626); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
-            ${isDE ? "Abo bestätigen" : "Confirm subscription"}
-          </a>
-          <p style="color: #57534e; font-size: 0.75rem; margin-top: 2rem;">
-            ${isDE ? "Falls du diesen Newsletter nicht angefordert hast, ignoriere diese E-Mail einfach." : "If you didn't request this newsletter, simply ignore this email."}
-          </p>
-        </div>
-      `,
+      subject: emailTemplate.subject,
+      html: emailTemplate.html,
     });
 
     if (mailError) {
