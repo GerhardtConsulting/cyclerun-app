@@ -1459,6 +1459,22 @@ export class CyclingSimulator {
         // Duplicate email — user already registered, that's fine
       } else if (error) {
         throw error;
+      } else {
+        // Notify admin about new registration (fire-and-forget)
+        fetch("/api/admin/notify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            event: "registration",
+            details: {
+              Name: firstName + (lastName ? ` ${lastName}` : ""),
+              Email: email,
+              Sport: this.selectedSport || "cycling",
+              Locale: navigator.language || "en",
+              Newsletter: newsletterOpt ? "Ja" : "Nein",
+            },
+          }),
+        }).catch(() => {});
       }
 
       localStorage.setItem("cyclerun_registered", "true");

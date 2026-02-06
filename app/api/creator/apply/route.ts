@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
-import { creatorApplicationEmail, BRAND } from "@/lib/email-templates";
+import { creatorApplicationEmail, adminNotificationEmail, BRAND } from "@/lib/email-templates";
 
 function getSupabase() {
   return createClient(
@@ -70,20 +70,19 @@ export async function POST(req: NextRequest) {
 
     // Notify admin
     try {
+      const adminTpl = adminNotificationEmail("creator_application", {
+        Name: name,
+        Email: email,
+        Social: social || "—",
+        Routen: routes || "—",
+        Locale: locale,
+      });
       const resend = getResend();
       await resend.emails.send({
         from: BRAND.from,
-        to: "kontakt@cyclerun.app",
-        subject: `New Creator Application: ${name}`,
-        html: `<div style="font-family:sans-serif;padding:1rem;">
-          <h2>New Creator Application</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Social:</strong> ${social || "—"}</p>
-          <p><strong>Routes:</strong> ${routes || "—"}</p>
-          <p><strong>Locale:</strong> ${locale}</p>
-          <p><strong>Time:</strong> ${new Date().toISOString()}</p>
-        </div>`,
+        to: process.env.ADMIN_EMAIL || "maximiliangerhardtofficial@gmail.com",
+        subject: adminTpl.subject,
+        html: adminTpl.html,
       });
     } catch (notifyErr) {
       console.error("Admin notify error:", notifyErr);

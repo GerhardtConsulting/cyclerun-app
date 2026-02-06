@@ -211,3 +211,41 @@ export function creatorApplicationEmail(locale: string, name: string): { subject
   };
 }
 
+// ─── Admin Notification (internal — sent to admin on events) ───
+
+export function adminNotificationEmail(
+  event: "registration" | "newsletter_confirmed" | "newsletter_unsubscribed" | "creator_application",
+  details: Record<string, string>
+): { subject: string; html: string } {
+  const labels: Record<string, string> = {
+    registration: "🆕 Neue Registrierung",
+    newsletter_confirmed: "📬 Newsletter bestätigt",
+    newsletter_unsubscribed: "📭 Newsletter abgemeldet",
+    creator_application: "🎬 Neue Creator-Bewerbung",
+  };
+  const label = labels[event] || event;
+
+  const detailRows = Object.entries(details)
+    .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#78716c;font-size:0.85rem;white-space:nowrap;">${k}</td><td style="padding:4px 0;color:#fafaf9;font-size:0.85rem;">${v}</td></tr>`)
+    .join("");
+
+  return {
+    subject: `${label} — CycleRun.app`,
+    html: `<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>body{margin:0;padding:0;background:#0a0a0a;color:#fafaf9;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif}
+.wrap{max-width:520px;margin:0 auto;padding:2rem}.card{background:#141414;border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:1.5rem}
+h2{margin:0 0 1rem;font-size:1.1rem;font-weight:700}table{border-collapse:collapse}
+.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.75rem;font-weight:600;background:rgba(249,115,22,0.12);color:#f97316;margin-bottom:1rem}
+.footer{text-align:center;padding:1rem 0 0;color:#78716c;font-size:0.75rem}</style></head>
+<body><div class="wrap"><div class="card">
+<div style="margin-bottom:1rem;font-size:1.3rem;font-weight:800;">cyclerun<span style="color:#f97316">.app</span></div>
+<span class="badge">Admin Dashboard</span>
+<h2>${label}</h2>
+<table>${detailRows}</table>
+<div style="height:1px;background:rgba(255,255,255,0.06);margin:1.5rem 0;"></div>
+<p style="margin:0;font-size:0.8rem;color:#78716c;">Zeitpunkt: ${new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })}</p>
+</div>
+<p class="footer"><a href="https://cyclerun.app/admin" style="color:#f97316;">Admin Dashboard öffnen</a></p>
+</div></body></html>`,
+  };
+}

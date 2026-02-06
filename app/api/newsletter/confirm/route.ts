@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
-import { newsletterWelcomeEmail, BRAND } from "@/lib/email-templates";
+import { newsletterWelcomeEmail, adminNotificationEmail, BRAND } from "@/lib/email-templates";
 
 function getSupabase() {
   return createClient(
@@ -61,6 +61,13 @@ export async function GET(req: NextRequest) {
   } catch (e) {
     console.error("Welcome email error:", e);
   }
+
+  // Notify admin (non-blocking)
+  try {
+    const adminTpl = adminNotificationEmail("newsletter_confirmed", { Email: data.email, Locale: data.locale || "en" });
+    const resend2 = getResend();
+    await resend2.emails.send({ from: BRAND.from, to: process.env.ADMIN_EMAIL || "maximiliangerhardtofficial@gmail.com", subject: adminTpl.subject, html: adminTpl.html });
+  } catch (e) { console.error("Admin notify error:", e); }
 
   return new NextResponse(successPage(), {
     status: 200,
