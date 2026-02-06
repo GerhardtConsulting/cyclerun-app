@@ -32,18 +32,24 @@
 
 ### ⚠️ Partially Translated
 
-| Page | Issue |
-|------|-------|
-| `/guide` (index) | ✅ UI translated, but guide card titles/descriptions are EN only (from `seo-pages-content.ts`) |
-| `/guide/[slug]` (9 guides) | ✅ UI chrome translated, but **all guide content (h1, description, FAQs, body) is EN only** |
+*None — all pages now have full DE translations.*
 
-### ❌ Not Yet i18n-Aware
+### ✅ Fixed (Previously Not i18n-Aware)
 
-| Item | Issue |
-|------|-------|
-| `<html lang="en">` in `layout.tsx:89` | **Hardcoded** — should dynamically reflect current locale |
-| Server metadata on all pages | Titles/descriptions are EN-only in `export const metadata` — this is acceptable for SEO (single canonical URL per page), but could be improved with `alternates.languages` |
-| Sitemap (`app/sitemap.ts`) | No `hreflang` alternates — single URL per page (acceptable for client-side i18n, but could add `alternates` for bilingual SEO) |
+| Item | Status |
+|------|--------|
+| `<html lang>` | ✅ **Dynamic** via `LocaleSync` component — syncs with active locale on client |
+| `hreflang` alternates | ✅ Added `<link rel="alternate" hreflang="en/de/x-default">` in layout head |
+| OpenGraph locale | ✅ Added `alternateLocale: "de_DE"` |
+| Blog dates | ✅ Locale-aware formatting (`formatDate()` with `de-DE` / `en-US`) |
+| Guide content (9 pages) | ✅ Full DE translations (h1, description, FAQs, body) |
+
+### Remaining Architecture Notes
+
+| Item | Note |
+|------|------|
+| Server metadata on all pages | Titles/descriptions are EN-only in `export const metadata` — acceptable for SSG + client-side i18n |
+| Sitemap (`app/sitemap.ts`) | No per-URL `hreflang` — acceptable since global `<link>` tags handle this |
 
 ---
 
@@ -51,16 +57,9 @@
 
 ### 🔴 HIGH PRIORITY
 
-1. **Guide content DE translations** — 9 guides × ~1000 words each = ~9000 words to translate
-   - `lib/seo-pages-data.ts`: Extend `SeoPage` interface with `h1_de?`, `description_de?`, `faqs_de?: SeoFaq[]`, `content_de?`
-   - `lib/seo-pages-content.ts`: Add DE fields to all 9 entries
-   - `components/GuideDetailContent.tsx`: Add `isDE` logic for h1, description, FAQs, content
-   - `components/GuideIndexContent.tsx`: Add `isDE` logic for card titles/descriptions
-   - **Guide slugs**: `zwift-alternative-free`, `indoor-cycling-app`, `heimtrainer-app`, `exercise-bike-app`, `spinning-bike-app`, `virtual-cycling-videos`, `indoor-cycling-without-smart-trainer`, `ergometer-training`, `rouvy-alternative`
+1. ~~**Guide content DE translations**~~ ✅ DONE — All 9 guides fully translated
 
-2. **`<html lang>` dynamic** — `app/layout.tsx:89` has `<html lang="en">` hardcoded
-   - Needs a client wrapper or cookie/header-based approach to set `lang` attribute dynamically
-   - Affects accessibility and search engine language detection
+2. ~~**`<html lang>` dynamic**~~ ✅ DONE — `LocaleSync` component sets it dynamically
 
 3. **robots.txt / noindex** — Currently ALL crawling is blocked:
    - `app/robots.ts`: `disallow: ["/"]`
@@ -74,23 +73,18 @@
 
 ### 🟡 MEDIUM PRIORITY
 
-5. **Sitemap hreflang** — Currently no language alternates in sitemap
-   - For pure client-side i18n (no /de/ prefix), this is acceptable
-   - If Google penalizes for duplicate content, consider adding `<xhtml:link rel="alternate" hreflang="de">` entries
-   - Alternative: Add `<link rel="alternate" hreflang="de">` to `<head>` in layout.tsx
+5. ~~**Sitemap hreflang**~~ ✅ DONE — Added global `<link rel="alternate" hreflang>` tags in layout head
 
 6. **Server-side metadata DE** — Page titles/descriptions in `export const metadata` are EN only
    - Since locale is client-side (localStorage), server can't know language at build time
    - This is architecturally correct for SSG — but limits DE-specific title tags in SERPs
    - Long-term: Consider Next.js middleware + cookie-based locale for server-aware i18n
 
-7. **Blog post dates** — Dates are EN format ("Feb 6, 2026") even on DE pages
-   - Should display "6. Feb. 2026" or "6. Februar 2026" in German
+7. ~~**Blog post dates**~~ ✅ DONE — `formatDate()` now uses `de-DE` / `en-US` locale formatting
 
 ### 🟢 LOW PRIORITY / FUTURE
 
-8. **OpenGraph locale** — `layout.tsx` has `locale: "en_US"` hardcoded
-   - Could add `alternateLocales: ["de_DE"]` for Facebook
+8. ~~**OpenGraph locale**~~ ✅ DONE — Added `alternateLocale: "de_DE"`
    
 9. **JSON-LD FAQ on home page** — Only in English, not locale-aware
    - `layout.tsx:60-72` has hardcoded English FAQ schema
@@ -192,6 +186,6 @@ git push origin main    # Triggers Vercel auto-deploy
 
 1. **Set up Google Search Console + Analytics** → then re-enable crawling (robots.ts + metadata)
 2. **Update Impressum** with physical address once received
-3. **Translate 9 guide pages** to German (biggest content gap)
-4. **Make `<html lang>` dynamic** based on locale
-5. Consider adding `hreflang` alternates to sitemap or layout head
+3. ~~**Translate 9 guide pages** to German~~ ✅ DONE
+4. ~~**Make `<html lang>` dynamic**~~ ✅ DONE
+5. ~~**hreflang alternates**~~ ✅ DONE
