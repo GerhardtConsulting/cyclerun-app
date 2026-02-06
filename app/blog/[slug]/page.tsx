@@ -1,8 +1,7 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { blogPosts, getBlogPost, getAllBlogSlugs } from "@/lib/blog-data";
 import { notFound } from "next/navigation";
-import SubpageFooter from "@/components/SubpageFooter";
+import BlogPostContent from "@/components/BlogPostContent";
 
 export function generateStaticParams() {
   return getAllBlogSlugs().map((slug) => ({ slug }));
@@ -33,29 +32,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-function markdownToHtml(md: string): string {
-  return md
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^\| (.+)$/gm, (match) => {
-      const cells = match.split('|').filter(c => c.trim()).map(c => c.trim());
-      if (cells.every(c => /^-+$/.test(c))) return '';
-      const tag = cells.every(c => /^\*\*/.test(c)) ? 'th' : 'td';
-      return `<tr>${cells.map(c => `<${tag}>${c.replace(/\*\*/g, '')}</${tag}>`).join('')}</tr>`;
-    })
-    .replace(/(<tr>.*<\/tr>\n?)+/g, (match) => `<table>${match}</table>`)
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`)
-    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-    .replace(/^(?!<[a-z])((?!^\s*$).+)$/gm, '<p>$1</p>')
-    .replace(/<p><\/p>/g, '')
-    .replace(/\n{2,}/g, '\n');
-}
-
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = getBlogPost(slug);
@@ -83,69 +59,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ],
   };
 
-  const otherPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
-
   return (
     <>
-      <head>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
-      </head>
-      <div className="blog-page">
-        <nav className="creator-nav">
-          <Link href="/" className="creator-nav-logo">cyclerun<span className="creator-nav-app">.app</span></Link>
-          <Link href="/blog" className="btn-ghost btn-sm">← All Posts</Link>
-        </nav>
-
-        <article className="blog-article">
-          <header className="blog-article-header">
-            <div className="blog-article-meta">
-              <span className="blog-card-category">{post.category}</span>
-              <span>{post.date}</span>
-              <span>·</span>
-              <span>{post.readTime} read</span>
-            </div>
-            <h1>{post.title}</h1>
-            <p className="blog-article-desc">{post.description}</p>
-          </header>
-
-          <div
-            className="blog-article-body"
-            dangerouslySetInnerHTML={{ __html: markdownToHtml(post.content) }}
-          />
-        </article>
-
-        {otherPosts.length > 0 && (
-          <section className="blog-related">
-            <h3>More from the blog</h3>
-            <div className="blog-related-grid">
-              {otherPosts.map((p) => (
-                <Link href={`/blog/${p.slug}`} key={p.slug} className="blog-card">
-                  <div className="blog-card-category">{p.category}</div>
-                  <h2>{p.title}</h2>
-                  <p>{p.description}</p>
-                  <div className="blog-card-meta">
-                    <span>{p.date}</span>
-                    <span>·</span>
-                    <span>{p.readTime} read</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        <section className="seo-cta" style={{ maxWidth: '640px', margin: '2rem auto 0' }}>
-          <h2>Try It Yourself — Free</h2>
-          <p>Open CycleRun, point your webcam at your legs, and ride this route. No download, no signup.</p>
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/" className="btn-primary btn-lg">Start Riding Free</Link>
-            <Link href="/creator" className="btn-ghost">Film &amp; Earn as Creator →</Link>
-          </div>
-        </section>
-
-        <SubpageFooter />
-      </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <BlogPostContent post={post} />
     </>
   );
 }
