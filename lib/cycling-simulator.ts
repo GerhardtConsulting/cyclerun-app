@@ -182,13 +182,13 @@ export class CyclingSimulator {
     document.getElementById("startRideBtn")?.addEventListener("click", () => this.startRide());
 
     // Ride controls
-    document.getElementById("strengthSlider")?.addEventListener("input", (e) => {
-      const el = document.getElementById("strengthValue");
-      if (el) el.textContent = (e.target as HTMLInputElement).value;
-    });
     document.getElementById("toggleWebcam")?.addEventListener("click", () => this.toggleWebcamMinimap());
     document.getElementById("pauseRide")?.addEventListener("click", () => this.togglePause());
     document.getElementById("stopRide")?.addEventListener("click", () => this.stopRide());
+
+    // Gear shift during ride
+    document.getElementById("gearUp")?.addEventListener("click", () => this.shiftGear(1));
+    document.getElementById("gearDown")?.addEventListener("click", () => this.shiftGear(-1));
 
     // Video
     document.getElementById("useDefaultVideo")?.addEventListener("click", () => this.loadDefaultVideo());
@@ -511,6 +511,21 @@ export class CyclingSimulator {
     document.querySelectorAll(".gear-btn").forEach((b) => b.classList.remove("active"));
     btn.classList.add("active");
     this.gear = parseInt(btn.dataset.gear || "2");
+    this.updateRideGearDisplay();
+  }
+
+  shiftGear(direction: number) {
+    const newGear = Math.min(3, Math.max(1, this.gear + direction));
+    if (newGear === this.gear) return;
+    this.gear = newGear;
+    this.updateRideGearDisplay();
+  }
+
+  updateRideGearDisplay() {
+    const num = document.getElementById("rideGearNum");
+    const label = document.getElementById("rideGearLabel");
+    if (num) num.textContent = String(this.gear);
+    if (label) label.textContent = t(`hud.gear.${this.gear}`);
   }
 
   // ============ MOTION DETECTION LOOP ============

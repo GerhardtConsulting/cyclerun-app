@@ -1575,21 +1575,107 @@ body {
     font-variant-numeric: tabular-nums;
 }
 
-.hud-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(249, 115, 22, 0.15);
+/* Ride logo overlay — top left */
+.ride-logo {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.5rem;
+    z-index: 15;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    pointer-events: none;
 }
 
-.strength-control {
+.ride-logo:hover {
+    opacity: 1;
+}
+
+/* Control buttons — top right */
+.ride-controls {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    z-index: 15;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Gear shift — right side, vertically centered */
+.gear-shift {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.gear-shift-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) border-box;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-secondary);
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.gear-shift-btn:hover {
+    color: var(--text-primary);
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)) padding-box,
+        var(--glow-border) border-box;
+    box-shadow: 0 0 16px rgba(249, 115, 22, 0.15);
+}
+
+.gear-shift-btn:active {
+    transform: scale(0.92);
+}
+
+.gear-shift-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-lg);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    min-width: 52px;
+}
+
+.gear-shift-num {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gear-shift-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
 }
 
 .strength-slider {
@@ -1639,35 +1725,34 @@ body {
     text-align: center;
 }
 
-.control-buttons {
-    display: flex;
-    gap: 0.75rem;
-}
-
 .btn-control {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid transparent;
-    background: 
-        linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)) padding-box,
-        linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)) border-box;
-    color: var(--text-primary);
-    font-size: 1.25rem;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) border-box;
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .btn-control:hover {
-    background: 
-        linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)) padding-box,
+    color: var(--text-primary);
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)) padding-box,
         var(--glow-border) border-box;
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.2);
-    transform: scale(1.05);
+    box-shadow: 0 0 16px rgba(249, 115, 22, 0.15);
+}
+
+.btn-control:active {
+    transform: scale(0.92);
 }
 
 .webcam-minimap {

@@ -109,6 +109,10 @@ const translations: Record<Locale, Record<string, string>> = {
     "hud.distance": "Distance",
     "hud.time": "Time",
     "hud.strength": "Strength",
+    "hud.gear": "Gear",
+    "hud.gear.1": "Light",
+    "hud.gear.2": "Medium",
+    "hud.gear.3": "Heavy",
 
     // Video Modal
     "video.title": "Choose your route",
@@ -265,6 +269,10 @@ const translations: Record<Locale, Record<string, string>> = {
     "hud.distance": "Distanz",
     "hud.time": "Zeit",
     "hud.strength": "Stärke",
+    "hud.gear": "Gang",
+    "hud.gear.1": "Leicht",
+    "hud.gear.2": "Mittel",
+    "hud.gear.3": "Schwer",
 
     // Video Modal
     "video.title": "Strecke auswählen",
