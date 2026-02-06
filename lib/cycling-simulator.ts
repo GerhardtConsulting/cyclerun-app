@@ -157,14 +157,23 @@ export class CyclingSimulator {
     // Wizard navigation — both back buttons
     document.getElementById("prevStep")?.addEventListener("click", () => this.prevStep());
     document.getElementById("wizardBack")?.addEventListener("click", () => this.prevStep());
-    document.getElementById("step1Next")?.addEventListener("click", () => this.showStep(2));
+    document.getElementById("step1Next")?.addEventListener("click", () => {
+      // Read rider data from optional body inputs
+      this.riderWeight = parseFloat((document.getElementById("riderWeight") as HTMLInputElement)?.value) || 75;
+      this.riderHeight = parseFloat((document.getElementById("riderHeight") as HTMLInputElement)?.value) || 175;
+      this.bikeWeight = parseFloat((document.getElementById("bikeWeight") as HTMLInputElement)?.value) || 10;
+      console.log(`Rider: ${this.riderWeight}kg, ${this.riderHeight}cm, Bike: ${this.bikeWeight}kg`);
+      this.showStep(2);
+    });
     document.getElementById("step3Next")?.addEventListener("click", () => this.showStep(4));
 
     // Registration form
     document.getElementById("registerForm")?.addEventListener("submit", (e) => this.handleRegistration(e));
 
-    // Step 1: Camera
+    // Camera permission overlay
     document.getElementById("requestCamera")?.addEventListener("click", () => this.requestCamera());
+    document.getElementById("camPermDeny")?.addEventListener("click", () => this.denyCameraPermission());
+    document.getElementById("camSelect")?.addEventListener("change", (e) => this.switchCamera((e.target as HTMLSelectElement).value));
 
     // Step 2: Setup type - auto advance on selection
     document.querySelectorAll(".setup-option, .position-card").forEach((btn) => {
@@ -219,16 +228,21 @@ export class CyclingSimulator {
 
   startSport(sport: string) {
     this.selectedSport = sport;
-    this.wizardStep = 1;
+    this.wizardStep = 0;
     this.showScreen("setup");
-    this.showStep(1);
+    // Show camera permission overlay first
+    document.getElementById("cameraPermOverlay")?.classList.add("active");
+    document.querySelectorAll(".wizard-step").forEach((s) => s.classList.remove("active"));
   }
 
   startWizard() {
     this.selectedSport = "cycling";
-    this.wizardStep = 1;
+    this.wizardStep = 0;
     this.showScreen("setup");
-    this.showStep(1);
+    // Show camera permission overlay first
+    document.getElementById("cameraPermOverlay")?.classList.add("active");
+    // Hide all wizard steps until permission is handled
+    document.querySelectorAll(".wizard-step").forEach((s) => s.classList.remove("active"));
   }
 
   showStep(step: number) {
@@ -271,48 +285,113 @@ export class CyclingSimulator {
     }
   }
 
-  // ============ STEP 1: CAMERA ============
+  // ============ CAMERA PERMISSION ============
 
   async requestCamera() {
-    const status = document.getElementById("cameraStatus");
+    const status = document.getElementById("camPermStatus");
     if (status) {
       status.textContent = t('sim.camera.activating');
-      status.className = "status-message info";
+      status.className = "cam-perm-status info";
     }
-
-    // Read rider data
-    this.riderWeight = parseFloat((document.getElementById("riderWeight") as HTMLInputElement)?.value) || 75;
-    this.riderHeight = parseFloat((document.getElementById("riderHeight") as HTMLInputElement)?.value) || 175;
-    this.bikeWeight = parseFloat((document.getElementById("bikeWeight") as HTMLInputElement)?.value) || 10;
-
-    console.log(`Rider: ${this.riderWeight}kg, ${this.riderHeight}cm, Bike: ${this.bikeWeight}kg`);
 
     try {
       this.webcamStream = await navigator.mediaDevices.getUserMedia({
         video: { width: { ideal: 640 }, height: { ideal: 480 } },
       });
+
+      // Show preview in permission overlay
+      const permPreview = document.getElementById("camPermPreview");
+      const permVideo = document.getElementById("step1Video") as HTMLVideoElement;
+      if (permPreview && permVideo) {
+        permVideo.srcObject = this.webcamStream;
+        permPreview.style.display = "block";
+      }
+
       if (status) {
         status.textContent = t('sim.camera.success');
-        status.className = "status-message success";
+        status.className = "cam-perm-status success";
       }
 
-      // Show camera preview
-      const preview = document.getElementById("cameraPreview");
-      const previewVideo = document.getElementById("step1Video") as HTMLVideoElement;
-      if (preview && previewVideo) {
-        previewVideo.srcObject = this.webcamStream;
-        preview.style.display = "block";
-      }
+      // Enumerate cameras and populate selector
+      await this.populateCameraSelector();
 
-      // Show the Weiter button
-      const nextBtn = document.getElementById("step1Next") as HTMLElement;
-      if (nextBtn) nextBtn.style.display = "flex";
+      // Change button to "Continue"
+      const allowBtn = document.getElementById("requestCamera");
+      if (allowBtn) {
+        allowBtn.textContent = t('wizard.next');
+        allowBtn.onclick = () => this.acceptCameraPermission();
+      }
+      // Hide deny button
+      const denyBtn = document.getElementById("camPermDeny");
+      if (denyBtn) denyBtn.style.display = "none";
+
     } catch (err: unknown) {
       if (status) {
-        status.textContent = t('sim.camera.denied') + (err instanceof Error ? err.message : String(err));
-        status.className = "status-message error";
+        status.textContent = t('cam.perm.denied');
+        status.className = "cam-perm-status error";
       }
     }
+  }
+
+  async populateCameraSelector() {
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const cameras = devices.filter(d => d.kind === "videoinput");
+      const select = document.getElementById("camSelect") as HTMLSelectElement;
+      const wrapper = document.getElementById("camSelectWrapper");
+
+      if (cameras.length > 1 && select && wrapper) {
+        select.innerHTML = "";
+        cameras.forEach((cam, i) => {
+          const opt = document.createElement("option");
+          opt.value = cam.deviceId;
+          opt.textContent = cam.label || `Camera ${i + 1}`;
+          select.appendChild(opt);
+        });
+        wrapper.style.display = "block";
+      }
+    } catch { /* ignore enumeration errors */ }
+  }
+
+  async switchCamera(deviceId: string) {
+    if (this.webcamStream) {
+      this.webcamStream.getTracks().forEach(t => t.stop());
+    }
+    try {
+      this.webcamStream = await navigator.mediaDevices.getUserMedia({
+        video: { deviceId: { exact: deviceId }, width: { ideal: 640 }, height: { ideal: 480 } },
+      });
+      const video = document.getElementById("step1Video") as HTMLVideoElement;
+      if (video) video.srcObject = this.webcamStream;
+    } catch (err) {
+      console.error("Camera switch error:", err);
+    }
+  }
+
+  acceptCameraPermission() {
+    // Hide the permission overlay and show Step 1
+    document.getElementById("cameraPermOverlay")?.classList.remove("active");
+
+    // Mirror the preview into Step 1
+    const preview = document.getElementById("cameraPreview");
+    const mirrorVideo = document.getElementById("step1VideoMirror") as HTMLVideoElement;
+    if (preview && mirrorVideo && this.webcamStream) {
+      mirrorVideo.srcObject = this.webcamStream;
+      preview.style.display = "block";
+    }
+
+    const stepStatus = document.getElementById("cameraStatus");
+    if (stepStatus) {
+      stepStatus.textContent = t('sim.camera.success');
+      stepStatus.className = "status-message success";
+    }
+
+    this.showStep(1);
+  }
+
+  denyCameraPermission() {
+    document.getElementById("cameraPermOverlay")?.classList.remove("active");
+    this.showStep(1);
   }
 
   // ============ STEP 2: SETUP TYPE ============

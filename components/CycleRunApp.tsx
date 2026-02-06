@@ -218,8 +218,48 @@ export default function CycleRunApp() {
               <div className="progress-fill" id="progressFill"></div>
             </div>
 
+            {/* Camera Permission Overlay (iPhone-style) */}
+            <div id="cameraPermOverlay" className="cam-perm-overlay active">
+              <div className="cam-perm-card">
+                <div className="cam-perm-icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" /><circle cx="12" cy="13" r="4" /></svg>
+                </div>
+                <h3>{t('cam.perm.title')}</h3>
+                <p className="cam-perm-desc">{t('cam.perm.desc')}</p>
+
+                <div id="camPermStatus" className="cam-perm-status"></div>
+
+                <div id="camSelectWrapper" className="cam-select-wrapper" style={{ display: "none" }}>
+                  <label className="cam-select-label">{t('cam.perm.select')}</label>
+                  <select id="camSelect" className="cam-select"></select>
+                </div>
+
+                <div className="cam-perm-preview" id="camPermPreview" style={{ display: "none" }}>
+                  <video id="step1Video" autoPlay muted playsInline></video>
+                </div>
+
+                <div className="cam-perm-actions">
+                  <button id="requestCamera" className="btn-primary btn-lg btn-full">
+                    {t('cam.perm.allow')}
+                  </button>
+                  <button id="camPermDeny" className="btn-ghost">{t('cam.perm.deny')}</button>
+                </div>
+
+                <div className="cam-perm-tip">
+                  <details>
+                    <summary>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
+                      {t('cam.perm.tip.title')}
+                    </summary>
+                    <p>{t('cam.perm.tip.iphone')}</p>
+                    <p>{t('cam.perm.tip.external')}</p>
+                  </details>
+                </div>
+              </div>
+            </div>
+
             {/* Step 1: Camera & Profile */}
-            <div className="wizard-step active" id="step1">
+            <div className="wizard-step" id="step1">
               <div className="step-header">
                 <span className="step-label">{t('step1.label')}</span>
                 <h2>{t('step1.title')}</h2>
@@ -237,44 +277,45 @@ export default function CycleRunApp() {
                       <p>{t('step1.camera.desc')}</p>
                     </div>
                   </div>
-                  <button id="requestCamera" className="btn-primary btn-full">
-                    <span>{t('step1.camera.btn')}</span>
-                  </button>
                   <div id="cameraStatus" className="form-status"></div>
                   <div id="cameraPreview" className="camera-preview" style={{ display: "none" }}>
-                    <video id="step1Video" autoPlay muted playsInline></video>
+                    <video id="step1VideoMirror" autoPlay muted playsInline></video>
                   </div>
                 </div>
 
-                <div className="form-card">
-                  <label className="form-label">{t('step1.weight')}</label>
-                  <div className="input-with-unit">
-                    <input type="number" id="riderWeight" defaultValue={75} min={40} max={150} step={1} />
-                    <span className="input-unit">kg</span>
+                <div className="form-card form-card-body-data">
+                  <div className="body-data-header">
+                    <h4>{t('step1.body.title')}</h4>
+                    <span className="badge-optional">{t('step1.body.optional')}</span>
                   </div>
-                  <span className="form-hint">{t('step1.weight.hint')}</span>
-                </div>
-
-                <div className="form-card">
-                  <label className="form-label">{t('step1.height')}</label>
-                  <div className="input-with-unit">
-                    <input type="number" id="riderHeight" defaultValue={175} min={140} max={220} step={1} />
-                    <span className="input-unit">cm</span>
+                  <p className="body-data-why">{t('step1.body.why')}</p>
+                  <div className="body-data-grid">
+                    <div className="body-input">
+                      <label className="form-label">{t('step1.weight')}</label>
+                      <div className="input-with-unit">
+                        <input type="number" id="riderWeight" defaultValue={75} min={40} max={150} step={1} />
+                        <span className="input-unit">kg</span>
+                      </div>
+                    </div>
+                    <div className="body-input">
+                      <label className="form-label">{t('step1.height')}</label>
+                      <div className="input-with-unit">
+                        <input type="number" id="riderHeight" defaultValue={175} min={140} max={220} step={1} />
+                        <span className="input-unit">cm</span>
+                      </div>
+                    </div>
+                    <div className="body-input">
+                      <label className="form-label">{t('step1.bike')}</label>
+                      <div className="input-with-unit">
+                        <input type="number" id="bikeWeight" defaultValue={10} min={5} max={25} step={0.5} />
+                        <span className="input-unit">kg</span>
+                      </div>
+                    </div>
                   </div>
-                  <span className="form-hint">{t('step1.height.hint')}</span>
-                </div>
-
-                <div className="form-card">
-                  <label className="form-label">{t('step1.bike')}</label>
-                  <div className="input-with-unit">
-                    <input type="number" id="bikeWeight" defaultValue={10} min={5} max={25} step={0.5} />
-                    <span className="input-unit">kg</span>
-                  </div>
-                  <span className="form-hint">{t('step1.bike.hint')}</span>
                 </div>
               </div>
 
-              <button id="step1Next" className="btn-primary btn-lg btn-full step-action" style={{ display: "none" }}>
+              <button id="step1Next" className="btn-primary btn-lg btn-full step-action">
                 {t('wizard.next')}
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>

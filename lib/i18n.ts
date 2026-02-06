@@ -49,6 +49,17 @@ const translations: Record<Locale, Record<string, string>> = {
     "wizard.home": "← Home",
     "wizard.next": "Next",
 
+    // Camera permission overlay
+    "cam.perm.title": "CycleRun would like to access your camera",
+    "cam.perm.desc": "Your webcam detects your leg movement in real-time. All processing happens locally in your browser — no images are ever transmitted.",
+    "cam.perm.allow": "Allow Camera Access",
+    "cam.perm.deny": "Not Now",
+    "cam.perm.select": "Select Camera",
+    "cam.perm.tip.title": "Using an external camera?",
+    "cam.perm.tip.iphone": "On Mac, you can use your iPhone as a webcam via Continuity Camera — just hold your iPhone near your Mac and it appears as a camera option.",
+    "cam.perm.tip.external": "USB webcams with wide-angle lenses (e.g. Logitech C920) provide the best tracking results.",
+    "cam.perm.denied": "Camera access was denied. Please allow camera access in your browser settings to continue.",
+
     // Step 1
     "step1.label": "Step 1",
     "step1.title": "Let's get started",
@@ -62,6 +73,9 @@ const translations: Record<Locale, Record<string, string>> = {
     "step1.height.hint": "For air resistance",
     "step1.bike": "Bike",
     "step1.bike.hint": "Total mass",
+    "step1.body.title": "Body Data",
+    "step1.body.optional": "Optional",
+    "step1.body.why": "For realistic speed simulation and the best experience. Default values work fine too.",
 
     // Step 2
     "step2.label": "Step 2",
@@ -230,28 +244,42 @@ const translations: Record<Locale, Record<string, string>> = {
     "faq.a6": "Ja! Egal ob dein Ergometer 5 oder 25 Jahre alt ist — solange sich deine Beine bewegen, erkennt CycleRun die Bewegung. Du brauchst keinen Smart Trainer und keine Sensoren.",
 
     // Wizard
-    "wizard.back": "← Zurück",
-    "wizard.home": "← Startseite",
+    "wizard.back": "\u2190 Zur\u00fcck",
+    "wizard.home": "\u2190 Startseite",
     "wizard.next": "Weiter",
+
+    // Camera permission overlay
+    "cam.perm.title": "CycleRun m\u00f6chte auf deine Kamera zugreifen",
+    "cam.perm.desc": "Deine Webcam erkennt deine Beinbewegung in Echtzeit. Alle Daten werden lokal in deinem Browser verarbeitet \u2014 es werden keine Bilder \u00fcbertragen.",
+    "cam.perm.allow": "Kamera-Zugriff erlauben",
+    "cam.perm.deny": "Nicht jetzt",
+    "cam.perm.select": "Kamera ausw\u00e4hlen",
+    "cam.perm.tip.title": "Externe Kamera verwenden?",
+    "cam.perm.tip.iphone": "Auf dem Mac kannst du dein iPhone als Webcam verwenden (Continuity Camera) \u2014 halte dein iPhone einfach in die N\u00e4he deines Macs.",
+    "cam.perm.tip.external": "USB-Webcams mit Weitwinkel (z.B. Logitech C920) liefern die besten Tracking-Ergebnisse.",
+    "cam.perm.denied": "Kamera-Zugriff wurde verweigert. Bitte erlaube den Zugriff in deinen Browser-Einstellungen.",
 
     // Step 1
     "step1.label": "Schritt 1",
     "step1.title": "Lass uns starten",
-    "step1.desc": "Wir brauchen Zugriff auf deine Kamera und ein paar Infos für die Physik-Berechnung.",
+    "step1.desc": "Wir brauchen Zugriff auf deine Kamera und ein paar Infos f\u00fcr die Physik-Berechnung.",
     "step1.camera.title": "Kamera-Zugriff",
-    "step1.camera.desc": "Für die Bewegungserkennung",
+    "step1.camera.desc": "F\u00fcr die Bewegungserkennung",
     "step1.camera.btn": "Kamera aktivieren",
     "step1.weight": "Gewicht",
-    "step1.weight.hint": "Für Trägheitsberechnung",
-    "step1.height": "Größe",
-    "step1.height.hint": "Für Luftwiderstand",
+    "step1.weight.hint": "F\u00fcr Tr\u00e4gheitsberechnung",
+    "step1.height": "Gr\u00f6\u00dfe",
+    "step1.height.hint": "F\u00fcr Luftwiderstand",
     "step1.bike": "Fahrrad",
     "step1.bike.hint": "Gesamtmasse",
+    "step1.body.title": "K\u00f6rperdaten",
+    "step1.body.optional": "Optional",
+    "step1.body.why": "F\u00fcr eine realistische Geschwindigkeitssimulation und das beste Erlebnis. Standardwerte funktionieren auch.",
 
     // Step 2
     "step2.label": "Schritt 2",
     "step2.title": "Kamera-Position",
-    "step2.desc": "Wähle die Perspektive deiner Webcam.",
+    "step2.desc": "W\u00e4hle die Perspektive deiner Webcam.",
     "step2.side": "SEITE",
     "step2.side.tag": "Empfohlen",
     "step2.front": "FRONTAL",
