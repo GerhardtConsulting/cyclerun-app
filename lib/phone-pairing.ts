@@ -24,10 +24,28 @@ function logErr(...args: unknown[]) {
   console.error(LOG_PREFIX, ...args);
 }
 
+// Singleton client — avoids multiple WebSocket connections and ensures
+// the API key is passed correctly for Realtime auth
+let _supabase: ReturnType<typeof createClient> | null = null;
+
 function getSupabase() {
+  if (_supabase) return _supabase;
   try {
-    return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  } catch {
+    _supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      realtime: {
+        params: {
+          apikey: SUPABASE_ANON_KEY,
+        },
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+      },
+    });
+    log("Supabase client created, URL:", SUPABASE_URL);
+    return _supabase;
+  } catch (err) {
+    logErr("Failed to create Supabase client:", err);
     return null;
   }
 }
