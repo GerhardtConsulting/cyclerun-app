@@ -11,6 +11,7 @@ export default function PairTestPage() {
   const [streamActive, setStreamActive] = useState(false);
   const [videoStats, setVideoStats] = useState<string>("");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const receiverRef = useRef<PairingReceiver | null>(null);
   const statsIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -66,11 +67,8 @@ export default function PairTestPage() {
 
     receiver.onRemoteStream = (stream) => {
       addLog(`Remote stream received! Tracks: ${stream.getTracks().length}`);
+      streamRef.current = stream;
       setStreamActive(true);
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.play().catch((e) => addLog(`Video play error: ${e.message}`));
-      }
 
       // Stats polling
       statsIntervalRef.current = setInterval(() => {
@@ -270,7 +268,13 @@ export default function PairTestPage() {
                 )}
               </div>
               <video
-                ref={videoRef}
+                ref={(el) => {
+                  videoRef.current = el;
+                  if (el && streamRef.current && el.srcObject !== streamRef.current) {
+                    el.srcObject = streamRef.current;
+                    el.play().catch(() => {});
+                  }
+                }}
                 autoPlay
                 muted
                 playsInline
