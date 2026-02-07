@@ -39,6 +39,17 @@ export default function CycleRunApp() {
     setLocaleState(detected);
     document.documentElement.lang = detected;
 
+    // TV device auto-detection: redirect to /tv if Smart TV detected
+    const ua = navigator.userAgent.toLowerCase();
+    const tvKeywords = ["smart-tv", "smarttv", "netcast", "webos", "tizen", "vidaa", "hbbtv", "viera", "bravia", "roku", "firetv", "fire tv", "appletv", "chromecast", "androidtv", "android tv"];
+    const isTV = tvKeywords.some((kw) => ua.includes(kw));
+    // Heuristic: very large screen + no touch = likely TV
+    const isBigNoTouch = typeof window !== "undefined" && window.screen.width >= 1800 && !("ontouchstart" in window) && navigator.maxTouchPoints === 0 && window.screen.height >= 900;
+    if ((isTV || (isBigNoTouch && !ua.includes("macintosh") && !ua.includes("windows"))) && !window.location.search.includes("tv=")) {
+      window.location.href = "/tv";
+      return;
+    }
+
     const unsub = onLocaleChange(() => {
       setLocaleState(getLocale());
     });

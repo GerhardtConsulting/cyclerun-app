@@ -1,7 +1,31 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import Link from "next/link";
 import { PairingReceiver, pollState, type TVState } from "@/lib/phone-pairing";
+import { initLocale, setLocale, getLocale, onLocaleChange, t, type Locale } from "@/lib/i18n";
+
+function FlagEN() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 60 42" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="42" fill="#012169" />
+      <path d="M0 0L60 42M60 0L0 42" stroke="#fff" strokeWidth="7" />
+      <path d="M0 0L60 42M60 0L0 42" stroke="#C8102E" strokeWidth="4" />
+      <path d="M30 0v42M0 21h60" stroke="#fff" strokeWidth="10" />
+      <path d="M30 0v42M0 21h60" stroke="#C8102E" strokeWidth="6" />
+    </svg>
+  );
+}
+
+function FlagDE() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 60 42" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="14" fill="#000" />
+      <rect y="14" width="60" height="14" fill="#D00" />
+      <rect y="28" width="60" height="14" fill="#FFCE00" />
+    </svg>
+  );
+}
 
 const WIZARD_LABELS: Record<number, string> = {
   0: "Camera Setup",
@@ -18,6 +42,7 @@ function formatTime(seconds: number): string {
 }
 
 export default function TVPage() {
+  const [locale, setLocaleState] = useState<Locale>("en");
   const [pairCode, setPairCode] = useState("");
   const [phase, setPhase] = useState<"qr" | "connecting" | "wizard" | "riding" | "finished">("qr");
   const [tvState, setTvState] = useState<TVState | null>(null);
@@ -26,6 +51,11 @@ export default function TVPage() {
   const streamRef = useRef<MediaStream | null>(null);
   const receiverRef = useRef<PairingReceiver | null>(null);
   const statePollerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const switchLang = useCallback((lang: Locale) => {
+    setLocale(lang);
+    setLocaleState(lang);
+  }, []);
 
   const startReceiver = useCallback(() => {
     const code = String(Math.floor(1000 + Math.random() * 9000));
@@ -40,7 +70,6 @@ export default function TVPage() {
         setPhase("connecting");
       } else if (s === "connected") {
         setPhase("wizard");
-        // Start polling state
         if (statePollerRef.current) clearInterval(statePollerRef.current);
         statePollerRef.current = setInterval(async () => {
           const st = await pollState(code);
@@ -63,8 +92,23 @@ export default function TVPage() {
   }, []);
 
   useEffect(() => {
+    const detected = initLocale();
+    setLocaleState(detected);
+
     startReceiver();
+
+    // Cookie consent
+    if (!localStorage.getItem("cyclerun_cookie_consent")) {
+      document.getElementById("cookieConsent")?.classList.add("active");
+    }
+    document.getElementById("cookieAccept")?.addEventListener("click", () => {
+      localStorage.setItem("cyclerun_cookie_consent", "true");
+      document.getElementById("cookieConsent")?.classList.remove("active");
+    });
+
+    const unsub = onLocaleChange(() => setLocaleState(getLocale()));
     return () => {
+      unsub();
       receiverRef.current?.destroy();
       if (statePollerRef.current) clearInterval(statePollerRef.current);
     };
@@ -78,234 +122,252 @@ export default function TVPage() {
     import("qrcode").then((QRCode) => {
       const canvas = document.createElement("canvas");
       QRCode.toCanvas(canvas, pairUrl, {
-        width: 320,
+        width: 280,
         margin: 2,
-        color: { dark: "#ffffff", light: "#00000000" },
+        color: { dark: "#ffffffee", light: "#00000000" },
       }).then(() => {
         const container = document.getElementById("tv-qr");
         if (container) {
           container.innerHTML = "";
           container.appendChild(canvas);
         }
-      });
+      }).catch(() => {});
     });
   }, [pairCode]);
 
-  // ---- QR Screen ----
-  if (phase === "qr") {
-    return (
-      <div style={{
-        width: "100vw", height: "100vh", background: "#0a0a0a",
-        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-        fontFamily: "'Inter', system-ui, sans-serif", color: "#fff",
-      }}>
-        <div style={{ fontSize: "1.2rem", fontWeight: 600, letterSpacing: 2, color: "#f59e0b", marginBottom: "1rem", textTransform: "uppercase" }}>
-          CycleRun
-        </div>
-        <h1 style={{ fontSize: "2.5rem", fontWeight: 800, margin: "0 0 0.5rem", textAlign: "center" }}>
-          TV Mode
-        </h1>
-        <p style={{ color: "#888", fontSize: "1.1rem", marginBottom: "2rem" }}>
-          Scan with your phone to connect
-        </p>
-        <div id="tv-qr" style={{
-          background: "rgba(255,255,255,0.05)", borderRadius: 20, padding: "1.5rem",
-          border: "1px solid rgba(255,255,255,0.1)", marginBottom: "1.5rem",
-        }} />
-        <div style={{
-          fontSize: "3rem", fontWeight: 900, letterSpacing: "0.5em",
-          fontFamily: "monospace", color: "#f59e0b", marginBottom: "1rem",
-        }}>
-          {pairCode.split("").join(" ")}
-        </div>
-        <p style={{ color: "#666", fontSize: "0.9rem" }}>
-          Or visit <strong style={{ color: "#f59e0b" }}>cyclerun.app</strong> and enter this code
-        </p>
-      </div>
-    );
-  }
+  return (
+    <>
+      {/* ============ QR / SPLASH SCREEN ============ */}
+      {phase === "qr" && (
+        <div className="screen active">
+          <div className="splash">
+            <div className="splash-glow"></div>
 
-  // ---- Connecting Screen ----
-  if (phase === "connecting") {
-    return (
-      <div style={{
-        width: "100vw", height: "100vh", background: "#0a0a0a",
-        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-        fontFamily: "'Inter', system-ui, sans-serif", color: "#fff",
-      }}>
-        <div style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "1rem" }}>
-          Phone detected!
-        </div>
-        <p style={{ color: "#888", fontSize: "1.2rem" }}>Establishing connection...</p>
-        <div style={{
-          width: 60, height: 60, border: "4px solid #333", borderTopColor: "#f59e0b",
-          borderRadius: "50%", marginTop: "2rem",
-          animation: "spin 1s linear infinite",
-        }} />
-        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
-      </div>
-    );
-  }
+            <div className="lang-switcher splash-lang">
+              <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} onClick={() => switchLang('en')} title="English"><FlagEN /></button>
+              <button className={`lang-btn${locale === 'de' ? ' active' : ''}`} onClick={() => switchLang('de')} title="Deutsch"><FlagDE /></button>
+            </div>
 
-  // ---- Wizard Screen ----
-  if (phase === "wizard") {
-    const step = tvState?.wizardStep ?? 0;
-    const stepLabel = WIZARD_LABELS[step] || `Step ${step}`;
-    return (
-      <div style={{
-        width: "100vw", height: "100vh", background: "#0a0a0a",
-        display: "flex", flexDirection: "column",
-        fontFamily: "'Inter', system-ui, sans-serif", color: "#fff",
-      }}>
-        {/* Header */}
-        <div style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "1.5rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.08)",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span style={{ fontSize: "1rem", fontWeight: 600, color: "#f59e0b", letterSpacing: 2, textTransform: "uppercase" }}>CycleRun</span>
-            <span style={{ fontSize: "0.85rem", background: "#22c55e22", color: "#22c55e", padding: "0.25rem 0.75rem", borderRadius: 20, fontWeight: 600 }}>
-              Phone Connected
-            </span>
-          </div>
-          <div style={{ fontSize: "1rem", color: "#888" }}>
-            Setup: <strong style={{ color: "#fff" }}>{stepLabel}</strong>
+            <div className="splash-logo">
+              <span className="splash-logo-text">cyclerun<span className="splash-logo-app">.app</span></span>
+            </div>
+
+            <p className="splash-tagline">TV Mode — {t('pair.desc')}</p>
+
+            <div className="pair-qr" id="tv-qr" style={{ margin: "1.5rem auto", minHeight: 280, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div className="loading-spinner" style={{ width: 40, height: 40 }}></div>
+            </div>
+
+            <div className="pair-code-display" style={{ fontSize: "2.5rem", letterSpacing: "0.5em", margin: "0.5rem 0 1.5rem" }}>
+              {pairCode ? pairCode.split("").join(" ") : "----"}
+            </div>
+
+            <p className="splash-tagline" style={{ fontSize: "0.9rem", opacity: 0.6 }}>
+              {t('pair.code.label')} <strong>cyclerun.app</strong>
+            </p>
+
+            <div className="splash-trust">
+              <span>{t('splash.trust.local')}</span>
+              <span className="splash-trust-dot"></span>
+              <span>{t('splash.trust.free')}</span>
+              <span className="splash-trust-dot"></span>
+              <span>DSGVO-konform</span>
+            </div>
           </div>
         </div>
+      )}
 
-        {/* Progress bar */}
-        <div style={{ height: 4, background: "#1a1a1a" }}>
-          <div style={{ height: "100%", background: "#f59e0b", width: `${Math.max(step, 1) * 25}%`, transition: "width 0.3s" }} />
+      {/* ============ CONNECTING SCREEN ============ */}
+      {phase === "connecting" && (
+        <div className="screen active">
+          <div className="splash">
+            <div className="splash-glow"></div>
+            <div className="splash-logo">
+              <span className="splash-logo-text">cyclerun<span className="splash-logo-app">.app</span></span>
+            </div>
+            <p className="splash-tagline" style={{ color: "#22c55e" }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ verticalAlign: "middle", marginRight: 8 }}>
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
+              </svg>
+              Phone detected! Establishing connection...
+            </p>
+            <div className="loading-spinner" style={{ margin: "2rem auto" }}></div>
+          </div>
         </div>
+      )}
 
-        {/* Main content — camera feed */}
-        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
-          {streamActive ? (
-            <div style={{ position: "relative", maxWidth: "80%", maxHeight: "80%" }}>
+      {/* ============ WIZARD SCREEN ============ */}
+      {phase === "wizard" && (
+        <div className="screen active">
+          <header className="app-header">
+            <div className="header-logo">cyclerun<span className="header-logo-app">.app</span></div>
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <span className="cam-perm-status success" style={{ margin: 0, padding: "0.25rem 0.75rem" }}>Phone Connected</span>
+              <div className="lang-switcher">
+                <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} onClick={() => switchLang('en')} title="English"><FlagEN /></button>
+                <button className={`lang-btn${locale === 'de' ? ' active' : ''}`} onClick={() => switchLang('de')} title="Deutsch"><FlagDE /></button>
+              </div>
+            </div>
+          </header>
+
+          <div className="wizard-wrapper">
+            <nav className="wizard-nav">
+              <div className="step-indicator">
+                {[1, 2, 3, 4].map((s) => (
+                  <div key={s} className={`step-dot${(tvState?.wizardStep ?? 0) >= s ? " active" : ""}`} />
+                ))}
+              </div>
+              <div className="step-counter">{WIZARD_LABELS[tvState?.wizardStep ?? 0] || "Setup"}</div>
+            </nav>
+
+            <div className="wizard-content">
+              <div className="progress-bar">
+                <div className="progress-fill" style={{ width: `${Math.max(tvState?.wizardStep ?? 0, 1) * 25}%` }}></div>
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flex: 1, padding: "2rem" }}>
+                {streamActive ? (
+                  <div style={{ position: "relative", width: "100%", maxWidth: 800 }}>
+                    <video
+                      ref={(el) => {
+                        videoRef.current = el;
+                        if (el && streamRef.current && el.srcObject !== streamRef.current) {
+                          el.srcObject = streamRef.current;
+                          el.play().catch(() => {});
+                        }
+                      }}
+                      autoPlay muted playsInline
+                      style={{ width: "100%", borderRadius: 16, background: "#000", objectFit: "contain" }}
+                    />
+                  </div>
+                ) : (
+                  <div style={{ textAlign: "center" }}>
+                    <p className="splash-tagline">Waiting for camera stream...</p>
+                    <div className="loading-spinner" style={{ margin: "1rem auto" }}></div>
+                  </div>
+                )}
+              </div>
+
+              <p style={{ textAlign: "center", padding: "0.75rem", opacity: 0.5, fontSize: "0.85rem" }}>
+                Complete the setup on your phone. This screen mirrors your progress.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============ RIDING SCREEN ============ */}
+      {(phase === "riding" || phase === "finished") && (
+        <div className="screen active">
+          <div className="ride-logo">
+            cyclerun<span className="header-logo-app">.app</span>
+          </div>
+
+          <div id="hud" className="hud" style={{ opacity: 1 }}>
+            <div className="hud-top">
+              <div className="speed-display">
+                <div className="speed-value">{(tvState?.speed ?? 0).toFixed(1)}</div>
+                <div className="speed-unit">km/h</div>
+              </div>
+              <div className="stats-row">
+                <div className="stat-item">
+                  <div className="stat-label">RPM</div>
+                  <div className="stat-value">{(tvState?.rpm ?? 0).toFixed(0)}</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-label">{t('hud.distance')}</div>
+                  <div className="stat-value">{(tvState?.distance ?? 0).toFixed(2)}</div>
+                </div>
+                <div className="stat-item">
+                  <div className="stat-label">{t('hud.time')}</div>
+                  <div className="stat-value">{formatTime(tvState?.rideTime ?? 0)}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="gear-shift" style={{ opacity: 1 }}>
+            <div className="gear-shift-display">
+              <span className="gear-shift-num">{tvState?.gear ?? 2}</span>
+              <span className="gear-shift-label">{t('hud.gear')}</span>
+            </div>
+          </div>
+
+          {streamActive && (
+            <div className="webcam-minimap">
               <video
                 ref={(el) => {
-                  videoRef.current = el;
                   if (el && streamRef.current && el.srcObject !== streamRef.current) {
                     el.srcObject = streamRef.current;
                     el.play().catch(() => {});
                   }
                 }}
                 autoPlay muted playsInline
-                style={{ width: "100%", maxHeight: "70vh", borderRadius: 16, background: "#000", objectFit: "contain" }}
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
               />
-              <div style={{
-                position: "absolute", bottom: 16, left: 16,
-                background: "rgba(0,0,0,0.7)", padding: "0.5rem 1rem", borderRadius: 8,
-                fontSize: "0.9rem", color: "#ccc",
-              }}>
-                Phone Camera — {stepLabel}
-              </div>
             </div>
-          ) : (
-            <div style={{ textAlign: "center", color: "#666" }}>
-              <p style={{ fontSize: "1.5rem" }}>Waiting for camera stream...</p>
+          )}
+
+          {phase === "finished" && (
+            <div className="ride-summary-overlay active">
+              <div className="ride-summary-card">
+                <div className="summary-header">
+                  <div className="summary-logo">cyclerun<span className="header-logo-app">.app</span></div>
+                  <h2>{t('ride.summary.title')}</h2>
+                  <p className="summary-subtitle">{t('ride.summary.great')}</p>
+                </div>
+                <div className="summary-main-stat">
+                  <span className="summary-main-value">{(tvState?.distance ?? 0).toFixed(2)}</span>
+                  <span className="summary-main-unit">km</span>
+                </div>
+                <div className="summary-stats-grid">
+                  <div className="summary-stat">
+                    <span className="summary-stat-label">{t('ride.summary.duration')}</span>
+                    <span className="summary-stat-value">{formatTime(tvState?.rideTime ?? 0)}</span>
+                  </div>
+                  <div className="summary-stat">
+                    <span className="summary-stat-label">{t('ride.summary.max.speed')}</span>
+                    <span className="summary-stat-value">{(tvState?.maxSpeed ?? 0).toFixed(1)} km/h</span>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>
+      )}
 
-        {/* Footer hint */}
-        <div style={{
-          padding: "1rem 2rem", borderTop: "1px solid rgba(255,255,255,0.08)",
-          textAlign: "center", color: "#666", fontSize: "0.9rem",
-        }}>
-          Complete the setup on your phone. This screen will mirror your progress.
+      {/* ============ COOKIE CONSENT (DSGVO) ============ */}
+      <div id="cookieConsent" className="cookie-banner">
+        <div className="cookie-content">
+          <div className="cookie-text">
+            <strong>{t('cookie.title')}</strong>
+            <p>{t('cookie.text')} <Link href="/datenschutz">{t('cookie.learn')}</Link></p>
+          </div>
+          <div className="cookie-actions">
+            <button id="cookieAccept" className="btn-primary btn-sm">{t('cookie.accept')}</button>
+          </div>
         </div>
       </div>
-    );
-  }
 
-  // ---- Riding Screen ----
-  if (phase === "riding" || phase === "finished") {
-    const speed = tvState?.speed ?? 0;
-    const rpm = tvState?.rpm ?? 0;
-    const distance = tvState?.distance ?? 0;
-    const rideTime = tvState?.rideTime ?? 0;
-    const gear = tvState?.gear ?? 2;
-    const maxSpeed = tvState?.maxSpeed ?? 0;
-
-    return (
-      <div style={{
-        width: "100vw", height: "100vh", background: "#0a0a0a",
-        display: "flex", flexDirection: "column",
-        fontFamily: "'Inter', system-ui, sans-serif", color: "#fff",
-      }}>
-        {/* Top bar */}
-        <div style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "1rem 2rem", borderBottom: "1px solid rgba(255,255,255,0.06)",
-        }}>
-          <span style={{ fontSize: "1rem", fontWeight: 600, color: "#f59e0b", letterSpacing: 2, textTransform: "uppercase" }}>CycleRun</span>
-          <span style={{ fontSize: "1rem", color: phase === "finished" ? "#f59e0b" : "#22c55e", fontWeight: 600 }}>
-            {phase === "finished" ? "Ride Complete!" : formatTime(rideTime)}
-          </span>
-        </div>
-
-        {/* Main stats grid */}
-        <div style={{ flex: 1, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1px", background: "rgba(255,255,255,0.04)" }}>
-          {/* Speed — big central stat */}
-          <div style={{
-            gridColumn: "1 / 3", gridRow: "1 / 2",
-            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-            background: "#0a0a0a", padding: "2rem",
-          }}>
-            <div style={{ fontSize: "0.9rem", color: "#888", textTransform: "uppercase", letterSpacing: 2, marginBottom: "0.5rem" }}>Speed</div>
-            <div style={{ fontSize: "8rem", fontWeight: 900, lineHeight: 1, fontFamily: "monospace", color: speed > 0 ? "#fff" : "#333" }}>
-              {speed.toFixed(1)}
-            </div>
-            <div style={{ fontSize: "1.2rem", color: "#666", marginTop: "0.5rem" }}>km/h</div>
+      {/* ============ FOOTER (DSGVO / Impressum) ============ */}
+      <footer className="site-footer site-footer-extended" id="siteFooter">
+        <div className="footer-grid">
+          <div className="footer-col">
+            <strong className="footer-col-title">CycleRun</strong>
+            <Link href="/">Home</Link>
+            <Link href="/tv">TV Mode</Link>
+            <Link href="/roadmap">Roadmap</Link>
           </div>
-
-          {/* Camera minimap */}
-          <div style={{
-            gridColumn: "3 / 4", gridRow: "1 / 2",
-            background: "#0a0a0a", display: "flex", alignItems: "center", justifyContent: "center",
-            padding: "1rem",
-          }}>
-            {streamActive ? (
-              <video
-                ref={(el) => {
-                  if (el && streamRef.current && el.srcObject !== streamRef.current) {
-                    el.srcObject = streamRef.current;
-                    el.play().catch(() => {});
-                  }
-                }}
-                autoPlay muted playsInline
-                style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: 12, background: "#000" }}
-              />
-            ) : (
-              <div style={{ color: "#444", textAlign: "center" }}>No camera</div>
-            )}
+          <div className="footer-col">
+            <strong className="footer-col-title">{locale === "de" ? "Rechtliches" : "Legal"}</strong>
+            <Link href="/datenschutz">{t('footer.privacy')}</Link>
+            <Link href="/impressum">{t('footer.legal')}</Link>
           </div>
-
-          {/* Bottom stats row */}
-          <StatBox label="RPM" value={rpm.toFixed(0)} color={rpm > 0 ? "#3b82f6" : "#333"} />
-          <StatBox label="Distance" value={distance.toFixed(2)} unit="km" color="#22c55e" />
-          <StatBox label="Gear" value={`${gear}`} sub={`Max: ${maxSpeed.toFixed(1)} km/h`} color="#f59e0b" />
         </div>
-      </div>
-    );
-  }
-
-  return null;
-}
-
-function StatBox({ label, value, unit, sub, color }: {
-  label: string; value: string; unit?: string; sub?: string; color: string;
-}) {
-  return (
-    <div style={{
-      background: "#0a0a0a", display: "flex", flexDirection: "column",
-      alignItems: "center", justifyContent: "center", padding: "1.5rem",
-    }}>
-      <div style={{ fontSize: "0.8rem", color: "#888", textTransform: "uppercase", letterSpacing: 2, marginBottom: "0.5rem" }}>{label}</div>
-      <div style={{ fontSize: "3.5rem", fontWeight: 800, fontFamily: "monospace", color, lineHeight: 1 }}>{value}</div>
-      {unit && <div style={{ fontSize: "1rem", color: "#666", marginTop: "0.25rem" }}>{unit}</div>}
-      {sub && <div style={{ fontSize: "0.8rem", color: "#555", marginTop: "0.5rem" }}>{sub}</div>}
-    </div>
+        <div className="footer-bottom">
+          <span className="footer-copy">{t('footer.copy')}</span>
+        </div>
+      </footer>
+    </>
   );
 }
