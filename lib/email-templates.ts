@@ -42,21 +42,21 @@ function wrapper(
 </head>
 <body style="margin:0;padding:0;background:#050505;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#050505;">
-    <tr><td align="center" style="padding:2rem 1rem;">
+    <tr><td align="center" style="padding:32px 16px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;">
 
         <!-- Gradient accent bar -->
         <tr><td style="height:4px;background:linear-gradient(90deg,#fbbf24,#f97316,#dc2626,#f97316,#fbbf24);border-radius:20px 20px 0 0;"></td></tr>
 
         <!-- Main card -->
-        <tr><td style="background:#111111;border-left:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);padding:2.5rem 2rem 2rem;">
+        <tr><td style="background:#111111;border-left:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);padding:40px 32px 32px;">
 
           <!-- Logo -->
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:2rem;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
             <tr>
-              <td style="font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;color:#fafaf9;">cyclerun</td>
-              <td style="font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;color:#f97316;">.</td>
-              <td style="font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:-0.03em;color:#f97316;">app</td>
+              <td style="font-family:-apple-system,BlinkMacSystemFont,Inter,sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.03em;color:#fafaf9;">cyclerun</td>
+              <td style="font-family:-apple-system,BlinkMacSystemFont,Inter,sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.03em;color:#f97316;">.</td>
+              <td style="font-family:-apple-system,BlinkMacSystemFont,Inter,sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.03em;color:#f97316;">app</td>
             </tr>
           </table>
 
@@ -68,9 +68,9 @@ function wrapper(
         <tr><td style="height:1px;background:linear-gradient(90deg,transparent,rgba(249,115,22,0.3),transparent);"></td></tr>
 
         <!-- DSGVO-compliant footer -->
-        <tr><td style="background:#0a0a0a;border-left:1px solid rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.03);border-radius:0 0 20px 20px;padding:1.5rem 2rem;">
-          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,sans-serif;">
-            <tr><td style="font-size:0.72rem;line-height:1.7;color:#57534e;">
+        <tr><td style="background:#0a0a0a;border-left:1px solid rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.03);border-radius:0 0 20px 20px;padding:24px 32px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-family:-apple-system,BlinkMacSystemFont,Inter,sans-serif;">
+            <tr><td style="font-size:11px;line-height:1.7;color:#78716c;">
               ${reason}<br><br>
               ${unsub ? `<a href="${unsub}" style="color:#78716c;text-decoration:underline;">${isDE ? "E-Mails abbestellen" : "Unsubscribe"}</a>&nbsp;&nbsp;·&nbsp;&nbsp;` : ""}
               <a href="${BRAND.baseUrl}/datenschutz" style="color:#78716c;text-decoration:none;">${isDE ? "Datenschutz" : "Privacy Policy"}</a>&nbsp;&nbsp;·&nbsp;&nbsp;
@@ -90,20 +90,23 @@ function wrapper(
 
 /* ── Shared inline styles (email-client safe) ── */
 
+/* Font stack without quotes — safe for inline style="" attributes */
+const F = '-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Roboto,sans-serif';
+
 const S = {
-  h1: 'font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;font-size:1.35rem;font-weight:800;color:#fafaf9;margin:0 0 0.75rem;letter-spacing:-0.02em;line-height:1.3;',
-  p: 'font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;font-size:0.9rem;line-height:1.75;color:#a8a29e;margin:0 0 1rem;',
+  h1: `font-family:${F};font-size:22px;font-weight:800;color:#fafaf9;margin:0 0 12px;letter-spacing:-0.02em;line-height:1.3;`,
+  p: `font-family:${F};font-size:15px;line-height:1.75;color:#d6d3d1;margin:0 0 16px;`,
   accent: 'color:#f97316;',
-  muted: 'font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,sans-serif;font-size:0.78rem;line-height:1.6;color:#57534e;',
-  cta: 'display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#f97316,#ea580c);color:#ffffff;text-decoration:none;border-radius:12px;font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;font-weight:700;font-size:0.92rem;letter-spacing:0.01em;',
-  ctaSecondary: 'display:inline-block;padding:12px 28px;border:1px solid rgba(249,115,22,0.25);color:#f97316;text-decoration:none;border-radius:12px;font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;font-weight:600;font-size:0.85rem;',
-  bentoBox: 'background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:1.25rem 1.5rem;margin:1.25rem 0;',
-  bentoBoxAccent: 'background:linear-gradient(135deg,rgba(249,115,22,0.06),rgba(234,88,12,0.02));border:1px solid rgba(249,115,22,0.1);border-radius:14px;padding:1.25rem 1.5rem;margin:1.25rem 0;',
-  bentoLabel: 'font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#78716c;margin:0 0 0.5rem;',
-  bentoValue: 'font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;font-size:0.88rem;color:#d6d3d1;line-height:1.7;margin:0;',
-  divider: 'height:1px;background:rgba(255,255,255,0.04);margin:1.75rem 0;',
-  step: 'font-family:-apple-system,BlinkMacSystemFont,"Inter",sans-serif;font-size:0.85rem;color:#d6d3d1;line-height:2;margin:0;',
-  stepNum: 'display:inline-block;width:22px;height:22px;background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;border-radius:7px;text-align:center;line-height:22px;font-size:0.7rem;font-weight:700;margin-right:10px;vertical-align:middle;',
+  muted: `font-family:${F};font-size:12px;line-height:1.6;color:#78716c;`,
+  cta: `display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#f97316,#ea580c);color:#ffffff;text-decoration:none;border-radius:12px;font-family:${F};font-weight:700;font-size:15px;letter-spacing:0.01em;`,
+  ctaSecondary: `display:inline-block;padding:12px 28px;border:1px solid rgba(249,115,22,0.25);color:#f97316;text-decoration:none;border-radius:12px;font-family:${F};font-weight:600;font-size:14px;`,
+  bentoBox: 'background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:20px 24px;margin:20px 0;',
+  bentoBoxAccent: 'background:linear-gradient(135deg,rgba(249,115,22,0.06),rgba(234,88,12,0.02));border:1px solid rgba(249,115,22,0.1);border-radius:14px;padding:20px 24px;margin:20px 0;',
+  bentoLabel: `font-family:${F};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#a8a29e;margin:0 0 8px;`,
+  bentoValue: `font-family:${F};font-size:14px;color:#d6d3d1;line-height:1.7;margin:0;`,
+  divider: 'height:1px;background:rgba(255,255,255,0.04);margin:28px 0;',
+  step: `font-family:${F};font-size:14px;color:#d6d3d1;line-height:2.2;margin:0;`,
+  stepNum: 'display:inline-block;width:22px;height:22px;background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;border-radius:7px;text-align:center;line-height:22px;font-size:11px;font-weight:700;margin-right:10px;vertical-align:middle;',
 };
 
 // ─── Newsletter Double Opt-In Confirmation (DOIP) ───
@@ -121,7 +124,7 @@ export function newsletterConfirmEmail(locale: string, confirmUrl: string): { su
         : "You just signed up for the CycleRun newsletter. To verify that this request came from you, please confirm with a single click."
       }</p>
 
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:1.75rem 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:28px 0;">
         <tr><td align="center">
           <a href="${confirmUrl}" style="${S.cta}">${isDE ? "Anmeldung bestätigen" : "Confirm subscription"}</a>
         </td></tr>
@@ -171,7 +174,7 @@ export function newsletterWelcomeEmail(locale: string, unsubscribeUrl: string): 
       }</p>
 
       <!-- Bento grid: 2 boxes side by side -->
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:1.25rem 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:20px 0;">
         <tr>
           <td width="48%" valign="top" style="${S.bentoBox}">
             <p style="${S.bentoLabel}">${isDE ? "Inhalte" : "Content"}</p>
@@ -196,7 +199,7 @@ export function newsletterWelcomeEmail(locale: string, unsubscribeUrl: string): 
         : "Because in the end, only one thing matters: that you get on the bike."
       }</p>
 
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:1.75rem 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:28px 0;">
         <tr><td align="center">
           <a href="${BRAND.baseUrl}" style="${S.cta}">${isDE ? "Jetzt losfahren" : "Start riding now"}</a>
         </td></tr>
@@ -227,7 +230,7 @@ export function registrationWelcomeEmail(locale: string, firstName: string, unsu
       }</p>
 
       <!-- Bento grid: 3 feature boxes -->
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:1.5rem 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:24px 0;">
         <tr>
           <td width="31%" valign="top" style="${S.bentoBoxAccent}">
             <p style="${S.bentoLabel}">${isDE ? "Tracking" : "Tracking"}</p>
@@ -251,7 +254,7 @@ export function registrationWelcomeEmail(locale: string, firstName: string, unsu
         : "Start your next session now — all you need is your browser and a webcam."
       }</p>
 
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:1.75rem 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:28px 0;">
         <tr><td align="center">
           <a href="${BRAND.baseUrl}" style="${S.cta}">${isDE ? "Nächste Fahrt starten" : "Start your next ride"}</a>
         </td></tr>
@@ -302,7 +305,7 @@ export function creatorApplicationEmail(locale: string, name: string): { subject
         : "Use the time to prepare with our recording guide — because well-prepared routes perform significantly better."
       }</p>
 
-      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:1.5rem 0;">
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:24px 0;">
         <tr><td align="center">
           <a href="${BRAND.baseUrl}/creator#recording-guide" style="${S.cta}">${isDE ? "Recording-Guide lesen" : "Read the Recording Guide"}</a>
         </td></tr>
@@ -345,8 +348,8 @@ export function adminNotificationEmail(
   const detailRows = Object.entries(details)
     .map(([k, v]) => `
       <tr>
-        <td style="padding:6px 16px 6px 0;${S.muted}white-space:nowrap;border-bottom:1px solid rgba(255,255,255,0.03);">${k}</td>
-        <td style="padding:6px 0;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;font-size:0.85rem;color:#e7e5e4;border-bottom:1px solid rgba(255,255,255,0.03);">${v}</td>
+        <td style="padding:6px 16px 6px 0;font-family:${F};font-size:12px;color:#a8a29e;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,0.03);">${k}</td>
+        <td style="padding:6px 0;font-family:${F};font-size:14px;color:#e7e5e4;border-bottom:1px solid rgba(255,255,255,0.03);">${v}</td>
       </tr>`)
     .join("");
 
@@ -356,39 +359,39 @@ export function adminNotificationEmail(
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"></head>
 <body style="margin:0;padding:0;background:#050505;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#050505;">
-    <tr><td align="center" style="padding:2rem 1rem;">
+    <tr><td align="center" style="padding:32px 16px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;">
 
         <tr><td style="height:3px;background:${eventColors[event] || eventColors.registration};border-radius:16px 16px 0 0;"></td></tr>
 
-        <tr><td style="background:#111111;border-left:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);padding:2rem 1.75rem;">
+        <tr><td style="background:#111111;border-left:1px solid rgba(255,255,255,0.05);border-right:1px solid rgba(255,255,255,0.05);padding:32px 28px;">
 
-          <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:1.5rem;">
+          <table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
             <tr>
-              <td style="font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;font-size:1.2rem;font-weight:800;color:#fafaf9;">cyclerun</td>
-              <td style="font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;font-size:1.2rem;font-weight:800;color:#f97316;">.</td>
-              <td style="font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;font-size:1.2rem;font-weight:800;color:#f97316;">app</td>
+              <td style="font-family:${F};font-size:19px;font-weight:800;color:#fafaf9;">cyclerun</td>
+              <td style="font-family:${F};font-size:19px;font-weight:800;color:#f97316;">.</td>
+              <td style="font-family:${F};font-size:19px;font-weight:800;color:#f97316;">app</td>
               <td style="padding-left:12px;">
-                <span style="display:inline-block;padding:3px 10px;border-radius:6px;font-family:-apple-system,sans-serif;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:rgba(249,115,22,0.1);color:#f97316;">Admin</span>
+                <span style="display:inline-block;padding:3px 10px;border-radius:6px;font-family:${F};font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;background:rgba(249,115,22,0.1);color:#f97316;">Admin</span>
               </td>
             </tr>
           </table>
 
-          <h2 style="font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;font-size:1.1rem;font-weight:700;color:#fafaf9;margin:0 0 1.25rem;">${label}</h2>
+          <h2 style="font-family:${F};font-size:18px;font-weight:700;color:#fafaf9;margin:0 0 20px;">${label}</h2>
 
-          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:1.25rem;">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:20px;">
             ${detailRows}
           </table>
 
-          <div style="height:1px;background:rgba(255,255,255,0.04);margin:1.25rem 0;"></div>
-          <p style="font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;margin:0;font-size:0.75rem;color:#57534e;">
+          <div style="height:1px;background:rgba(255,255,255,0.04);margin:20px 0;"></div>
+          <p style="font-family:${F};margin:0;font-size:12px;color:#78716c;">
             ${new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin", dateStyle: "long", timeStyle: "short" })}
           </p>
 
         </td></tr>
 
-        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:1rem 1.75rem;text-align:center;">
-          <a href="https://cyclerun.app/admin" style="font-family:-apple-system,sans-serif;font-size:0.78rem;color:#78716c;text-decoration:none;">Dashboard öffnen</a>
+        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:16px 28px;text-align:center;">
+          <a href="https://cyclerun.app/admin" style="font-family:${F};font-size:12px;color:#78716c;text-decoration:none;">Dashboard öffnen</a>
         </td></tr>
 
       </table>
