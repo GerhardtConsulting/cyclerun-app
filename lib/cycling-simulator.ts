@@ -337,7 +337,10 @@ export class CyclingSimulator {
 
     try {
       this.webcamStream = await navigator.mediaDevices.getUserMedia({
-        video: { width: { ideal: 640 }, height: { ideal: 480 } },
+        video: {
+          ...(this.tvCode ? { facingMode: "environment" } : {}),
+          width: { ideal: 640 }, height: { ideal: 480 },
+        },
       });
 
       // Show preview in permission overlay
@@ -413,6 +416,14 @@ export class CyclingSimulator {
       });
       const video = document.getElementById("step1Video") as HTMLVideoElement;
       if (video) video.srcObject = this.webcamStream;
+
+      // TV mode: restart stream to TV with new camera
+      if (this.tvCode && this.tvSender && this.webcamStream) {
+        this.tvSender.destroy();
+        this.tvSender = new PairingSender(this.tvCode);
+        this.tvSender.onStatusChange = (s) => console.log("[TV] Sender status:", s);
+        this.tvSender.startWithStream(this.webcamStream);
+      }
     } catch (err) {
       console.error("Camera switch error:", err);
     }

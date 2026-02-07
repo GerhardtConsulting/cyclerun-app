@@ -39,13 +39,11 @@ export default function CycleRunApp() {
     setLocaleState(detected);
     document.documentElement.lang = detected;
 
-    // TV device auto-detection: redirect to /tv if Smart TV detected
+    // TV device auto-detection: redirect to /tv only for confirmed Smart TV user agents
     const ua = navigator.userAgent.toLowerCase();
     const tvKeywords = ["smart-tv", "smarttv", "netcast", "webos", "tizen", "vidaa", "hbbtv", "viera", "bravia", "roku", "firetv", "fire tv", "appletv", "chromecast", "androidtv", "android tv"];
     const isTV = tvKeywords.some((kw) => ua.includes(kw));
-    // Heuristic: very large screen + no touch = likely TV
-    const isBigNoTouch = typeof window !== "undefined" && window.screen.width >= 1800 && !("ontouchstart" in window) && navigator.maxTouchPoints === 0 && window.screen.height >= 900;
-    if ((isTV || (isBigNoTouch && !ua.includes("macintosh") && !ua.includes("windows"))) && !window.location.search.includes("tv=")) {
+    if (isTV && !window.location.search.includes("tv=")) {
       window.location.href = "/tv";
       return;
     }
@@ -280,6 +278,7 @@ export default function CycleRunApp() {
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
                       {t('cam.perm.tip.title')}
                     </summary>
+                    <p>{t('cam.perm.tip.tv')}</p>
                     <p>{t('cam.perm.tip.iphone')}</p>
                     <p>{t('cam.perm.tip.external')}</p>
                   </details>

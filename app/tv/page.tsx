@@ -152,26 +152,58 @@ export default function TVPage() {
               <span className="splash-logo-text">cyclerun<span className="splash-logo-app">.app</span></span>
             </div>
 
-            <p className="splash-tagline">TV Mode — {t('pair.desc')}</p>
+            <p className="splash-tagline">{t('tv.tagline')}</p>
 
-            <div className="pair-qr" id="tv-qr" style={{ margin: "1.5rem auto", minHeight: 280, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", margin: "0.5rem 0 1rem", opacity: 0.8 }}>
+              {t('tv.scan')}
+            </p>
+
+            <div className="pair-qr" id="tv-qr" style={{ margin: "1rem auto", minHeight: 280, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div className="loading-spinner" style={{ width: 40, height: 40 }}></div>
             </div>
 
-            <div className="pair-code-display" style={{ fontSize: "2.5rem", letterSpacing: "0.5em", margin: "0.5rem 0 1.5rem" }}>
+            <div className="pair-code-display" style={{ fontSize: "2.5rem", letterSpacing: "0.5em", margin: "0.5rem 0 1rem" }}>
               {pairCode ? pairCode.split("").join(" ") : "----"}
             </div>
 
-            <p className="splash-tagline" style={{ fontSize: "0.9rem", opacity: 0.6 }}>
-              {t('pair.code.label')} <strong>cyclerun.app</strong>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.8rem", opacity: 0.5, marginBottom: "1.5rem" }}>
+              {t('tv.code.hint')}
             </p>
+
+            {/* UX Tips */}
+            <div className="info-grid" style={{ maxWidth: 700, margin: "0 auto 1.5rem", gap: "0.75rem" }}>
+              <div className="info-card" style={{ padding: "0.75rem 1rem", textAlign: "left" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem" }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" strokeWidth="1.5"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></svg>
+                  <strong style={{ fontSize: "0.8rem" }}>{t('tv.tip.light')}</strong>
+                </div>
+              </div>
+              <div className="info-card" style={{ padding: "0.75rem 1rem", textAlign: "left" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem" }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" strokeWidth="1.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" /></svg>
+                  <strong style={{ fontSize: "0.8rem" }}>{t('tv.tip.camera')}</strong>
+                </div>
+              </div>
+              <div className="info-card" style={{ padding: "0.75rem 1rem", textAlign: "left" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem" }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" strokeWidth="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
+                  <strong style={{ fontSize: "0.8rem" }}>{t('tv.tip.distance')}</strong>
+                </div>
+              </div>
+              <div className="info-card" style={{ padding: "0.75rem 1rem", textAlign: "left" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.25rem" }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                  <strong style={{ fontSize: "0.8rem" }}>{t('tv.tip.stable')}</strong>
+                </div>
+              </div>
+            </div>
 
             <div className="splash-trust">
               <span>{t('splash.trust.local')}</span>
               <span className="splash-trust-dot"></span>
               <span>{t('splash.trust.free')}</span>
               <span className="splash-trust-dot"></span>
-              <span>DSGVO-konform</span>
+              <span>{t('tv.gdpr')}</span>
             </div>
           </div>
         </div>
@@ -189,7 +221,7 @@ export default function TVPage() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ verticalAlign: "middle", marginRight: 8 }}>
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
               </svg>
-              Phone detected! Establishing connection...
+              {t('tv.connecting')}
             </p>
             <div className="loading-spinner" style={{ margin: "2rem auto" }}></div>
           </div>
@@ -202,7 +234,7 @@ export default function TVPage() {
           <header className="app-header">
             <div className="header-logo">cyclerun<span className="header-logo-app">.app</span></div>
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <span className="cam-perm-status success" style={{ margin: 0, padding: "0.25rem 0.75rem" }}>Phone Connected</span>
+              <span className="cam-perm-status success" style={{ margin: 0, padding: "0.25rem 0.75rem" }}>{t('tv.phone.connected')}</span>
               <div className="lang-switcher">
                 <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} onClick={() => switchLang('en')} title="English"><FlagEN /></button>
                 <button className={`lang-btn${locale === 'de' ? ' active' : ''}`} onClick={() => switchLang('de')} title="Deutsch"><FlagDE /></button>
@@ -249,7 +281,7 @@ export default function TVPage() {
               </div>
 
               <p style={{ textAlign: "center", padding: "0.75rem", opacity: 0.5, fontSize: "0.85rem" }}>
-                Complete the setup on your phone. This screen mirrors your progress.
+                {t('tv.wizard.hint')}
               </p>
             </div>
           </div>

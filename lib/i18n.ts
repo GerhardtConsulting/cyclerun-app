@@ -202,6 +202,21 @@ const translations: Record<Locale, Record<string, string>> = {
     "pair.use.phone": "Use Phone Camera",
     "pair.skip": "Use webcam instead",
 
+    // TV Mode
+    "tv.tagline": "Use your TV or tablet as a large display while your phone acts as the camera.",
+    "tv.scan": "Scan the QR code with your phone to start",
+    "tv.code.hint": "Or open cyclerun.app on your phone and add ?tv= followed by this code",
+    "tv.tip.title": "Tips for the best experience",
+    "tv.tip.light": "Ensure good lighting so the camera can detect your movement clearly.",
+    "tv.tip.camera": "Position your phone camera so your legs/pedals are fully visible.",
+    "tv.tip.distance": "Place the phone about 1–2 meters away, at knee height.",
+    "tv.tip.stable": "Use a phone stand or lean your phone against something stable.",
+    "tv.connecting": "Phone detected! Establishing connection...",
+    "tv.wizard.hint": "Complete the setup on your phone. This screen mirrors your progress.",
+    "tv.phone.connected": "Phone Connected",
+    "tv.gdpr": "GDPR compliant",
+    "cam.perm.tip.tv": "For the best experience, use a TV, tablet, or laptop as your display and your phone as the camera.",
+
     // Newsletter
     "newsletter.opt_in": "Keep me updated on new features (no spam, GDPR compliant)",
     "newsletter.subscribed": "Check your email to confirm",
@@ -569,6 +584,21 @@ const translations: Record<Locale, Record<string, string>> = {
     "pair.connected": "Handy verbunden!",
     "pair.use.phone": "Handy-Kamera nutzen",
     "pair.skip": "Webcam verwenden",
+
+    // TV Mode
+    "tv.tagline": "Nutze deinen TV oder dein Tablet als gro\u00dfen Bildschirm, w\u00e4hrend dein Handy als Kamera dient.",
+    "tv.scan": "Scanne den QR-Code mit deinem Handy, um zu starten",
+    "tv.code.hint": "Oder \u00f6ffne cyclerun.app auf deinem Handy und f\u00fcge ?tv= gefolgt von diesem Code hinzu",
+    "tv.tip.title": "Tipps f\u00fcr die beste Erfahrung",
+    "tv.tip.light": "Sorge f\u00fcr ausreichend Licht, damit die Kamera deine Bewegungen gut erkennen kann.",
+    "tv.tip.camera": "Richte dein Handy so aus, dass deine Beine/Pedale vollst\u00e4ndig sichtbar sind.",
+    "tv.tip.distance": "Platziere das Handy etwa 1\u20132 Meter entfernt, auf Knieh\u00f6he.",
+    "tv.tip.stable": "Verwende einen Handyhalter oder lehne dein Handy stabil an.",
+    "tv.connecting": "Handy erkannt! Verbindung wird hergestellt...",
+    "tv.wizard.hint": "Richte alles auf deinem Handy ein. Dieser Bildschirm spiegelt deinen Fortschritt.",
+    "tv.phone.connected": "Handy verbunden",
+    "tv.gdpr": "DSGVO-konform",
+    "cam.perm.tip.tv": "F\u00fcr die beste Erfahrung nutze einen TV, ein Tablet oder einen Laptop als Bildschirm und dein Handy als Kamera.",
 
     // Newsletter
     "newsletter.opt_in": "\u00dcber neue Features informieren (kein Spam, DSGVO-konform)",
