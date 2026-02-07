@@ -769,6 +769,9 @@ export default function CycleRunApp() {
               </div>
             </div>
 
+            {/* Gamification results (populated dynamically after ride) */}
+            <div id="summaryGamification" className="summary-stats-grid" style={{ display: "none", borderTop: "1px solid var(--border)", paddingTop: "0.75rem", marginTop: "0.5rem" }}></div>
+
             <div className="summary-actions">
               <button id="downloadShareCard" className="btn-primary btn-full">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
@@ -791,6 +794,10 @@ export default function CycleRunApp() {
                 {t('ride.summary.ride.again')}
               </button>
               <button id="summaryDone" className="btn-ghost">{t('ride.summary.done')}</button>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center", gap: "1rem", marginTop: "0.5rem", fontSize: "0.8rem" }}>
+              <Link href="/profile" style={{ color: "var(--accent-1)" }}>⚡ {t('g.profile')}</Link>
+              <Link href="/leaderboard" style={{ color: "var(--text-muted)" }}>🏆 {t('g.leaderboard')}</Link>
             </div>
           </div>
         </div>
@@ -852,6 +859,8 @@ export default function CycleRunApp() {
           </div>
           <div className="footer-col">
             <strong className="footer-col-title">CycleRun</strong>
+            <Link href="/profile">{t('g.profile')}</Link>
+            <Link href="/leaderboard">{t('g.leaderboard')}</Link>
             <Link href="/creator">Creator Hub</Link>
             <Link href="/roadmap">Roadmap</Link>
             <Link href="/datenschutz">{t('footer.privacy')}</Link>

@@ -3,23 +3,11 @@
  * Camera-based motion tracking for cycling & running
  */
 
-import { createClient } from "@supabase/supabase-js";
 import { t, getLocale } from "@/lib/i18n";
 import { downloadShareCard, type RideMetrics } from "@/lib/share-card";
 import QRCode from "qrcode";
 import { PairingReceiver, PairingSender, sendState } from "@/lib/phone-pairing";
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://yuxkujcnsrrkwbvftkvq.supabase.co";
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1eGt1amNuc3Jya3didmZ0a3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjAwNzgsImV4cCI6MjA4NTg5NjA3OH0.aQRnjS2lKDr0qQU9eKphynaHajdn5xWruAXnRx8zhZI";
-
-function getSupabase() {
-  try {
-    return createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  } catch (e) {
-    console.warn("Supabase not available");
-  }
-  return null;
-}
+import { getSupabase } from "@/lib/supabase";
 
 interface DetectionZone {
   x: number;
@@ -1187,10 +1175,11 @@ export class CyclingSimulator {
     };
     (window as unknown as Record<string, unknown>).__cyclerunLastRide = metrics;
 
-    // Save session to Supabase if registered
+    // Save session to Supabase if registered, then show gamification results
     const email = localStorage.getItem("cyclerun_email");
     if (email && durationSeconds > 10) {
-      this.saveSession(metrics, email);
+      // Capture pre-save state for comparison
+      this._showGamificationSummary(email, metrics);
     }
 
     // Show save prompt only if not registered
@@ -1239,17 +1228,116 @@ export class CyclingSimulator {
         calories_estimated: metrics.calories,
         gear: metrics.gear,
       });
-
-      // Update profile totals
-      try {
-        await sb.rpc("increment_profile_stats", {
-          p_user_id: user.id,
-          p_distance: metrics.distanceKm,
-          p_duration: metrics.durationSeconds,
-        });
-      } catch { /* optional RPC, ignore errors */ }
+      // Stats (total_sessions, total_distance, total_energy, streak, badges, level)
+      // are updated automatically by the DB trigger: process_session_gamification()
     } catch (err) {
       console.error("Session save error:", err);
+    }
+  }
+
+  async _showGamificationSummary(email: string, metrics: Record<string, unknown>) {
+    try {
+      const sb = getSupabase();
+      if (!sb) return;
+
+      // Get user pre-save state
+      const { data: userBefore } = await sb.from("registrations")
+        .select("id, total_energy, level, current_streak")
+        .eq("email", email)
+        .single();
+      if (!userBefore) return;
+
+      const prevEnergy = userBefore.total_energy || 0;
+      const prevLevel = userBefore.level || 1;
+
+      // Get badges before save
+      const { data: badgesBefore } = await sb.from("user_badges")
+        .select("badge_id")
+        .eq("user_id", userBefore.id);
+      const prevBadgeIds = new Set((badgesBefore || []).map((b: { badge_id: string }) => b.badge_id));
+
+      // Save session (trigger fires automatically)
+      await this.saveSession(metrics, email);
+
+      // Small delay to let trigger complete
+      await new Promise((r) => setTimeout(r, 300));
+
+      // Get user post-save state
+      const { data: userAfter } = await sb.from("registrations")
+        .select("total_energy, level, current_streak")
+        .eq("email", email)
+        .single();
+      if (!userAfter) return;
+
+      const energyEarned = (userAfter.total_energy || 0) - prevEnergy;
+      const newLevel = userAfter.level || 1;
+      const streak = userAfter.current_streak || 0;
+
+      // Get new badges
+      const { data: badgesAfter } = await sb.from("user_badges")
+        .select("badge_id")
+        .eq("user_id", userBefore.id);
+      const newBadgeIds = (badgesAfter || [])
+        .map((b: { badge_id: string }) => b.badge_id)
+        .filter((id: string) => !prevBadgeIds.has(id));
+
+      // Fetch badge details for new ones
+      let newBadgeDetails: { icon: string; name_en: string; name_de: string }[] = [];
+      if (newBadgeIds.length > 0) {
+        const { data: badges } = await sb.from("badges")
+          .select("icon, name_en, name_de")
+          .in("id", newBadgeIds);
+        newBadgeDetails = badges || [];
+      }
+
+      // Update summary UI
+      const locale = getLocale();
+      const container = document.getElementById("summaryGamification");
+      if (!container) return;
+      container.style.display = "block";
+
+      let html = "";
+
+      // Energy earned
+      if (energyEarned > 0) {
+        html += `<div class="summary-stat" style="grid-column:1/-1">
+          <span class="summary-stat-label">⚡ ${t("g.summary.energy")}</span>
+          <span class="summary-stat-value" style="color:var(--accent-1);font-size:1.4rem">+${energyEarned.toLocaleString()}</span>
+        </div>`;
+      }
+
+      // Streak
+      if (streak > 0) {
+        html += `<div class="summary-stat">
+          <span class="summary-stat-label">🔥 ${t("g.summary.streak")}</span>
+          <span class="summary-stat-value">${streak} ${locale === "de" ? "Tage" : "days"}</span>
+        </div>`;
+      }
+
+      // Level up
+      if (newLevel > prevLevel) {
+        html += `<div class="summary-stat">
+          <span class="summary-stat-label">🎉 ${t("g.summary.level_up")}</span>
+          <span class="summary-stat-value" style="color:var(--accent-1)">Lv.${newLevel} ${t("g.level." + newLevel)}</span>
+        </div>`;
+      }
+
+      // New badges
+      if (newBadgeDetails.length > 0) {
+        html += `<div class="summary-stat" style="grid-column:1/-1">
+          <span class="summary-stat-label">${t("g.summary.new_badges")}</span>
+          <span class="summary-stat-value">${newBadgeDetails.map((b) =>
+            `${b.icon} ${locale === "de" ? b.name_de : b.name_en}`
+          ).join(" · ")}</span>
+        </div>`;
+      }
+
+      container.innerHTML = html;
+
+    } catch (err) {
+      console.error("Gamification summary error:", err);
+      // Fallback: just save the session
+      this.saveSession(metrics, email);
     }
   }
 
