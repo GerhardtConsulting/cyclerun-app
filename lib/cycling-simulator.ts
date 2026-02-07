@@ -7,7 +7,7 @@ import { createClient } from "@supabase/supabase-js";
 import { t, getLocale } from "@/lib/i18n";
 import { downloadShareCard, type RideMetrics } from "@/lib/share-card";
 import QRCode from "qrcode";
-import { PairingReceiver } from "@/lib/phone-pairing";
+import { PairingReceiver, PairingSender, sendState } from "@/lib/phone-pairing";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://yuxkujcnsrrkwbvftkvq.supabase.co";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1eGt1amNuc3Jya3didmZ0a3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjAwNzgsImV4cCI6MjA4NTg5NjA3OH0.aQRnjS2lKDr0qQU9eKphynaHajdn5xWruAXnRx8zhZI";
@@ -81,6 +81,9 @@ export class CyclingSimulator {
   nudgeSeconds: number;
   pairCode: string;
   pairingReceiver: PairingReceiver | null;
+  tvCode: string | null;
+  tvSender: PairingSender | null;
+  private _tvStateInterval: ReturnType<typeof setInterval> | null;
   private _started: boolean;
 
   constructor() {
@@ -110,6 +113,9 @@ export class CyclingSimulator {
     this.nudgeSeconds = 30;
     this.pairCode = '';
     this.pairingReceiver = null;
+    this.tvCode = null;
+    this.tvSender = null;
+    this._tvStateInterval = null;
 
     this.riderWeight = 75;
     this.riderHeight = 175;
@@ -148,7 +154,20 @@ export class CyclingSimulator {
     if (this._started) return;
     this._started = true;
     this.bindEvents();
-    this.showScreen("welcome");
+
+    // Detect TV mode: ?tv=CODE in URL
+    const params = new URLSearchParams(window.location.search);
+    const tvParam = params.get("tv");
+    if (tvParam && tvParam.length === 4) {
+      this.tvCode = tvParam;
+      console.log("[TV] TV mode detected, code:", this.tvCode);
+      // Auto-start the wizard so the phone user can begin setup immediately
+      this.showScreen("welcome");
+      // Small delay to let DOM render, then auto-start
+      setTimeout(() => this.startSport("cycling"), 300);
+    } else {
+      this.showScreen("welcome");
+    }
   }
 
   bindEvents() {
@@ -286,6 +305,9 @@ export class CyclingSimulator {
     } else if (step === 4) {
       this.initCalibration();
     }
+
+    // TV mode: notify TV of step change
+    this._sendTVState();
   }
 
   prevStep() {
@@ -333,6 +355,15 @@ export class CyclingSimulator {
 
       // Enumerate cameras and populate selector
       await this.populateCameraSelector();
+
+      // TV mode: start streaming camera to TV
+      if (this.tvCode && this.webcamStream && !this.tvSender) {
+        this.tvSender = new PairingSender(this.tvCode);
+        this.tvSender.onStatusChange = (s) => console.log("[TV] Sender status:", s);
+        this.tvSender.startWithStream(this.webcamStream);
+        // Send initial wizard state
+        this._sendTVState();
+      }
 
       // Change button to "Continue"
       const allowBtn = document.getElementById("requestCamera");
@@ -983,6 +1014,7 @@ export class CyclingSimulator {
     video.play();
 
     this.startPhysicsLoop();
+    this._startTVStateLoop();
 
     document.getElementById("webcamMinimap")?.classList.remove("hidden");
 
@@ -1099,6 +1131,7 @@ export class CyclingSimulator {
   stopRide() {
     this.isRiding = false;
     this.isPaused = false;
+    this._stopTVStateLoop();
     const video = document.getElementById("rideVideo") as HTMLVideoElement;
     video.pause();
     video.currentTime = 0;
@@ -1155,6 +1188,19 @@ export class CyclingSimulator {
 
     // Show summary overlay
     document.getElementById("rideSummary")?.classList.add("active");
+
+    // TV mode: send finished state
+    if (this.tvCode) {
+      sendState(this.tvCode, {
+        phase: "finished",
+        speed: 0,
+        rpm: 0,
+        distance: this.distance,
+        rideTime: durationSeconds,
+        maxSpeed: this.maxSpeed,
+        gear: this.gear,
+      }).catch(() => {});
+    }
   }
 
   async saveSession(metrics: Record<string, unknown>, email: string) {
@@ -1413,6 +1459,35 @@ export class CyclingSimulator {
     this.pairingReceiver = null;
     const panel = document.getElementById("phonePairPanel");
     if (panel) panel.style.display = "none";
+  }
+
+  // ============ TV MODE STATE SYNC ============
+
+  _sendTVState() {
+    if (!this.tvCode) return;
+    const rideTime = this.rideStartTime ? Math.floor((Date.now() - this.rideStartTime) / 1000) : 0;
+    sendState(this.tvCode, {
+      phase: this.isRiding ? (this.isPaused ? "paused" : "riding") : "wizard",
+      wizardStep: this.wizardStep,
+      speed: this.currentSpeed,
+      rpm: this.currentRPM,
+      distance: this.distance,
+      rideTime,
+      gear: this.gear,
+      maxSpeed: this.maxSpeed,
+    }).catch(() => {});
+  }
+
+  _startTVStateLoop() {
+    if (!this.tvCode || this._tvStateInterval) return;
+    this._tvStateInterval = setInterval(() => this._sendTVState(), 500);
+  }
+
+  _stopTVStateLoop() {
+    if (this._tvStateInterval) {
+      clearInterval(this._tvStateInterval);
+      this._tvStateInterval = null;
+    }
   }
 
   async handleRegistration(e: Event) {

@@ -14,7 +14,8 @@
 const SUPABASE_URL = "https://yuxkujcnsrrkwbvftkvq.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl1eGt1amNuc3Jya3didmZ0a3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjAwNzgsImV4cCI6MjA4NTg5NjA3OH0.aQRnjS2lKDr0qQU9eKphynaHajdn5xWruAXnRx8zhZI";
 
-const REST_BASE = `${SUPABASE_URL}/rest/v1/pair_signals`;
+const REST_SIGNALS = `${SUPABASE_URL}/rest/v1/pair_signals`;
+const REST_STATE = `${SUPABASE_URL}/rest/v1/pair_state`;
 const REST_HEADERS = {
   apikey: SUPABASE_ANON_KEY,
   Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
@@ -33,7 +34,7 @@ function logErr(...args: unknown[]) {
 // ---- REST helpers ----
 
 async function insertSignal(code: string, signalType: string, payload: unknown) {
-  const res = await fetch(REST_BASE, {
+  const res = await fetch(REST_SIGNALS, {
     method: "POST",
     headers: REST_HEADERS,
     body: JSON.stringify({ code, signal_type: signalType, payload }),
@@ -54,7 +55,7 @@ interface SignalRow {
 
 async function pollSignals(code: string, types: string[], afterId: number): Promise<SignalRow[]> {
   const typeFilter = types.map((t) => `"${t}"`).join(",");
-  const url = `${REST_BASE}?code=eq.${code}&signal_type=in.(${typeFilter})&id=gt.${afterId}&order=id.asc`;
+  const url = `${REST_SIGNALS}?code=eq.${code}&signal_type=in.(${typeFilter})&id=gt.${afterId}&order=id.asc`;
   const res = await fetch(url, {
     headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
   });
@@ -63,6 +64,46 @@ async function pollSignals(code: string, types: string[], afterId: number): Prom
 }
 
 const POLL_INTERVAL = 400; // ms
+
+// ---- State sync helpers (TV mode) ----
+
+export interface TVState {
+  phase: "wizard" | "riding" | "paused" | "finished";
+  wizardStep?: number;
+  speed?: number;
+  rpm?: number;
+  distance?: number;
+  rideTime?: number;
+  gear?: number;
+  maxSpeed?: number;
+  videoUrl?: string;
+}
+
+export async function sendState(code: string, state: TVState) {
+  const res = await fetch(REST_STATE, {
+    method: "POST",
+    headers: { ...REST_HEADERS, Prefer: "return=minimal,resolution=merge-duplicates" },
+    body: JSON.stringify({ code, state, updated_at: new Date().toISOString() }),
+  });
+  if (!res.ok) {
+    // Upsert fallback: try PATCH if insert fails
+    await fetch(`${REST_STATE}?code=eq.${code}`, {
+      method: "PATCH",
+      headers: REST_HEADERS,
+      body: JSON.stringify({ state, updated_at: new Date().toISOString() }),
+    });
+  }
+}
+
+export async function pollState(code: string): Promise<TVState | null> {
+  const url = `${REST_STATE}?code=eq.${code}&select=state`;
+  const res = await fetch(url, {
+    headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+  });
+  if (!res.ok) return null;
+  const rows = await res.json();
+  return rows[0]?.state ?? null;
+}
 
 const ICE_SERVERS: RTCIceServer[] = [
   { urls: "stun:stun.l.google.com:19302" },
@@ -225,6 +266,7 @@ export class PairingSender {
   private _remoteDescSet = false;
   private _pollTimer: ReturnType<typeof setInterval> | null = null;
   private _lastId = 0;
+  private _ownsStream = true;
 
   constructor(code: string) {
     this.code = code;
@@ -242,6 +284,7 @@ export class PairingSender {
     }
   }
 
+  /** Start with own camera (used by /pair page) */
   async start() {
     log("Sender: starting with code", this.code);
 
@@ -259,9 +302,22 @@ export class PairingSender {
       return;
     }
 
+    await this._connect();
+  }
+
+  /** Start with existing stream (used by TV mode — simulator provides the camera) */
+  async startWithStream(stream: MediaStream) {
+    log("Sender: starting with existing stream, code", this.code);
+    this.stream = stream;
+    this._ownsStream = false;
+    this.onStatusChange?.("camera-ready");
+    await this._connect();
+  }
+
+  private async _connect() {
     this.pc = new RTCPeerConnection({ iceServers: ICE_SERVERS });
 
-    this.stream.getTracks().forEach((track) => {
+    this.stream!.getTracks().forEach((track) => {
       this.pc!.addTrack(track, this.stream!);
     });
 
@@ -365,7 +421,9 @@ export class PairingSender {
   destroy() {
     this._destroyed = true;
     this._stopPolling();
-    this.stream?.getTracks().forEach((t) => t.stop());
+    if (this._ownsStream) {
+      this.stream?.getTracks().forEach((t) => t.stop());
+    }
     this.stream = null;
     this.pc?.close();
     this.pc = null;
