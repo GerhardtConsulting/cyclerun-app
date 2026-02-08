@@ -46,7 +46,7 @@ resend 6.9.1, qrcode 1.5.4, babel-plugin-react-compiler 1.0.0
 | `/changelog` | ○ Static | `ChangelogContent.tsx` | ✅ | — |
 | `/pair` | ○ Static | `pair/page.tsx` | — | — |
 | `/tv` | ○ Static | `tv/page.tsx` | — | — |
-| `/datenschutz` | ○ Static | inline | ✅ (DE) | — |
+| `/datenschutz` | ○ Static | `DatenschutzContent.tsx` | ✅ (DE) | — |
 | `/impressum` | ○ Static | inline | ✅ (DE) | — |
 
 ### Dynamische Seiten (SSG mit `generateStaticParams`)
@@ -73,6 +73,7 @@ resend 6.9.1, qrcode 1.5.4, babel-plugin-react-compiler 1.0.0
 | `/api/newsletter/unsubscribe` | GET | Newsletter-Abmeldung |
 | `/api/creator/apply` | POST | Creator-Bewerbung |
 | `/api/admin/notify` | POST | Interne Admin-Benachrichtigungen |
+| `/api/register` | POST | Nutzer-Registrierung (DOI-Flow) |
 | `/api/admin/stats` | GET | Admin-Dashboard Statistiken |
 | `/api/routes/unlock` | POST | Route mit Credits freischalten |
 | `/api/cron/engagement` | GET | Tägliche Engagement-Emails (09:00 UTC) |
@@ -107,7 +108,7 @@ Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/
 - **Video-Synchronisation**: YouTube POV-Videos synchron zur Trittfrequenz
 - **Ride Summary**: Statistiken, Gamification, Share-Card
 - **Gear System**: 6-Gang Schaltung mit Tastatur/Touch
-- **Cookie Consent**: DSGVO-konform
+- **Cookie Consent**: Siehe Abschnitt 4.10 (zentrale Komponente in Root Layout)
 
 ### 4.2 Gamification System
 
@@ -185,7 +186,31 @@ Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/
 
 **Dateien**: `lib/phone-pairing.ts` — `PairingSender` (Phone) + `PairingReceiver` (PC/TV)
 
-### 4.8 Unified Navigation
+### 4.8 Cookie Consent & Google Analytics (GA4)
+
+**⚠️ WICHTIG: Es gibt nur EINE Cookie-Consent-Implementierung — `components/CookieConsent.tsx` im Root Layout. KEINE weitere hinzufügen!**
+
+**Komponente**: `components/CookieConsent.tsx` (eingebunden in `app/layout.tsx`)
+
+- **Opt-In Only**: GA4 Script (G-WL522VY008) wird NUR nach aktivem Klick auf "Akzeptieren" geladen
+- **Ohne Consent**: Kein Script, keine Cookies, kein Tracking
+- **Banner**: Zwei Buttons — "Akzeptieren" / "Nur notwendige", DE/EN auto-detect
+- **Consent-Storage**: `localStorage` → `cyclerun_cookie_consent` (Werte: `accepted` | `declined`)
+- **IP-Anonymisierung**: `anonymize_ip: true`
+- **Cookie Flags**: `SameSite=Lax;Secure`
+- **Widerruf**: Globale Funktion `window.__cyclerunRevokeConsent()` + Button auf `/datenschutz`
+- **Bei Widerruf**: GA-Script entfernt + alle `_ga`/`_gid`/`_gat` Cookies gelöscht
+
+**Datenschutzseite** (`app/datenschutz/DatenschutzContent.tsx`):
+- Abschnitt 7: Google Analytics (Umfang, Rechtsgrundlage, Empfänger, Speicherdauer, Widerruf)
+- Live-Status-Anzeige + Widerruf-/Reaktivierungs-Button
+- Cookie-Tabelle mit allen localStorage-Keys + GA-Cookies
+
+**Rechtsgrundlagen**:
+- Analyse-Cookies: Art. 6 Abs. 1 lit. a DSGVO + § 25 Abs. 1 TTDSG (Einwilligung)
+- Technisch notwendig (localStorage): § 25 Abs. 2 TTDSG (kein Consent nötig)
+
+### 4.9 Unified Navigation
 
 **Site Header** (`SubpageNav.tsx`) — auf ALLEN Seiten:
 - Logo (links) + Login-Button / User-Avatar + Hamburger ☰ (rechts)
@@ -197,7 +222,20 @@ Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/
 - 4 Spalten: Product, Guides, Resources, CycleRun
 - CTA-Zeile + Copyright
 
-### 4.9 Email Engagement System
+### 4.10 Registration & Double-Opt-In (DOI)
+
+**API**: `/api/register` (POST) — zentrale Registrierung für ALLE Einstiegspunkte
+
+- **Einstiegspunkte** (alle nutzen `/api/register`):
+  - `cycling-simulator.ts` → `handleRegistration()` (Registrierungs-Overlay)
+  - `cycling-simulator.ts` → `handleSummaryClaim()` (Post-Ride Claim-Form)
+- **Flow**: Registrierung → DOI-Email senden → Redirect zu `/confirm?status=pending`
+- **DOI-Bestätigung**: `/api/newsletter/confirm` → `email_confirmed = true`
+- **Login-Check**: `SubpageNav.tsx` + `UserMenu.tsx` prüfen `email_confirmed` vor Login
+
+**⚠️ WICHTIG: Neue Registrierungs-Einstiegspunkte MÜSSEN `/api/register` nutzen — NIEMALS direkt in die DB schreiben!**
+
+### 4.11 Email Engagement System
 
 **Transaktionale Emails** (`lib/email-templates.ts` — 5 Templates):
 
@@ -358,7 +396,7 @@ Zusätzlich: Sitemap enthält `<xhtml:link rel="alternate">` Tags für jede URL.
 
 ```
 app/
-├─ layout.tsx                    → Root Layout, Metadata, JSON-LD, hreflang
+├─ layout.tsx                    → Root Layout, Metadata, JSON-LD, hreflang, CookieConsent
 ├─ page.tsx                      → Home (rendert CycleRunApp)
 ├─ globals.css                   → Alle Styles (111KB, Single-File)
 ├─ seo-config.tsx                → SEO Defaults, Schema-Generatoren, <JsonLd />
@@ -373,7 +411,8 @@ app/
 ├─ creator/dashboard/page.tsx    → Creator Dashboard
 ├─ pair/page.tsx                 → Phone Camera Pairing
 ├─ tv/page.tsx                   → TV Mode Display
-├─ api/                          → 10 API Routes
+├─ datenschutz/DatenschutzContent.tsx → Client: Consent-Status + Widerruf-Button
+├─ api/                          → 11 API Routes (inkl. /api/register)
 └─ ...weitere statische Seiten
 
 components/
@@ -385,6 +424,7 @@ components/
 ├─ CreatorContent.tsx            → Creator Hub Landing (26KB)
 ├─ RoadmapContent.tsx            → Roadmap mit Voting (18KB)
 ├─ StoreRouteContent.tsx         → Store Einzelroute (15KB)
+├─ CookieConsent.tsx             → DSGVO Cookie Consent + GA4 (6KB) ⚠️ EINZIGE Consent-Impl.
 ├─ StoreContent.tsx              → Store Übersicht (12KB)
 ├─ UserMenu.tsx                  → Legacy (ersetzt durch SubpageNav)
 ├─ PublicProfileContent.tsx      → Öffentliches Profil (10KB)
@@ -545,7 +585,28 @@ git push origin main    # Vercel Auto-Deploy
 
 ---
 
-## 11. Bekannte Probleme & TODOs
+## 11. Duplikat-Vermeidung — Feature-Ownership
+
+**⚠️ VOR jeder neuen Feature-Implementierung: Prüfe diese Liste!**
+
+| Feature | Datei(en) | Hinweis |
+|---------|-----------|--------|
+| Cookie Consent | `components/CookieConsent.tsx` | Einzige Implementierung, eingebunden in `app/layout.tsx` |
+| Google Analytics | `components/CookieConsent.tsx` | GA4 Script wird dort dynamisch geladen |
+| Registrierung | `/api/register` Route | Alle Einstiegspunkte nutzen diese API |
+| Login | `components/SubpageNav.tsx` | Login-Modal ist dort eingebaut |
+| Navigation Header | `components/SubpageNav.tsx` | Einziger Header für ALLE Seiten |
+| Navigation Footer | `components/SubpageFooter.tsx` | Einziger Footer für ALLE Seiten |
+| User Menu | `components/SubpageNav.tsx` | Hamburger-Menu (UserMenu.tsx = Legacy, kann gelöscht werden) |
+| Datenschutz | `app/datenschutz/DatenschutzContent.tsx` | Client-Component mit Consent-Widerruf |
+| Email Templates | `lib/email-templates.ts` (transaktional) + `lib/email-engagement.ts` (engagement) | Zwei Dateien, nicht mischen |
+| i18n Übersetzungen | `lib/i18n.ts` | Einzige Übersetzungsdatei |
+| Supabase Client | `lib/supabase.ts` | Singleton — NICHT erneut erstellen |
+| Gamification Trigger | DB: `process_session_gamification()` | AFTER INSERT auf `sessions` — kein separates RPC nötig |
+
+---
+
+## 12. Bekannte Probleme & TODOs
 
 ### 🔴 KRITISCH (vor Launch)
 
@@ -575,7 +636,7 @@ git push origin main    # Vercel Auto-Deploy
 
 ---
 
-## 12. Kennzahlen (Stand Feb 8, 2026)
+## 13. Kennzahlen (Stand Feb 8, 2026)
 
 | Metrik | Wert |
 |--------|------|
@@ -583,11 +644,11 @@ git push origin main    # Vercel Auto-Deploy
 | **Blog-Posts** | 3 (EN+DE) |
 | **Cycling Routes** | 5 (EN+DE) |
 | **SEO Guides** | 9 (EN+DE) |
-| **API Routes** | 10 |
+| **API Routes** | 11 |
 | **DB Tabellen** | 19 |
 | **Storage Buckets** | 3 |
 | **Email Templates** | 20+ (transaktional + engagement) |
 | **i18n Schlüssel** | ~1.200+ |
-| **Komponenten** | 21 |
+| **Komponenten** | 22 (inkl. CookieConsent) |
 | **CSS** | 1 Datei (112KB) |
 | **Changelog Versionen** | bis v0.10.0 |

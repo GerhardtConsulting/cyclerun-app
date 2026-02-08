@@ -59,15 +59,6 @@ export default function CycleRunApp() {
       new CyclingSimulator();
     });
 
-    // Cookie consent
-    if (!localStorage.getItem("cyclerun_cookie_consent")) {
-      document.getElementById("cookieConsent")?.classList.add("active");
-    }
-    document.getElementById("cookieAccept")?.addEventListener("click", () => {
-      localStorage.setItem("cyclerun_cookie_consent", "true");
-      document.getElementById("cookieConsent")?.classList.remove("active");
-    });
-
     // Splash idle registration prompt — show after 45s if not registered
     const isRegistered = localStorage.getItem("cyclerun_registered") === "true";
     let splashTimer: ReturnType<typeof setTimeout> | null = null;
@@ -872,19 +863,6 @@ export default function CycleRunApp() {
       <div id="loadingOverlay" className="loading-overlay hidden">
         <div className="loading-spinner"></div>
         <p id="loadingText">{t('loading')}</p>
-      </div>
-
-      {/* Cookie Consent Banner */}
-      <div id="cookieConsent" className="cookie-banner">
-        <div className="cookie-content">
-          <div className="cookie-text">
-            <strong>{t('cookie.title')}</strong>
-            <p>{t('cookie.text')} <Link href="/datenschutz">{t('cookie.learn')}</Link></p>
-          </div>
-          <div className="cookie-actions">
-            <button id="cookieAccept" className="btn-primary btn-sm">{t('cookie.accept')}</button>
-          </div>
-        </div>
       </div>
 
       {/* Unified Footer — same as all subpages */}

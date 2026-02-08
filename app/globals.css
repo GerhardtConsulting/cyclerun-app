@@ -2387,67 +2387,6 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     white-space: nowrap;
 }
 
-/* ============================================
-   COOKIE CONSENT BANNER
-   ============================================ */
-
-.cookie-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 400;
-    display: none;
-    padding: 1rem 2rem;
-    background: var(--bg-card);
-    border-top: 1px solid transparent;
-    background: 
-        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
-        linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent) border-box;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    animation: slideUp 0.4s ease;
-}
-
-.cookie-banner.active {
-    display: block;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.cookie-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-}
-
-.cookie-text {
-    flex: 1;
-}
-
-.cookie-text strong {
-    color: var(--text-primary);
-    font-size: 0.9rem;
-}
-
-.cookie-text p {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
-    line-height: 1.5;
-}
-
-.cookie-text a {
-    color: var(--accent-1);
-    text-decoration: underline;
-}
-
 .btn-sm {
     padding: 0.5rem 1.25rem;
     font-size: 0.85rem;
@@ -5492,11 +5431,7 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
         align-items: flex-start;
     }
     
-    .cookie-content {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-    }
+
 
     .creator-benefits-grid {
         grid-template-columns: 1fr;
