@@ -210,7 +210,7 @@ export default function CreatorDashboardContent() {
             </div>
           ) : notAuth ? (
             <div style={{ textAlign: "center", padding: "3rem 0" }}>
-              <h1 className="creator-hero-h1" style={{ fontSize: "2rem" }}>Creator Dashboard</h1>
+              <h1 className="creator-hero-h1" style={{ fontSize: "2rem" }}>{isDE ? "Creator Dashboard" : "Creator Dashboard"}</h1>
               <p style={{ color: "var(--text-muted)", maxWidth: 400, margin: "1rem auto 2rem" }}>
                 {isDE ? "Registriere dich zuerst, um Strecken hochzuladen." : "Register first to upload routes."}
               </p>

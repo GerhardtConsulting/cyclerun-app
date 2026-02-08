@@ -292,7 +292,7 @@ export default function CreatorContent() {
 
       {/* Apply Section */}
       <section className="creator-section" id="apply">
-        <h2>{t("sub.creator.apply_title").split("creator")[0]}<span className="gradient-text">{isDE ? "Creator zu werden" : "become a creator"}</span>?</h2>
+        <h2>{t("sub.creator.apply_1")}<span className="gradient-text">{t("sub.creator.apply_2")}</span>?</h2>
         <p className="section-subtitle">{t("sub.creator.apply_sub")}</p>
         <div className="creator-apply-card">
           <form id="creatorApplyForm" className="creator-form">

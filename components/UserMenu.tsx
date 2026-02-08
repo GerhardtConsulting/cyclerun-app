@@ -210,7 +210,7 @@ export default function UserMenu() {
           {/* Menu items */}
           <div style={{ padding: "0.25rem 0" }}>
             <MenuLink href="/profile" icon="👤" label={isDE ? "Profil" : "Profile"} onClick={() => setOpen(false)} />
-            <MenuLink href="/store" icon="🏪" label={isDE ? "Route Store" : "Route Store"} onClick={() => setOpen(false)} />
+            <MenuLink href="/store" icon="🏪" label={isDE ? "Strecken-Store" : "Route Store"} onClick={() => setOpen(false)} />
             <MenuLink href="/leaderboard" icon="🏆" label={isDE ? "Rangliste" : "Leaderboard"} onClick={() => setOpen(false)} />
 
             {/* Creator section */}

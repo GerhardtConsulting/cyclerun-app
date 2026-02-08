@@ -22,7 +22,7 @@ export default function SubpageFooter() {
             <div className="subpage-footer-col">
               <strong>{t("sub.footer.product")}</strong>
               <Link href="/">{t("sub.footer.start_riding")}</Link>
-              <Link href="/store">Route Store</Link>
+              <Link href="/store">{isDE ? "Strecken-Store" : "Route Store"}</Link>
               <Link href="/routes">{t("sub.footer.routes")}</Link>
               <Link href="/leaderboard">{isDE ? "Rangliste" : "Leaderboard"}</Link>
               <Link href="/profile">{isDE ? "Profil" : "Profile"}</Link>

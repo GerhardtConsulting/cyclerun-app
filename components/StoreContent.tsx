@@ -110,11 +110,11 @@ export default function StoreContent() {
 
   return (
     <div className="creator-page">
-      <SubpageNav rightLabel="Creator Dashboard" rightHref="/creator/dashboard" />
+      <SubpageNav rightLabel={isDE ? "Creator Dashboard" : "Creator Dashboard"} rightHref="/creator/dashboard" />
 
       <section className="creator-hero" style={{ paddingBottom: "2rem" }}>
         <div className="creator-hero-inner" style={{ maxWidth: 900 }}>
-          <span className="creator-badge-label">🏪 Route Store</span>
+          <span className="creator-badge-label">🏪 {isDE ? "Strecken-Store" : "Route Store"}</span>
           <h1 className="creator-hero-h1" style={{ fontSize: "2.2rem", marginBottom: "0.25rem" }}>
             {isDE ? "Strecken-Store" : "Route Store"}
           </h1>

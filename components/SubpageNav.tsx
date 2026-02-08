@@ -44,7 +44,7 @@ interface UserInfo {
   level: number;
 }
 
-export default function SubpageNav(_props: SubpageNavProps) {
+export default function SubpageNav(props: SubpageNavProps) {
   const locale = useLocale();
   const isDE = locale === "de";
   const [menuOpen, setMenuOpen] = useState(false);
@@ -147,8 +147,15 @@ export default function SubpageNav(_props: SubpageNavProps) {
           ) : (
             <button className="site-header-login" onClick={() => setShowLogin(true)}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="8" r="4" /><path d="M20 21a8 8 0 10-16 0" /></svg>
-              <span>Login</span>
+              <span>{isDE ? "Einloggen" : "Login"}</span>
             </button>
+          )}
+
+          {/* Optional CTA button from props */}
+          {props.rightLabel && props.rightHref && (
+            <a href={props.rightHref} className="btn-primary btn-sm" style={{ fontSize: "0.75rem", padding: "0.35rem 0.75rem", whiteSpace: "nowrap" }}>
+              {props.rightLabel}
+            </a>
           )}
 
           {/* Hamburger */}
@@ -217,7 +224,7 @@ export default function SubpageNav(_props: SubpageNavProps) {
                 </Link>
                 {user.is_creator ? (
                   <Link href="/creator/dashboard" className="site-menu-link" onClick={closeMenu}>
-                    Creator Dashboard
+                    {isDE ? "Creator Dashboard" : "Creator Dashboard"}
                     <span className="site-menu-badge">Creator</span>
                   </Link>
                 ) : (
