@@ -586,6 +586,20 @@ export default function CycleRunApp() {
           cyclerun<span className="header-logo-app">.app</span>
         </div>
 
+        {/* Cast to screen button */}
+        <button id="rideCastBtn" className="ride-cast-btn" title={t('cast.tooltip')}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M2 16.1A5 5 0 015.9 20M2 12.05A9 9 0 019.95 20M2 8V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2h-6" />
+            <circle cx="2" cy="20" r="0" fill="currentColor" />
+          </svg>
+          <span>Cast</span>
+        </button>
+        <div id="rideCastOverlay" className="ride-cast-overlay" style={{ display: "none" }}>
+          <div className="ride-cast-code" id="rideCastCode">----</div>
+          <div className="ride-cast-hint">{t('cast.hint')}</div>
+          <div className="ride-cast-url">cyclerun.app/cast</div>
+        </div>
+
         <video id="rideVideo" loop muted></video>
 
         {/* Gear shift — right side */}

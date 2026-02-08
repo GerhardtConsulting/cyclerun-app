@@ -6,7 +6,7 @@
 import { t, getLocale } from "@/lib/i18n";
 import { downloadShareCard, type RideMetrics } from "@/lib/share-card";
 import QRCode from "qrcode";
-import { PairingReceiver, PairingSender, sendState } from "@/lib/phone-pairing";
+import { PairingReceiver, PairingSender, sendState, sendCastState } from "@/lib/phone-pairing";
 import { getSupabase } from "@/lib/supabase";
 import { getNextPrompt, saveGoalResponse, dismissGoalPrompt, fetchGoalState, type GoalPrompt } from "@/lib/goal-capture";
 
@@ -74,6 +74,8 @@ export class CyclingSimulator {
   tvSender: PairingSender | null;
   private _tvStateInterval: ReturnType<typeof setInterval> | null;
   private _started: boolean;
+  castCode: string | null;
+  private _castInterval: ReturnType<typeof setInterval> | null;
 
   constructor() {
     this.wizardStep = 1;
@@ -105,6 +107,8 @@ export class CyclingSimulator {
     this.tvCode = null;
     this.tvSender = null;
     this._tvStateInterval = null;
+    this.castCode = null;
+    this._castInterval = null;
 
     this.riderWeight = 75;
     this.riderHeight = 175;
@@ -239,6 +243,9 @@ export class CyclingSimulator {
     document.getElementById("useDefaultVideo")?.addEventListener("click", () => this.loadDefaultVideo());
     document.getElementById("videoUpload")?.addEventListener("change", (e) => this.uploadVideo(e));
     document.getElementById("loadVideoUrl")?.addEventListener("click", () => this.loadVideoFromUrl());
+
+    // Cast to screen
+    document.getElementById("rideCastBtn")?.addEventListener("click", () => this.toggleCast());
 
     // Post-ride summary
     document.getElementById("summaryDone")?.addEventListener("click", () => this.closeSummary("welcome"));
@@ -1132,6 +1139,7 @@ export class CyclingSimulator {
     this.isRiding = false;
     this.isPaused = false;
     this._stopTVStateLoop();
+    this.stopCast();
     const video = document.getElementById("rideVideo") as HTMLVideoElement;
     video.pause();
     video.currentTime = 0;
@@ -1536,6 +1544,59 @@ export class CyclingSimulator {
     if (regSub) regSub.textContent = t('reg.popup.subtitle', { speed: speedStr });
 
     document.getElementById("registerOverlay")?.classList.add("active");
+  }
+
+  // ============ CAST TO SCREEN ============
+
+  toggleCast() {
+    const overlay = document.getElementById("rideCastOverlay");
+    const btn = document.getElementById("rideCastBtn");
+
+    if (this.castCode) {
+      // Stop casting
+      this.stopCast();
+      return;
+    }
+
+    // Generate 4-digit code
+    this.castCode = String(Math.floor(1000 + Math.random() * 9000));
+    const codeEl = document.getElementById("rideCastCode");
+    if (codeEl) codeEl.textContent = this.castCode.split("").join(" ");
+    if (overlay) overlay.style.display = "block";
+    if (btn) btn.classList.add("active");
+
+    // Start sending cast state every 500ms
+    this._castInterval = setInterval(() => {
+      if (!this.castCode || !this.isRiding) return;
+      const video = document.getElementById("rideVideo") as HTMLVideoElement;
+      if (!video) return;
+
+      sendCastState(this.castCode, {
+        mode: "cast",
+        videoUrl: video.src || video.currentSrc || "",
+        playbackRate: video.playbackRate,
+        currentTime: video.currentTime,
+        isPlaying: !video.paused,
+        speed: this.currentSpeed,
+        distance: this.distance,
+        rideTime: this.rideStartTime ? Math.floor((Date.now() - this.rideStartTime) / 1000) : 0,
+      });
+    }, 500);
+
+    console.log("[Cast] Started casting with code:", this.castCode);
+  }
+
+  stopCast() {
+    if (this._castInterval) {
+      clearInterval(this._castInterval);
+      this._castInterval = null;
+    }
+    this.castCode = null;
+    const overlay = document.getElementById("rideCastOverlay");
+    const btn = document.getElementById("rideCastBtn");
+    if (overlay) overlay.style.display = "none";
+    if (btn) btn.classList.remove("active");
+    console.log("[Cast] Stopped casting");
   }
 
   // ============ PHONE PAIRING ============

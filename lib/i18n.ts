@@ -195,6 +195,10 @@ const translations: Record<Locale, Record<string, string>> = {
     "nudge.dismiss": "Not now",
     "disconnect.tooltip": "Not registered — stats won't be saved",
 
+    // Cast to screen
+    "cast.tooltip": "Cast video to TV or second screen",
+    "cast.hint": "Open on your TV or second screen",
+
     // Phone pairing
     "pair.title": "Connect Your Phone Camera",
     "pair.desc": "Scan the QR code with your phone to use its camera for motion tracking.",
@@ -663,6 +667,10 @@ const translations: Record<Locale, Record<string, string>> = {
     "nudge.cta": "Registrieren",
     "nudge.dismiss": "Sp\u00e4ter",
     "disconnect.tooltip": "Nicht registriert \u2014 Statistiken werden nicht gespeichert",
+
+    // Cast to screen
+    "cast.tooltip": "Video auf TV oder zweiten Bildschirm streamen",
+    "cast.hint": "\u00d6ffne auf deinem TV oder zweiten Bildschirm",
 
     // Phone pairing
     "pair.title": "Handy-Kamera verbinden",

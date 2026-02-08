@@ -79,6 +79,29 @@ export interface TVState {
   videoUrl?: string;
 }
 
+// ---- Cast state (ride video → second screen) ----
+
+export interface CastState {
+  mode: "cast";
+  videoUrl: string;
+  playbackRate: number;
+  currentTime: number;
+  isPlaying: boolean;
+  speed?: number;
+  distance?: number;
+  rideTime?: number;
+}
+
+export async function sendCastState(code: string, state: CastState) {
+  return sendState(code, state as unknown as TVState);
+}
+
+export async function pollCastState(code: string): Promise<CastState | null> {
+  const s = await pollState(code);
+  if (s && (s as unknown as CastState).mode === "cast") return s as unknown as CastState;
+  return null;
+}
+
 export async function sendState(code: string, state: TVState) {
   const res = await fetch(REST_STATE, {
     method: "POST",
