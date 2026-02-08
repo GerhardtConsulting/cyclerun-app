@@ -3,7 +3,30 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useLocale } from "@/lib/useLocale";
+import { setLocale } from "@/lib/i18n";
 import { getSupabase } from "@/lib/supabase";
+
+function FlagEN() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 60 42" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="42" fill="#012169" />
+      <path d="M0 0L60 42M60 0L0 42" stroke="#fff" strokeWidth="7" />
+      <path d="M0 0L60 42M60 0L0 42" stroke="#C8102E" strokeWidth="4" />
+      <path d="M30 0v42M0 21h60" stroke="#fff" strokeWidth="10" />
+      <path d="M30 0v42M0 21h60" stroke="#C8102E" strokeWidth="6" />
+    </svg>
+  );
+}
+
+function FlagDE() {
+  return (
+    <svg width="20" height="14" viewBox="0 0 60 42" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="14" fill="#000" />
+      <rect y="14" width="60" height="14" fill="#D00" />
+      <rect y="28" width="60" height="14" fill="#FFCE00" />
+    </svg>
+  );
+}
 
 interface SubpageNavProps {
   rightLabel?: string;
@@ -106,6 +129,12 @@ export default function SubpageNav(_props: SubpageNavProps) {
         </Link>
 
         <div className="site-header-right">
+          {/* Language switcher */}
+          <div className="site-header-lang">
+            <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} onClick={() => setLocale('en')} title="English"><FlagEN /></button>
+            <button className={`lang-btn${locale === 'de' ? ' active' : ''}`} onClick={() => setLocale('de')} title="Deutsch"><FlagDE /></button>
+          </div>
+
           {/* User avatar / Login button */}
           {user ? (
             <button className="site-header-avatar" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
@@ -167,16 +196,16 @@ export default function SubpageNav(_props: SubpageNavProps) {
             <div className="site-menu-section">
               <div className="site-menu-label">{isDE ? "Training" : "Training"}</div>
               <Link href="/" className="site-menu-link" onClick={closeMenu}>
-                🚴 {isDE ? "Jetzt fahren" : "Start Riding"}
+                {isDE ? "Jetzt fahren" : "Start Riding"}
               </Link>
               <Link href="/store" className="site-menu-link" onClick={closeMenu}>
-                🏪 {isDE ? "Strecken-Store" : "Route Store"}
+                {isDE ? "Strecken-Store" : "Route Store"}
               </Link>
               <Link href="/routes" className="site-menu-link" onClick={closeMenu}>
-                🗺️ {isDE ? "Strecken" : "Routes"}
+                {isDE ? "Strecken" : "Routes"}
               </Link>
               <Link href="/leaderboard" className="site-menu-link" onClick={closeMenu}>
-                🏆 {isDE ? "Rangliste" : "Leaderboard"}
+                {isDE ? "Rangliste" : "Leaderboard"}
               </Link>
             </div>
 
@@ -184,16 +213,16 @@ export default function SubpageNav(_props: SubpageNavProps) {
               <div className="site-menu-section">
                 <div className="site-menu-label">{isDE ? "Mein Bereich" : "My Account"}</div>
                 <Link href="/profile" className="site-menu-link" onClick={closeMenu}>
-                  👤 {isDE ? "Profil" : "Profile"}
+                  {isDE ? "Profil" : "Profile"}
                 </Link>
                 {user.is_creator ? (
                   <Link href="/creator/dashboard" className="site-menu-link" onClick={closeMenu}>
-                    🎬 Creator Dashboard
+                    Creator Dashboard
                     <span className="site-menu-badge">Creator</span>
                   </Link>
                 ) : (
                   <Link href="/creator/dashboard" className="site-menu-link" onClick={closeMenu}>
-                    🎬 {isDE ? "Creator werden" : "Become Creator"}
+                    {isDE ? "Creator werden" : "Become Creator"}
                   </Link>
                 )}
               </div>
@@ -202,19 +231,19 @@ export default function SubpageNav(_props: SubpageNavProps) {
             <div className="site-menu-section">
               <div className="site-menu-label">{isDE ? "Entdecken" : "Discover"}</div>
               <Link href="/blog" className="site-menu-link" onClick={closeMenu}>
-                📝 Blog
+                Blog
               </Link>
               <Link href="/guide" className="site-menu-link" onClick={closeMenu}>
-                📖 {isDE ? "Guides" : "Guides"}
+                {isDE ? "Guides" : "Guides"}
               </Link>
               <Link href="/creator" className="site-menu-link" onClick={closeMenu}>
-                🎥 {isDE ? "Creator Hub" : "Creator Hub"}
+                Creator Hub
               </Link>
               <Link href="/roadmap" className="site-menu-link" onClick={closeMenu}>
-                🗓️ Roadmap
+                Roadmap
               </Link>
               <Link href="/changelog" className="site-menu-link" onClick={closeMenu}>
-                📋 Changelog
+                Changelog
               </Link>
             </div>
 
@@ -231,7 +260,7 @@ export default function SubpageNav(_props: SubpageNavProps) {
             {user && (
               <div className="site-menu-section site-menu-section-logout">
                 <button className="site-menu-link site-menu-logout" onClick={handleLogout}>
-                  🚪 {isDE ? "Ausloggen" : "Log Out"}
+                  {isDE ? "Ausloggen" : "Log Out"}
                 </button>
               </div>
             )}

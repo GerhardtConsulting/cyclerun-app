@@ -81,16 +81,11 @@ export default function CycleRunApp() {
         <div className="splash">
           <div className="splash-glow"></div>
 
-          {/* Language Switcher — top right on splash */}
-          <div className="lang-switcher splash-lang">
-            <button className={`lang-btn${locale === 'en' ? ' active' : ''}`} onClick={() => switchLang('en')} title="English"><FlagEN /></button>
-            <button className={`lang-btn${locale === 'de' ? ' active' : ''}`} onClick={() => switchLang('de')} title="Deutsch"><FlagDE /></button>
-          </div>
-
           <div className="splash-logo">
             <span className="splash-logo-text">cyclerun<span className="splash-logo-app">.app</span></span>
           </div>
 
+          <h1 className="splash-headline">{t('splash.headline.1')}<span className="gradient-text">{t('splash.headline.2')}</span></h1>
           <p className="splash-tagline">{t('splash.tagline')}</p>
 
           <div className="sport-cards">

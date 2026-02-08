@@ -250,6 +250,16 @@ body {
     display: block;
 }
 
+.splash-headline {
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.02em;
+    text-align: center;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+}
+
 .splash-tagline {
     font-size: 1rem;
     color: var(--text-muted);
@@ -3146,6 +3156,13 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+/* Language switcher in header */
+.site-header-lang {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 /* Login button (not logged in) */
