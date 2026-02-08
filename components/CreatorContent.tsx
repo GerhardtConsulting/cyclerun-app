@@ -102,8 +102,8 @@ export default function CreatorContent() {
           <p className="creator-hero-sub">{t("sub.creator.hero_sub")}</p>
           <div className="creator-hero-stats">
             <div className="creator-stat">
-              <span className="creator-stat-num">10,000+</span>
-              <span className="creator-stat-label">{t("sub.creator.active_riders")}</span>
+              <span className="creator-stat-num">{isDE ? "Wachsend" : "Growing"}</span>
+              <span className="creator-stat-label">{isDE ? "Aktive Community" : "Active Community"}</span>
             </div>
             <div className="creator-stat">
               <span className="creator-stat-num">0€</span>

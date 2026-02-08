@@ -5,7 +5,7 @@ import { JsonLd, makeAlternates } from "@/app/seo-config";
 export const metadata: Metadata = {
   title: "Become a Creator — Earn Money with Your Cycling Videos",
   description:
-    "Share your POV cycling routes with 10,000+ riders. Earn passive income, grow your audience, and join the fastest-growing indoor cycling community. Free to join — apply in 2 minutes.",
+    "Share your POV cycling routes with thousands of riders. Earn passive income, grow your audience, and join the fastest-growing indoor cycling community. Free to join — start in 2 minutes.",
   keywords:
     "cycling creator, POV cycling video, indoor cycling routes, cycling content creator, cycling video monetization, GoPro cycling, cycling influencer, route video creator, cycling community, fitness creator platform",
   alternates: makeAlternates("/creator"),
@@ -115,10 +115,10 @@ const jsonLdFaq = {
     },
     {
       "@type": "Question",
-      name: "How does the approval process work?",
+      name: "How do I get started as a creator?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Apply with your name and email. We review applications within 48 hours. Once approved, you get access to the Creator Dashboard where you can upload routes, track views, and manage earnings.",
+        text: "Sign up with your name and email. Activation is instant — no approval needed. You immediately get access to the Creator Dashboard where you can upload routes, track views, and manage earnings.",
       },
     },
   ],

@@ -7,40 +7,71 @@ const CONSENT_KEY = "cyclerun_cookie_consent";
 
 type ConsentState = "pending" | "accepted" | "declined";
 
+/* ── Google gtag helper ────────────────────────────────── */
+// Must use `arguments` (not ...args) so dataLayer items match
+// the format the gtag.js script expects.
+function ensureGtag() {
+  const w = window as unknown as Record<string, unknown>;
+  if (typeof w.gtag === "function") return;
+  w.dataLayer = (w.dataLayer as unknown[]) || [];
+  // eslint-disable-next-line prefer-rest-params
+  w.gtag = function () { (w.dataLayer as IArguments[]).push(arguments); };
+}
+
+function gtag(..._args: unknown[]) {
+  // Thin wrapper that calls the real window.gtag which uses `arguments`.
+  // We call ensureGtag first, then forward via apply so the Arguments
+  // object (not an Array) lands in dataLayer.
+  ensureGtag();
+  const w = window as unknown as Record<string, (...a: unknown[]) => void>;
+  w.gtag(..._args);
+}
+
 function getConsent(): ConsentState {
   if (typeof window === "undefined") return "pending";
   return (localStorage.getItem(CONSENT_KEY) as ConsentState) || "pending";
 }
 
-function loadGA() {
-  if (typeof window === "undefined") return;
-  if (document.getElementById("ga-script")) return;
-
-  // gtag script
-  const script = document.createElement("script");
-  script.id = "ga-script";
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-  document.head.appendChild(script);
-
-  // gtag init
-  const w = window as unknown as Record<string, unknown>;
-  w.dataLayer = (w.dataLayer as unknown[]) || [];
-  function gtag(...args: unknown[]) {
-    (w.dataLayer as unknown[]).push(args);
+/* ── Consent Mode v2 defaults + gtag.js load ─────────── */
+// The script is ALWAYS loaded so Google can verify the tag.
+// With analytics_storage:"denied", GA4 sets NO cookies and
+// collects NO identifiable data until consent is granted.
+if (typeof window !== "undefined") {
+  ensureGtag();
+  // 1. Set consent defaults BEFORE script loads
+  gtag("consent", "default", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    wait_for_update: 500,
+  });
+  // 2. Load gtag.js immediately (consent mode controls behavior)
+  if (!document.getElementById("ga-script")) {
+    const s = document.createElement("script");
+    s.id = "ga-script";
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(s);
   }
+  // 3. Configure GA4
   gtag("js", new Date());
   gtag("config", GA_ID, {
-    anonymize_ip: true,
     cookie_flags: "SameSite=Lax;Secure",
   });
 }
 
-function removeGA() {
-  if (typeof window === "undefined") return;
-  // Remove script
-  document.getElementById("ga-script")?.remove();
-  // Clear GA cookies
+function grantConsent() {
+  gtag("consent", "update", {
+    analytics_storage: "granted",
+  });
+}
+
+function revokeConsent() {
+  gtag("consent", "update", {
+    analytics_storage: "denied",
+  });
+  // Clear any GA cookies that were set while consent was granted
   const cookies = document.cookie.split(";");
   for (const c of cookies) {
     const name = c.split("=")[0].trim();
@@ -49,15 +80,13 @@ function removeGA() {
       document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
     }
   }
-  // Clear dataLayer
-  (window as unknown as Record<string, unknown>).dataLayer = undefined;
 }
 
 /** Expose globally so Datenschutz page can trigger revoke */
 if (typeof window !== "undefined") {
   (window as unknown as Record<string, (() => void) | undefined>).__cyclerunRevokeConsent = () => {
     localStorage.setItem(CONSENT_KEY, "declined");
-    removeGA();
+    revokeConsent();
     window.dispatchEvent(new Event("consent-changed"));
   };
 }
@@ -70,7 +99,7 @@ export default function CookieConsent() {
     const stored = getConsent();
     setConsent(stored);
     if (stored === "accepted") {
-      loadGA();
+      grantConsent();
     }
     if (stored === "pending") {
       // Short delay so banner doesn't flash on initial load
@@ -89,14 +118,14 @@ export default function CookieConsent() {
     localStorage.setItem(CONSENT_KEY, "accepted");
     setConsent("accepted");
     setVisible(false);
-    loadGA();
+    grantConsent();
   };
 
   const handleDecline = () => {
     localStorage.setItem(CONSENT_KEY, "declined");
     setConsent("declined");
     setVisible(false);
-    removeGA();
+    revokeConsent();
   };
 
   // Detect locale

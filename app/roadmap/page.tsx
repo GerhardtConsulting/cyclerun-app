@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import RoadmapContent from "@/components/RoadmapContent";
+import { JsonLd, makeAlternates } from "@/app/seo-config";
 
 export const metadata: Metadata = {
   title: "Roadmap — What's New and What's Next",
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
     "See what we've shipped, what's coming next, and vote on features you want most. CycleRun is built by and for the community.",
   keywords:
     "CycleRun roadmap, indoor cycling features, CycleRun changelog, feature requests, cycling app updates",
-  alternates: { canonical: "/roadmap" },
+  alternates: makeAlternates("/roadmap"),
   openGraph: {
     title: "CycleRun Roadmap — Built by the Community",
     description: "See what we shipped, what's coming, and vote on what matters to you.",
@@ -28,7 +29,7 @@ export default function RoadmapPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <RoadmapContent />
     </>
   );

@@ -1740,4 +1740,1409 @@ Es sind ergänzende Tools. Plane deine Sommerroute auf RideWithGPS, trainiere de
 
 [CycleRun kostenlos testen →](https://cyclerun.app)`,
   },
+
+  // Page 13: Indoor Cycling Weight Loss
+  {
+    slug: "indoor-cycling-weight-loss",
+    title: "Indoor Cycling for Weight Loss — How Many Calories Can You Burn?",
+    title_de: "Abnehmen mit Indoor Cycling — Wie viele Kalorien verbrennst du wirklich?",
+    h1: "Indoor Cycling for Weight Loss: The Complete Science-Backed Guide",
+    h1_de: "Abnehmen mit Indoor Cycling: Der komplette, wissenschaftlich fundierte Guide",
+    description: "Learn how indoor cycling burns 400-600 calories per hour and how to structure your rides for maximum fat loss. Free training plan included — no smart trainer needed.",
+    description_de: "Erfahre wie Indoor Cycling 400-600 Kalorien pro Stunde verbrennt und wie du deine Fahrten für maximalen Fettabbau strukturierst. Kostenloser Trainingsplan inklusive.",
+    keywords: "indoor cycling weight loss, calories burned indoor cycling, cycling for fat loss, home trainer weight loss, ergometer abnehmen, indoor cycling kalorienverbrauch, spinning weight loss, cycling diet plan",
+    faqs: [
+      { q: "How many calories does indoor cycling burn?", a: "Indoor cycling burns 400-600 calories per hour depending on intensity, body weight, and resistance. A 75 kg rider at moderate intensity burns approximately 500 calories in 60 minutes. CycleRun tracks your estimated calorie burn in real-time." },
+      { q: "Is indoor cycling good for belly fat?", a: "Yes. While you can't spot-reduce fat, indoor cycling is one of the most effective cardio exercises for overall fat loss. Combined with a slight caloric deficit, regular cycling sessions will reduce body fat including belly fat." },
+      { q: "How often should I cycle to lose weight?", a: "For effective weight loss, aim for 3-5 sessions per week, 30-60 minutes each. Consistency matters more than intensity. CycleRun's goal tracking helps you stay on target." },
+      { q: "Is indoor cycling better than running for weight loss?", a: "Both are effective. Indoor cycling is lower impact (easier on joints), has lower injury risk, and is more accessible. You can cycle longer without joint pain, which often leads to more total calories burned per week." },
+      { q: "Do I need expensive equipment to lose weight with cycling?", a: "No. CycleRun works with any stationary bike — even a 20-year-old ergometer. No smart trainer, no sensors, no subscription needed. Just your bike and a webcam." },
+      { q: "What's the best indoor cycling workout for fat loss?", a: "Alternate between steady-state rides (Zone 2, 45-60 min) and interval sessions (30 sec hard / 30 sec easy, 20-30 min). CycleRun's varied route profiles naturally create interval-like sessions through elevation changes." },
+    ],
+    faqs_de: [
+      { q: "Wie viele Kalorien verbrennt Indoor Cycling?", a: "Indoor Cycling verbrennt 400-600 Kalorien pro Stunde, abhängig von Intensität, Körpergewicht und Widerstand. Ein 75-kg-Fahrer verbrennt bei moderater Intensität ca. 500 Kalorien in 60 Minuten. CycleRun trackt deinen geschätzten Kalorienverbrauch in Echtzeit." },
+      { q: "Hilft Indoor Cycling gegen Bauchfett?", a: "Ja. Zwar kann man Fett nicht gezielt an einer Stelle abbauen, aber Indoor Cycling ist eine der effektivsten Cardio-Übungen für den Gesamtfettabbau. Kombiniert mit einem leichten Kaloriendefizit reduzieren regelmäßige Sessions das Körperfett inklusive Bauchfett." },
+      { q: "Wie oft sollte ich radeln um abzunehmen?", a: "Für effektives Abnehmen: 3-5 Sessions pro Woche, je 30-60 Minuten. Konstanz ist wichtiger als Intensität. CycleRuns Ziel-Tracking hilft dir dabei." },
+      { q: "Ist Indoor Cycling besser als Laufen zum Abnehmen?", a: "Beides ist effektiv. Indoor Cycling ist gelenkschonender, hat ein geringeres Verletzungsrisiko und ist zugänglicher. Du kannst länger fahren ohne Gelenkschmerzen, was oft zu mehr verbrannten Kalorien pro Woche führt." },
+      { q: "Brauche ich teure Ausrüstung zum Abnehmen mit Cycling?", a: "Nein. CycleRun funktioniert mit jedem stationären Fahrrad — auch einem 20 Jahre alten Ergometer. Kein Smart Trainer, keine Sensoren, kein Abo nötig. Nur dein Rad und eine Webcam." },
+      { q: "Welches Indoor-Cycling-Workout ist am besten zum Abnehmen?", a: "Wechsle zwischen Steady-State-Fahrten (Zone 2, 45-60 Min.) und Intervall-Sessions (30 Sek. hart / 30 Sek. leicht, 20-30 Min.). CycleRuns abwechslungsreiche Streckenprofile erzeugen durch Höhenänderungen natürliche Intervalle." },
+    ],
+    content: `## The Science of Cycling and Weight Loss
+
+Weight loss comes down to one principle: **burn more calories than you consume**. Indoor cycling is one of the most efficient ways to create this caloric deficit because it engages large muscle groups (quadriceps, hamstrings, glutes, calves) continuously for extended periods.
+
+But there's more to it than just calories in vs. calories out:
+
+- **EPOC Effect** (Excess Post-Exercise Oxygen Consumption) — After an intense cycling session, your body continues burning calories at an elevated rate for 12-24 hours. Higher intensity = more EPOC.
+- **Muscle preservation** — Unlike extreme caloric restriction, cycling helps maintain lean muscle mass while burning fat. Muscle tissue burns more calories at rest.
+- **Metabolic adaptation** — Regular cycling improves your body's ability to use fat as fuel, especially during moderate-intensity rides.
+
+## How Many Calories Does Indoor Cycling Really Burn?
+
+Calorie burn depends on your weight, intensity, and duration:
+
+| Body Weight | Light (casual) | Moderate (steady) | Vigorous (intervals) |
+|---|---|---|---|
+| 60 kg | 210 / 420 | 300 / 600 | 390 / 780 |
+| 75 kg | 260 / 520 | 375 / 750 | 490 / 980 |
+| 90 kg | 315 / 630 | 450 / 900 | 585 / 1170 |
+
+*Values shown as 30 min / 60 min estimates*
+
+These numbers make cycling one of the highest calorie-burning activities available — comparable to running but without the joint impact.
+
+## The Best Indoor Cycling Routine for Fat Loss
+
+A balanced weekly plan combines different ride types:
+
+| Day | Session | Duration | Intensity |
+|---|---|---|---|
+| Monday | Zone 2 Scenic Ride | 45 min | Moderate — fat-burning zone |
+| Tuesday | Rest or light walk | — | — |
+| Wednesday | Interval Session | 25 min | High — alternate hard/easy |
+| Thursday | Rest | — | — |
+| Friday | Scenic Endurance Ride | 50 min | Moderate — enjoy the views |
+| Saturday | Long Ride | 60-75 min | Easy to moderate |
+| Sunday | Rest or active recovery | — | — |
+
+**Total: 3-4 sessions, 2.5-3.5 hours per week** — enough for consistent weight loss of 0.5-1 kg per week when combined with sensible eating.
+
+## Zone 2 Training: The Fat-Burning Sweet Spot
+
+Zone 2 is moderate intensity — you can hold a conversation but you're breathing harder than at rest. At this intensity, your body preferentially burns **fat** for fuel rather than glycogen (carbohydrates).
+
+How to find your Zone 2 on CycleRun:
+- You should be able to speak in sentences (not gasping)
+- RPE (Rate of Perceived Exertion): 4-5 out of 10
+- On CycleRun, choose a route with gentle gradients like the Pacific Coast Highway or Provence Lavender Fields
+- Maintain a steady pedaling rhythm — the video speed should be consistent
+
+Zone 2 rides of 45-60 minutes are the **most effective fat-burning sessions** you can do. They're also sustainable — you can do them 3-4 times per week without burnout.
+
+## Nutrition Tips for Cycling Weight Loss
+
+Training alone isn't enough. Here are the essentials:
+
+- **Moderate deficit** — Aim for 300-500 calories below maintenance. Never go extreme — it kills performance and motivation.
+- **Protein priority** — 1.6-2.0 g per kg body weight daily. This preserves muscle while losing fat.
+- **Hydrate** — Drink 500 ml water before riding, sip during, and replenish after. Dehydration reduces performance by up to 25%.
+- **Don't eat back all exercise calories** — A common trap. If you burned 400 calories riding, don't reward yourself with a 600-calorie meal.
+- **Timing** — Fasted morning rides can enhance fat oxidation, but only if you feel good. Performance matters more than timing.
+
+## Why CycleRun Makes Weight Loss Easier
+
+Traditional indoor cycling fails because it's **boring**. You stare at a wall, watch the clock, and quit after two weeks. CycleRun changes this:
+
+- **Scenic POV videos** keep your mind engaged — you forget you're exercising
+- **Gamification** (Energy, Badges, Levels, Streaks) creates daily motivation to ride
+- **Goal tracking** monitors your progress toward your weight loss target
+- **Variety** — different routes prevent monotony (Mallorca one day, Alps the next)
+- **Post-ride summaries** with calories, distance, and share cards give you a sense of accomplishment
+- **Zero friction** — open the browser and ride. No setup, no subscription, no excuses.
+
+## Your 4-Week Starter Plan
+
+**Week 1 — Build the Habit**
+- 3 rides × 20 minutes at easy pace
+- Choose flat, scenic routes (Pacific Coast Highway, Provence)
+- Focus: just show up and pedal
+
+**Week 2 — Extend Duration**
+- 3 rides × 30 minutes at easy-moderate pace
+- Try one hilly route (Cap de Formentor)
+- Focus: comfortable breathing, steady rhythm
+
+**Week 3 — Add Intensity**
+- 3 rides × 35 minutes
+- One session with intervals: 20 sec fast / 40 sec easy × 8
+- Focus: push slightly outside comfort zone
+
+**Week 4 — Full Program**
+- 4 rides: 2 × 40 min Zone 2 + 1 × 25 min intervals + 1 × 50 min long ride
+- Track your stats on CycleRun profile
+- Focus: consistency and enjoying the process
+
+After 4 weeks, you'll have burned approximately 4,000-6,000 extra calories through cycling alone — equivalent to 0.5-0.8 kg of pure fat loss, on top of any dietary changes.
+
+---
+
+### Related Guides
+
+- [Indoor Cycling Workout Plan — Free 8-Week Schedule](/guide/cycling-workout-plan)
+- [Indoor Cycling for Beginners — Starter Guide](/guide/indoor-cycling-beginner)
+- [Ergometer Training](/guide/ergometer-training)
+- [Free Zwift Alternative](/guide/zwift-alternative-free)
+
+[Start your weight loss journey →](https://cyclerun.app)`,
+    content_de: `## Die Wissenschaft hinter Cycling und Abnehmen
+
+Gewichtsverlust basiert auf einem Prinzip: **Verbrenne mehr Kalorien als du aufnimmst**. Indoor Cycling ist eine der effizientesten Methoden, dieses Kaloriendefizit zu erzeugen, weil es große Muskelgruppen (Quadrizeps, Hamstrings, Gesäß, Waden) kontinuierlich über längere Zeiträume beansprucht.
+
+Aber es steckt mehr dahinter als nur Kalorien rein vs. Kalorien raus:
+
+- **EPOC-Effekt** (Excess Post-Exercise Oxygen Consumption) — Nach einer intensiven Cycling-Session verbrennt dein Körper weiterhin Kalorien mit erhöhter Rate für 12-24 Stunden.
+- **Muskelerhalt** — Anders als bei extremer Kalorienrestriktion hilft Cycling, Muskelmasse zu erhalten während Fett verbrannt wird.
+- **Metabolische Anpassung** — Regelmäßiges Cycling verbessert die Fähigkeit deines Körpers, Fett als Brennstoff zu nutzen.
+
+## Wie viele Kalorien verbrennt Indoor Cycling wirklich?
+
+Der Kalorienverbrauch hängt von Gewicht, Intensität und Dauer ab:
+
+| Körpergewicht | Leicht (locker) | Moderat (stetig) | Intensiv (Intervalle) |
+|---|---|---|---|
+| 60 kg | 210 / 420 | 300 / 600 | 390 / 780 |
+| 75 kg | 260 / 520 | 375 / 750 | 490 / 980 |
+| 90 kg | 315 / 630 | 450 / 900 | 585 / 1170 |
+
+*Werte als 30 Min. / 60 Min. Schätzung*
+
+Diese Zahlen machen Cycling zu einer der kalorienintensivsten Aktivitäten — vergleichbar mit Laufen, aber ohne die Gelenkbelastung.
+
+## Die beste Indoor-Cycling-Routine zum Abnehmen
+
+Ein ausgewogener Wochenplan kombiniert verschiedene Fahrttypen:
+
+| Tag | Session | Dauer | Intensität |
+|---|---|---|---|
+| Montag | Zone 2 Scenic Ride | 45 Min. | Moderat — Fettverbrennungszone |
+| Dienstag | Ruhe oder leichter Spaziergang | — | — |
+| Mittwoch | Intervall-Session | 25 Min. | Hoch — hart/leicht wechselnd |
+| Donnerstag | Ruhe | — | — |
+| Freitag | Scenic Ausdauerfahrt | 50 Min. | Moderat — Landschaft genießen |
+| Samstag | Lange Fahrt | 60-75 Min. | Leicht bis moderat |
+| Sonntag | Ruhe oder aktive Erholung | — | — |
+
+**Gesamt: 3-4 Sessions, 2,5-3,5 Stunden pro Woche** — genug für konstanten Gewichtsverlust von 0,5-1 kg pro Woche in Kombination mit vernünftiger Ernährung.
+
+## Zone 2 Training: Der Fettverbrennungs-Sweet-Spot
+
+Zone 2 ist moderate Intensität — du kannst dich unterhalten, atmest aber stärker als in Ruhe. Bei dieser Intensität verbrennt dein Körper bevorzugt **Fett** als Brennstoff statt Glykogen.
+
+So findest du deine Zone 2 auf CycleRun:
+- Du solltest in Sätzen sprechen können (nicht keuchen)
+- RPE (Rate of Perceived Exertion): 4-5 von 10
+- Wähle Strecken mit sanften Steigungen wie Pacific Coast Highway oder Provence Lavendelfelder
+- Halte einen gleichmäßigen Tritt — die Videogeschwindigkeit sollte konstant sein
+
+Zone-2-Fahrten von 45-60 Minuten sind die **effektivsten Fettverbrennungs-Sessions**. Sie sind auch nachhaltig — du kannst sie 3-4 Mal pro Woche machen ohne auszubrennen.
+
+## Ernährungstipps zum Abnehmen mit Cycling
+
+Training allein reicht nicht. Hier die Grundlagen:
+
+- **Moderates Defizit** — 300-500 Kalorien unter Erhaltungsbedarf. Nie extrem — das killt Leistung und Motivation.
+- **Protein-Priorität** — 1,6-2,0 g pro kg Körpergewicht täglich. Erhält Muskeln beim Fettabbau.
+- **Hydrieren** — 500 ml Wasser vor der Fahrt, schlückweise währenddessen, auffüllen danach.
+- **Nicht alle Trainingskalorien zurückessen** — Eine häufige Falle. 400 Kalorien verbrannt ≠ 600-Kalorien-Belohnung.
+- **Timing** — Nüchterne Morgenfahrten können die Fettoxidation verbessern, aber nur wenn du dich gut fühlst.
+
+## Warum CycleRun das Abnehmen leichter macht
+
+Traditionelles Indoor Cycling scheitert, weil es **langweilig** ist. Du starrst eine Wand an, schaust auf die Uhr und hörst nach zwei Wochen auf. CycleRun ändert das:
+
+- **Szenische POV-Videos** halten deinen Geist beschäftigt — du vergisst, dass du trainierst
+- **Gamification** (Energie, Abzeichen, Level, Streaks) erzeugt tägliche Motivation
+- **Ziel-Tracking** überwacht deinen Fortschritt zum Abnehm-Ziel
+- **Abwechslung** — verschiedene Strecken verhindern Monotonie (heute Mallorca, morgen Alpen)
+- **Fahrt-Zusammenfassungen** mit Kalorien, Distanz und Share Cards geben ein Erfolgsgefühl
+- **Null Friction** — Browser öffnen und losfahren. Kein Setup, kein Abo, keine Ausreden.
+
+## Dein 4-Wochen-Starterplan
+
+**Woche 1 — Gewohnheit aufbauen**
+- 3 Fahrten × 20 Minuten bei lockerem Tempo
+- Wähle flache, szenische Strecken (Pacific Coast Highway, Provence)
+- Fokus: einfach auftauchen und treten
+
+**Woche 2 — Dauer steigern**
+- 3 Fahrten × 30 Minuten bei leicht-moderatem Tempo
+- Probiere eine hügelige Strecke (Cap de Formentor)
+- Fokus: komfortable Atmung, gleichmäßiger Rhythmus
+
+**Woche 3 — Intensität hinzufügen**
+- 3 Fahrten × 35 Minuten
+- Eine Session mit Intervallen: 20 Sek. schnell / 40 Sek. leicht × 8
+- Fokus: leicht aus der Komfortzone
+
+**Woche 4 — Volles Programm**
+- 4 Fahrten: 2 × 40 Min. Zone 2 + 1 × 25 Min. Intervalle + 1 × 50 Min. Langfahrt
+- Tracke deine Stats im CycleRun-Profil
+- Fokus: Konstanz und Spaß am Prozess
+
+Nach 4 Wochen hast du ungefähr 4.000-6.000 zusätzliche Kalorien durch Cycling verbrannt — das entspricht 0,5-0,8 kg reinem Fettverlust, zusätzlich zu Ernährungsumstellungen.
+
+---
+
+### Verwandte Guides
+
+- [Indoor Cycling Trainingsplan — Kostenloser 8-Wochen-Plan](/guide/cycling-workout-plan)
+- [Indoor Cycling für Anfänger — Starter-Guide](/guide/indoor-cycling-beginner)
+- [Ergometer Training](/guide/ergometer-training)
+- [Kostenlose Zwift-Alternative](/guide/zwift-alternative-free)
+
+[Starte deine Abnehm-Reise →](https://cyclerun.app)`,
+  },
+
+  // Page 14: Peloton Alternative Free
+  {
+    slug: "peloton-alternative-free",
+    title: "Free Peloton Alternative 2026 — Indoor Cycling Without the Subscription",
+    title_de: "Kostenlose Peloton-Alternative 2026 — Indoor Cycling ohne Abo",
+    h1: "Free Peloton Alternative: Turn Any Bike Into a Smart Cycling Experience",
+    h1_de: "Kostenlose Peloton-Alternative: Mach jedes Rad zum smarten Cycling-Erlebnis",
+    description: "Use your Peloton, Spinning bike, or any exercise bike with CycleRun — the free alternative that needs no subscription. Real POV videos, AI motion tracking, zero cost.",
+    description_de: "Nutze dein Peloton, Spinning Bike oder jeden Heimtrainer mit CycleRun — die kostenlose Alternative ohne Abo. Echte POV-Videos, KI-Bewegungserkennung, null Kosten.",
+    keywords: "peloton alternative free, peloton alternative without subscription, free peloton app, peloton bike free classes, indoor cycling without subscription, peloton kostenlos, peloton alternative kostenlos, spinning bike app free",
+    faqs: [
+      { q: "Can I use my Peloton bike without the subscription?", a: "Yes! While Peloton charges $44/month for their classes, you can use CycleRun completely free. Just point your webcam at your Peloton's pedals and ride real-world POV videos. No subscription, no Peloton account needed." },
+      { q: "What can I do with my Peloton if I cancel the subscription?", a: "Your Peloton bike still works as a spinning bike. With CycleRun, you add real-world video routes, AI-based cadence tracking via webcam, gamification with levels and badges, and ride stats — all free." },
+      { q: "Is CycleRun as good as Peloton classes?", a: "Different, not worse. Peloton offers instructor-led classes with music. CycleRun offers scenic real-world POV rides where you control the pace. Many former Peloton users prefer the immersive feeling of riding real roads." },
+      { q: "Does CycleRun work with other spinning bikes?", a: "Yes. CycleRun works with any stationary bike — Peloton, Keiser, Schwinn, Life Fitness, cheap Amazon bikes, old ergometers. If your legs move, CycleRun tracks it." },
+      { q: "How much does CycleRun cost?", a: "CycleRun is completely free. No subscription, no trial period, no premium tier. Compare that to Peloton ($44/month = $528/year) or Zwift (€17.99/month = €216/year)." },
+      { q: "Do I need any additional hardware?", a: "Just a computer or laptop with a webcam. No sensors, no heart rate monitor, no ANT+ dongle. Your webcam does all the tracking." },
+    ],
+    faqs_de: [
+      { q: "Kann ich mein Peloton ohne Abo nutzen?", a: "Ja! Während Peloton $44/Monat (~40 €) für Kurse verlangt, kannst du CycleRun völlig kostenlos nutzen. Richte einfach deine Webcam auf die Pedale und fahre echte POV-Streckenvideos. Kein Abo, kein Peloton-Konto nötig." },
+      { q: "Was kann ich mit meinem Peloton machen, wenn ich das Abo kündige?", a: "Dein Peloton funktioniert weiterhin als Spinning Bike. Mit CycleRun bekommst du echte Streckenvideos, KI-basiertes Trittfrequenz-Tracking per Webcam, Gamification mit Leveln und Abzeichen, und Fahrtstatistiken — alles kostenlos." },
+      { q: "Ist CycleRun so gut wie Peloton-Kurse?", a: "Anders, nicht schlechter. Peloton bietet Kursleiter-geführte Classes mit Musik. CycleRun bietet szenische Echtzeit-POV-Fahrten, bei denen du das Tempo kontrollierst. Viele ehemalige Peloton-Nutzer bevorzugen das immersive Gefühl, echte Straßen zu fahren." },
+      { q: "Funktioniert CycleRun mit anderen Spinning Bikes?", a: "Ja. CycleRun funktioniert mit jedem stationären Fahrrad — Peloton, Keiser, Schwinn, Life Fitness, günstige Amazon-Bikes, alte Ergometer. Wenn sich deine Beine bewegen, trackt CycleRun es." },
+      { q: "Was kostet CycleRun?", a: "CycleRun ist völlig kostenlos. Kein Abo, keine Testphase, kein Premium-Tier. Vergleiche das mit Peloton ($44/Monat = $528/Jahr) oder Zwift (17,99 €/Monat = 216 €/Jahr)." },
+      { q: "Brauche ich zusätzliche Hardware?", a: "Nur einen Computer oder Laptop mit Webcam. Keine Sensoren, kein Pulsmesser, kein ANT+-Dongle. Deine Webcam übernimmt das gesamte Tracking." },
+    ],
+    content: `## The Peloton Problem: Great Bike, Expensive Software
+
+Peloton revolutionized home fitness with beautifully designed bikes and engaging instructor-led classes. But the economics don't add up for many riders:
+
+- **Peloton Bike**: $1,445 (or $2,495 for Bike+)
+- **Monthly subscription**: $44/month ($528/year)
+- **3-year total cost**: $1,445 + $1,584 = **$3,029**
+
+That $44/month is for software and video classes — the bike itself is just a well-built spinning bike. Cancel the subscription, and your expensive investment becomes a clothes hanger with a screen.
+
+## What Happens When You Cancel Peloton
+
+Without the $44/month All-Access Membership:
+
+- **No live or on-demand classes** — the core Peloton experience disappears
+- **"Just Ride" mode only** — a basic screen showing cadence and resistance (if you have the Bike+ screen)
+- **No leaderboards, no achievements** — the gamification that kept you motivated is gone
+- **No metrics tracking** — ride history disappears
+
+Your $1,445+ bike becomes a basic spinning bike. A very nice spinning bike, but just a spinning bike.
+
+## CycleRun: The Free Alternative That Works With Your Peloton
+
+CycleRun gives your Peloton a second life — or works with any other bike you own:
+
+**How it works:**
+1. Place your laptop next to your Peloton (or any bike)
+2. Point the webcam at your legs/pedals
+3. CycleRun's AI detects your pedaling motion
+4. Real-world POV videos sync to your speed
+5. Track stats, earn badges, climb the leaderboard — all free
+
+**What you get:**
+- Real-world POV cycling videos (Mallorca, Stelvio Pass, Alpe d'Huez, and more)
+- AI-powered cadence detection via webcam
+- Speed, distance, calories, and RPM tracking
+- Gamification: Energy points, 30 badges, 8 levels, daily streaks
+- Share cards for Instagram Stories
+- Community leaderboard
+- Creator marketplace with new routes
+
+**What it costs: €0. Forever.**
+
+## Feature Comparison: CycleRun vs Peloton
+
+| Feature | CycleRun | Peloton |
+|---|---|---|
+| **Monthly cost** | Free | $44/month |
+| **Hardware needed** | Any bike + webcam | Peloton Bike ($1,445+) |
+| **Video content** | Real-world POV rides | Instructor-led studio classes |
+| **Cadence tracking** | AI webcam detection | Built-in bike sensors |
+| **Resistance control** | Manual (physics sim) | Auto-adjust (Bike+) |
+| **Gamification** | Badges, levels, streaks, energy | Leaderboard, achievements |
+| **Music** | Your own playlist | Curated by instructors |
+| **Privacy** | 100% local processing | Cloud-based |
+| **Works with any bike** | ✅ Yes | ❌ Peloton only |
+| **Offline capability** | ✅ Yes (local video) | ❌ No |
+
+## How to Set Up CycleRun on Your Peloton
+
+**Step 1:** Place a laptop or tablet with a webcam next to your Peloton, angled toward your legs.
+
+**Step 2:** Open [cyclerun.app](https://cyclerun.app) in your browser.
+
+**Step 3:** Allow camera access. Position the detection zones over your knees or pedals.
+
+**Step 4:** Choose a route — try the Pacific Coast Highway for an easy first ride, or Stelvio Pass if you want a challenge.
+
+**Step 5:** Start pedaling. The video syncs to your speed automatically. Your Peloton's resistance wheel still works — crank it up for climbs.
+
+**Setup time: under 2 minutes.** No download, no account required, no credit card.
+
+## Beyond Peloton: Works With Every Bike
+
+CycleRun isn't just a Peloton alternative. It works with:
+
+| Bike Type | Compatible? | Notes |
+|---|---|---|
+| Peloton Bike / Bike+ | ✅ Yes | Webcam on pedals, use Peloton resistance |
+| Keiser M3i | ✅ Yes | Great build quality, perfect with CycleRun |
+| Schwinn IC4 / IC8 | ✅ Yes | Popular budget spinning bikes |
+| Life Fitness IC bikes | ✅ Yes | Commercial-grade quality |
+| Any Amazon spinning bike | ✅ Yes | Even $200 models work perfectly |
+| Old ergometer (any age) | ✅ Yes | Your dusty basement bike works too |
+| Recumbent bike | ✅ Yes | Side camera angle works best |
+| Road bike on trainer | ✅ Yes | Wheel-on or direct-drive |
+
+## What Former Peloton Users Say
+
+*"I was paying $528/year for classes I wasn't even watching anymore. CycleRun's real road videos are actually more immersive than a studio instructor."*
+
+*"My old Schwinn from 2015 works just as well as my friend's Peloton with CycleRun. She's paying $44/month, I'm paying nothing."*
+
+*"The gamification in CycleRun — badges, streaks, the energy system — actually motivates me more than Peloton's leaderboard ever did."*
+
+## The Math Is Simple
+
+| | CycleRun | Peloton |
+|---|---|---|
+| Year 1 | $0 | $528 + $1,445 = $1,973 |
+| Year 2 | $0 | $528 |
+| Year 3 | $0 | $528 |
+| **3-Year Total** | **$0** | **$3,029** |
+
+Save $3,029 over 3 years. Get real-world video rides instead of studio classes. Use any bike you already own.
+
+---
+
+### Related Guides
+
+- [Free Zwift Alternative](/guide/zwift-alternative-free)
+- [Indoor Cycling App](/guide/indoor-cycling-app)
+- [Indoor Cycling for Beginners](/guide/indoor-cycling-beginner)
+- [Spinning Bike App](/guide/spinning-bike-app)
+
+[Try CycleRun free — no signup needed →](https://cyclerun.app)`,
+    content_de: `## Das Peloton-Problem: Tolles Rad, teure Software
+
+Peloton hat Heimfitness mit wunderschön designten Rädern und fesselnden Kursleiter-Klassen revolutioniert. Aber die Rechnung geht für viele nicht auf:
+
+- **Peloton Bike**: $1.445 (oder $2.495 für Bike+)
+- **Monatliches Abo**: $44/Monat ($528/Jahr)
+- **3-Jahres-Gesamtkosten**: $1.445 + $1.584 = **$3.029**
+
+Die $44/Monat sind für Software und Video-Kurse — das Rad selbst ist nur ein gut gebautes Spinning Bike. Kündige das Abo, und deine teure Investition wird zum Kleiderständer mit Bildschirm.
+
+## Was passiert, wenn du Peloton kündigst
+
+Ohne die $44/Monat All-Access-Mitgliedschaft:
+
+- **Keine Live- oder On-Demand-Kurse** — das Kern-Peloton-Erlebnis verschwindet
+- **Nur "Just Ride"-Modus** — ein einfacher Bildschirm mit Trittfrequenz und Widerstand
+- **Keine Ranglisten, keine Achievements** — die Gamification, die dich motiviert hat, ist weg
+- **Kein Metrik-Tracking** — Fahrthistorie verschwindet
+
+Dein $1.445+ Rad wird zu einem einfachen Spinning Bike. Ein sehr schönes Spinning Bike, aber eben nur ein Spinning Bike.
+
+## CycleRun: Die kostenlose Alternative für dein Peloton
+
+CycleRun gibt deinem Peloton ein zweites Leben — oder funktioniert mit jedem anderen Rad:
+
+**So funktioniert's:**
+1. Stelle deinen Laptop neben dein Peloton (oder jedes andere Rad)
+2. Richte die Webcam auf deine Beine/Pedale
+3. CycleRuns KI erkennt deine Tretbewegung
+4. Echte POV-Streckenvideos synchronisieren sich mit deiner Geschwindigkeit
+5. Tracke Stats, verdiene Abzeichen, klettere die Rangliste hoch — alles kostenlos
+
+**Was du bekommst:**
+- Echte POV-Cycling-Videos (Mallorca, Stelvio Pass, Alpe d'Huez und mehr)
+- KI-basierte Trittfrequenzerkennung per Webcam
+- Geschwindigkeit, Distanz, Kalorien und RPM-Tracking
+- Gamification: Energiepunkte, 30 Abzeichen, 8 Level, tägliche Streaks
+- Share Cards für Instagram Stories
+- Community-Rangliste
+- Creator-Marketplace mit neuen Strecken
+
+**Was es kostet: 0 €. Für immer.**
+
+## Funktionsvergleich: CycleRun vs Peloton
+
+| Funktion | CycleRun | Peloton |
+|---|---|---|
+| **Monatliche Kosten** | Kostenlos | $44/Monat |
+| **Benötigte Hardware** | Jedes Rad + Webcam | Peloton Bike ($1.445+) |
+| **Video-Content** | Echte POV-Fahrten | Kursleiter-Studio-Klassen |
+| **Trittfrequenz-Tracking** | KI-Webcam-Erkennung | Eingebaute Bike-Sensoren |
+| **Widerstandssteuerung** | Manuell (Physik-Sim) | Auto-Adjust (Bike+) |
+| **Gamification** | Abzeichen, Level, Streaks, Energie | Rangliste, Achievements |
+| **Musik** | Deine eigene Playlist | Vom Kursleiter kuratiert |
+| **Datenschutz** | 100% lokale Verarbeitung | Cloud-basiert |
+| **Funktioniert mit jedem Rad** | ✅ Ja | ❌ Nur Peloton |
+| **Offline-Fähigkeit** | ✅ Ja (lokales Video) | ❌ Nein |
+
+## CycleRun auf deinem Peloton einrichten
+
+**Schritt 1:** Stelle einen Laptop oder Tablet mit Webcam neben dein Peloton, auf deine Beine gerichtet.
+
+**Schritt 2:** Öffne [cyclerun.app](https://cyclerun.app) im Browser.
+
+**Schritt 3:** Erlaube den Kamerazugriff. Positioniere die Erkennungszonen über deinen Knien oder Pedalen.
+
+**Schritt 4:** Wähle eine Strecke — probiere den Pacific Coast Highway für eine lockere erste Fahrt, oder den Stelvio Pass für eine Herausforderung.
+
+**Schritt 5:** Fang an zu treten. Das Video synchronisiert sich automatisch mit deiner Geschwindigkeit. Der Widerstandsregler deines Peloton funktioniert weiterhin — dreh ihn für Anstiege hoch.
+
+**Setup-Zeit: unter 2 Minuten.** Kein Download, kein Account nötig, keine Kreditkarte.
+
+## Über Peloton hinaus: Funktioniert mit jedem Rad
+
+CycleRun ist nicht nur eine Peloton-Alternative. Es funktioniert mit:
+
+| Rad-Typ | Kompatibel? | Hinweise |
+|---|---|---|
+| Peloton Bike / Bike+ | ✅ Ja | Webcam auf Pedale, Peloton-Widerstand nutzen |
+| Keiser M3i | ✅ Ja | Hervorragende Bauqualität |
+| Schwinn IC4 / IC8 | ✅ Ja | Beliebte Budget-Spinning-Bikes |
+| Life Fitness IC Bikes | ✅ Ja | Profi-Qualität |
+| Jedes Amazon Spinning Bike | ✅ Ja | Auch 200-€-Modelle funktionieren |
+| Altes Ergometer (jedes Alter) | ✅ Ja | Dein verstaubtes Kellerrad funktioniert auch |
+| Liegeergometer | ✅ Ja | Seitliche Kamera funktioniert am besten |
+| Rennrad auf Rollentrainer | ✅ Ja | Wheel-on oder Direct-Drive |
+
+## Was ehemalige Peloton-Nutzer sagen
+
+*"Ich habe $528/Jahr für Kurse bezahlt, die ich nicht mal mehr geschaut habe. CycleRuns echte Straßenvideos sind tatsächlich immersiver als ein Studio-Kursleiter."*
+
+*"Mein alter Schwinn von 2015 funktioniert mit CycleRun genauso gut wie das Peloton meiner Freundin. Sie zahlt $44/Monat, ich zahle nichts."*
+
+*"Die Gamification bei CycleRun — Abzeichen, Streaks, das Energiesystem — motiviert mich tatsächlich mehr als Pelotons Rangliste es je getan hat."*
+
+## Die Rechnung ist einfach
+
+| | CycleRun | Peloton |
+|---|---|---|
+| Jahr 1 | 0 € | $528 + $1.445 = $1.973 |
+| Jahr 2 | 0 € | $528 |
+| Jahr 3 | 0 € | $528 |
+| **3-Jahres-Gesamt** | **0 €** | **$3.029** |
+
+Spare $3.029 über 3 Jahre. Bekomme echte Streckenvideos statt Studio-Kurse. Nutze jedes Rad, das du bereits besitzt.
+
+---
+
+### Verwandte Guides
+
+- [Kostenlose Zwift-Alternative](/guide/zwift-alternative-free)
+- [Indoor Cycling App](/guide/indoor-cycling-app)
+- [Indoor Cycling für Anfänger](/guide/indoor-cycling-beginner)
+- [Spinning Bike App](/guide/spinning-bike-app)
+
+[CycleRun kostenlos testen — keine Anmeldung nötig →](https://cyclerun.app)`,
+  },
+
+  // Page 15: Indoor Cycling Beginner
+  {
+    slug: "indoor-cycling-beginner",
+    title: "Indoor Cycling for Beginners — Complete 2026 Starter Guide",
+    title_de: "Indoor Cycling für Anfänger — Kompletter Starter-Guide 2026",
+    h1: "Indoor Cycling for Beginners: Everything You Need to Start Today",
+    h1_de: "Indoor Cycling für Anfänger: Alles was du brauchst, um heute zu starten",
+    description: "New to indoor cycling? This beginner's guide covers setup, technique, first rides, and common mistakes. Start riding for free with any home trainer — no experience needed.",
+    description_de: "Neu beim Indoor Cycling? Dieser Anfänger-Guide deckt Setup, Technik, erste Fahrten und häufige Fehler ab. Starte kostenlos mit jedem Heimtrainer.",
+    keywords: "indoor cycling beginner, indoor cycling starter guide, how to start indoor cycling, home trainer beginner, ergometer anfänger, indoor cycling tipps anfänger, first indoor cycling ride, cycling at home for beginners",
+    faqs: [
+      { q: "What bike do I need for indoor cycling?", a: "Any stationary bike works — spinning bikes, ergometers, old exercise bikes, even a road bike on a trainer. With CycleRun, you don't need a smart trainer or any sensors. A basic bike and a webcam is all you need." },
+      { q: "How long should my first indoor ride be?", a: "Start with 15-20 minutes. It's better to finish feeling good than to push too hard and dread the next session. Increase by 5 minutes each week." },
+      { q: "What should I wear for indoor cycling?", a: "Comfortable workout clothes and sneakers or cycling shoes. Padded cycling shorts help for longer rides. Indoor cycling is warmer than outdoor — dress lighter than you think." },
+      { q: "How do I set up my bike correctly?", a: "Saddle height: when your foot is at the bottom of the pedal stroke, your knee should have a slight bend (not fully straight). Handlebar height: roughly level with the saddle for beginners — higher is more comfortable." },
+      { q: "How often should a beginner cycle per week?", a: "Start with 3 sessions per week with rest days between. This gives your body time to adapt. After 2-3 weeks, you can increase to 4 sessions if you feel good." },
+      { q: "Do I need expensive equipment?", a: "No. CycleRun works with any stationary bike and a webcam. No smart trainer, no sensors, no subscription. Total cost: €0 if you already have a bike and a laptop." },
+    ],
+    faqs_de: [
+      { q: "Welches Rad brauche ich für Indoor Cycling?", a: "Jedes stationäre Rad funktioniert — Spinning Bikes, Ergometer, alte Heimtrainer, sogar ein Rennrad auf einem Rollentrainer. Mit CycleRun brauchst du keinen Smart Trainer und keine Sensoren. Ein einfaches Rad und eine Webcam reichen." },
+      { q: "Wie lange sollte meine erste Indoor-Fahrt sein?", a: "Starte mit 15-20 Minuten. Es ist besser, mit einem guten Gefühl aufzuhören, als sich zu überfordern. Steigere um 5 Minuten pro Woche." },
+      { q: "Was soll ich beim Indoor Cycling anziehen?", a: "Bequeme Sportklamotten und Turnschuhe oder Radschuhe. Gepolsterte Radhosen helfen bei längeren Fahrten. Indoor Cycling ist wärmer als draußen — zieh dich leichter an als du denkst." },
+      { q: "Wie stelle ich mein Rad richtig ein?", a: "Sattelhöhe: Wenn dein Fuß am tiefsten Punkt der Pedalumdrehung ist, sollte dein Knie leicht gebeugt sein (nicht vollständig gestreckt). Lenkerhöhe: ungefähr auf Sattelhöhe für Anfänger — höher ist bequemer." },
+      { q: "Wie oft sollte ein Anfänger pro Woche fahren?", a: "Starte mit 3 Sessions pro Woche mit Ruhetagen dazwischen. Das gibt deinem Körper Zeit zur Anpassung. Nach 2-3 Wochen kannst du auf 4 Sessions steigern." },
+      { q: "Brauche ich teure Ausrüstung?", a: "Nein. CycleRun funktioniert mit jedem stationären Fahrrad und einer Webcam. Kein Smart Trainer, keine Sensoren, kein Abo. Gesamtkosten: 0 € wenn du bereits ein Rad und einen Laptop hast." },
+    ],
+    content: `## Your First Indoor Ride: What to Expect
+
+Here's the truth about indoor cycling: **it's easier to start than you think**. You don't need to be fit. You don't need expensive gear. You don't need to know anything about cycling.
+
+If you can sit on a bike and move your legs, you can indoor cycle. That's it.
+
+Your first ride will feel a bit strange — you're pedaling but going nowhere. That's where CycleRun changes everything: real-world POV videos make your brain believe you're actually riding through Mallorca or along the California coast. Your webcam tracks your legs, and the video speed matches your pedaling. Faster legs = faster video.
+
+Within 5 minutes, you'll forget you're indoors.
+
+## Choosing Your Bike
+
+You don't need to buy anything special. Here's what works:
+
+**Spinning Bike** (Peloton, Keiser, Schwinn, any brand)
+- Best all-around option for indoor cycling
+- Smooth flywheel, adjustable resistance
+- Price range: €200-2,500
+
+**Ergometer** (Kettler, Daum, Life Fitness)
+- More upright, comfortable seated position
+- Built-in display (which you can ignore with CycleRun)
+- Great for beginners who want comfort
+
+**Old Exercise Bike** (any age, any brand)
+- Yes, that dusty thing in your basement works
+- As long as your legs move visibly, CycleRun tracks them
+- Zero additional investment
+
+**Road Bike on Indoor Trainer**
+- Wheel-on or direct-drive trainer
+- Most realistic feeling
+- You can use the same bike indoors and outdoors
+
+**Bottom line:** Use whatever you already own. Don't buy anything until you know you enjoy it.
+
+## Setting Up Your Space
+
+A good setup makes the difference between quitting after one week and riding consistently:
+
+- **Fan** — Indoor cycling generates heat. A fan pointed at your face is the single best upgrade you can make. Seriously.
+- **Towel** — Drape one over your handlebars. You will sweat.
+- **Water bottle** — Within arm's reach. Drink every 10-15 minutes.
+- **Laptop position** — At eye level or slightly below, roughly 1 meter away. You should see the screen without straining your neck.
+- **Lighting** — Important for CycleRun! Your webcam needs to see your legs clearly. Normal room lighting is fine. Avoid strong backlighting (don't sit in front of a bright window).
+- **Mat** — A yoga mat or exercise mat under your bike catches sweat and reduces noise.
+
+## Bike Fit Basics
+
+Getting your bike position right prevents pain and injury:
+
+**Saddle Height**
+Stand next to your bike. The saddle should be roughly at hip bone level. When seated with your foot at the lowest pedal position, your knee should have a slight 25-30° bend. Too low = knee pain. Too high = hip rocking.
+
+**Handlebar Height**
+For beginners: set handlebars at saddle height or slightly higher. This gives a more upright, comfortable position. You can lower them as you get fitter and more flexible.
+
+**Fore/Aft Position**
+When pedaling, your knee should be roughly above the pedal axle at the 3 o'clock position. Adjust the saddle forward or backward until this feels right.
+
+**Don't overthink it.** If something hurts during your ride, adjust. Your body will tell you what's wrong.
+
+## Your First Ride on CycleRun
+
+Here's exactly what to do:
+
+1. **Open** [cyclerun.app](https://cyclerun.app) in your browser
+2. **Allow camera access** when prompted
+3. **Follow the setup wizard** — it guides you through placing detection zones over your knees or pedals
+4. **Choose an easy route** — Pacific Coast Highway (flat, scenic, relaxing) is perfect for your first ride
+5. **Start pedaling** — the video starts moving when you do
+6. **Find your rhythm** — there's no rush. Pedal at whatever speed feels comfortable
+7. **Enjoy the scenery** — you're "riding" the California coast from your living room
+
+Your first ride should be **15-20 minutes**. That's enough to get the feel without overdoing it.
+
+## Beginner Ride Plan: Weeks 1-4
+
+| Week | Sessions | Duration | Focus |
+|---|---|---|---|
+| 1 | 3 rides | 15-20 min each | Get comfortable, easy pace |
+| 2 | 3 rides | 20-25 min each | Slightly longer, try a new route |
+| 3 | 3-4 rides | 25-35 min each | One harder route (gentle hills) |
+| 4 | 4 rides | 30-45 min each | Mix easy and moderate intensity |
+
+After 4 weeks, you'll have a solid habit and the fitness base to tackle any route.
+
+## Common Beginner Mistakes
+
+**Starting too hard**
+The #1 reason beginners quit. Your first week should feel easy — almost too easy. You're building a habit, not training for the Tour de France.
+
+**Wrong saddle height**
+A saddle that's too low puts excessive pressure on your knees. Take 2 minutes to adjust it properly.
+
+**No water**
+Dehydration kills performance and makes everything feel harder than it should. Drink before you're thirsty.
+
+**Same route every day**
+Variety prevents boredom. CycleRun has multiple routes — Alps, Mediterranean, Norway. Switch it up.
+
+**Skipping rest days**
+Your muscles grow during rest, not during exercise. Beginners need at least one rest day between rides.
+
+**Comparing yourself to others**
+The leaderboard can wait. Focus on your own progress. Every ride is better than no ride.
+
+## Making It Stick: The Motivation Secret
+
+The secret to consistent indoor cycling isn't willpower — it's making it **enjoyable**:
+
+- **Scenic videos** transform boring pedaling into virtual travel
+- **Gamification** — CycleRun's badges, streaks, and levels give you short-term goals to chase
+- **Share cards** — Download your ride summary and share it on Instagram. Social accountability works.
+- **Track progress** — Watching your total distance and ride count grow is genuinely motivating
+- **Stack habits** — Ride while watching your favourite show, listening to a podcast, or during your morning coffee time
+
+The best exercise is the one you actually do. CycleRun makes indoor cycling the exercise you'll want to do.
+
+---
+
+### Related Guides
+
+- [Indoor Cycling Workout Plan — Free 8-Week Schedule](/guide/cycling-workout-plan)
+- [Indoor Cycling for Weight Loss](/guide/indoor-cycling-weight-loss)
+- [Heimtrainer App](/guide/heimtrainer-app)
+- [Exercise Bike App](/guide/exercise-bike-app)
+
+[Start your first ride — free, no signup →](https://cyclerun.app)`,
+    content_de: `## Deine erste Indoor-Fahrt: Was dich erwartet
+
+Die Wahrheit über Indoor Cycling: **Es ist einfacher anzufangen als du denkst.** Du musst nicht fit sein. Du brauchst keine teure Ausrüstung. Du musst nichts über Radfahren wissen.
+
+Wenn du auf einem Rad sitzen und deine Beine bewegen kannst, kannst du Indoor Cycling machen. Das war's.
+
+Deine erste Fahrt wird sich etwas seltsam anfühlen — du trittst, aber fährst nirgendwo hin. Genau hier verändert CycleRun alles: Echte POV-Streckenvideos lassen dein Gehirn glauben, du fährst wirklich durch Mallorca oder entlang der kalifornischen Küste. Deine Webcam trackt deine Beine, und die Videogeschwindigkeit passt sich deinem Treten an.
+
+Nach 5 Minuten vergisst du, dass du drinnen bist.
+
+## Das richtige Rad wählen
+
+Du musst nichts Spezielles kaufen. Das funktioniert alles:
+
+**Spinning Bike** (Peloton, Keiser, Schwinn, jede Marke)
+- Beste Allround-Option für Indoor Cycling
+- Glattes Schwungrad, einstellbarer Widerstand
+- Preisspanne: 200-2.500 €
+
+**Ergometer** (Kettler, Daum, Life Fitness)
+- Aufrechter, bequemer Sitz
+- Eingebautes Display (das du mit CycleRun ignorieren kannst)
+- Großartig für Anfänger, die Komfort wollen
+
+**Altes Fitnessrad** (jedes Alter, jede Marke)
+- Ja, das verstaubte Ding im Keller funktioniert
+- Solange sich deine Beine sichtbar bewegen, trackt CycleRun sie
+- Null zusätzliche Investition
+
+**Rennrad auf Indoor-Trainer**
+- Wheel-on oder Direct-Drive-Trainer
+- Realistischstes Fahrgefühl
+- Du kannst dasselbe Rad drinnen und draußen nutzen
+
+**Fazit:** Nutze was du bereits hast. Kaufe nichts, bevor du weißt, dass es dir Spaß macht.
+
+## Deinen Platz einrichten
+
+Ein gutes Setup entscheidet zwischen Aufhören nach einer Woche und konstantem Fahren:
+
+- **Ventilator** — Indoor Cycling erzeugt Wärme. Ein Ventilator auf dein Gesicht gerichtet ist das beste Upgrade. Ernsthaft.
+- **Handtuch** — Über den Lenker drapieren. Du wirst schwitzen.
+- **Wasserflasche** — In Armreichweite. Alle 10-15 Minuten trinken.
+- **Laptop-Position** — Auf Augenhöhe oder leicht darunter, ca. 1 Meter entfernt.
+- **Beleuchtung** — Wichtig für CycleRun! Deine Webcam muss deine Beine klar sehen. Normales Raumlicht reicht. Vermeide starkes Gegenlicht.
+- **Matte** — Eine Yoga-Matte unter dem Rad fängt Schweiß auf und reduziert Lärm.
+
+## Rad-Einstellung für Anfänger
+
+Die richtige Position verhindert Schmerzen und Verletzungen:
+
+**Sattelhöhe**
+Stell dich neben dein Rad. Der Sattel sollte ungefähr auf Hüftknochenhöhe sein. Im Sitzen mit dem Fuß am tiefsten Punkt sollte dein Knie leicht gebeugt sein (25-30°). Zu niedrig = Knieschmerzen. Zu hoch = Hüfte wippt.
+
+**Lenkerhöhe**
+Für Anfänger: Lenker auf Sattelhöhe oder leicht höher. Das gibt eine aufrechtere, bequemere Position.
+
+**Vor/Zurück-Position**
+Beim Treten sollte dein Knie ungefähr über der Pedalachse sein, wenn das Pedal auf 3 Uhr steht.
+
+**Nicht überdenken.** Wenn etwas während der Fahrt weh tut, verstelle es. Dein Körper sagt dir, was falsch ist.
+
+## Deine erste Fahrt auf CycleRun
+
+So geht's:
+
+1. **Öffne** [cyclerun.app](https://cyclerun.app) im Browser
+2. **Erlaube den Kamerazugriff** wenn gefragt
+3. **Folge dem Setup-Wizard** — er führt dich durch die Platzierung der Erkennungszonen über deinen Knien oder Pedalen
+4. **Wähle eine leichte Strecke** — Pacific Coast Highway (flach, szenisch, entspannend) ist perfekt für die erste Fahrt
+5. **Fang an zu treten** — das Video bewegt sich, wenn du es tust
+6. **Finde deinen Rhythmus** — kein Zeitdruck. Tritt in dem Tempo, das sich gut anfühlt
+7. **Genieße die Landschaft** — du "fährst" die kalifornische Küste von deinem Wohnzimmer aus
+
+Deine erste Fahrt sollte **15-20 Minuten** dauern. Genug um ein Gefühl zu bekommen, ohne zu übertreiben.
+
+## Anfänger-Fahrplan: Wochen 1-4
+
+| Woche | Sessions | Dauer | Fokus |
+|---|---|---|---|
+| 1 | 3 Fahrten | 15-20 Min. | Wohlfühlen, lockeres Tempo |
+| 2 | 3 Fahrten | 20-25 Min. | Etwas länger, neue Strecke probieren |
+| 3 | 3-4 Fahrten | 25-35 Min. | Eine anspruchsvollere Strecke (sanfte Hügel) |
+| 4 | 4 Fahrten | 30-45 Min. | Mix aus leicht und moderat |
+
+Nach 4 Wochen hast du eine solide Gewohnheit und die Fitness-Basis für jede Strecke.
+
+## Häufige Anfängerfehler
+
+**Zu hart starten**
+Der #1 Grund warum Anfänger aufhören. Deine erste Woche sollte sich leicht anfühlen — fast zu leicht. Du baust eine Gewohnheit auf, nicht Training für die Tour de France.
+
+**Falsche Sattelhöhe**
+Ein zu niedriger Sattel belastet die Knie übermäßig. Nimm dir 2 Minuten für die richtige Einstellung.
+
+**Kein Wasser**
+Dehydrierung killt die Leistung und lässt alles schwerer erscheinen. Trinke bevor du durstig bist.
+
+**Jeden Tag dieselbe Strecke**
+Abwechslung verhindert Langeweile. CycleRun hat mehrere Strecken — Alpen, Mittelmeer, Norwegen. Wechsle ab.
+
+**Ruhetage auslassen**
+Deine Muskeln wachsen während der Ruhe, nicht während des Trainings. Anfänger brauchen mindestens einen Ruhetag zwischen den Fahrten.
+
+**Sich mit anderen vergleichen**
+Die Rangliste kann warten. Konzentriere dich auf deinen eigenen Fortschritt. Jede Fahrt ist besser als keine Fahrt.
+
+## Dranbleiben: Das Motivations-Geheimnis
+
+Das Geheimnis von konstantem Indoor Cycling ist nicht Willenskraft — es ist, es **angenehm zu machen**:
+
+- **Szenische Videos** verwandeln langweiliges Treten in virtuelles Reisen
+- **Gamification** — CycleRuns Abzeichen, Streaks und Level geben dir kurzfristige Ziele
+- **Share Cards** — Lade deine Fahrt-Zusammenfassung herunter und teile sie auf Instagram
+- **Fortschritt tracken** — Zu sehen wie deine Gesamtdistanz und Fahrtenzahl wachsen, motiviert echt
+- **Gewohnheiten stapeln** — Fahre während du deine Lieblingsserie schaust oder einen Podcast hörst
+
+Das beste Training ist das, das du tatsächlich machst. CycleRun macht Indoor Cycling zum Training, das du machen willst.
+
+---
+
+### Verwandte Guides
+
+- [Indoor Cycling Trainingsplan — Kostenloser 8-Wochen-Plan](/guide/cycling-workout-plan)
+- [Abnehmen mit Indoor Cycling](/guide/indoor-cycling-weight-loss)
+- [Heimtrainer App](/guide/heimtrainer-app)
+- [Exercise Bike App](/guide/exercise-bike-app)
+
+[Starte deine erste Fahrt — kostenlos, ohne Anmeldung →](https://cyclerun.app)`,
+  },
+
+  // Page 16: Cycling Workout Plan
+  {
+    slug: "cycling-workout-plan",
+    title: "Indoor Cycling Workout Plan — Free 8-Week Training Schedule",
+    title_de: "Indoor Cycling Trainingsplan — Kostenloser 8-Wochen-Plan",
+    h1: "Free Indoor Cycling Workout Plan: 8 Weeks From Beginner to Strong",
+    h1_de: "Kostenloser Indoor Cycling Trainingsplan: 8 Wochen vom Anfänger zum Sportler",
+    description: "Free 8-week indoor cycling workout plan for all levels. Includes easy rides, intervals, and endurance sessions. Works with any home trainer — no smart trainer needed.",
+    description_de: "Kostenloser 8-Wochen Indoor Cycling Trainingsplan für alle Level. Leichte Fahrten, Intervalle und Ausdauer-Sessions. Funktioniert mit jedem Heimtrainer.",
+    keywords: "indoor cycling workout plan, cycling training plan free, home trainer workout schedule, ergometer trainingsplan, spinning workout plan, 8 week cycling plan, indoor cycling training program, cycling exercise routine",
+    faqs: [
+      { q: "How many times per week should I do indoor cycling?", a: "This plan uses 3-4 sessions per week. Beginners start with 3, progressing to 4 by week 5. Rest days are essential for recovery and performance gains." },
+      { q: "How long should each cycling session be?", a: "Sessions range from 20 minutes (early weeks) to 60-75 minutes (peak weeks). Quality matters more than duration — a focused 30-minute interval session can be more effective than a lazy 60-minute ride." },
+      { q: "What is Zone 2 training?", a: "Zone 2 is moderate intensity where you can hold a conversation but breathe harder than at rest. It's the most efficient zone for fat burning and building aerobic base. On a 1-10 effort scale, it's about 4-5." },
+      { q: "Can I adjust the plan to my fitness level?", a: "Absolutely. If a session feels too hard, reduce duration by 10-15 minutes or lower the intensity. If it feels too easy, add 5-10 minutes or choose a hillier route on CycleRun." },
+      { q: "Do I need rest days?", a: "Yes. Rest days allow muscles to repair and grow stronger. This plan includes 3-4 rest days per week. Active recovery (light walking, stretching) on rest days is fine." },
+      { q: "How do I track my progress?", a: "CycleRun tracks distance, duration, average speed, calories, and RPM for every ride. Register for free to save your ride history. The Energy system and Level progression show your overall fitness growth." },
+    ],
+    faqs_de: [
+      { q: "Wie oft pro Woche sollte ich Indoor Cycling machen?", a: "Dieser Plan nutzt 3-4 Sessions pro Woche. Anfänger starten mit 3, steigern auf 4 ab Woche 5. Ruhetage sind essentiell für Erholung und Leistungszuwachs." },
+      { q: "Wie lange sollte jede Cycling-Session sein?", a: "Sessions reichen von 20 Minuten (frühe Wochen) bis 60-75 Minuten (Peak-Wochen). Qualität zählt mehr als Dauer — eine fokussierte 30-Minuten-Intervall-Session kann effektiver sein als eine lockere 60-Minuten-Fahrt." },
+      { q: "Was ist Zone 2 Training?", a: "Zone 2 ist moderate Intensität, bei der du dich unterhalten kannst, aber stärker atmest als in Ruhe. Es ist die effizienteste Zone für Fettverbrennung und Aufbau der aeroben Basis. Auf einer 1-10 Anstrengungsskala etwa 4-5." },
+      { q: "Kann ich den Plan an mein Fitnesslevel anpassen?", a: "Absolut. Wenn eine Session zu hart ist, reduziere die Dauer um 10-15 Minuten oder senke die Intensität. Wenn es zu leicht ist, füge 5-10 Minuten hinzu oder wähle eine hügligere Strecke auf CycleRun." },
+      { q: "Brauche ich Ruhetage?", a: "Ja. Ruhetage erlauben den Muskeln, sich zu reparieren und stärker zu werden. Dieser Plan enthält 3-4 Ruhetage pro Woche. Aktive Erholung (leichtes Gehen, Stretching) an Ruhetagen ist in Ordnung." },
+      { q: "Wie tracke ich meinen Fortschritt?", a: "CycleRun trackt Distanz, Dauer, Durchschnittsgeschwindigkeit, Kalorien und RPM für jede Fahrt. Registriere dich kostenlos, um deinen Fahrtverlauf zu speichern. Das Energie-System und Level-Fortschritt zeigen dein Fitness-Wachstum." },
+    ],
+    content: `## Why You Need a Plan
+
+Most people approach indoor cycling randomly: ride when you feel like it, go as hard as you can, hope for results. This works for about two weeks before motivation drops.
+
+A structured plan works because of **progressive overload** — gradually increasing demands on your body so it adapts and gets stronger. Without progression, your body plateaus.
+
+This 8-week plan takes you from beginner (or returning rider) to a solid fitness level, using only CycleRun and any stationary bike. No smart trainer, no power meter, no subscription required.
+
+## Understanding Training Zones
+
+Since CycleRun uses webcam-based tracking rather than power meters, we use **RPE (Rate of Perceived Exertion)** on a 1-10 scale:
+
+| Zone | RPE | Feel | Purpose |
+|---|---|---|---|
+| Zone 1 (Recovery) | 1-3 | Very easy, could chat freely | Active recovery |
+| Zone 2 (Endurance) | 4-5 | Moderate, can talk in sentences | Fat burning, aerobic base |
+| Zone 3 (Tempo) | 6-7 | Uncomfortable, short sentences only | Fitness building |
+| Zone 4 (Threshold) | 8 | Hard, only a few words at a time | Performance gains |
+| Zone 5 (Max) | 9-10 | All-out, can't speak | Short intervals only |
+
+Most of your training should be in **Zone 2** (60-70% of your rides). This builds the aerobic engine that powers everything else.
+
+## The 8-Week Plan
+
+### Weeks 1-2: Foundation
+
+Goal: Build the habit, establish baseline fitness.
+
+| Day | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+|---|---|---|---|---|---|---|---|
+| **Week 1** | Easy Ride 20 min Z2 | Rest | Easy Ride 20 min Z2 | Rest | Easy Ride 25 min Z2 | Rest | Rest |
+| **Week 2** | Easy Ride 25 min Z2 | Rest | Easy Ride 25 min Z2 | Rest | Scenic Ride 30 min Z2 | Rest | Rest |
+
+**CycleRun routes:** Pacific Coast Highway (flat, scenic), Provence Lavender Fields (gentle)
+
+### Weeks 3-4: Build
+
+Goal: Increase duration, introduce intensity variation.
+
+| Day | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+|---|---|---|---|---|---|---|---|
+| **Week 3** | Scenic Ride 30 min Z2 | Rest | Tempo Ride 25 min Z2-3 | Rest | Scenic Ride 35 min Z2 | Rest | Rest |
+| **Week 4** | Scenic Ride 35 min Z2 | Rest | Intervals 25 min* | Rest | Endurance 40 min Z2 | Rest | Rest |
+
+*Intervals: 5 min warmup Z1 → 6× (30 sec Z4-5 / 60 sec Z1) → 5 min cooldown Z1
+
+**CycleRun routes:** Cap de Formentor (rolling hills), Lake Garda (varied terrain)
+
+### Weeks 5-6: Intensity
+
+Goal: Push fitness with structured intervals and longer rides.
+
+| Day | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+|---|---|---|---|---|---|---|---|
+| **Week 5** | Endurance 40 min Z2 | Rest | Intervals 30 min* | Rest | Scenic Ride 35 min Z2 | Long Ride 50 min Z2 | Rest |
+| **Week 6** | Tempo Ride 35 min Z2-3 | Rest | Intervals 30 min** | Rest | Scenic Ride 40 min Z2 | Long Ride 55 min Z2 | Rest |
+
+*Week 5 Intervals: 5 min warmup → 8× (30 sec Z5 / 60 sec Z1) → 5 min cooldown
+**Week 6 Intervals: 5 min warmup → 4× (2 min Z4 / 2 min Z1) → 5 min cooldown
+
+**CycleRun routes:** Stelvio Pass (intense climb), Alpe d'Huez (legendary switchbacks), Trollstigen (dramatic)
+
+### Weeks 7-8: Peak
+
+Goal: Maximum sustainable training load, then consolidate gains.
+
+| Day | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
+|---|---|---|---|---|---|---|---|
+| **Week 7** | Endurance 45 min Z2 | Rest | Intervals 35 min* | Rest | Tempo 40 min Z2-3 | Long Ride 60 min Z2 | Rest |
+| **Week 8** | Scenic Ride 40 min Z2 | Rest | Intervals 30 min | Rest | Endurance 45 min Z2 | Long Ride 60-75 min Z2 | Rest |
+
+*Week 7 Intervals: 5 min warmup → 5× (3 min Z4 / 2 min Z1) → 5 min cooldown
+
+## Session Types Explained
+
+**Easy/Scenic Ride (Zone 2)**
+Steady pace on a flat or gently rolling route. You should be able to hold a conversation. This builds your aerobic base — the foundation of all fitness.
+
+**Tempo Ride (Zone 2-3)**
+Slightly harder than easy. Choose a route with moderate gradients. You're pushing but still sustainable. Great for building stamina.
+
+**Interval Session (Zone 4-5 bursts)**
+Short hard efforts followed by recovery periods. The most time-efficient way to improve fitness. CycleRun's hilly routes naturally create these intervals through elevation changes.
+
+**Long Ride (Zone 2)**
+Extended duration at comfortable pace. The purpose is time in the saddle, not speed. Choose a scenic route you enjoy — Ring of Kerry or Pacific Coast Highway work perfectly.
+
+**Recovery Ride (Zone 1)**
+Very easy, short ride. Only if you feel you need active recovery. Not in the main plan but an option on rest days.
+
+## Suggested CycleRun Routes per Session Type
+
+| Session Type | Route | Why |
+|---|---|---|
+| Easy/Recovery | Pacific Coast Highway | Flat, scenic, relaxing |
+| Easy/Scenic | Provence Lavender Fields | Gentle rolls, beautiful |
+| Tempo | Cap de Formentor (Mallorca) | Rolling hills, moderate challenge |
+| Intervals | Stelvio Pass | Steep gradients create natural intervals |
+| Long Endurance | Ring of Kerry (Ireland) | 40 km varied, perfect for long rides |
+| Challenge | Alpe d'Huez | 21 switchbacks, legendary climb |
+
+## Recovery and Rest Days
+
+Rest days aren't lazy days — they're when your body actually gets stronger:
+
+- **Sleep** — Aim for 7-9 hours. Growth hormone peaks during deep sleep.
+- **Hydration** — Drink 2-3 liters of water throughout the day.
+- **Light movement** — A 20-minute walk or gentle stretching is fine.
+- **Nutrition** — Protein within 30 minutes post-ride (20-30g). Don't undereat on rest days.
+- **Foam rolling** — 5 minutes on quads, hamstrings, and calves reduces soreness.
+
+## Tracking Your Progress on CycleRun
+
+CycleRun provides several ways to see your improvement:
+
+- **Ride stats** — After each ride: distance, duration, avg/max speed, RPM, calories
+- **Profile** — Total rides, total distance, total time, best average speed
+- **Energy system** — Points earned per ride based on effort. Watch your total climb.
+- **Levels** — 8 levels from Beginner to Immortal. Each level requires more Energy.
+- **Badges** — 30 achievements across distance, duration, speed, streak, and session categories
+- **Streaks** — Consecutive days riding. The streak multiplier rewards consistency.
+- **Leaderboard** — Weekly, monthly, and all-time rankings against other riders
+
+After 8 weeks, compare your Week 1 stats to your Week 8 stats. You'll be amazed at the difference.
+
+---
+
+### Related Guides
+
+- [Indoor Cycling for Weight Loss](/guide/indoor-cycling-weight-loss)
+- [Indoor Cycling for Beginners](/guide/indoor-cycling-beginner)
+- [Ergometer Training](/guide/ergometer-training)
+- [Virtual Cycling Videos](/guide/virtual-cycling-videos)
+
+[Start Week 1 today →](https://cyclerun.app)`,
+    content_de: `## Warum du einen Plan brauchst
+
+Die meisten Leute gehen Indoor Cycling zufällig an: Fahren wenn die Lust da ist, so hart wie möglich, auf Ergebnisse hoffen. Das funktioniert etwa zwei Wochen, bevor die Motivation nachlässt.
+
+Ein strukturierter Plan funktioniert wegen **progressiver Überlastung** — schrittweise steigende Anforderungen an deinen Körper, damit er sich anpasst und stärker wird. Ohne Progression stagniert dein Körper.
+
+Dieser 8-Wochen-Plan bringt dich vom Anfänger (oder Wiedereinsteiger) zu einem soliden Fitnesslevel. Nur CycleRun und ein beliebiges stationäres Rad. Kein Smart Trainer, kein Powermeter, kein Abo nötig.
+
+## Trainingszonen verstehen
+
+Da CycleRun webcam-basiertes Tracking nutzt statt Powermeter, verwenden wir **RPE (Rate of Perceived Exertion)** auf einer 1-10 Skala:
+
+| Zone | RPE | Gefühl | Zweck |
+|---|---|---|---|
+| Zone 1 (Erholung) | 1-3 | Sehr leicht, freies Plaudern | Aktive Erholung |
+| Zone 2 (Ausdauer) | 4-5 | Moderat, in Sätzen reden | Fettverbrennung, aerobe Basis |
+| Zone 3 (Tempo) | 6-7 | Unbequem, nur kurze Sätze | Fitness aufbauen |
+| Zone 4 (Schwelle) | 8 | Hart, nur wenige Worte | Leistungszuwachs |
+| Zone 5 (Maximum) | 9-10 | Alles raus, kein Sprechen | Nur kurze Intervalle |
+
+Der Großteil deines Trainings sollte in **Zone 2** sein (60-70% deiner Fahrten). Das baut den aeroben Motor, der alles andere antreibt.
+
+## Der 8-Wochen-Plan
+
+### Wochen 1-2: Fundament
+
+Ziel: Gewohnheit aufbauen, Grundfitness etablieren.
+
+| Tag | Mo | Di | Mi | Do | Fr | Sa | So |
+|---|---|---|---|---|---|---|---|
+| **Woche 1** | Locker 20 Min. Z2 | Ruhe | Locker 20 Min. Z2 | Ruhe | Locker 25 Min. Z2 | Ruhe | Ruhe |
+| **Woche 2** | Locker 25 Min. Z2 | Ruhe | Locker 25 Min. Z2 | Ruhe | Scenic 30 Min. Z2 | Ruhe | Ruhe |
+
+**CycleRun-Strecken:** Pacific Coast Highway (flach, szenisch), Provence Lavendelfelder (sanft)
+
+### Wochen 3-4: Aufbau
+
+Ziel: Dauer steigern, Intensitätsvariation einführen.
+
+| Tag | Mo | Di | Mi | Do | Fr | Sa | So |
+|---|---|---|---|---|---|---|---|
+| **Woche 3** | Scenic 30 Min. Z2 | Ruhe | Tempo 25 Min. Z2-3 | Ruhe | Scenic 35 Min. Z2 | Ruhe | Ruhe |
+| **Woche 4** | Scenic 35 Min. Z2 | Ruhe | Intervalle 25 Min.* | Ruhe | Ausdauer 40 Min. Z2 | Ruhe | Ruhe |
+
+*Intervalle: 5 Min. Aufwärmen Z1 → 6× (30 Sek. Z4-5 / 60 Sek. Z1) → 5 Min. Cooldown Z1
+
+**CycleRun-Strecken:** Cap de Formentor (wellige Hügel), Gardasee (abwechslungsreich)
+
+### Wochen 5-6: Intensität
+
+Ziel: Fitness mit strukturierten Intervallen und längeren Fahrten pushen.
+
+| Tag | Mo | Di | Mi | Do | Fr | Sa | So |
+|---|---|---|---|---|---|---|---|
+| **Woche 5** | Ausdauer 40 Min. Z2 | Ruhe | Intervalle 30 Min.* | Ruhe | Scenic 35 Min. Z2 | Langfahrt 50 Min. Z2 | Ruhe |
+| **Woche 6** | Tempo 35 Min. Z2-3 | Ruhe | Intervalle 30 Min.** | Ruhe | Scenic 40 Min. Z2 | Langfahrt 55 Min. Z2 | Ruhe |
+
+*Woche 5: 5 Min. Aufwärmen → 8× (30 Sek. Z5 / 60 Sek. Z1) → 5 Min. Cooldown
+**Woche 6: 5 Min. Aufwärmen → 4× (2 Min. Z4 / 2 Min. Z1) → 5 Min. Cooldown
+
+**CycleRun-Strecken:** Stelvio Pass (intensiver Anstieg), Alpe d'Huez (legendäre Serpentinen), Trollstigen (dramatisch)
+
+### Wochen 7-8: Peak
+
+Ziel: Maximales nachhaltiges Trainingsvolumen, dann Gewinne konsolidieren.
+
+| Tag | Mo | Di | Mi | Do | Fr | Sa | So |
+|---|---|---|---|---|---|---|---|
+| **Woche 7** | Ausdauer 45 Min. Z2 | Ruhe | Intervalle 35 Min.* | Ruhe | Tempo 40 Min. Z2-3 | Langfahrt 60 Min. Z2 | Ruhe |
+| **Woche 8** | Scenic 40 Min. Z2 | Ruhe | Intervalle 30 Min. | Ruhe | Ausdauer 45 Min. Z2 | Langfahrt 60-75 Min. Z2 | Ruhe |
+
+*Woche 7: 5 Min. Aufwärmen → 5× (3 Min. Z4 / 2 Min. Z1) → 5 Min. Cooldown
+
+## Session-Typen erklärt
+
+**Lockere/Scenic Fahrt (Zone 2)**
+Gleichmäßiges Tempo auf flacher oder sanft welliger Strecke. Du solltest dich unterhalten können. Das baut deine aerobe Basis — das Fundament aller Fitness.
+
+**Tempo-Fahrt (Zone 2-3)**
+Etwas härter als locker. Wähle eine Strecke mit moderaten Steigungen. Du pushst, aber es bleibt nachhaltig.
+
+**Intervall-Session (Zone 4-5 Sprints)**
+Kurze harte Belastungen gefolgt von Erholungsphasen. Die zeiteffizienteste Methode, Fitness zu verbessern. CycleRuns hügelige Strecken erzeugen diese Intervalle natürlich durch Höhenänderungen.
+
+**Langfahrt (Zone 2)**
+Verlängerte Dauer bei komfortablem Tempo. Der Zweck ist Zeit im Sattel, nicht Geschwindigkeit. Wähle eine Strecke, die dir gefällt — Ring of Kerry oder Pacific Coast Highway passen perfekt.
+
+## Empfohlene CycleRun-Strecken pro Session-Typ
+
+| Session-Typ | Strecke | Warum |
+|---|---|---|
+| Locker/Erholung | Pacific Coast Highway | Flach, szenisch, entspannend |
+| Locker/Scenic | Provence Lavendelfelder | Sanfte Wellen, wunderschön |
+| Tempo | Cap de Formentor (Mallorca) | Wellige Hügel, moderate Herausforderung |
+| Intervalle | Stelvio Pass | Steile Steigungen = natürliche Intervalle |
+| Langfahrt | Ring of Kerry (Irland) | 40 km abwechslungsreich, perfekt für lange Fahrten |
+| Herausforderung | Alpe d'Huez | 21 Serpentinen, legendärer Anstieg |
+
+## Erholung und Ruhetage
+
+Ruhetage sind keine faulen Tage — sie sind, wenn dein Körper tatsächlich stärker wird:
+
+- **Schlaf** — 7-9 Stunden anstreben. Wachstumshormon hat seinen Peak im Tiefschlaf.
+- **Hydrierung** — 2-3 Liter Wasser über den Tag verteilt.
+- **Leichte Bewegung** — 20 Minuten Spaziergang oder sanftes Stretching ist okay.
+- **Ernährung** — Protein innerhalb von 30 Minuten nach der Fahrt (20-30g). Nicht zu wenig essen an Ruhetagen.
+- **Faszienrolle** — 5 Minuten auf Quads, Hamstrings und Waden reduziert Muskelkater.
+
+## Fortschritt tracken auf CycleRun
+
+CycleRun bietet mehrere Wege, deine Verbesserung zu sehen:
+
+- **Fahrt-Stats** — Nach jeder Fahrt: Distanz, Dauer, Ø/Max Geschwindigkeit, RPM, Kalorien
+- **Profil** — Gesamtfahrten, Gesamtdistanz, Gesamtzeit, beste Ø-Geschwindigkeit
+- **Energie-System** — Punkte pro Fahrt basierend auf Anstrengung. Beobachte deinen Gesamtanstieg.
+- **Level** — 8 Level von Anfänger bis Unsterblich. Jedes Level braucht mehr Energie.
+- **Abzeichen** — 30 Achievements in Distanz, Dauer, Geschwindigkeit, Streak und Session-Kategorien
+- **Streaks** — Aufeinanderfolgende Tage mit Fahrt. Der Streak-Multiplikator belohnt Konstanz.
+- **Rangliste** — Wöchentliche, monatliche und Gesamt-Rankings gegen andere Fahrer
+
+Nach 8 Wochen vergleiche deine Woche-1-Stats mit deinen Woche-8-Stats. Du wirst erstaunt sein.
+
+---
+
+### Verwandte Guides
+
+- [Abnehmen mit Indoor Cycling](/guide/indoor-cycling-weight-loss)
+- [Indoor Cycling für Anfänger](/guide/indoor-cycling-beginner)
+- [Ergometer Training](/guide/ergometer-training)
+- [Virtuelle Cycling Videos](/guide/virtual-cycling-videos)
+
+[Starte Woche 1 heute →](https://cyclerun.app)`,
+  },
+
+  // Page 17: GoPro Cycling Setup
+  {
+    slug: "gopro-cycling-setup",
+    title: "GoPro Cycling Setup Guide 2026 — Film POV Routes & Earn Money",
+    title_de: "GoPro Cycling Setup Guide 2026 — Filme POV-Strecken & verdiene Geld",
+    h1: "GoPro Cycling Setup: How to Film, Upload, and Earn From Your Rides",
+    h1_de: "GoPro Cycling Setup: Filme, lade hoch und verdiene mit deinen Fahrten",
+    description: "Complete guide to filming POV cycling videos with GoPro and other action cameras. Camera settings, mounting, GPX data, and how to earn money by sharing routes on CycleRun.",
+    description_de: "Kompletter Guide zum Filmen von POV-Cycling-Videos mit GoPro und anderen Actionkameras. Einstellungen, Montage, GPX-Daten und wie du mit CycleRun Geld verdienst.",
+    keywords: "GoPro cycling setup, POV cycling video, action camera cycling, GoPro settings cycling, cycling video earn money, CycleRun creator, film cycling routes, GoPro chest mount cycling, gopro fahrrad einstellungen",
+    faqs: [
+      { q: "Which GoPro is best for cycling?", a: "GoPro Hero 13 or 12 are ideal. The Hero 11 is also excellent and often available at a discount. Key features: HyperSmooth stabilization, GPS, and long battery life. Even older models (Hero 9/10) produce good results." },
+      { q: "What's the best mounting position?", a: "Chest mount is recommended for CycleRun routes. It provides a natural rider's perspective, stays stable, and captures the road ahead plus your hands on the handlebars. Handlebar mounts work too but vibrate more." },
+      { q: "Do I need GPX data?", a: "GPX data is optional but highly recommended. It contains elevation data that CycleRun uses to simulate realistic inclines and resistance changes. Record GPX via your GoPro's GPS, a Garmin/Wahoo computer, or a phone app like Strava." },
+      { q: "Can I earn money with cycling videos?", a: "Yes! CycleRun's Creator Program lets you upload routes and earn 70% of every premium purchase. It's free to join with instant activation. Popular routes with scenic locations generate passive income as more riders discover them." },
+      { q: "Do cameras other than GoPro work?", a: "Yes. DJI Osmo Action 5, Insta360 Ace Pro, and even phone cameras in a waterproof case work. The key requirements: good stabilization, 1080p minimum, and ideally GPS for GPX data." },
+      { q: "How long should a route video be?", a: "20-60 minutes is the sweet spot. Short routes (15-20 min) are great for quick sessions. Longer routes (45-60 min) are popular for endurance training. You can create multiple videos from one long ride." },
+    ],
+    faqs_de: [
+      { q: "Welche GoPro ist am besten fürs Radfahren?", a: "GoPro Hero 13 oder 12 sind ideal. Die Hero 11 ist ebenfalls exzellent und oft günstiger erhältlich. Wichtige Features: HyperSmooth-Stabilisierung, GPS und lange Akkulaufzeit. Auch ältere Modelle (Hero 9/10) liefern gute Ergebnisse." },
+      { q: "Welche Montageposition ist die beste?", a: "Die Brusthalterung wird für CycleRun-Strecken empfohlen. Sie bietet eine natürliche Fahrerperspektive, bleibt stabil und erfasst die Straße plus deine Hände am Lenker. Lenkermontage funktioniert auch, vibriert aber mehr." },
+      { q: "Brauche ich GPX-Daten?", a: "GPX-Daten sind optional, aber sehr empfohlen. Sie enthalten Höhendaten, die CycleRun nutzt um realistische Steigungen und Widerstandsänderungen zu simulieren. Nimm GPX via GoPro-GPS, Garmin/Wahoo-Computer oder eine Handy-App wie Strava auf." },
+      { q: "Kann ich mit Cycling-Videos Geld verdienen?", a: "Ja! CycleRuns Creator-Programm lässt dich Strecken hochladen und 70% jedes Premium-Kaufs verdienen. Kostenlos beitreten mit sofortiger Aktivierung. Beliebte Strecken mit szenischen Orten generieren passives Einkommen." },
+      { q: "Funktionieren auch andere Kameras als GoPro?", a: "Ja. DJI Osmo Action 5, Insta360 Ace Pro und sogar Handykameras in einer wasserdichten Hülle funktionieren. Die Anforderungen: gute Stabilisierung, mindestens 1080p, und idealerweise GPS für GPX-Daten." },
+      { q: "Wie lang sollte ein Streckenvideo sein?", a: "20-60 Minuten ist der Sweet Spot. Kurze Strecken (15-20 Min.) sind super für schnelle Sessions. Längere Strecken (45-60 Min.) sind beliebt für Ausdauertraining. Du kannst mehrere Videos aus einer langen Fahrt erstellen." },
+    ],
+    content: `## Why Cyclists Are Filming Their Rides
+
+A quiet revolution is happening in cycling: riders are turning their everyday rides into content — and income. The creator economy has reached cycling, and platforms like CycleRun are making it possible for anyone with a camera and a bike to earn money.
+
+Here's why it matters:
+- **Indoor cycling is booming** — millions of riders want scenic routes to ride at home
+- **POV videos are in demand** — first-person perspective cycling videos are the core content of virtual cycling platforms
+- **Monetization is real** — CycleRun creators earn 70% of every premium route purchase
+- **Low barrier to entry** — a GoPro and a chest mount is all you need to start
+
+If you already ride beautiful roads, you're sitting on a content goldmine.
+
+## Best Cameras for POV Cycling
+
+You don't necessarily need a GoPro. Here are the top options:
+
+| Camera | Price | Stabilization | Battery | Weight | GPS |
+|---|---|---|---|---|---|
+| **GoPro Hero 13** | ~$400 | HyperSmooth 6.0 | 1.5-2h | 154g | ✅ Yes |
+| **GoPro Hero 12** | ~$350 | HyperSmooth 6.0 | 1.5-2h | 154g | ✅ Yes |
+| **GoPro Hero 11** | ~$250 | HyperSmooth 5.0 | 1-1.5h | 154g | ✅ Yes |
+| **DJI Osmo Action 5** | ~$350 | RockSteady 3.0+ | 2-2.5h | 145g | ✅ Yes |
+| **Insta360 Ace Pro** | ~$380 | FlowState | 1.5-2h | 177g | ✅ Yes |
+| **Phone (waterproof case)** | You have one | Varies | 1-3h | Varies | ✅ Via app |
+
+**Our recommendation:** GoPro Hero 12 offers the best value. If budget is tight, a used Hero 11 for ~$200 is excellent. DJI Osmo Action 5 has the best battery life.
+
+## The Perfect GoPro Settings
+
+These settings are optimized for CycleRun route videos:
+
+| Setting | Value | Why |
+|---|---|---|
+| **Resolution** | 1080p | Perfect quality, manageable file size |
+| **Frame Rate** | 30 fps | Smooth, natural motion. 60fps only for slow-motion edits |
+| **Stabilization** | HyperSmooth HIGH | Eliminates vibration. Don't use BOOST (crops too much) |
+| **FOV (Field of View)** | Wide | Shows the road + surroundings. Not SuperView (too distorted) |
+| **Color Profile** | Natural | Realistic colors. Riders want to see the real landscape |
+| **GPS** | ON | Critical for GPX data → elevation simulation in CycleRun |
+| **Audio** | Wind Reduction ON | Reduces wind noise. Some riders enjoy ambient sounds |
+| **Orientation** | Landscape | Always. Never portrait for cycling videos |
+
+**Quick Settings Cheat Sheet:**
+1080p / 30fps / HyperSmooth HIGH / Wide / Natural / GPS ON
+
+Save this as a preset on your GoPro so you can start recording with one tap.
+
+## Mounting: Chest vs Handlebar vs Helmet
+
+| Position | Stability | Perspective | Recommended? |
+|---|---|---|---|
+| **Chest mount** | ⭐⭐⭐⭐⭐ | Natural rider view | ✅ Best for CycleRun |
+| **Handlebar** | ⭐⭐⭐ | Road-focused, vibrates | ⚠️ Okay with stabilization |
+| **Helmet** | ⭐⭐⭐⭐ | Head movements visible | ❌ Too much head bob |
+| **Chin mount** | ⭐⭐⭐⭐ | Motorbike-style | ⚠️ Good if you have one |
+
+**Chest mount tips:**
+- Tilt the camera 15-20° upward so the horizon is in the upper third
+- Tighten the strap firmly — any looseness = vibration
+- The GoPro should sit roughly at your sternum level
+- Test angle before you ride: check the preview on your phone via GoPro app
+
+## Recording GPX Data
+
+GPX (GPS Exchange Format) is an XML file that records your route coordinates, elevation, and timestamps. When paired with your video, CycleRun can simulate realistic inclines and resistance changes.
+
+**How to record GPX:**
+
+**Option 1: GoPro's built-in GPS** (easiest)
+- Turn on GPS in GoPro settings
+- After the ride, extract GPX using [gopro2gpx](https://github.com/juanmcasillas/gopro2gpx) or GoPro Quik app
+
+**Option 2: Cycling computer** (most accurate)
+- Garmin, Wahoo, Bryton — all export GPX
+- Download from Garmin Connect, Wahoo app, or device directly
+
+**Option 3: Phone app** (free)
+- Strava, Komoot, or RideWithGPS all record GPX
+- Start recording before you ride, export GPX after
+
+**Option 4: No GPX** (still works)
+- Routes without GPX still work on CycleRun
+- They just won't have elevation-based resistance simulation
+- You can always add GPX later
+
+## Editing Your Route Video
+
+Keep it simple. CycleRun riders want an authentic, raw experience — not a YouTube vlog.
+
+**Minimal editing checklist:**
+1. **Trim** start and end (remove the "reaching for the camera" moments)
+2. **Stabilize** if your camera doesn't have built-in EIS (DaVinci Resolve = free)
+3. **Export** as MP4, H.264 codec, 1080p, 30fps
+4. **Don't add** music, text overlays, transitions, or effects
+5. **Don't add** a watermark or logo
+6. **Upload** to YouTube as Unlisted (CycleRun embeds YouTube videos)
+
+**File size:** A 30-minute 1080p/30fps video is approximately 3-5 GB raw, 1-2 GB after compression.
+
+## Earn Money: Upload to CycleRun
+
+CycleRun's Creator Program turns your rides into passive income:
+
+**The deal:**
+- **70% revenue share** — you earn 70% of every premium route purchase
+- **Free to join** — no membership fee, no upfront cost
+- **Instant activation** — create your account and start uploading immediately, no approval needed
+- **You own your content** — no exclusivity, upload anywhere else too
+- **Dashboard** — track views, sales, and earnings in real-time
+
+**How to upload:**
+1. Go to [cyclerun.app/creator/dashboard](/creator/dashboard)
+2. Create your free creator account (one-click activation)
+3. Fill in route details: title (EN + DE), description, distance, elevation, difficulty
+4. Paste your YouTube video URL
+5. Upload thumbnail image + GPX file (optional)
+6. Set your price in Credits (0 = free)
+7. Accept the 3 legal checkboxes (ownership, original content, terms)
+8. Submit for review
+
+Your route goes through a brief review, then appears in the [Route Store](/store) for thousands of riders to discover.
+
+## Your First Upload Checklist
+
+Use this before submitting your first route:
+
+- [ ] Video recorded in 1080p, landscape, stable footage
+- [ ] Start/end trimmed, no dead time
+- [ ] Uploaded to YouTube (Unlisted)
+- [ ] GPX file exported (optional but recommended)
+- [ ] Thumbnail image ready (landscape, shows the route scenery)
+- [ ] Route metadata: distance, elevation gain, estimated duration, difficulty
+- [ ] Title and description in English AND German (CycleRun is bilingual)
+- [ ] Creator account created at [cyclerun.app/creator/dashboard](/creator/dashboard)
+- [ ] Price set (start with free routes to build ratings, then go premium)
+
+**Pro tip:** Upload 2-3 free routes first to build ratings and visibility. Then start pricing premium routes. Riders who loved your free content will gladly pay for more.
+
+---
+
+### Related Guides
+
+- [Virtual Cycling Videos](/guide/virtual-cycling-videos)
+- [Indoor Cycling Without Smart Trainer](/guide/indoor-cycling-without-smart-trainer)
+- [Komoot Routes for Indoor Cycling](/guide/komoot-routes-indoor-cycling)
+- [Strava Routes for Indoor Cycling](/guide/strava-routes-indoor-cycling)
+
+[Become a CycleRun Creator →](/creator)`,
+    content_de: `## Warum Radfahrer ihre Fahrten filmen
+
+Eine stille Revolution im Radsport: Fahrer verwandeln ihre alltäglichen Fahrten in Content — und Einkommen. Die Creator Economy hat den Radsport erreicht, und Plattformen wie CycleRun ermöglichen es jedem mit einer Kamera und einem Rad, Geld zu verdienen.
+
+Warum das wichtig ist:
+- **Indoor Cycling boomt** — Millionen Fahrer wollen szenische Strecken für zuhause
+- **POV-Videos sind gefragt** — First-Person-Perspektive Cycling-Videos sind der Kern-Content virtueller Cycling-Plattformen
+- **Monetarisierung ist real** — CycleRun-Creator verdienen 70% jedes Premium-Streckenkaufs
+- **Niedrige Einstiegshürde** — eine GoPro und eine Brusthalterung reichen
+
+Wenn du bereits schöne Straßen fährst, sitzt du auf einer Content-Goldgrube.
+
+## Beste Kameras für POV-Cycling
+
+Du brauchst nicht unbedingt eine GoPro. Hier die Top-Optionen:
+
+| Kamera | Preis | Stabilisierung | Akku | Gewicht | GPS |
+|---|---|---|---|---|---|
+| **GoPro Hero 13** | ~400 € | HyperSmooth 6.0 | 1,5-2h | 154g | ✅ Ja |
+| **GoPro Hero 12** | ~350 € | HyperSmooth 6.0 | 1,5-2h | 154g | ✅ Ja |
+| **GoPro Hero 11** | ~250 € | HyperSmooth 5.0 | 1-1,5h | 154g | ✅ Ja |
+| **DJI Osmo Action 5** | ~350 € | RockSteady 3.0+ | 2-2,5h | 145g | ✅ Ja |
+| **Insta360 Ace Pro** | ~380 € | FlowState | 1,5-2h | 177g | ✅ Ja |
+| **Handy (wasserdichte Hülle)** | Hast du schon | Variiert | 1-3h | Variiert | ✅ Via App |
+
+**Unsere Empfehlung:** GoPro Hero 12 bietet das beste Preis-Leistungs-Verhältnis. Bei knappem Budget: eine gebrauchte Hero 11 für ~200 € ist exzellent. DJI Osmo Action 5 hat die beste Akkulaufzeit.
+
+## Die perfekten GoPro-Einstellungen
+
+Diese Einstellungen sind für CycleRun-Streckenvideos optimiert:
+
+| Einstellung | Wert | Warum |
+|---|---|---|
+| **Auflösung** | 1080p | Perfekte Qualität, handhabbare Dateigröße |
+| **Bildrate** | 30 fps | Flüssig, natürliche Bewegung |
+| **Stabilisierung** | HyperSmooth HIGH | Eliminiert Vibrationen. Kein BOOST (croppt zu viel) |
+| **FOV (Sichtfeld)** | Wide | Zeigt Straße + Umgebung. Kein SuperView (zu verzerrt) |
+| **Farbprofil** | Natural | Realistische Farben |
+| **GPS** | EIN | Kritisch für GPX-Daten → Höhensimulation in CycleRun |
+| **Audio** | Windreduzierung EIN | Reduziert Windgeräusche |
+| **Ausrichtung** | Querformat | Immer. Nie Hochformat für Cycling-Videos |
+
+**Quick Settings:**
+1080p / 30fps / HyperSmooth HIGH / Wide / Natural / GPS EIN
+
+Speichere das als Preset auf deiner GoPro für One-Tap-Start.
+
+## Montage: Brust vs Lenker vs Helm
+
+| Position | Stabilität | Perspektive | Empfohlen? |
+|---|---|---|---|
+| **Brusthalterung** | ⭐⭐⭐⭐⭐ | Natürliche Fahrersicht | ✅ Am besten für CycleRun |
+| **Lenker** | ⭐⭐⭐ | Straßenfokus, vibriert | ⚠️ Okay mit Stabilisierung |
+| **Helm** | ⭐⭐⭐⭐ | Kopfbewegungen sichtbar | ❌ Zu viel Kopfwackeln |
+| **Kinn-Mount** | ⭐⭐⭐⭐ | Motorrad-Stil | ⚠️ Gut wenn vorhanden |
+
+**Tipps für Brustmontage:**
+- Kamera 15-20° nach oben neigen, damit der Horizont im oberen Drittel ist
+- Gurt fest anziehen — jede Lockerheit = Vibration
+- GoPro sollte ungefähr auf Brustbeinhöhe sitzen
+- Winkel vor der Fahrt testen: Vorschau auf dem Handy via GoPro-App prüfen
+
+## GPX-Daten aufnehmen
+
+GPX (GPS Exchange Format) ist eine XML-Datei mit Routenkoordinaten, Höhe und Zeitstempeln. Zusammen mit deinem Video kann CycleRun realistische Steigungen und Widerstandsänderungen simulieren.
+
+**So nimmst du GPX auf:**
+
+**Option 1: GoPro's eingebautes GPS** (am einfachsten)
+- GPS in GoPro-Einstellungen aktivieren
+- Nach der Fahrt GPX extrahieren mit [gopro2gpx](https://github.com/juanmcasillas/gopro2gpx) oder GoPro Quik App
+
+**Option 2: Radcomputer** (am genauesten)
+- Garmin, Wahoo, Bryton — alle exportieren GPX
+- Download von Garmin Connect, Wahoo App oder direkt vom Gerät
+
+**Option 3: Handy-App** (kostenlos)
+- Strava, Komoot oder RideWithGPS zeichnen alle GPX auf
+- Vor der Fahrt Aufnahme starten, danach GPX exportieren
+
+**Option 4: Ohne GPX** (funktioniert trotzdem)
+- Strecken ohne GPX funktionieren auf CycleRun
+- Sie haben nur keine höhenbasierte Widerstandssimulation
+- Du kannst GPX später hinzufügen
+
+## Dein Streckenvideo bearbeiten
+
+Halte es einfach. CycleRun-Fahrer wollen ein authentisches, rohes Erlebnis — keinen YouTube-Vlog.
+
+**Minimale Bearbeitungs-Checkliste:**
+1. **Trimmen** — Anfang und Ende schneiden (die "nach der Kamera greifen"-Momente)
+2. **Stabilisieren** — Falls deine Kamera kein EIS hat (DaVinci Resolve = kostenlos)
+3. **Exportieren** — MP4, H.264 Codec, 1080p, 30fps
+4. **Nicht hinzufügen** — Musik, Text-Overlays, Übergänge oder Effekte
+5. **Kein Wasserzeichen** oder Logo
+6. **Hochladen** auf YouTube als Nicht gelistet (CycleRun bettet YouTube-Videos ein)
+
+## Geld verdienen: Auf CycleRun hochladen
+
+CycleRuns Creator-Programm verwandelt deine Fahrten in passives Einkommen:
+
+**Der Deal:**
+- **70% Umsatzbeteiligung** — du verdienst 70% jedes Premium-Streckenkaufs
+- **Kostenlos beitreten** — keine Mitgliedsgebühr, keine Vorabkosten
+- **Sofortige Aktivierung** — Konto erstellen und sofort hochladen, kein Approval nötig
+- **Dein Content gehört dir** — keine Exklusivität, lade überall sonst auch hoch
+- **Dashboard** — Verfolge Views, Verkäufe und Einnahmen in Echtzeit
+
+**So lädst du hoch:**
+1. Gehe zu [cyclerun.app/creator/dashboard](/creator/dashboard)
+2. Erstelle dein kostenloses Creator-Konto (Ein-Klick-Aktivierung)
+3. Fülle Streckendetails aus: Titel (EN + DE), Beschreibung, Distanz, Höhenmeter, Schwierigkeit
+4. Füge deine YouTube-Video-URL ein
+5. Lade Thumbnail-Bild + GPX-Datei hoch (optional)
+6. Setze deinen Preis in Credits (0 = kostenlos)
+7. Akzeptiere die 3 rechtlichen Checkboxen (Eigentum, Originalinhalt, Bedingungen)
+8. Einreichen zur Überprüfung
+
+Deine Strecke durchläuft eine kurze Prüfung und erscheint dann im [Route Store](/store) für tausende Fahrer.
+
+## Deine erste Upload-Checkliste
+
+Nutze diese vor dem Einreichen deiner ersten Strecke:
+
+- [ ] Video in 1080p aufgenommen, Querformat, stabiles Material
+- [ ] Anfang/Ende getrimmt, keine Leerlaufzeit
+- [ ] Auf YouTube hochgeladen (Nicht gelistet)
+- [ ] GPX-Datei exportiert (optional aber empfohlen)
+- [ ] Thumbnail-Bild bereit (Querformat, zeigt die Streckenlandschaft)
+- [ ] Strecken-Metadaten: Distanz, Höhenmeter, geschätzte Dauer, Schwierigkeit
+- [ ] Titel und Beschreibung auf Englisch UND Deutsch (CycleRun ist zweisprachig)
+- [ ] Creator-Konto erstellt bei [cyclerun.app/creator/dashboard](/creator/dashboard)
+- [ ] Preis gesetzt (starte mit kostenlosen Strecken um Bewertungen aufzubauen)
+
+**Pro-Tipp:** Lade zuerst 2-3 kostenlose Strecken hoch um Bewertungen und Sichtbarkeit aufzubauen. Dann beginne mit Premium-Preisen. Fahrer, die deine kostenlosen Inhalte geliebt haben, zahlen gerne für mehr.
+
+---
+
+### Verwandte Guides
+
+- [Virtuelle Cycling Videos](/guide/virtual-cycling-videos)
+- [Indoor Cycling ohne Smart Trainer](/guide/indoor-cycling-without-smart-trainer)
+- [Komoot-Strecken für Indoor Cycling](/guide/komoot-routes-indoor-cycling)
+- [Strava-Strecken für Indoor Cycling](/guide/strava-routes-indoor-cycling)
+
+[Werde CycleRun Creator →](/creator)`,
+  },
 ];

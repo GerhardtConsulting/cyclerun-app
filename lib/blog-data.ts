@@ -128,6 +128,14 @@ No subscription. No smart trainer. Just you, your bike, and the open road.
 ## Upload Your Own Routes
 
 Are you a content creator who films POV cycling videos? [Become a CycleRun Creator](/creator) and share your routes with our community. Earn revenue from every play.
+
+---
+
+### Related
+
+- [Virtual Cycling Videos Guide](/guide/virtual-cycling-videos)
+- [Indoor Cycling App](/guide/indoor-cycling-app)
+- [Become a Creator](/creator)
     `,
     content_de: `
 ## Warum virtuelle Strecken wichtig sind
@@ -228,6 +236,14 @@ Kein Abo. Kein Smart Trainer. Nur du, dein Rad und die offene Straße.
 ## Eigene Strecken hochladen
 
 Du bist Content Creator und filmst POV-Cycling-Videos? [Werde CycleRun Creator](/creator) und teile deine Strecken mit unserer Community. Verdiene mit jeder Wiedergabe.
+
+---
+
+### Verwandt
+
+- [Virtuelle Cycling Videos Guide](/guide/virtual-cycling-videos)
+- [Indoor Cycling App](/guide/indoor-cycling-app)
+- [Creator werden](/creator)
     `,
   },
   {
@@ -370,7 +386,15 @@ When exporting from GoPro Quik or editing software:
 
 ## Ready to Share Your Routes?
 
-Once you've recorded your ride, [become a CycleRun Creator](/creator) and upload your routes. Our community of 10,000+ indoor riders is waiting to experience your roads.
+Once you've recorded your ride, [become a CycleRun Creator](/creator) and upload your routes. Our community of thousands of indoor riders is waiting to experience your roads.
+
+---
+
+### Related
+
+- [GoPro Cycling Setup Guide](/guide/gopro-cycling-setup)
+- [Become a Creator](/creator)
+- [Virtual Cycling Videos](/guide/virtual-cycling-videos)
     `,
     content_de: `
 ## Warum GoPro-Einstellungen für Indoor Cycling wichtig sind
@@ -474,7 +498,15 @@ Warum es wichtig ist:
 
 ## Bereit deine Strecken zu teilen?
 
-Nachdem du deine Fahrt aufgenommen hast, [werde CycleRun Creator](/creator) und lade deine Strecken hoch. Unsere Community von 10.000+ Indoor-Fahrern wartet darauf, deine Straßen zu erleben.
+Nachdem du deine Fahrt aufgenommen hast, [werde CycleRun Creator](/creator) und lade deine Strecken hoch. Unsere Community von tausenden Indoor-Fahrern wartet darauf, deine Straßen zu erleben.
+
+---
+
+### Verwandt
+
+- [GoPro Cycling Setup Guide](/guide/gopro-cycling-setup)
+- [Creator werden](/creator)
+- [Virtuelle Cycling Videos](/guide/virtual-cycling-videos)
     `,
   },
   {
@@ -582,6 +614,14 @@ The future of indoor cycling isn't one platform — it's choice. And CycleRun gi
 ## Try CycleRun Free
 
 [Open CycleRun](https://cyclerun.app) — no signup required, no credit card, no smart trainer. Just you and the road.
+
+---
+
+### Related
+
+- [Free Zwift Alternative Guide](/guide/zwift-alternative-free)
+- [Rouvy Alternative](/guide/rouvy-alternative)
+- [Indoor Cycling App](/guide/indoor-cycling-app)
     `,
     content_de: `
 ## Die Indoor-Cycling-Landschaft 2026
@@ -663,6 +703,14 @@ CycleRun demokratisiert Indoor Cycling. Wenn du ein Rad hast, das sich bewegt, u
 ## CycleRun kostenlos testen
 
 [CycleRun öffnen](https://cyclerun.app) — keine Anmeldung nötig, keine Kreditkarte, kein Smart Trainer. Nur du und die Straße.
+
+---
+
+### Verwandt
+
+- [Kostenlose Zwift-Alternative](/guide/zwift-alternative-free)
+- [Rouvy-Alternative](/guide/rouvy-alternative)
+- [Indoor Cycling App](/guide/indoor-cycling-app)
     `,
   },
 ];

@@ -1,6 +1,6 @@
 # CycleRun.app — Projekt-Dokumentation
 
-> **Version**: 0.10.0 · **Stand**: 8. Februar 2026  
+> **Version**: 0.11.0 · **Stand**: 9. Februar 2026  
 > Vollständige Übersicht über Architektur, Features, SEO, Datenbank und Status.
 
 ---
@@ -55,7 +55,7 @@ resend 6.9.1, qrcode 1.5.4, babel-plugin-react-compiler 1.0.0
 |------------|--------|-------|------------|
 | `/blog/[slug]` | 3 | `best-indoor-cycling-routes-2026`, `gopro-settings-pov-cycling-video`, `cyclerun-vs-zwift-comparison` | BlogPosting, BreadcrumbList |
 | `/routes/[slug]` | 5 | `mallorca-cap-de-formentor`, `stelvio-pass-italy`, `pacific-coast-highway-california`, `alpe-d-huez-france`, `trollstigen-norway` | SportsEvent, BreadcrumbList |
-| `/guide/[slug]` | 9 | `zwift-alternative-free`, `indoor-cycling-app`, `heimtrainer-app`, `exercise-bike-app`, `spinning-bike-app`, `virtual-cycling-videos`, `indoor-cycling-without-smart-trainer`, `ergometer-training`, `rouvy-alternative` | FAQPage, BreadcrumbList, Article |
+| `/guide/[slug]` | 17 | `zwift-alternative-free`, `indoor-cycling-app`, `heimtrainer-app`, `exercise-bike-app`, `spinning-bike-app`, `virtual-cycling-videos`, `indoor-cycling-without-smart-trainer`, `ergometer-training`, `rouvy-alternative`, `komoot-routes-indoor-cycling`, `strava-routes-indoor-cycling`, `ridewithgps-routes-indoor`, `indoor-cycling-weight-loss`, `peloton-alternative-free`, `indoor-cycling-beginner`, `cycling-workout-plan`, `gopro-cycling-setup` | FAQPage, BreadcrumbList, Article |
 
 ### Dynamische Seiten (Server-Rendered)
 
@@ -86,13 +86,13 @@ resend 6.9.1, qrcode 1.5.4, babel-plugin-react-compiler 1.0.0
 
 `app/sitemap.ts` generiert automatisch alle URLs:
 
-**11 statische Seiten**: `/`, `/creator`, `/blog`, `/routes`, `/guide`, `/roadmap`, `/changelog`, `/store`, `/creator/dashboard`, `/datenschutz`, `/impressum`  
+**9 statische Seiten**: `/`, `/creator`, `/blog`, `/routes`, `/guide`, `/roadmap`, `/changelog`, `/datenschutz`, `/impressum`  
 **3 Blog-Posts**: `/blog/[slug]`  
 **5 Routen**: `/routes/[slug]`  
-**9 Guides**: `/guide/[slug]`  
-**= 28 URLs in der Sitemap**
+**17 Guides**: `/guide/[slug]`  
+**= 34 URLs in der Sitemap**
 
-Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/[slug]`, `/store/[id]`, `/admin`
+Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/[slug]`, `/store/[id]`, `/store`, `/creator/dashboard`, `/admin`
 
 ---
 
@@ -311,15 +311,16 @@ Alle Seiten nutzen `title.template: "%s | CycleRun"` — Brand-Suffix wird autom
 | `/routes` | ✅ | ✅ | ✅ | ✅ en/de/x-default | ✅ |
 | `/routes/[slug]` | ✅ dynamisch | ✅ | ✅ | ✅ en/de/x-default | ✅ |
 | `/guide` | ✅ | ✅ | ✅ | ✅ en/de/x-default | ✅ |
-| `/guide/[slug]` | ✅ dynamisch | ✅ | ✅ | ✅ en/de/x-default | ✅ |
+| `/guide/[slug]` | ✅ dynamisch (17) | ✅ | ✅ | ✅ en/de/x-default | ✅ |
 | `/creator` | ✅ | ✅ | ✅ | ✅ en/de/x-default | ✅ |
-| `/store` | ✅ | ✅ | — | ✅ en/de/x-default | ✅ |
+| `/store` | ✅ | ✅ | ✅ | ✅ en/de/x-default | ✅ |
 | `/store/[id]` | ✅ generisch | ✅ | — | ✅ | — |
 | `/creator/dashboard` | ✅ | ✅ | — | ✅ | — |
 | `/roadmap` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `/changelog` | ✅ | ✅ | — | ✅ | ✅ |
 | `/pair` | — | — | — | — | — |
 | `/tv` | — | — | — | — | — |
+| `/leaderboard` | ✅ | ✅ | — | ✅ en/de/x-default | noindex, follow |
 
 ### hreflang
 
@@ -400,12 +401,12 @@ app/
 ├─ page.tsx                      → Home (rendert CycleRunApp)
 ├─ globals.css                   → Alle Styles (111KB, Single-File)
 ├─ seo-config.tsx                → SEO Defaults, Schema-Generatoren, <JsonLd />
-├─ sitemap.ts                    → Auto-generierte Sitemap (29 URLs, hreflang)
+├─ sitemap.ts                    → Auto-generierte Sitemap (34 URLs, hreflang)
 ├─ robots.ts                     → ✅ allow all, disallow private routes
 ├─ opengraph-image.tsx           → Dynamisches OG-Image
 ├─ blog/[slug]/page.tsx          → SSG Blog-Posts (3)
 ├─ routes/[slug]/page.tsx        → SSG Cycling-Routes (5)
-├─ guide/[slug]/page.tsx         → SSG SEO-Guides (9)
+├─ guide/[slug]/page.tsx        → SSG SEO-Guides (17)
 ├─ store/[id]/page.tsx           → Dynamic Store-Route
 ├─ u/[slug]/page.tsx             → Dynamic Public Profile
 ├─ creator/dashboard/page.tsx    → Creator Dashboard
@@ -436,7 +437,7 @@ lib/
 ├─ cycling-simulator.ts          → Core Simulator Engine (61KB, 1.785 Zeilen)
 ├─ i18n.ts                       → Übersetzungen EN+DE (51KB)
 ├─ email-engagement.ts           → 15+ Engagement-Email Templates (51KB)
-├─ seo-pages-content.ts          → 9 SEO-Guides Inhalt (90KB)
+├─ seo-pages-content.ts          → 17 SEO-Guides Inhalt (~180KB)
 ├─ blog-data.ts                  → 3 Blog-Posts Inhalt (29KB)
 ├─ email-templates.ts            → 5 Transaktionale Email Templates (21KB)
 ├─ route-data.ts                 → 5 Cycling Routes Inhalt (13KB)
@@ -640,10 +641,10 @@ git push origin main    # Vercel Auto-Deploy
 
 | Metrik | Wert |
 |--------|------|
-| **Gesamte Seiten** | 29+ URLs in Sitemap + dynamische |
+| **Gesamte Seiten** | 34+ URLs in Sitemap + dynamische |
 | **Blog-Posts** | 3 (EN+DE) |
 | **Cycling Routes** | 5 (EN+DE) |
-| **SEO Guides** | 9 (EN+DE) |
+| **SEO Guides** | 17 (EN+DE) |
 | **API Routes** | 11 |
 | **DB Tabellen** | 19 |
 | **Storage Buckets** | 3 |
@@ -651,4 +652,4 @@ git push origin main    # Vercel Auto-Deploy
 | **i18n Schlüssel** | ~1.200+ |
 | **Komponenten** | 22 (inkl. CookieConsent) |
 | **CSS** | 1 Datei (112KB) |
-| **Changelog Versionen** | bis v0.10.0 |
+| **Changelog Versionen** | bis v0.11.0 |

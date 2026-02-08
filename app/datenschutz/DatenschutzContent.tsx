@@ -39,7 +39,7 @@ export default function DatenschutzContent() {
 
         <h2>1. Verantwortlicher</h2>
         <p>
-          CycleRun.app ist ein Community-Projekt ohne Gewinnabsicht.<br />
+          CycleRun.app — Free indoor cycling, built by cyclists.<br />
           Kontakt: datenschutz@cyclerun.app
         </p>
 
@@ -88,7 +88,7 @@ export default function DatenschutzContent() {
           <li><strong>Kommunikation:</strong> Informationen über neue Features und Updates (nur mit Einwilligung).</li>
           <li><strong>Analyse:</strong> Anonymisierte Nutzungsanalyse zur Verbesserung der Website (nur mit Einwilligung, siehe Abschnitt 7).</li>
         </ul>
-        <p><strong>CycleRun ist ein Community-Projekt ohne Gewinnabsicht.</strong> Es findet kein Verkauf von Daten an Dritte statt.</p>
+        <p><strong>Es findet kein Verkauf von Daten an Dritte statt.</strong></p>
 
         <h2>5. Datenspeicherung &amp; Hosting</h2>
         <p>Unsere Daten werden bei folgenden Anbietern gehostet:</p>
@@ -96,6 +96,7 @@ export default function DatenschutzContent() {
           <li><strong>Supabase Inc.</strong> (Datenbank) — Server in Frankfurt/Main (eu-central-1), DSGVO-konform</li>
           <li><strong>Vercel Inc.</strong> (Website-Hosting) — Edge Network mit europäischen Nodes</li>
           <li><strong>Google LLC</strong> (Analyse, nur mit Einwilligung) — siehe Abschnitt 7</li>
+          <li><strong>Resend Inc.</strong> (E-Mail-Versand) — transaktionale und Engagement-E-Mails, SCCs implementiert</li>
         </ul>
         <p>Alle Anbieter haben Standardvertragsklauseln (SCCs) gemäß Art. 46 DSGVO implementiert.</p>
 
@@ -136,6 +137,8 @@ export default function DatenschutzContent() {
           Die Nutzung von Google Analytics erfolgt ausschließlich auf Grundlage deiner <strong>Einwilligung</strong> gemäß
           Art. 6 Abs. 1 lit. a DSGVO i.V.m. § 25 Abs. 1 TTDSG. Google Analytics wird <strong>erst nach deiner
           aktiven Zustimmung</strong> im Cookie-Banner geladen. Ohne deine Einwilligung findet kein Tracking statt.
+          Wir verwenden zusätzlich den Google Consent Mode v2, der sicherstellt, dass ohne deine Einwilligung
+          keine Analyse-Cookies gesetzt und keine Daten an Google übermittelt werden.
         </p>
 
         <h3>7.3 Empfänger / Datenübermittlung</h3>

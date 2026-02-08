@@ -39,10 +39,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     withAlternates(`${BASE}/routes`, { lastModified: now, changeFrequency: "weekly", priority: 0.8 }),
     withAlternates(`${BASE}/guide`, { lastModified: now, changeFrequency: "weekly", priority: 0.9 }),
     withAlternates(`${BASE}/store`, { lastModified: now, changeFrequency: "daily", priority: 0.9 }),
-    withAlternates(`${BASE}/leaderboard`, { lastModified: now, changeFrequency: "daily", priority: 0.6 }),
     withAlternates(`${BASE}/roadmap`, { lastModified: now, changeFrequency: "weekly", priority: 0.7 }),
     withAlternates(`${BASE}/changelog`, { lastModified: now, changeFrequency: "weekly", priority: 0.7 }),
-    withAlternates(`${BASE}/creator/dashboard`, { lastModified: now, changeFrequency: "monthly", priority: 0.7 }),
     withAlternates(`${BASE}/datenschutz`, { lastModified: now, changeFrequency: "yearly", priority: 0.3 }),
     withAlternates(`${BASE}/impressum`, { lastModified: now, changeFrequency: "yearly", priority: 0.3 }),
   ];
