@@ -250,17 +250,44 @@ body {
     display: block;
 }
 
+/* Gradient chip badge */
+.splash-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 1rem 0.35rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+        var(--gradient-main) border-box;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+    margin-bottom: 1.25rem;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.splash-chip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-1);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
 .splash-headline {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0;
-    margin: 0 0 2.5rem;
-    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    margin: 0 0 1rem;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 
 .splash-headline-main {
-    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-size: clamp(2rem, 5.5vw, 3.2rem);
     font-weight: 800;
     color: var(--text-primary);
     letter-spacing: -0.04em;
@@ -268,14 +295,22 @@ body {
 }
 
 .splash-headline-accent {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.2;
+    font-size: clamp(2.2rem, 6.5vw, 3.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
     background: var(--gradient-main);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.splash-sub {
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.01em;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 
 .splash-tagline {
