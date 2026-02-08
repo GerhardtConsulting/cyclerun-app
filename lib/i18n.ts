@@ -9,8 +9,8 @@ export type Locale = "en" | "de";
 const translations: Record<Locale, Record<string, string>> = {
   en: {
     // Splash
-    "splash.headline.1": "The Free Smart Trainer ",
-    "splash.headline.2": "Alternative",
+    "splash.headline.1": "Train Free.",
+    "splash.headline.2": "Just Your Webcam.",
     "splash.tagline": "No smart trainer. No subscription. Just your webcam.",
     "splash.cycle.sub": "Spinning · Ergometer · Indoor Bike",
     "splash.run.sub": "Treadmill · Coming Soon",
@@ -482,8 +482,8 @@ const translations: Record<Locale, Record<string, string>> = {
 
   de: {
     // Splash
-    "splash.headline.1": "Die kostenlose Smart-Trainer ",
-    "splash.headline.2": "Alternative",
+    "splash.headline.1": "Trainiere kostenlos.",
+    "splash.headline.2": "Nur deine Webcam.",
     "splash.tagline": "Kein Smart Trainer. Kein Abo. Nur deine Webcam.",
     "splash.cycle.sub": "Spinning · Ergometer · Indoor Bike",
     "splash.run.sub": "Laufband · Bald verfügbar",

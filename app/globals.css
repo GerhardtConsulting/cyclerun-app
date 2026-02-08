@@ -251,13 +251,31 @@ body {
 }
 
 .splash-headline {
-    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-    font-weight: 500;
-    color: var(--text-secondary);
-    margin: 0 0 0.5rem;
-    letter-spacing: -0.02em;
-    text-align: center;
-    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 0 0 2.5rem;
+    animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.splash-headline-main {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+}
+
+.splash-headline-accent {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .splash-tagline {
