@@ -27,6 +27,7 @@ interface UserProfile {
   is_public: boolean;
   referral_code: string | null;
   credits: number;
+  onboarding_completed: boolean;
 }
 
 interface Badge {
@@ -95,7 +96,7 @@ export default function ProfileContent() {
     // Fetch user
     const { data: userData } = await sb
       .from("registrations")
-      .select("id, display_name, first_name, total_energy, total_sessions, total_distance_km, total_duration_seconds, current_streak, longest_streak, streak_freeze_available, level, avatar_url, nickname, slug, is_public, referral_code, credits")
+      .select("id, display_name, first_name, total_energy, total_sessions, total_distance_km, total_duration_seconds, current_streak, longest_streak, streak_freeze_available, level, avatar_url, nickname, slug, is_public, referral_code, credits, onboarding_completed")
       .eq("email", email)
       .single();
 
@@ -251,6 +252,43 @@ export default function ProfileContent() {
             </div>
           ) : user && (
             <>
+              {/* Onboarding Welcome Card */}
+              {!user.onboarding_completed && (
+                <div style={{
+                  background: "linear-gradient(135deg, rgba(249,115,22,0.08), rgba(234,88,12,0.03))",
+                  border: "1px solid rgba(249,115,22,0.15)",
+                  borderRadius: 16, padding: "1.5rem", marginBottom: "1rem", textAlign: "center",
+                }}>
+                  <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>🎉</div>
+                  <h2 style={{ fontSize: "1.3rem", fontWeight: 800, marginBottom: "0.5rem" }}>
+                    {isDE ? `Willkommen, ${user.first_name}!` : `Welcome, ${user.first_name}!`}
+                  </h2>
+                  <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.6, maxWidth: 400, margin: "0 auto 1rem" }}>
+                    {isDE
+                      ? "Dein Profil ist aktiv. Starte deine erste Fahrt, um Energie zu sammeln, Level aufzusteigen und Badges freizuschalten."
+                      : "Your profile is active. Start your first ride to earn Energy, level up, and unlock badges."}
+                  </p>
+                  <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap" }}>
+                    <Link href="/" className="btn-primary" style={{ padding: "0.5rem 1.25rem", fontSize: "0.85rem" }}>
+                      {isDE ? "Erste Fahrt starten" : "Start first ride"}
+                    </Link>
+                    <button
+                      className="btn-ghost"
+                      style={{ padding: "0.5rem 1.25rem", fontSize: "0.85rem" }}
+                      onClick={async () => {
+                        const sb = getSupabase();
+                        if (sb && user) {
+                          await sb.from("registrations").update({ onboarding_completed: true }).eq("id", user.id);
+                          setUser({ ...user, onboarding_completed: true });
+                        }
+                      }}
+                    >
+                      {isDE ? "Verstanden" : "Got it"}
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {/* Profile Card */}
               <div className="info-card" style={{ padding: "1.25rem", marginBottom: "1rem" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>

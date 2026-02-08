@@ -1868,69 +1868,41 @@ export class CyclingSimulator {
     }
 
     try {
-      const sb = getSupabase();
-      if (!sb) throw new Error("Supabase not loaded");
       const newsletterOpt = (document.getElementById("regNewsletter") as HTMLInputElement)?.checked || false;
-      const { error } = await sb.from("registrations").insert({
-        first_name: firstName,
-        last_name: lastName || null,
-        email: email,
-        preferred_sport: this.selectedSport || "cycling",
-        locale: navigator.language || "en",
-        consent_privacy: consentPrivacy,
-        consent_data_processing: consentPrivacy,
-        newsletter_opt_in: newsletterOpt,
+      const refCode = new URLSearchParams(window.location.search).get("ref");
+
+      const res = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName: lastName || null,
+          email,
+          sport: this.selectedSport || "cycling",
+          locale: navigator.language || "en",
+          consentPrivacy,
+          newsletterOptIn: newsletterOpt,
+          referralCode: refCode || undefined,
+        }),
       });
 
-      // Subscribe to newsletter if opted in
-      if (newsletterOpt) {
-        fetch("/api/newsletter", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, locale: navigator.language?.startsWith("de") ? "de" : "en" }),
-        }).catch(() => {});
-      }
-
-      if (error && error.code === "23505") {
-        // Duplicate email — user already registered, that's fine
-      } else if (error) {
-        throw error;
-      } else {
-        // Notify admin about new registration (fire-and-forget)
-        fetch("/api/admin/notify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            event: "registration",
-            details: {
-              Name: firstName + (lastName ? ` ${lastName}` : ""),
-              Email: email,
-              Sport: this.selectedSport || "cycling",
-              Locale: navigator.language || "en",
-              Newsletter: newsletterOpt ? "Ja" : "Nein",
-            },
-          }),
-        }).catch(() => {});
-      }
+      const result = await res.json();
 
       localStorage.setItem("cyclerun_registered", "true");
       localStorage.setItem("cyclerun_name", firstName);
       localStorage.setItem("cyclerun_email", email);
       this.isRegistered = true;
 
-      // Process referral code if present in URL
-      const refCode = new URLSearchParams(window.location.search).get("ref");
-      if (refCode && !error) {
-        const { data: newUser } = await sb.from("registrations").select("id").eq("email", email).single();
-        if (newUser) {
-          await sb.rpc("process_referral", { p_referred_id: newUser.id, p_referral_code: refCode });
-        }
-      }
-
       document.getElementById("registerOverlay")?.classList.remove("active");
 
-      const video = document.getElementById("rideVideo") as HTMLVideoElement;
-      if (video) video.play().catch(() => {});
+      if (result.status === "already_confirmed") {
+        // Already confirmed — just continue
+        const video = document.getElementById("rideVideo") as HTMLVideoElement;
+        if (video) video.play().catch(() => {});
+      } else {
+        // Redirect to DOI confirmation page
+        window.location.href = "/confirm?status=pending";
+      }
     } catch (err) {
       console.error("Registration error:", err);
       localStorage.setItem("cyclerun_registered", "true");

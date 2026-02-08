@@ -65,12 +65,18 @@ export default function UserMenu() {
 
     const { data } = await sb
       .from("registrations")
-      .select("id, first_name, nickname, avatar_url, is_creator, credits, level")
+      .select("id, first_name, nickname, avatar_url, is_creator, credits, level, email_confirmed")
       .eq("email", loginEmail.trim().toLowerCase())
       .single();
 
     if (!data) {
       setLoginError(isDE ? "Kein Account mit dieser E-Mail gefunden." : "No account found with this email.");
+      setLoginLoading(false);
+      return;
+    }
+
+    if (!(data as Record<string, unknown>).email_confirmed) {
+      setLoginError(isDE ? "Bitte bestätige zuerst deine E-Mail. Prüfe dein Postfach." : "Please confirm your email first. Check your inbox.");
       setLoginLoading(false);
       return;
     }

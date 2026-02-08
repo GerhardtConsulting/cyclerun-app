@@ -213,6 +213,61 @@ export function newsletterWelcomeEmail(locale: string, unsubscribeUrl: string): 
   };
 }
 
+// ─── Registration Email Confirmation (DOI) ───
+
+export function registrationConfirmEmail(locale: string, firstName: string, confirmUrl: string): { subject: string; html: string } {
+  const isDE = locale === "de";
+  const name = firstName || "Rider";
+  return {
+    subject: isDE
+      ? `${name}, bestätige deine E-Mail — CycleRun.app`
+      : `${name}, confirm your email — CycleRun.app`,
+    html: wrapper(`
+      <h1 style="${S.h1}">${isDE ? `Fast geschafft, ${name}.` : `Almost there, ${name}.`}</h1>
+      <p style="${S.p}">${isDE
+        ? "Bestätige deine E-Mail-Adresse mit einem Klick, um dein Profil zu aktivieren und deine Fahrdaten dauerhaft zu speichern."
+        : "Confirm your email address with one click to activate your profile and permanently save your ride data."
+      }</p>
+
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:28px 0;">
+        <tr><td align="center">
+          <a href="${confirmUrl}" style="${S.cta}">${isDE ? "E-Mail bestätigen" : "Confirm email"}</a>
+        </td></tr>
+      </table>
+
+      <!-- Bento grid: what happens next -->
+      <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:24px 0;">
+        <tr>
+          <td width="31%" valign="top" style="${S.bentoBoxAccent}">
+            <p style="${S.bentoLabel}">${isDE ? "Profil" : "Profile"}</p>
+            <p style="${S.bentoValue}">${isDE ? "Dein persönliches Dashboard" : "Your personal dashboard"}</p>
+          </td>
+          <td width="3.5%"></td>
+          <td width="31%" valign="top" style="${S.bentoBox}">
+            <p style="${S.bentoLabel}">${isDE ? "Tracking" : "Tracking"}</p>
+            <p style="${S.bentoValue}">${isDE ? "Jede Fahrt wird gespeichert" : "Every ride is saved"}</p>
+          </td>
+          <td width="3.5%"></td>
+          <td width="31%" valign="top" style="${S.bentoBox}">
+            <p style="${S.bentoLabel}">${isDE ? "Rangliste" : "Leaderboard"}</p>
+            <p style="${S.bentoValue}">${isDE ? "Miss dich mit anderen" : "Compete with others"}</p>
+          </td>
+        </tr>
+      </table>
+
+      <div style="${S.divider}"></div>
+      <p style="${S.muted}">${isDE
+        ? "Hinweis: Falls du dich nicht bei CycleRun registriert hast, musst du nichts weiter tun. Der Bestätigungslink ist 48 Stunden gültig — wird er nicht angeklickt, löschen wir deine Daten automatisch."
+        : "Note: If you did not register at CycleRun, no action is required. The confirmation link is valid for 48 hours — if not clicked, your data will be automatically deleted."
+      }</p>
+    `, locale, {
+      reason: isDE
+        ? "Du erhältst diese E-Mail, weil du dich soeben bei CycleRun.app registriert hast."
+        : "You are receiving this email because you just registered at CycleRun.app.",
+    }),
+  };
+}
+
 // ─── Registration Welcome ───
 
 export function registrationWelcomeEmail(locale: string, firstName: string, unsubscribeUrl?: string): { subject: string; html: string } {
