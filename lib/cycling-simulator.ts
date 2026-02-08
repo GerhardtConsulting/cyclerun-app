@@ -1792,30 +1792,20 @@ export class CyclingSimulator {
     if (btn) { btn.disabled = true; btn.textContent = t('claim.saving'); }
 
     try {
-      const sb = getSupabase();
-      if (!sb) throw new Error("Supabase not loaded");
-
-      const { error } = await sb.from("registrations").insert({
-        first_name: name,
-        email: email,
-        preferred_sport: this.selectedSport || "cycling",
-        locale: navigator.language || "en",
-        consent_privacy: true,
-        consent_data_processing: true,
-        newsletter_opt_in: false,
-      });
-
-      if (error && error.code !== "23505") throw error;
-
-      // Notify admin
-      fetch("/api/admin/notify", {
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          event: "registration",
-          details: { Name: name, Email: email, Source: "post-ride-claim" },
+          firstName: name,
+          email,
+          sport: this.selectedSport || "cycling",
+          locale: navigator.language || "en",
+          consentPrivacy: true,
+          newsletterOptIn: false,
         }),
-      }).catch(() => {});
+      });
+
+      const result = await res.json();
 
       localStorage.setItem("cyclerun_registered", "true");
       localStorage.setItem("cyclerun_name", name);
@@ -1833,6 +1823,11 @@ export class CyclingSimulator {
       const success = document.getElementById("summaryClaimSuccess");
       if (form) form.style.display = "none";
       if (success) success.style.display = "";
+
+      // Redirect to DOI page if new registration
+      if (result.status === "confirmation_sent") {
+        setTimeout(() => { window.location.href = "/confirm?status=pending"; }, 2000);
+      }
 
     } catch (err) {
       console.error("Claim error:", err);

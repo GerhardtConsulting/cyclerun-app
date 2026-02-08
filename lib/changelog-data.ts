@@ -43,8 +43,8 @@ export const changelog: ChangelogEntry[] = [
       },
       {
         type: "feature",
-        text: "**Credits System** \u2014 Earn Credits by referring friends. Spend Credits to unlock premium routes via the route unlock API.",
-        text_de: "**Credits-System** \u2014 Verdiene Credits durch Empfehlungen. Gib Credits aus, um Premium-Strecken \u00fcber die Route-Unlock-API freizuschalten.",
+        text: "**Credits System** \u2014 Earn Credits by referring friends. Spend Credits to unlock premium routes in the Route Store.",
+        text_de: "**Credits-System** \u2014 Verdiene Credits durch Empfehlungen. Gib Credits aus, um Premium-Strecken im Strecken-Store freizuschalten.",
       },
       {
         type: "feature",
@@ -52,14 +52,9 @@ export const changelog: ChangelogEntry[] = [
         text_de: "**Changelog-Seite** \u2014 Ein \u00f6ffentlicher Changelog unter `/changelog` mit allen CycleRun-Updates. Zweisprachig EN+DE. In jedem Footer verlinkt.",
       },
       {
-        type: "system",
-        text: "**Avatar Storage** \u2014 Supabase Storage bucket for profile photos with public read access.",
-        text_de: "**Avatar-Speicher** \u2014 Supabase Storage Bucket f\u00fcr Profilbilder mit \u00f6ffentlichem Lesezugriff.",
-      },
-      {
-        type: "system",
-        text: "**Referral Processing** \u2014 Server-side RPC function validates referral codes, prevents self-referrals and duplicates, awards Credits atomically.",
-        text_de: "**Empfehlungsverarbeitung** \u2014 Serverseitige RPC-Funktion validiert Codes, verhindert Selbst-Empfehlungen und Duplikate, vergibt Credits atomar.",
+        type: "improvement",
+        text: "**Secure Referrals** \u2014 Referral system validates codes, prevents self-referrals and duplicates, and awards Credits instantly.",
+        text_de: "**Sichere Empfehlungen** \u2014 Empfehlungssystem validiert Codes, verhindert Selbst-Empfehlungen und Duplikate und vergibt Credits sofort.",
       },
     ],
   },
@@ -112,24 +107,14 @@ export const changelog: ChangelogEntry[] = [
         text_de: "**Ziel-Fortschritt im Profil** \u2014 Visueller Fortschrittsbalken zu deinem pers\u00f6nlichen Ziel (Abnehmen, Fitness, Distanz oder Stressabbau).",
       },
       {
-        type: "system",
-        text: "**Email Engagement System** \u2014 Welcome drip series (Day 1, 3, 7), 5-part Weight Loss Guide, retention win-back emails (3/7/14/30 days inactive), weekly performance summaries. All bilingual EN+DE, DSGVO-compliant.",
-        text_de: "**E-Mail-Engagement-System** \u2014 Welcome-Drip-Serie (Tag 1, 3, 7), 5-teiliger Abnehm-Guide, Retention-Win-Back-E-Mails (3/7/14/30 Tage inaktiv), w\u00f6chentliche Performance-Zusammenfassungen. Alles zweisprachig EN+DE, DSGVO-konform.",
-      },
-      {
-        type: "system",
-        text: "**Smart Email Personalization** \u2014 Emails adapt to your stated goals. Weight loss users get the guide series immediately, others after proving engagement.",
-        text_de: "**Intelligente E-Mail-Personalisierung** \u2014 E-Mails passen sich deinen Zielen an. Abnehm-Nutzer erhalten die Guide-Serie sofort, andere nach bewiesener Aktivit\u00e4t.",
+        type: "feature",
+        text: "**Smart Emails** \u2014 Personalized welcome series, weekly performance summaries, and a 5-part cycling guide. Emails adapt to your goals and activity level. Bilingual EN+DE.",
+        text_de: "**Smarte E-Mails** \u2014 Personalisierte Willkommens-Serie, w\u00f6chentliche Performance-Zusammenfassungen und ein 5-teiliger Cycling-Guide. E-Mails passen sich deinen Zielen und deiner Aktivit\u00e4t an. Zweisprachig EN+DE.",
       },
       {
         type: "improvement",
-        text: "**Database Trigger** \u2014 All stats (Energy, streak, badges, level) are calculated automatically server-side after each ride. No double counting, no race conditions.",
-        text_de: "**Datenbank-Trigger** \u2014 Alle Statistiken (Energie, Streak, Abzeichen, Level) werden automatisch serverseitig nach jeder Fahrt berechnet. Kein doppeltes Z\u00e4hlen.",
-      },
-      {
-        type: "improvement",
-        text: "**Shared Supabase Client** \u2014 Centralized database connection for cleaner code and better performance.",
-        text_de: "**Zentraler Supabase-Client** \u2014 Zentralisierte Datenbankverbindung f\u00fcr saubereren Code und bessere Performance.",
+        text: "**Automatic Stats** \u2014 All stats (Energy, streak, badges, level) are calculated instantly after each ride. Accurate and reliable.",
+        text_de: "**Automatische Stats** \u2014 Alle Statistiken (Energie, Streak, Abzeichen, Level) werden sofort nach jeder Fahrt berechnet. Genau und zuverl\u00e4ssig.",
       },
     ],
   },
@@ -143,8 +128,8 @@ export const changelog: ChangelogEntry[] = [
     changes: [
       {
         type: "feature",
-        text: "**TV Mode** \u2014 Open `/tv` on your big screen, scan the QR code with your phone. Camera + state sync via WebRTC. No app install needed.",
-        text_de: "**TV-Modus** \u2014 \u00d6ffne `/tv` auf deinem gro\u00dfen Bildschirm, scanne den QR-Code mit dem Handy. Kamera + State-Sync via WebRTC. Keine App-Installation n\u00f6tig.",
+        text: "**TV Mode** \u2014 Open CycleRun on your big screen, scan the QR code with your phone. Your camera and ride data sync instantly. No app install needed.",
+        text_de: "**TV-Modus** \u2014 \u00d6ffne CycleRun auf deinem gro\u00dfen Bildschirm, scanne den QR-Code mit dem Handy. Kamera und Fahrdaten synchronisieren sich sofort. Keine App-Installation n\u00f6tig.",
       },
       {
         type: "feature",

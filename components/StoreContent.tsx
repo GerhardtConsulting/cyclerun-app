@@ -152,13 +152,83 @@ export default function StoreContent() {
               <div className="loading-spinner" style={{ margin: "0 auto" }}></div>
             </div>
           ) : filtered.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "3rem 0", color: "var(--text-muted)" }}>
-              <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>🏔️</div>
-              <p>{isDE ? "Noch keine Strecken in dieser Kategorie." : "No routes in this category yet."}</p>
-              <Link href="/creator/dashboard" className="btn-primary" style={{ marginTop: "1rem", display: "inline-block" }}>
-                {isDE ? "Erste Strecke hochladen" : "Upload the first route"}
-              </Link>
-            </div>
+            <>
+              {/* Coming Soon section */}
+              <div style={{ textAlign: "center", padding: "1.5rem 0 1rem" }}>
+                <span style={{
+                  display: "inline-block", fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase",
+                  letterSpacing: "0.08em", color: "var(--accent-1)",
+                  background: "rgba(249,115,22,0.1)", padding: "0.25rem 0.75rem", borderRadius: 20,
+                }}>
+                  {isDE ? "Demnächst verfügbar" : "Coming Soon"}
+                </span>
+                <h2 style={{ fontSize: "1.3rem", fontWeight: 800, marginTop: "0.75rem", marginBottom: "0.25rem" }}>
+                  {isDE ? "Die ersten Strecken kommen bald" : "First routes launching soon"}
+                </h2>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", maxWidth: 440, margin: "0 auto" }}>
+                  {isDE
+                    ? "Wir kuratieren gerade die ersten POV-Cycling-Strecken. Sei unter den Ersten, die sie fahren."
+                    : "We're curating the first POV cycling routes. Be among the first to ride them."}
+                </p>
+              </div>
+
+              {/* Preview cards — upcoming routes (placeholder) */}
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1rem", marginTop: "1rem" }}>
+                {[
+                  { emoji: "🏔️", title: isDE ? "Alpen-Klassiker" : "Alpine Classic", region: isDE ? "Schweiz" : "Switzerland", diff: "hard", km: 42, elev: 1200 },
+                  { emoji: "🌊", title: isDE ? "Küstenstraße" : "Coastal Highway", region: isDE ? "Mittelmeer" : "Mediterranean", diff: "moderate", km: 28, elev: 320 },
+                  { emoji: "🌿", title: isDE ? "Weinberg-Tour" : "Vineyard Tour", region: isDE ? "Toskana" : "Tuscany", diff: "easy", km: 18, elev: 180 },
+                ].map((preview, i) => (
+                  <div key={i} className="info-card" style={{ padding: 0, overflow: "hidden", opacity: 0.6, position: "relative" }}>
+                    <div style={{
+                      paddingBottom: "56.25%", position: "relative",
+                      background: `linear-gradient(135deg, rgba(249,115,22,${0.04 + i * 0.02}), rgba(0,0,0,0.3))`,
+                    }}>
+                      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "3rem" }}>
+                        {preview.emoji}
+                      </div>
+                      <span style={{
+                        position: "absolute", top: 8, left: 8, fontSize: "0.6rem", fontWeight: 700,
+                        textTransform: "uppercase", color: "#fff",
+                        background: DIFF_COLORS[preview.diff] || "#666",
+                        padding: "0.15rem 0.5rem", borderRadius: 4,
+                      }}>
+                        {isDE ? DIFF_LABELS[preview.diff]?.de : DIFF_LABELS[preview.diff]?.en}
+                      </span>
+                      <span style={{
+                        position: "absolute", top: 8, right: 8, fontSize: "0.65rem", fontWeight: 700,
+                        color: "var(--accent-1)", background: "rgba(0,0,0,0.7)", padding: "0.2rem 0.5rem", borderRadius: 4,
+                      }}>
+                        Coming Soon
+                      </span>
+                    </div>
+                    <div style={{ padding: "0.75rem" }}>
+                      <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: "0.25rem" }}>{preview.title}</div>
+                      <div style={{ display: "flex", gap: "0.5rem", fontSize: "0.7rem", color: "var(--text-muted)" }}>
+                        <span>📏 {preview.km} km</span>
+                        <span>⛰️ {preview.elev} m</span>
+                        <span>📍 {preview.region}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Notify me CTA */}
+              <div className="info-card" style={{ padding: "1.25rem", marginTop: "1.5rem", textAlign: "center" }}>
+                <p style={{ fontSize: "0.9rem", fontWeight: 600, marginBottom: "0.5rem" }}>
+                  {isDE ? "Benachrichtigt werden, wenn's losgeht?" : "Want to know when routes go live?"}
+                </p>
+                <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: "0.75rem" }}>
+                  {isDE
+                    ? "Melde dich für den Newsletter an und erfahre als Erster von neuen Strecken."
+                    : "Subscribe to the newsletter and be the first to know about new routes."}
+                </p>
+                <Link href="/#newsletter" className="btn-primary" style={{ fontSize: "0.85rem", padding: "0.5rem 1.25rem" }}>
+                  {isDE ? "Newsletter abonnieren" : "Subscribe to newsletter"}
+                </Link>
+              </div>
+            </>
           ) : (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1rem" }}>
               {filtered.map((route) => {
