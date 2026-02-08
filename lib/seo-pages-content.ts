@@ -1196,4 +1196,548 @@ Da CycleRun nichts kostet und keine Anmeldung erfordert, gibt es null Risiko bei
 
 [CycleRun kostenlos testen →](https://cyclerun.app)`,
   },
+
+  // Page 10: Komoot Routes — Cycling Route Planning + GPS Data
+  {
+    slug: "komoot-routes-indoor-cycling",
+    title: "Komoot Routes for Indoor Cycling — How to Ride Outdoor Routes at Home",
+    title_de: "Komoot-Strecken für Indoor Cycling — Outdoor-Routen zuhause fahren",
+    h1: "Komoot Routes for Indoor Cycling: Turn Your Favourite Outdoor Routes Into Living Room Rides",
+    h1_de: "Komoot-Strecken für Indoor Cycling: Deine Lieblings-Outdoor-Routen ins Wohnzimmer holen",
+    description: "Use Komoot routes for indoor cycling training. Export GPX files, find the best cycling routes, and ride them at home with CycleRun — free, no smart trainer needed.",
+    description_de: "Nutze Komoot-Strecken fürs Indoor Cycling. GPX-Dateien exportieren, die besten Radrouten finden und zuhause mit CycleRun fahren — kostenlos, ohne Smart Trainer.",
+    keywords: "komoot routes indoor cycling, komoot gpx export, komoot strecken indoor, cycling routes gpx download, komoot alternative indoor, best cycling routes komoot, komoot radrouten indoor training",
+    faqs: [
+      { q: "Can I use Komoot routes for indoor cycling?", a: "Not directly — Komoot provides GPS route data (maps, elevation, turn-by-turn), but indoor cycling apps need video. You can use Komoot to plan your outdoor route, then find a matching POV cycling video on platforms like CycleRun, FulGaz, or Rouvy to ride that route virtually at home." },
+      { q: "How do I export GPX files from Komoot?", a: "In the Komoot app or website, open any tour you've planned or completed, click the three-dot menu, and select 'Download GPX'. This gives you a .gpx file with GPS coordinates, elevation data, and waypoints that you can import into other apps." },
+      { q: "Is Komoot free to use?", a: "Komoot offers one free region. Additional regions cost €3.99 each, or you can unlock the entire world map for €29.99 (one-time). Premium features like multi-day planning and sports-specific maps require Komoot Premium at €59.99/year." },
+      { q: "What are the best Komoot routes for cycling?", a: "Popular Komoot cycling routes include Mallorca's Cap de Formentor, Italy's Stelvio Pass, the Mosel Valley in Germany, and California's Pacific Coast Highway. For indoor cycling, look for routes with POV cycling videos available — CycleRun offers several of these famous routes for free." },
+      { q: "Can I ride Komoot routes on CycleRun?", a: "CycleRun uses real-world POV cycling videos instead of GPS maps. While you can't import a Komoot GPX file directly, many popular Komoot routes have matching video versions on CycleRun. Check our route library for Mallorca, Stelvio Pass, Pacific Coast Highway, and more." },
+      { q: "Where can I buy cycling route videos?", a: "Several platforms sell cycling route videos: FulGaz (€13.99/month) offers 4,000+ filmed routes, Rouvy (€10.99/month) has augmented reality routes, and Kinomap (€9.99/month) provides user-uploaded training videos. CycleRun offers a growing library of free POV cycling videos." },
+    ],
+    faqs_de: [
+      { q: "Kann ich Komoot-Strecken für Indoor Cycling nutzen?", a: "Nicht direkt — Komoot liefert GPS-Routendaten (Karten, Höhenprofil, Navigation), aber Indoor-Cycling-Apps brauchen Video. Du kannst Komoot zur Routenplanung nutzen und dann ein passendes POV-Video auf Plattformen wie CycleRun, FulGaz oder Rouvy finden." },
+      { q: "Wie exportiere ich GPX-Dateien aus Komoot?", a: "Öffne in der Komoot-App oder Website eine geplante oder absolvierte Tour, klicke auf das Drei-Punkte-Menü und wähle 'GPX herunterladen'. Das gibt dir eine .gpx-Datei mit GPS-Koordinaten, Höhendaten und Wegpunkten." },
+      { q: "Ist Komoot kostenlos?", a: "Komoot bietet eine kostenlose Region. Weitere Regionen kosten je 3,99 €, oder du schaltest die gesamte Weltkarte für 29,99 € (einmalig) frei. Premium-Features wie Mehrtagesplanung erfordern Komoot Premium für 59,99 €/Jahr." },
+      { q: "Was sind die besten Komoot-Strecken zum Radfahren?", a: "Beliebte Komoot-Radstrecken sind Mallorcas Cap de Formentor, Italiens Stilfser Joch, das Moseltal und Kaliforniens Pacific Coast Highway. Für Indoor Cycling such nach Strecken mit POV-Videos — CycleRun bietet einige dieser berühmten Routen kostenlos an." },
+      { q: "Kann ich Komoot-Strecken auf CycleRun fahren?", a: "CycleRun nutzt echte POV-Radvideos statt GPS-Karten. Du kannst keine GPX-Datei direkt importieren, aber viele beliebte Komoot-Strecken haben passende Video-Versionen auf CycleRun. Schau in unsere Streckenbibliothek für Mallorca, Stelvio Pass, Pacific Coast Highway und mehr." },
+      { q: "Wo kann ich Cycling-Streckenvideos kaufen?", a: "Mehrere Plattformen verkaufen Rad-Streckenvideos: FulGaz (13,99 €/Monat) bietet 4.000+ gefilmte Routen, Rouvy (10,99 €/Monat) hat Augmented-Reality-Strecken, und Kinomap (9,99 €/Monat) bietet von Nutzern hochgeladene Trainingsvideos. CycleRun bietet eine wachsende Bibliothek kostenloser POV-Videos." },
+    ],
+    content: `## Why Cyclists Love Komoot for Route Planning
+
+Komoot is the world's most popular cycling and hiking route planner, used by over 35 million outdoor enthusiasts. It's the go-to platform for discovering new cycling routes, planning multi-day tours, and downloading GPS data for your bike computer.
+
+But here's the thing: **Komoot is built for outdoor cycling**. If you're training indoors — on a spinning bike, ergometer, or home trainer — you need more than a GPS map. You need video.
+
+## The Gap Between Komoot Routes and Indoor Cycling
+
+Komoot gives you:
+- **GPS coordinates** — turn-by-turn navigation
+- **Elevation profiles** — see the climbs ahead
+- **Surface types** — road, gravel, trail
+- **Community highlights** — photos and tips from other cyclists
+
+What Komoot doesn't give you:
+- **Video footage** of the route
+- **Speed-synced playback** that matches your pedalling
+- **Indoor training integration** with your home setup
+
+That's where dedicated indoor cycling platforms come in.
+
+## Where to Buy Cycling Route Videos
+
+Until you find your perfect route on CycleRun's free library, here are the top platforms where you can purchase professional cycling route videos:
+
+### FulGaz — Premium Filmed Routes
+- **Price**: €13.99/month or €99.99/year
+- **Library**: 4,000+ professionally filmed routes worldwide
+- **Quality**: 4K video with accurate GPS elevation data
+- **Best for**: Serious cyclists who want the most realistic experience
+- [Visit FulGaz](https://fulgaz.com)
+
+### Rouvy — Augmented Reality Routes
+- **Price**: €10.99/month or €109.99/year
+- **Library**: 3,500+ routes with AR overlay features
+- **Quality**: Real video with augmented reality elements
+- **Best for**: Cyclists who want data overlays and virtual race features
+- [Visit Rouvy](https://rouvy.com)
+
+### Kinomap — Community Video Routes
+- **Price**: €9.99/month or €99.99/year
+- **Library**: 400,000+ user-uploaded training videos
+- **Quality**: Varies (community-uploaded content)
+- **Best for**: Budget-conscious riders who want variety
+- [Visit Kinomap](https://kinomap.com)
+
+## How to Ride Komoot Routes on CycleRun — For Free
+
+While CycleRun doesn't import GPX files directly, many of the most popular Komoot cycling routes have matching POV video versions in our library:
+
+| Komoot Route | CycleRun Video | Distance |
+|---|---|---|
+| Mallorca Cap de Formentor | [Ride on CycleRun](/routes/mallorca-cap-de-formentor) | 18.7 km |
+| Stelvio Pass Italy | [Ride on CycleRun](/routes/stelvio-pass-italy) | 24.3 km |
+| Pacific Coast Highway | [Ride on CycleRun](/routes/pacific-coast-highway-california) | 15.2 km |
+
+### The CycleRun Difference
+
+Unlike paid platforms, CycleRun is **completely free** and requires **no smart trainer**. Your webcam tracks your leg movement and adjusts the video speed to match your pedalling. It works with any stationary bike — [spinning bikes](/guide/spinning-bike-app), [ergometers](/guide/ergometer-training), or [old exercise bikes](/guide/exercise-bike-app).
+
+## From Komoot Route to Indoor Ride: A Practical Workflow
+
+1. **Plan on Komoot** — Find your dream route and study the elevation profile
+2. **Search for video** — Look for a POV cycling video of that route on YouTube, CycleRun, or paid platforms
+3. **Ride on CycleRun** — Paste the video URL into CycleRun's video input, enable your webcam, and start pedalling
+4. **Cast to your TV** — Use CycleRun's [Cast feature](/cast) to stream the video to a big screen while tracking on your phone or laptop
+
+## Related Guides
+
+- [Free Zwift Alternative](/guide/zwift-alternative-free) — How CycleRun compares to the biggest indoor cycling platform
+- [Rouvy Alternative](/guide/rouvy-alternative) — Real-world video routes without the subscription
+- [Virtual Cycling Videos](/guide/virtual-cycling-videos) — Where to find the best POV ride videos
+- [Indoor Cycling Without a Smart Trainer](/guide/indoor-cycling-without-smart-trainer) — Everything you need to know
+
+[Try CycleRun free →](https://cyclerun.app)`,
+    content_de: `## Warum Radfahrer Komoot für die Routenplanung lieben
+
+Komoot ist der weltweit beliebteste Rad- und Wander-Routenplaner mit über 35 Millionen Outdoor-Enthusiasten. Es ist die erste Anlaufstelle zum Entdecken neuer Radstrecken, Planen von Mehrtagestouren und Herunterladen von GPS-Daten für den Radcomputer.
+
+Aber: **Komoot ist für Outdoor-Radfahren gebaut**. Wenn du drinnen trainierst — auf einem Spinning Bike, Ergometer oder Heimtrainer — brauchst du mehr als eine GPS-Karte. Du brauchst Video.
+
+## Die Lücke zwischen Komoot-Strecken und Indoor Cycling
+
+Komoot bietet dir:
+- **GPS-Koordinaten** — Abbiegehinweise
+- **Höhenprofile** — Anstiege vorausschauend sehen
+- **Belagsarten** — Straße, Schotter, Trail
+- **Community-Highlights** — Fotos und Tipps anderer Radfahrer
+
+Was Komoot dir nicht bietet:
+- **Videomaterial** der Strecke
+- **Geschwindigkeits-synchrone Wiedergabe** passend zu deinem Treten
+- **Indoor-Training-Integration** mit deinem Heimsetup
+
+Dafür gibt es spezialisierte Indoor-Cycling-Plattformen.
+
+## Wo du Cycling-Streckenvideos kaufen kannst
+
+Bis du deine perfekte Strecke in CycleRuns kostenloser Bibliothek findest, hier die Top-Plattformen für professionelle Streckenvideos:
+
+### FulGaz — Premium-Streckenvideos
+- **Preis**: 13,99 €/Monat oder 99,99 €/Jahr
+- **Bibliothek**: 4.000+ professionell gefilmte Strecken weltweit
+- **Qualität**: 4K-Video mit akkuraten GPS-Höhendaten
+- **Ideal für**: Ernsthafte Radfahrer, die maximalen Realismus wollen
+- [FulGaz besuchen](https://fulgaz.com)
+
+### Rouvy — Augmented-Reality-Strecken
+- **Preis**: 10,99 €/Monat oder 109,99 €/Jahr
+- **Bibliothek**: 3.500+ Strecken mit AR-Overlay
+- **Qualität**: Echtes Video mit Augmented-Reality-Elementen
+- **Ideal für**: Radfahrer, die Daten-Overlays und virtuelle Rennfeatures wollen
+- [Rouvy besuchen](https://rouvy.com)
+
+### Kinomap — Community-Video-Strecken
+- **Preis**: 9,99 €/Monat oder 99,99 €/Jahr
+- **Bibliothek**: 400.000+ nutzerhochgeladene Trainingsvideos
+- **Qualität**: Variiert (Community-Content)
+- **Ideal für**: Preisbewusste Fahrer, die Vielfalt suchen
+- [Kinomap besuchen](https://kinomap.com)
+
+## Wie du Komoot-Strecken auf CycleRun fährst — kostenlos
+
+CycleRun importiert keine GPX-Dateien direkt, aber viele der beliebtesten Komoot-Radstrecken haben passende POV-Video-Versionen in unserer Bibliothek:
+
+| Komoot-Strecke | CycleRun-Video | Distanz |
+|---|---|---|
+| Mallorca Cap de Formentor | [Auf CycleRun fahren](/routes/mallorca-cap-de-formentor) | 18,7 km |
+| Stilfser Joch Italien | [Auf CycleRun fahren](/routes/stelvio-pass-italy) | 24,3 km |
+| Pacific Coast Highway | [Auf CycleRun fahren](/routes/pacific-coast-highway-california) | 15,2 km |
+
+### Der CycleRun-Unterschied
+
+Anders als kostenpflichtige Plattformen ist CycleRun **komplett kostenlos** und braucht **keinen Smart Trainer**. Deine Webcam erkennt deine Beinbewegung und passt die Videogeschwindigkeit an dein Treten an. Funktioniert mit jedem stationären Rad — [Spinning Bikes](/guide/spinning-bike-app), [Ergometer](/guide/ergometer-training) oder [alten Heimtrainern](/guide/exercise-bike-app).
+
+## Von der Komoot-Strecke zur Indoor-Fahrt: Praktischer Workflow
+
+1. **Auf Komoot planen** — Finde deine Traumstrecke und studiere das Höhenprofil
+2. **Video suchen** — Such ein POV-Radvideo der Strecke auf YouTube, CycleRun oder kostenpflichtigen Plattformen
+3. **Auf CycleRun fahren** — Füge die Video-URL in CycleRuns Video-Eingabe ein, aktiviere deine Webcam und los
+4. **Auf den TV casten** — Nutze CycleRuns [Cast-Funktion](/cast), um das Video auf einen großen Bildschirm zu streamen
+
+## Verwandte Guides
+
+- [Kostenlose Zwift-Alternative](/guide/zwift-alternative-free) — Wie CycleRun sich mit der größten Indoor-Cycling-Plattform vergleicht
+- [Rouvy-Alternative](/guide/rouvy-alternative) — Echte Streckenvideos ohne Abo
+- [Virtuelle Cycling Videos](/guide/virtual-cycling-videos) — Wo du die besten POV-Streckenvideos findest
+- [Indoor Cycling ohne Smart Trainer](/guide/indoor-cycling-without-smart-trainer) — Alles was du wissen musst
+
+[CycleRun kostenlos testen →](https://cyclerun.app)`,
+  },
+
+  // Page 11: Strava Routes — Segments, GPS Export, Indoor Use
+  {
+    slug: "strava-routes-indoor-cycling",
+    title: "Strava Routes for Indoor Cycling — How to Ride Strava Segments at Home",
+    title_de: "Strava-Strecken für Indoor Cycling — Strava-Segmente zuhause fahren",
+    h1: "Strava Routes for Indoor Cycling: Ride Your Favourite Segments From Home",
+    h1_de: "Strava-Strecken für Indoor Cycling: Deine Lieblings-Segmente von zuhause fahren",
+    description: "Turn Strava routes and segments into indoor cycling sessions. Export GPX, find matching route videos, and ride them at home with CycleRun — free and without a smart trainer.",
+    description_de: "Verwandle Strava-Strecken und Segmente in Indoor-Cycling-Sessions. GPX exportieren, passende Videos finden und zuhause mit CycleRun fahren — kostenlos und ohne Smart Trainer.",
+    keywords: "strava routes indoor cycling, strava gpx export, strava segments indoor, strava indoor ride, strava alternative indoor, strava strecken indoor training, strava routes download gpx",
+    faqs: [
+      { q: "Can I ride Strava routes indoors?", a: "Strava itself doesn't support indoor video riding, but you can export your favourite Strava routes as GPX files and find matching POV cycling videos on CycleRun, FulGaz, or Rouvy. Many famous Strava segments — like Alpe d'Huez, Sa Calobra, or Mont Ventoux — have video versions available." },
+      { q: "How do I export GPX from Strava?", a: "On the Strava website, open any activity or route, click the wrench icon (settings), and select 'Export GPX'. This downloads a .gpx file with GPS coordinates and elevation. Note: GPX export is only available on the web version, not in the mobile app." },
+      { q: "Is Strava free for route planning?", a: "Basic Strava is free and includes activity tracking and route viewing. Strava Summit/Subscription (€11.99/month) adds route planning tools, segment leaderboards, training analysis, and live segments. GPX export is available on the free tier." },
+      { q: "Can I use Strava with CycleRun?", a: "CycleRun doesn't integrate directly with Strava, but you can ride the same routes. Find POV cycling videos of popular Strava segments in CycleRun's free route library, or paste any YouTube cycling video URL into CycleRun. Your webcam tracks your movement — no smart trainer or Strava sensors needed." },
+      { q: "What are the most popular Strava cycling segments?", a: "The most famous Strava cycling segments include Alpe d'Huez (21 hairpins), Box Hill in Surrey, Hawk Hill in San Francisco, Mont Ventoux, Sa Calobra in Mallorca, and the Stelvio Pass. Many of these have POV cycling videos available for indoor riding." },
+      { q: "Where can I find cycling videos of Strava routes?", a: "YouTube has thousands of free POV cycling videos. For premium content, FulGaz (€13.99/month) offers 4,000+ filmed routes, Rouvy (€10.99/month) provides augmented reality routes, and CycleRun offers a growing library of free route videos you can ride with just your webcam." },
+    ],
+    faqs_de: [
+      { q: "Kann ich Strava-Strecken drinnen fahren?", a: "Strava selbst unterstützt kein Indoor-Video-Fahren, aber du kannst deine Lieblings-Strava-Routen als GPX exportieren und passende POV-Radvideos auf CycleRun, FulGaz oder Rouvy finden. Viele berühmte Strava-Segmente haben Video-Versionen." },
+      { q: "Wie exportiere ich GPX aus Strava?", a: "Öffne auf der Strava-Website eine Aktivität oder Route, klicke auf das Schraubenschlüssel-Symbol und wähle 'GPX exportieren'. Das lädt eine .gpx-Datei mit GPS-Koordinaten und Höhendaten herunter. Hinweis: GPX-Export geht nur über die Webversion." },
+      { q: "Ist Strava kostenlos für Routenplanung?", a: "Basis-Strava ist kostenlos mit Aktivitätstracking und Routenansicht. Strava-Abo (11,99 €/Monat) fügt Routenplanung, Segment-Ranglisten und Trainingsanalyse hinzu. GPX-Export ist im kostenlosen Tarif verfügbar." },
+      { q: "Kann ich Strava mit CycleRun nutzen?", a: "CycleRun integriert nicht direkt mit Strava, aber du kannst die gleichen Strecken fahren. Finde POV-Videos beliebter Strava-Segmente in CycleRuns kostenloser Bibliothek oder füge jede YouTube-Cycling-Video-URL ein. Keine Sensoren nötig." },
+      { q: "Was sind die beliebtesten Strava-Cycling-Segmente?", a: "Die berühmtesten Strava-Segmente sind Alpe d'Huez (21 Kehren), Box Hill in Surrey, Hawk Hill in San Francisco, Mont Ventoux, Sa Calobra auf Mallorca und das Stilfser Joch. Viele davon haben POV-Videos für Indoor-Fahren." },
+      { q: "Wo finde ich Cycling-Videos von Strava-Strecken?", a: "YouTube hat tausende kostenlose POV-Radvideos. Für Premium-Content bietet FulGaz (13,99 €/Monat) 4.000+ gefilmte Routen, Rouvy (10,99 €/Monat) Augmented-Reality-Strecken und CycleRun eine wachsende Bibliothek kostenloser Streckenvideos." },
+    ],
+    content: `## Why Strava Cyclists Want to Ride Indoors
+
+Strava is the world's largest cycling and running community with over 120 million athletes. If you're a Strava user, you know the thrill of chasing segment times, climbing leaderboards, and logging thousands of kilometres. But when winter hits, rain pours, or life gets busy, you need an indoor alternative.
+
+The problem? **Strava doesn't offer indoor video riding**. It can record indoor activities from smart trainers, but it won't let you ride your favourite outdoor segments with real-world video.
+
+## From Strava Segment to Indoor Ride
+
+Here's how to bridge the gap between your Strava life and indoor training:
+
+### Step 1: Export Your Route
+On the Strava website, navigate to any route or activity. Click the settings icon and select **Export GPX**. This gives you the exact GPS data of the route.
+
+### Step 2: Find a Matching Video
+Search for POV (point-of-view) cycling videos of your route:
+- **CycleRun** — Free route video library with famous routes
+- **YouTube** — Thousands of free cycling POV videos
+- **FulGaz** — 4,000+ premium filmed routes (€13.99/mo)
+- **Rouvy** — 3,500+ augmented reality routes (€10.99/mo)
+
+### Step 3: Ride on CycleRun
+Paste the video URL into CycleRun, enable your webcam, and start pedalling. The video speed matches your cadence — no smart trainer needed. Your webcam does all the tracking.
+
+## Where to Buy Cycling Route Videos
+
+If you can't find your favourite Strava route as a free video, these platforms offer extensive paid libraries:
+
+### FulGaz — The Filmmaker's Choice
+- **4,000+ routes** filmed in up to 4K resolution
+- Accurate GPS elevation data synced to video
+- Routes from 40+ countries
+- €13.99/month · [Visit FulGaz](https://fulgaz.com)
+
+### Rouvy — Data Meets Video
+- **3,500+ routes** with augmented reality overlays
+- Virtual racing and group rides
+- Training plan integration
+- €10.99/month · [Visit Rouvy](https://rouvy.com)
+
+### Kinomap — Community Power
+- **400,000+ videos** uploaded by the community
+- Covers running, cycling, and rowing
+- The largest library by volume
+- €9.99/month · [Visit Kinomap](https://kinomap.com)
+
+## Famous Strava Segments You Can Ride on CycleRun
+
+Many of the world's most iconic Strava segments have matching video routes on CycleRun — completely free:
+
+| Strava Segment | CycleRun Route | Climb |
+|---|---|---|
+| Cap de Formentor, Mallorca | [Ride free →](/routes/mallorca-cap-de-formentor) | 320m |
+| Stelvio Pass, Italy | [Ride free →](/routes/stelvio-pass-italy) | 1,808m |
+| Pacific Coast Highway, CA | [Ride free →](/routes/pacific-coast-highway-california) | Rolling |
+
+## CycleRun vs. Strava Indoor: Key Differences
+
+| Feature | Strava Indoor | CycleRun |
+|---|---|---|
+| **Cost** | Free (basic) / €11.99/mo | Free forever |
+| **Video routes** | No | Yes — real POV videos |
+| **Hardware needed** | Smart trainer + sensors | Webcam only |
+| **Motion tracking** | Via smart trainer | Via webcam AI |
+| **Route videos** | Not available | Free library + any URL |
+| **TV casting** | No | [Yes — built-in](/cast) |
+
+## The Best of Both Worlds
+
+Many cyclists use **Strava for outdoor tracking** and **CycleRun for indoor training**. Since CycleRun is free and requires no account to start, you can try it in under 60 seconds.
+
+## Related Guides
+
+- [Komoot Routes for Indoor Cycling](/guide/komoot-routes-indoor-cycling) — From route planner to indoor ride
+- [Free Zwift Alternative](/guide/zwift-alternative-free) — The biggest indoor platform vs. CycleRun
+- [Rouvy Alternative](/guide/rouvy-alternative) — Real video routes without the monthly fee
+- [Virtual Cycling Videos](/guide/virtual-cycling-videos) — The best POV cycling videos for indoor training
+- [Indoor Cycling Without a Smart Trainer](/guide/indoor-cycling-without-smart-trainer) — How webcam tracking works
+
+[Try CycleRun free →](https://cyclerun.app)`,
+    content_de: `## Warum Strava-Radfahrer drinnen fahren wollen
+
+Strava ist die weltweit größte Rad- und Lauf-Community mit über 120 Millionen Athleten. Als Strava-Nutzer kennst du den Reiz, Segment-Zeiten zu jagen, Ranglisten zu erklimmen und tausende Kilometer zu loggen. Aber wenn der Winter kommt, der Regen fällt oder das Leben hektisch wird, brauchst du eine Indoor-Alternative.
+
+Das Problem? **Strava bietet kein Indoor-Video-Fahren**. Es kann Indoor-Aktivitäten von Smart Trainern aufzeichnen, aber deine Lieblings-Outdoor-Segmente mit echtem Video wirst du dort nicht finden.
+
+## Vom Strava-Segment zur Indoor-Fahrt
+
+So überbrückst du die Lücke zwischen deinem Strava-Leben und Indoor-Training:
+
+### Schritt 1: Route exportieren
+Auf der Strava-Website zu einer Route oder Aktivität navigieren. Auf das Einstellungen-Symbol klicken und **GPX exportieren** wählen.
+
+### Schritt 2: Passendes Video finden
+Such nach POV-Radvideos deiner Strecke:
+- **CycleRun** — Kostenlose Streckenvideos mit berühmten Routen
+- **YouTube** — Tausende kostenlose Cycling-POV-Videos
+- **FulGaz** — 4.000+ Premium-Strecken (13,99 €/Mo)
+- **Rouvy** — 3.500+ AR-Strecken (10,99 €/Mo)
+
+### Schritt 3: Auf CycleRun fahren
+Video-URL in CycleRun einfügen, Webcam aktivieren, losfahren. Die Videogeschwindigkeit passt sich deiner Trittfrequenz an — kein Smart Trainer nötig.
+
+## Wo du Cycling-Streckenvideos kaufen kannst
+
+Falls du deine Lieblings-Strava-Route nicht als kostenloses Video findest, bieten diese Plattformen umfangreiche Bibliotheken:
+
+### FulGaz — Die Filmer-Wahl
+- **4.000+ Strecken** in bis zu 4K-Auflösung gefilmt
+- Akkurate GPS-Höhendaten synchronisiert mit Video
+- Strecken aus 40+ Ländern
+- 13,99 €/Monat · [FulGaz besuchen](https://fulgaz.com)
+
+### Rouvy — Daten trifft Video
+- **3.500+ Strecken** mit Augmented-Reality-Overlay
+- Virtuelles Rennen und Gruppenfahrten
+- Trainingsplan-Integration
+- 10,99 €/Monat · [Rouvy besuchen](https://rouvy.com)
+
+### Kinomap — Community-Power
+- **400.000+ Videos** von der Community hochgeladen
+- Deckt Laufen, Radfahren und Rudern ab
+- Die größte Bibliothek nach Volumen
+- 9,99 €/Monat · [Kinomap besuchen](https://kinomap.com)
+
+## Berühmte Strava-Segmente auf CycleRun fahren
+
+Viele der ikonischsten Strava-Segmente haben passende Video-Routen auf CycleRun — komplett kostenlos:
+
+| Strava-Segment | CycleRun-Route | Anstieg |
+|---|---|---|
+| Cap de Formentor, Mallorca | [Kostenlos fahren →](/routes/mallorca-cap-de-formentor) | 320 m |
+| Stilfser Joch, Italien | [Kostenlos fahren →](/routes/stelvio-pass-italy) | 1.808 m |
+| Pacific Coast Highway, CA | [Kostenlos fahren →](/routes/pacific-coast-highway-california) | Hügelig |
+
+## CycleRun vs. Strava Indoor: Die Unterschiede
+
+| Feature | Strava Indoor | CycleRun |
+|---|---|---|
+| **Kosten** | Kostenlos (Basic) / 11,99 €/Mo | Kostenlos für immer |
+| **Video-Strecken** | Nein | Ja — echte POV-Videos |
+| **Hardware** | Smart Trainer + Sensoren | Nur Webcam |
+| **Bewegungserkennung** | Via Smart Trainer | Via Webcam-KI |
+| **Streckenvideos** | Nicht verfügbar | Kostenlose Bibliothek + jede URL |
+| **TV-Casting** | Nein | [Ja — eingebaut](/cast) |
+
+## Das Beste aus beiden Welten
+
+Viele Radfahrer nutzen **Strava fürs Outdoor-Tracking** und **CycleRun fürs Indoor-Training**. Da CycleRun kostenlos ist und keinen Account braucht, kannst du es in unter 60 Sekunden ausprobieren.
+
+## Verwandte Guides
+
+- [Komoot-Strecken für Indoor Cycling](/guide/komoot-routes-indoor-cycling) — Vom Routenplaner zur Indoor-Fahrt
+- [Kostenlose Zwift-Alternative](/guide/zwift-alternative-free) — Die größte Indoor-Plattform vs. CycleRun
+- [Rouvy-Alternative](/guide/rouvy-alternative) — Echte Streckenvideos ohne Monatsgebühr
+- [Virtuelle Cycling Videos](/guide/virtual-cycling-videos) — Die besten POV-Videos fürs Indoor-Training
+- [Indoor Cycling ohne Smart Trainer](/guide/indoor-cycling-without-smart-trainer) — Wie Webcam-Tracking funktioniert
+
+[CycleRun kostenlos testen →](https://cyclerun.app)`,
+  },
+
+  // Page 12: RideWithGPS — Route Library, GPX Files, Cycling Maps
+  {
+    slug: "ridewithgps-routes-indoor",
+    title: "RideWithGPS Routes for Indoor Cycling — GPX Downloads & Video Rides",
+    title_de: "RideWithGPS-Strecken für Indoor Cycling — GPX-Downloads & Video-Fahrten",
+    h1: "RideWithGPS Routes for Indoor Cycling: From GPS Data to Video Rides at Home",
+    h1_de: "RideWithGPS-Strecken für Indoor Cycling: Von GPS-Daten zu Video-Fahrten zuhause",
+    description: "Use RideWithGPS routes for indoor training. Download GPX files, find matching POV cycling videos, and ride at home with CycleRun — free, no subscription, no smart trainer.",
+    description_de: "Nutze RideWithGPS-Strecken fürs Indoor-Training. GPX-Dateien herunterladen, passende POV-Videos finden und zuhause mit CycleRun fahren — kostenlos, ohne Abo, ohne Smart Trainer.",
+    keywords: "ridewithgps routes indoor, ridewithgps gpx download, ridewithgps indoor cycling, cycling routes gpx, ridewithgps alternative, best cycling gpx routes, ridewithgps strecken indoor",
+    faqs: [
+      { q: "Can I use RideWithGPS routes for indoor cycling?", a: "RideWithGPS provides GPS-based route data (maps, cue sheets, elevation) but doesn't include video. For indoor cycling, you need a video platform. Export your RideWithGPS route as GPX, then find a matching POV video on CycleRun (free), FulGaz, or Rouvy to ride it at home." },
+      { q: "How do I download GPX files from RideWithGPS?", a: "On RideWithGPS, open any route and click the 'Export' button. Free users can export as GPX. Premium users ($10/month) get additional export formats including TCX and turn-by-turn cue sheets. The GPX file contains GPS coordinates and elevation data." },
+      { q: "Is RideWithGPS free?", a: "RideWithGPS has a free tier with basic route planning and GPX export. The Starter plan ($6/month) adds offline maps and navigation. The Premium plan ($10/month) includes advanced features like heatmaps, surface type data, and unlimited route planning." },
+      { q: "What makes RideWithGPS different from Komoot or Strava?", a: "RideWithGPS focuses specifically on cycling route creation and cue-sheet navigation. It's especially popular in the US for organized rides and events. Unlike Komoot (which covers hiking too) or Strava (which focuses on activity tracking), RideWithGPS is a dedicated cycling route platform." },
+      { q: "Can I ride RideWithGPS routes on CycleRun?", a: "CycleRun uses POV cycling videos instead of GPS maps. While you can't import GPX files directly, many popular cycling routes have matching free video versions in CycleRun's route library. You can also paste any YouTube cycling video URL into CycleRun to ride any route." },
+      { q: "What are the best platforms for buying cycling route videos?", a: "The top platforms are: FulGaz (€13.99/month, 4,000+ 4K routes), Rouvy (€10.99/month, 3,500+ AR routes), and Kinomap (€9.99/month, 400,000+ community videos). CycleRun offers a growing library of free POV cycling videos that work with any webcam." },
+    ],
+    faqs_de: [
+      { q: "Kann ich RideWithGPS-Strecken für Indoor Cycling nutzen?", a: "RideWithGPS liefert GPS-basierte Routendaten (Karten, Wegbeschreibungen, Höhenprofil), aber kein Video. Für Indoor Cycling brauchst du eine Video-Plattform. Exportiere die Route als GPX und finde ein passendes POV-Video auf CycleRun (kostenlos), FulGaz oder Rouvy." },
+      { q: "Wie lade ich GPX-Dateien von RideWithGPS herunter?", a: "Öffne auf RideWithGPS eine Route und klicke auf 'Export'. Kostenlose Nutzer können als GPX exportieren. Premium-Nutzer ($10/Monat) bekommen zusätzliche Formate wie TCX und Abbiegehinweise." },
+      { q: "Ist RideWithGPS kostenlos?", a: "RideWithGPS hat einen kostenlosen Tarif mit Basis-Routenplanung und GPX-Export. Der Starter-Plan ($6/Monat) fügt Offline-Karten hinzu. Der Premium-Plan ($10/Monat) bietet Heatmaps, Belagsdaten und unbegrenzte Routenplanung." },
+      { q: "Was unterscheidet RideWithGPS von Komoot oder Strava?", a: "RideWithGPS konzentriert sich speziell auf Rad-Routenerstellung und Cue-Sheet-Navigation. Es ist besonders in den USA beliebt. Anders als Komoot (auch Wandern) oder Strava (Aktivitäts-Tracking) ist RideWithGPS eine reine Cycling-Routen-Plattform." },
+      { q: "Kann ich RideWithGPS-Strecken auf CycleRun fahren?", a: "CycleRun nutzt POV-Radvideos statt GPS-Karten. Viele beliebte Strecken haben aber passende kostenlose Videos in CycleRuns Bibliothek. Du kannst auch jede YouTube-Cycling-Video-URL einfügen." },
+      { q: "Was sind die besten Plattformen für Cycling-Streckenvideos?", a: "Die Top-Plattformen: FulGaz (13,99 €/Monat, 4.000+ 4K-Strecken), Rouvy (10,99 €/Monat, 3.500+ AR-Strecken), Kinomap (9,99 €/Monat, 400.000+ Community-Videos). CycleRun bietet eine wachsende Bibliothek kostenloser POV-Videos." },
+    ],
+    content: `## RideWithGPS: The Cyclist's Route Planning Powerhouse
+
+RideWithGPS is one of the most powerful cycling-specific route planning tools available. With over 2 million routes in its library, it's the go-to platform for organized rides, brevets, and cycling events — particularly in North America.
+
+But like Komoot and Strava, **RideWithGPS is designed for outdoor riding**. It gives you GPS data, not video. If you're looking to ride those routes indoors during winter or bad weather, you need to bridge the gap.
+
+## What RideWithGPS Offers
+
+- **Route planning** with advanced tools (avoid highways, prefer bike lanes, surface types)
+- **Cue sheets** — turn-by-turn written directions
+- **Elevation data** with detailed climb categorization
+- **GPX/TCX export** for bike computers (Garmin, Wahoo, etc.)
+- **Route library** — 2 million+ community-shared routes
+- **Event integration** — popular with organized ride directors
+
+## From RideWithGPS to Indoor Ride: Your Options
+
+### Option 1: Free — CycleRun + YouTube Videos
+1. Find your RideWithGPS route's location (e.g., "Pacific Coast Highway")
+2. Search YouTube for a POV cycling video of that route
+3. Copy the video URL and paste it into [CycleRun](https://cyclerun.app)
+4. Your webcam tracks your pedalling and syncs the video speed
+5. **Cost: €0** — no subscription, no smart trainer
+
+### Option 2: Premium — Paid Video Platforms
+If you want professionally filmed, GPS-synced video routes:
+
+| Platform | Price | Routes | Special Feature |
+|---|---|---|---|
+| **FulGaz** | €13.99/mo | 4,000+ | 4K video, GPS-synced elevation |
+| **Rouvy** | €10.99/mo | 3,500+ | Augmented reality overlays |
+| **Kinomap** | €9.99/mo | 400,000+ | Largest community library |
+
+- [Visit FulGaz](https://fulgaz.com) · [Visit Rouvy](https://rouvy.com) · [Visit Kinomap](https://kinomap.com)
+
+## CycleRun Routes You Can Ride Right Now
+
+No GPX import needed — just click and ride:
+
+| Route | Location | Distance | Style |
+|---|---|---|---|
+| [Mallorca Cap de Formentor](/routes/mallorca-cap-de-formentor) | Spain | 18.7 km | Coastal climb |
+| [Stelvio Pass](/routes/stelvio-pass-italy) | Italy | 24.3 km | Epic mountain pass |
+| [Pacific Coast Highway](/routes/pacific-coast-highway-california) | California | 15.2 km | Scenic coastal |
+
+All free. All with real POV video. All synced to your webcam.
+
+## RideWithGPS vs. CycleRun: Different Tools, Same Passion
+
+| | RideWithGPS | CycleRun |
+|---|---|---|
+| **Purpose** | Outdoor route planning | Indoor video cycling |
+| **Data type** | GPS maps + cue sheets | Real-world POV video |
+| **Cost** | Free – $10/mo | Free forever |
+| **Indoor use** | Export GPX only | Full video ride experience |
+| **Hardware** | Bike computer | Webcam |
+| **Best for** | Planning outdoor rides | Riding routes indoors |
+
+They're complementary tools. Plan your summer route on RideWithGPS, train for it on CycleRun all winter.
+
+## Pro Tips for Indoor Route Riders
+
+1. **Use CycleRun's Cast feature** — Stream the ride video to your TV while tracking on your laptop. [Learn about Cast](/cast)
+2. **Vary your routes** — CycleRun lets you paste any video URL. YouTube has thousands of free cycling videos from around the world
+3. **Train with purpose** — Use [RideWithGPS elevation data](https://ridewithgps.com) to pick routes that match your training goals, then find matching videos
+4. **Track your progress** — Register on CycleRun (free) to save ride history, earn badges, and climb the [leaderboard](/leaderboard)
+
+## Related Guides
+
+- [Komoot Routes for Indoor Cycling](/guide/komoot-routes-indoor-cycling) — Europe's favourite route planner meets indoor training
+- [Strava Routes for Indoor Cycling](/guide/strava-routes-indoor-cycling) — Ride Strava segments from home
+- [Free Zwift Alternative](/guide/zwift-alternative-free) — Save €200+/year on indoor cycling
+- [Virtual Cycling Videos](/guide/virtual-cycling-videos) — The best POV ride footage online
+- [Ergometer Training](/guide/ergometer-training) — Turn your home ergometer into a virtual cycling studio
+
+[Try CycleRun free →](https://cyclerun.app)`,
+    content_de: `## RideWithGPS: Das Kraftpaket für Rad-Routenplanung
+
+RideWithGPS ist eines der leistungsstärksten radsportspezifischen Routenplanungs-Tools. Mit über 2 Millionen Strecken in der Bibliothek ist es die erste Wahl für organisierte Fahrten, Brevets und Rad-Events — besonders in Nordamerika.
+
+Aber wie Komoot und Strava ist **RideWithGPS für Outdoor-Radfahren konzipiert**. Es liefert GPS-Daten, kein Video. Wenn du diese Strecken im Winter oder bei schlechtem Wetter drinnen fahren willst, musst du die Lücke überbrücken.
+
+## Was RideWithGPS bietet
+
+- **Routenplanung** mit fortschrittlichen Tools (Autobahnen meiden, Radwege bevorzugen, Belagsarten)
+- **Cue Sheets** — schriftliche Abbiegehinweise
+- **Höhendaten** mit detaillierter Anstiegskategorisierung
+- **GPX/TCX-Export** für Radcomputer (Garmin, Wahoo, etc.)
+- **Streckenbibliothek** — 2 Millionen+ Community-Strecken
+- **Event-Integration** — beliebt bei Veranstaltungsorganisatoren
+
+## Von RideWithGPS zur Indoor-Fahrt: Deine Optionen
+
+### Option 1: Kostenlos — CycleRun + YouTube-Videos
+1. Finde den Standort deiner RideWithGPS-Strecke (z.B. "Pacific Coast Highway")
+2. Suche auf YouTube nach einem POV-Radvideo dieser Strecke
+3. Kopiere die Video-URL und füge sie in [CycleRun](https://cyclerun.app) ein
+4. Deine Webcam erkennt dein Treten und synchronisiert die Videogeschwindigkeit
+5. **Kosten: 0 €** — kein Abo, kein Smart Trainer
+
+### Option 2: Premium — Kostenpflichtige Video-Plattformen
+Wenn du professionell gefilmte, GPS-synchronisierte Streckenvideos willst:
+
+| Plattform | Preis | Strecken | Besonderheit |
+|---|---|---|---|
+| **FulGaz** | 13,99 €/Mo | 4.000+ | 4K-Video, GPS-synchronisierte Höhe |
+| **Rouvy** | 10,99 €/Mo | 3.500+ | Augmented-Reality-Overlays |
+| **Kinomap** | 9,99 €/Mo | 400.000+ | Größte Community-Bibliothek |
+
+- [FulGaz besuchen](https://fulgaz.com) · [Rouvy besuchen](https://rouvy.com) · [Kinomap besuchen](https://kinomap.com)
+
+## CycleRun-Strecken sofort losfahren
+
+Kein GPX-Import nötig — einfach klicken und fahren:
+
+| Strecke | Ort | Distanz | Stil |
+|---|---|---|---|
+| [Mallorca Cap de Formentor](/routes/mallorca-cap-de-formentor) | Spanien | 18,7 km | Küstenanstieg |
+| [Stilfser Joch](/routes/stelvio-pass-italy) | Italien | 24,3 km | Epischer Gebirgspass |
+| [Pacific Coast Highway](/routes/pacific-coast-highway-california) | Kalifornien | 15,2 km | Panorama-Küste |
+
+Alle kostenlos. Alle mit echtem POV-Video. Alle synchronisiert mit deiner Webcam.
+
+## RideWithGPS vs. CycleRun: Verschiedene Tools, gleiche Leidenschaft
+
+| | RideWithGPS | CycleRun |
+|---|---|---|
+| **Zweck** | Outdoor-Routenplanung | Indoor-Video-Cycling |
+| **Datentyp** | GPS-Karten + Cue Sheets | Echtes POV-Video |
+| **Kosten** | Kostenlos – $10/Mo | Kostenlos für immer |
+| **Indoor-Nutzung** | Nur GPX-Export | Volles Video-Fahrerlebnis |
+| **Hardware** | Radcomputer | Webcam |
+| **Ideal für** | Outdoor-Fahrten planen | Strecken drinnen fahren |
+
+Es sind ergänzende Tools. Plane deine Sommerroute auf RideWithGPS, trainiere den ganzen Winter dafür auf CycleRun.
+
+## Profi-Tipps für Indoor-Streckenfahrer
+
+1. **Nutze CycleRuns Cast-Funktion** — Streame das Video auf den TV während du am Laptop trackst. [Mehr über Cast](/cast)
+2. **Variiere deine Strecken** — CycleRun akzeptiert jede Video-URL. YouTube hat tausende kostenlose Radvideos aus aller Welt
+3. **Trainiere mit Ziel** — Nutze [RideWithGPS-Höhendaten](https://ridewithgps.com) um Strecken passend zu deinen Zielen zu finden
+4. **Verfolge deinen Fortschritt** — Registriere dich auf CycleRun (kostenlos) um Fahrten zu speichern, Badges zu verdienen und die [Rangliste](/leaderboard) zu erklimmen
+
+## Verwandte Guides
+
+- [Komoot-Strecken für Indoor Cycling](/guide/komoot-routes-indoor-cycling) — Europas beliebtester Routenplaner trifft Indoor-Training
+- [Strava-Strecken für Indoor Cycling](/guide/strava-routes-indoor-cycling) — Strava-Segmente von zuhause fahren
+- [Kostenlose Zwift-Alternative](/guide/zwift-alternative-free) — Spare 200+ €/Jahr beim Indoor Cycling
+- [Virtuelle Cycling Videos](/guide/virtual-cycling-videos) — Die besten POV-Streckenvideos online
+- [Ergometer Training](/guide/ergometer-training) — Verwandle deinen Ergometer in ein virtuelles Cycling-Studio
+
+[CycleRun kostenlos testen →](https://cyclerun.app)`,
+  },
 ];
