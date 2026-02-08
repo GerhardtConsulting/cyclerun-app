@@ -83,9 +83,8 @@ export default function CycleRunApp() {
 
           <div className="splash-logo">
             <span className="splash-logo-text">cyclerun<span className="splash-logo-app">.app</span></span>
+            <h1 className="splash-headline">{t('splash.headline.1')}<span className="gradient-text">{t('splash.headline.2')}</span></h1>
           </div>
-
-          <h1 className="splash-headline">{t('splash.headline.1')}<span className="gradient-text">{t('splash.headline.2')}</span></h1>
           <p className="splash-tagline">{t('splash.tagline')}</p>
 
           <div className="sport-cards">
