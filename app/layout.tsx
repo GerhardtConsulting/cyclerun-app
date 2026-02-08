@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import LocaleSync from "@/components/LocaleSync";
+import CookieConsent from "@/components/CookieConsent";
 import { defaultMetadata, JsonLd, schemas, homepageFaqs } from "@/app/seo-config";
 
 const inter = Inter({
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <LocaleSync />
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
