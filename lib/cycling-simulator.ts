@@ -1607,8 +1607,10 @@ export class CyclingSimulator {
         currentTime: video.currentTime,
         isPlaying: !video.paused,
         speed: this.currentSpeed,
+        rpm: this.currentRPM,
         distance: this.distance,
         rideTime: this.rideStartTime ? Math.floor((Date.now() - this.rideStartTime) / 1000) : 0,
+        gear: this.gear,
       });
     }, 500);
 

@@ -18,6 +18,7 @@ function CastInner() {
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const lastSyncRef = useRef(0);
+  const loadedUrlRef = useRef("");
 
   useEffect(() => {
     setLocale(initLocale());
@@ -83,18 +84,24 @@ function CastInner() {
   useEffect(() => {
     if (!castState || !videoRef.current) return;
     const video = videoRef.current;
+    const url = castState.videoUrl || "";
 
-    // Load new video if URL changed
-    if (video.src !== castState.videoUrl) {
-      video.src = castState.videoUrl;
+    // Load new video only if URL actually changed (track with ref, not video.src)
+    if (url && url !== loadedUrlRef.current && !url.startsWith("blob:")) {
+      loadedUrlRef.current = url;
+      video.src = url;
       video.load();
+      video.play().catch(() => {});
+      return; // let it load first before syncing playback
     }
 
     // Sync playback rate
-    video.playbackRate = castState.playbackRate;
+    if (Math.abs(video.playbackRate - castState.playbackRate) > 0.01) {
+      video.playbackRate = castState.playbackRate;
+    }
 
     // Sync play/pause
-    if (castState.isPlaying && video.paused) {
+    if (castState.isPlaying && video.paused && video.readyState >= 2) {
       video.play().catch(() => {});
     } else if (!castState.isPlaying && !video.paused) {
       video.pause();
@@ -176,23 +183,39 @@ function CastInner() {
     );
   }
 
-  // ---- PLAYING (fullscreen video) ----
+  // ---- PLAYING (fullscreen video + HUD) ----
+  const videoUrl = castState?.videoUrl || "";
+  const hasVideo = !!videoUrl && !videoUrl.startsWith("blob:");
+
   return (
     <div className="cast-fullscreen">
-      <video
-        ref={videoRef}
-        className="cast-video"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+      {hasVideo ? (
+        <video
+          ref={videoRef}
+          className="cast-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      ) : (
+        <div className="cast-video-fallback">
+          <div className="cast-fallback-speed">{(castState?.speed ?? 0).toFixed(1)}</div>
+          <div className="cast-fallback-unit">km/h</div>
+        </div>
+      )}
       {/* HUD overlay */}
       {castState && (
         <div className="cast-hud">
+          {hasVideo && (
+            <div className="cast-hud-item cast-hud-speed">
+              <span className="cast-hud-value">{(castState.speed ?? 0).toFixed(1)}</span>
+              <span className="cast-hud-label">km/h</span>
+            </div>
+          )}
           <div className="cast-hud-item">
-            <span className="cast-hud-value">{(castState.speed ?? 0).toFixed(1)}</span>
-            <span className="cast-hud-label">km/h</span>
+            <span className="cast-hud-value">{castState.rpm ?? 0}</span>
+            <span className="cast-hud-label">RPM</span>
           </div>
           <div className="cast-hud-item">
             <span className="cast-hud-value">{(castState.distance ?? 0).toFixed(2)}</span>
@@ -204,6 +227,12 @@ function CastInner() {
                 {Math.floor(castState.rideTime / 60).toString().padStart(2, "0")}:{(castState.rideTime % 60).toString().padStart(2, "0")}
               </span>
               <span className="cast-hud-label">{isDE ? "Zeit" : "Time"}</span>
+            </div>
+          )}
+          {castState.gear != null && (
+            <div className="cast-hud-item">
+              <span className="cast-hud-value">{castState.gear}</span>
+              <span className="cast-hud-label">{isDE ? "Gang" : "Gear"}</span>
             </div>
           )}
         </div>

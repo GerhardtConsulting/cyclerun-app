@@ -5633,6 +5633,37 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     object-fit: cover;
 }
 
+.cast-video-fallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 50% 40%, rgba(249, 115, 22, 0.12) 0%, var(--bg-base) 70%);
+}
+
+.cast-fallback-speed {
+    font-size: 12rem;
+    font-weight: 800;
+    line-height: 1;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.04em;
+}
+
+.cast-fallback-unit {
+    font-size: 2rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-top: 0.5rem;
+}
+
 .cast-hud {
     position: absolute;
     bottom: 2rem;

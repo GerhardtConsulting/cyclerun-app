@@ -88,8 +88,10 @@ export interface CastState {
   currentTime: number;
   isPlaying: boolean;
   speed?: number;
+  rpm?: number;
   distance?: number;
   rideTime?: number;
+  gear?: number;
 }
 
 export async function sendCastState(code: string, state: CastState) {
