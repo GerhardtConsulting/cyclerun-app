@@ -11,8 +11,16 @@ function PairContent() {
   const [showCamera, setShowCamera] = useState(false);
   const [connected, setConnected] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const senderRef = useRef<PairingSender | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
+  // Ref callback — assigns stream the instant the video element mounts
+  const videoRefCallback = useCallback((node: HTMLVideoElement | null) => {
+    if (node && streamRef.current) {
+      node.srcObject = streamRef.current;
+      node.play().catch(() => {});
+    }
+  }, [showCamera]); // re-run when showCamera changes
 
   // Auto-fill code from URL param
   useEffect(() => {
@@ -56,11 +64,9 @@ function PairContent() {
       switch (s) {
         case "camera-ready":
           setStatus({ text: "Camera active! Connecting to your device...", type: "success" });
-          // Show local preview
-          if (videoRef.current && sender.stream) {
-            videoRef.current.srcObject = sender.stream;
-            setShowCamera(true);
-          }
+          // Store stream and show camera — video element will pick it up via effect
+          streamRef.current = sender.stream;
+          setShowCamera(true);
           break;
         case "offer-sent":
           setStatus({ text: "Waiting for your computer to respond...", type: "info" });
@@ -145,7 +151,7 @@ function PairContent() {
 
         {showCamera && (
           <div className="pair-mobile-camera">
-            <video ref={videoRef} autoPlay muted playsInline></video>
+            <video ref={videoRefCallback} autoPlay muted playsInline></video>
             <p className="pair-camera-label">
               {connected ? "Camera is streaming to your device" : "Camera preview — connecting..."}
             </p>

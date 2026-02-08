@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import CreatorContent from "@/components/CreatorContent";
+import { JsonLd, makeAlternates } from "@/app/seo-config";
 
 export const metadata: Metadata = {
-  title: "Become a Creator — Earn Money with Your Cycling Videos | CycleRun.app",
+  title: "Become a Creator — Earn Money with Your Cycling Videos",
   description:
     "Share your POV cycling routes with 10,000+ riders. Earn passive income, grow your audience, and join the fastest-growing indoor cycling community. Free to join — apply in 2 minutes.",
   keywords:
     "cycling creator, POV cycling video, indoor cycling routes, cycling content creator, cycling video monetization, GoPro cycling, cycling influencer, route video creator, cycling community, fitness creator platform",
-  alternates: {
-    canonical: "/creator",
-  },
+  alternates: makeAlternates("/creator"),
   openGraph: {
     title: "Become a CycleRun Creator — Your Routes, Your Revenue",
     description:
@@ -147,10 +146,7 @@ const jsonLdWebPage = {
 export default function CreatorPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebPage) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdHowTo) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFaq) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
+      <JsonLd data={[jsonLdWebPage, jsonLdHowTo, jsonLdFaq, jsonLdBreadcrumb]} />
       <CreatorContent />
     </>
   );

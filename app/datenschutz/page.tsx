@@ -2,11 +2,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Datenschutzerklärung — CycleRun.app",
+  title: "Datenschutzerklärung",
   description: "Datenschutzerklärung von CycleRun.app — Wie wir mit deinen Daten umgehen. Informationen zu Cookies, Webcam-Datenverarbeitung und deinen Rechten.",
   alternates: { canonical: "/datenschutz" },
   openGraph: {
-    title: "Datenschutzerklärung — CycleRun.app",
+    title: "Datenschutzerklärung",
     description: "Wie CycleRun.app mit deinen Daten umgeht. 100% lokal, keine Tracking-Cookies.",
     url: "https://cyclerun.app/datenschutz",
   },

@@ -2,11 +2,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Impressum — CycleRun.app",
+  title: "Impressum",
   description: "Impressum von CycleRun.app — Angaben gemäß § 5 DDG. Verantwortlich: Maximilian Gerhardt.",
   alternates: { canonical: "/impressum" },
   openGraph: {
-    title: "Impressum — CycleRun.app",
+    title: "Impressum",
     description: "Angaben gemäß § 5 DDG.",
     url: "https://cyclerun.app/impressum",
   },

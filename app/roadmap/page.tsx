@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import RoadmapContent from "@/components/RoadmapContent";
 
 export const metadata: Metadata = {
-  title: "Roadmap & Changelog — What's New and What's Next | CycleRun.app",
+  title: "Roadmap — What's New and What's Next",
   description:
     "See what we've shipped, what's coming next, and vote on features you want most. CycleRun is built by and for the community.",
   keywords:

@@ -4,8 +4,8 @@ export const seoPages: SeoPage[] = [
   // Page 1: Zwift Alternative Free
   {
     slug: "zwift-alternative-free",
-    title: "Free Zwift Alternative 2026 — Indoor Cycling Without Smart Trainer | CycleRun",
-    title_de: "Kostenlose Zwift-Alternative 2026 — Indoor Cycling ohne Smart Trainer | CycleRun",
+    title: "Free Zwift Alternative 2026 — Indoor Cycling Without Smart Trainer",
+    title_de: "Kostenlose Zwift-Alternative 2026 — Indoor Cycling ohne Smart Trainer",
     h1: "The Free Zwift Alternative That Uses Your Webcam Instead of a Smart Trainer",
     h1_de: "Die kostenlose Zwift-Alternative, die deine Webcam statt eines Smart Trainers nutzt",
     description: "Looking for a free Zwift alternative? CycleRun turns any home trainer into a virtual cycling experience using just your webcam. No smart trainer, no subscription, no ANT+ sensors needed.",
@@ -164,8 +164,8 @@ Kein Download. Keine Installation. Kein Account nötig. Keine Kreditkarte.
   // Page 2: Indoor Cycling App
   {
     slug: "indoor-cycling-app",
-    title: "Indoor Cycling App — Free Training with Real Videos | CycleRun.app",
-    title_de: "Indoor Cycling App — Kostenloses Training mit echten Videos | CycleRun.app",
+    title: "Indoor Cycling App — Free Training with Real Videos",
+    title_de: "Indoor Cycling App — Kostenloses Training mit echten Videos",
     h1: "The Indoor Cycling App That Turns Your Living Room Into a Road",
     h1_de: "Die Indoor Cycling App, die dein Wohnzimmer in eine Straße verwandelt",
     description: "CycleRun is the free indoor cycling app that uses your webcam for motion detection. Ride real-world POV videos on any home trainer — no smart sensors needed.",
@@ -295,8 +295,8 @@ Dein Webcam-Feed wird ausschließlich auf deinem Gerät verarbeitet. Keine Bilde
   // Page 3: Heimtrainer App (German)
   {
     slug: "heimtrainer-app",
-    title: "Heimtrainer App Kostenlos — Indoor Cycling mit Webcam | CycleRun.app",
-    title_de: "Heimtrainer App Kostenlos — Indoor Cycling mit Webcam | CycleRun.app",
+    title: "Heimtrainer App Kostenlos — Indoor Cycling mit Webcam",
+    title_de: "Heimtrainer App Kostenlos — Indoor Cycling mit Webcam",
     h1: "Die kostenlose Heimtrainer App: Dein altes Ergometer wird zum virtuellen Rennrad",
     h1_de: "Die kostenlose Heimtrainer App: Dein altes Ergometer wird zum virtuellen Rennrad",
     description: "CycleRun ist die kostenlose Heimtrainer App für Ergometer, Spinning Bikes und Indoor Bikes. Nutze deine Webcam statt teurer Sensoren. Echte Streckenvideos, kein Smart Trainer nötig.",
@@ -425,8 +425,8 @@ Du fährst keine 3D-Computergrafik, sondern **echte First-Person Cycling Videos*
   // Page 4: Exercise Bike App
   {
     slug: "exercise-bike-app",
-    title: "Exercise Bike App — Make Any Stationary Bike Smart for Free | CycleRun",
-    title_de: "Fitnessrad App — Mach jedes stationäre Rad kostenlos smart | CycleRun",
+    title: "Exercise Bike App — Make Any Stationary Bike Smart for Free",
+    title_de: "Fitnessrad App — Mach jedes stationäre Rad kostenlos smart",
     h1: "Turn Your Old Exercise Bike Into a Smart Indoor Cycling Experience",
     h1_de: "Verwandle dein altes Fitnessrad in ein smartes Indoor Cycling Erlebnis",
     description: "CycleRun makes any exercise bike smart — for free. Use your webcam for cadence detection, ride real-world videos, and track your training. No sensors or upgrades needed.",
@@ -521,8 +521,8 @@ CycleRun adressiert beides: ansprechende echte Videos + umfassende Metriken.
   // Page 5: Spinning Bike App
   {
     slug: "spinning-bike-app",
-    title: "Spinning Bike App Free — Use Your Peloton Without the Subscription | CycleRun",
-    title_de: "Spinning Bike App Kostenlos — Nutze dein Peloton ohne Abo | CycleRun",
+    title: "Spinning Bike App Free — Use Your Peloton Without the Subscription",
+    title_de: "Spinning Bike App Kostenlos — Nutze dein Peloton ohne Abo",
     h1: "Free Spinning Bike App: Turn Any Spin Bike Into a Virtual Cycling Studio",
     h1_de: "Kostenlose Spinning Bike App: Verwandle jedes Spin Bike in ein virtuelles Cycling Studio",
     description: "Use your spinning bike with CycleRun — the free app that detects your cadence via webcam. No sensors, no subscription. Works with Peloton, Keiser, Schwinn, and any spin bike.",
@@ -627,8 +627,8 @@ CycleRun verbindet sich nicht mit der Elektronik deines Bikes. Deine Webcam beob
   // Page 6: Virtual Cycling Videos
   {
     slug: "virtual-cycling-videos",
-    title: "Virtual Cycling Videos — POV Ride Videos for Indoor Training | CycleRun",
-    title_de: "Virtuelle Cycling Videos — POV-Streckenvideos für Indoor Training | CycleRun",
+    title: "Virtual Cycling Videos — POV Ride Videos for Indoor Training",
+    title_de: "Virtuelle Cycling Videos — POV-Streckenvideos für Indoor Training",
     h1: "Virtual Cycling Videos: Ride Real Roads From Your Living Room",
     h1_de: "Virtuelle Cycling Videos: Fahre echte Straßen von deinem Wohnzimmer aus",
     description: "Watch and ride along with virtual cycling videos that sync to your pedaling speed. First-person POV videos from Mallorca, the Alps, California, and more. Free on CycleRun.",
@@ -909,8 +909,8 @@ Deine Laptop-Webcam oder Handykamera beobachtet deine Beine beim Treten. Compute
   // Page 8: Ergometer Training
   {
     slug: "ergometer-training",
-    title: "Ergometer Training App — Virtual Rides for Your Home Ergometer | CycleRun",
-    title_de: "Ergometer Training App — Virtuelle Fahrten für deinen Heimergometer | CycleRun",
+    title: "Ergometer Training App — Virtual Rides for Your Home Ergometer",
+    title_de: "Ergometer Training App — Virtuelle Fahrten für deinen Heimergometer",
     h1: "Ergometer Training: From Boring Basement Bike to Virtual Cycling Studio",
     h1_de: "Ergometer Training: Vom langweiligen Kellerrad zum virtuellen Cycling Studio",
     description: "Transform your ergometer training with CycleRun. Ride real-world video routes that sync to your pedaling speed. Free app, no sensors needed, works with any ergometer brand.",
@@ -1039,8 +1039,8 @@ Kettler, Daum, Life Fitness, Technogym, Hammer, Christopeit, Sportstech, Skandik
   // Page 9: Rouvy Alternative
   {
     slug: "rouvy-alternative",
-    title: "Rouvy Alternative Free — Real-World Video Routes Without Subscription | CycleRun",
-    title_de: "Kostenlose Rouvy-Alternative — Echte Streckenvideos ohne Abo | CycleRun",
+    title: "Rouvy Alternative Free — Real-World Video Routes Without Subscription",
+    title_de: "Kostenlose Rouvy-Alternative — Echte Streckenvideos ohne Abo",
     h1: "Free Rouvy Alternative: Real Road Videos Without the Monthly Fee",
     h1_de: "Kostenlose Rouvy-Alternative: Echte Straßenvideos ohne monatliche Gebühr",
     description: "Looking for a free Rouvy alternative with real-world cycling videos? CycleRun offers POV route videos that sync to your speed — no smart trainer, no subscription, completely free.",

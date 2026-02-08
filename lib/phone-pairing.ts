@@ -145,11 +145,9 @@ export class PairingReceiver {
     this.pc = new RTCPeerConnection({ iceServers: ICE_SERVERS });
 
     this.pc.ontrack = (event) => {
-      log("Receiver: ontrack fired, streams:", event.streams.length);
-      if (event.streams[0]) {
-        this.onRemoteStream?.(event.streams[0]);
-        this.onStatusChange?.("connected");
-      }
+      log("Receiver: ontrack fired, streams:", event.streams.length, "track kind:", event.track.kind);
+      const stream = event.streams[0] || new MediaStream([event.track]);
+      this.onRemoteStream?.(stream);
     };
 
     this.pc.onicecandidate = (event) => {

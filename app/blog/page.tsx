@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { blogPosts } from "@/lib/blog-data";
 import BlogIndexContent from "@/components/BlogIndexContent";
+import { JsonLd, makeAlternates } from "@/app/seo-config";
 
 export const metadata: Metadata = {
-  title: "Blog — Indoor Cycling Tips, Guides & Comparisons | CycleRun.app",
+  title: "Blog — Indoor Cycling Tips, Guides & Comparisons",
   description:
     "Expert guides on indoor cycling, route recording, camera settings, and platform comparisons. Learn how to get the most from your home trainer with CycleRun.",
   keywords:
     "indoor cycling blog, home trainer tips, cycling training guides, virtual cycling routes, Zwift alternative, GoPro cycling, POV cycling video",
-  alternates: { canonical: "/blog" },
+  alternates: makeAlternates("/blog"),
   openGraph: {
     title: "CycleRun Blog — Indoor Cycling Guides & Tips",
     description: "Expert guides on indoor cycling, route recording, and getting the most from your home trainer.",
@@ -41,7 +42,7 @@ const jsonLd = {
 export default function BlogIndex() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <BlogIndexContent />
     </>
   );

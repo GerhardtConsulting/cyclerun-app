@@ -5,7 +5,8 @@ import { t } from "@/lib/i18n";
 import { useLocale } from "@/lib/useLocale";
 
 export default function SubpageFooter() {
-  useLocale(); // re-render on locale change
+  const locale = useLocale();
+  const isDE = locale === "de";
   return (
     <footer className="subpage-footer">
       <div className="subpage-footer-inner">
@@ -21,9 +22,10 @@ export default function SubpageFooter() {
             <div className="subpage-footer-col">
               <strong>{t("sub.footer.product")}</strong>
               <Link href="/">{t("sub.footer.start_riding")}</Link>
+              <Link href="/store">Route Store</Link>
               <Link href="/routes">{t("sub.footer.routes")}</Link>
-              <Link href="/creator">{t("sub.footer.creator")}</Link>
-              <Link href="/roadmap">{t("sub.footer.roadmap")}</Link>
+              <Link href="/leaderboard">{isDE ? "Rangliste" : "Leaderboard"}</Link>
+              <Link href="/profile">{isDE ? "Profil" : "Profile"}</Link>
             </div>
             <div className="subpage-footer-col">
               <strong>{t("sub.footer.guides")}</strong>
@@ -41,7 +43,10 @@ export default function SubpageFooter() {
               <Link href="/guide/spinning-bike-app">{t("sub.footer.spinning")}</Link>
             </div>
             <div className="subpage-footer-col">
-              <strong>{t("sub.footer.company")}</strong>
+              <strong>CycleRun</strong>
+              <Link href="/creator">{isDE ? "Creator Hub" : "Creator Hub"}</Link>
+              <Link href="/roadmap">Roadmap</Link>
+              <Link href="/changelog">Changelog</Link>
               <Link href="/datenschutz">{t("sub.footer.privacy")}</Link>
               <Link href="/impressum">{t("sub.footer.legal")}</Link>
             </div>

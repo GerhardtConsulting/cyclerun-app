@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { routes } from "@/lib/route-data";
 import RoutesIndexContent from "@/components/RoutesIndexContent";
+import { JsonLd, makeAlternates } from "@/app/seo-config";
 
 export const metadata: Metadata = {
-  title: "Virtual Cycling Routes — Ride the World from Home | CycleRun.app",
+  title: "Virtual Cycling Routes — Ride the World from Home",
   description:
     "Browse the best virtual cycling routes for indoor training. Alpine passes, coastal roads, and city tours — all free to ride with your webcam on CycleRun.",
   keywords:
     "virtual cycling routes, indoor cycling routes, POV cycling videos, cycling route videos, home trainer routes, Zwift alternative routes",
-  alternates: { canonical: "/routes" },
+  alternates: makeAlternates("/routes"),
   openGraph: {
     title: "CycleRun Routes — Virtual Cycling Routes for Indoor Training",
     description: "Ride Mallorca, the Stelvio, Alpe d'Huez and more from your living room. Free.",
@@ -40,7 +41,7 @@ const jsonLd = {
 export default function RoutesIndex() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <RoutesIndexContent />
     </>
   );

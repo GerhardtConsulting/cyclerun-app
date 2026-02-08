@@ -1,4 +1,14 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/engagement",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/weekly-summary",
+      "schedule": "0 18 * * 0"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

@@ -7,6 +7,7 @@ import { useLocale } from "@/lib/useLocale";
 import SubpageNav from "@/components/SubpageNav";
 import SubpageFooter from "@/components/SubpageFooter";
 import { getSupabase } from "@/lib/supabase";
+import { fetchGoalState, calculateGoalProgress, type GoalState, type GoalProgress } from "@/lib/goal-capture";
 
 interface UserProfile {
   id: string;
@@ -20,6 +21,12 @@ interface UserProfile {
   longest_streak: number;
   streak_freeze_available: boolean;
   level: number;
+  avatar_url: string | null;
+  nickname: string | null;
+  slug: string | null;
+  is_public: boolean;
+  referral_code: string | null;
+  credits: number;
 }
 
 interface Badge {
@@ -63,6 +70,16 @@ export default function ProfileContent() {
   const [bestSpeed, setBestSpeed] = useState<number>(0);
   const [loading, setLoading] = useState(true);
   const [notRegistered, setNotRegistered] = useState(false);
+  const [goalProgress, setGoalProgress] = useState<GoalProgress | null>(null);
+  const [goalState, setGoalState] = useState<GoalState | null>(null);
+  const [upvoteCount, setUpvoteCount] = useState(0);
+  const [referralCount, setReferralCount] = useState(0);
+  const [editing, setEditing] = useState(false);
+  const [editNickname, setEditNickname] = useState("");
+  const [editPublic, setEditPublic] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const [referralCopied, setReferralCopied] = useState(false);
 
   const loadProfile = useCallback(async () => {
     const email = typeof window !== "undefined" ? localStorage.getItem("cyclerun_email") : null;
@@ -78,7 +95,7 @@ export default function ProfileContent() {
     // Fetch user
     const { data: userData } = await sb
       .from("registrations")
-      .select("id, display_name, first_name, total_energy, total_sessions, total_distance_km, total_duration_seconds, current_streak, longest_streak, streak_freeze_available, level")
+      .select("id, display_name, first_name, total_energy, total_sessions, total_distance_km, total_duration_seconds, current_streak, longest_streak, streak_freeze_available, level, avatar_url, nickname, slug, is_public, referral_code, credits")
       .eq("email", email)
       .single();
 
@@ -104,6 +121,32 @@ export default function ProfileContent() {
     setWeekRank((weekRes.data as LeaderboardEntry | null)?.rank ?? null);
     setAllTimeRank((allTimeRes.data as LeaderboardEntry | null)?.rank ?? null);
     setBestSpeed(Number((speedRes.data as { avg_speed_kmh: number } | null)?.avg_speed_kmh ?? 0));
+
+    // Fetch upvote count + referral count
+    const [upvotesRes, referralsRes] = await Promise.all([
+      sb.from("upvotes").select("id", { count: "exact" }).eq("target_user_id", userData.id),
+      sb.from("referrals").select("id", { count: "exact" }).eq("referrer_id", userData.id),
+    ]);
+    setUpvoteCount(upvotesRes.count || 0);
+    setReferralCount(referralsRes.count || 0);
+
+    // Initialize edit state
+    setEditNickname(userData.nickname || "");
+    setEditPublic(userData.is_public || false);
+
+    // Fetch goal state + calculate progress
+    const gs = await fetchGoalState(userData.id);
+    setGoalState(gs);
+    if (gs) {
+      const progress = calculateGoalProgress(gs, {
+        totalDistanceKm: userData.total_distance_km || 0,
+        totalSessions: userData.total_sessions || 0,
+        totalDurationSeconds: userData.total_duration_seconds || 0,
+        currentStreak: userData.current_streak || 0,
+      }, locale);
+      setGoalProgress(progress);
+    }
+
     setLoading(false);
   }, []);
 
@@ -132,6 +175,60 @@ export default function ProfileContent() {
     special: "✨ " + (locale === "de" ? "Spezial" : "Special"),
   };
 
+  const handleSaveProfile = async () => {
+    if (!user) return;
+    setSaving(true);
+    const sb = getSupabase();
+    if (!sb) { setSaving(false); return; }
+
+    const slug = editNickname.trim().toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-").replace(/^-|-$/g, "") || null;
+
+    const { error } = await sb.from("registrations").update({
+      nickname: editNickname.trim() || null,
+      slug,
+      is_public: editPublic,
+      display_name: editNickname.trim() || user.first_name,
+    }).eq("id", user.id);
+
+    if (!error) {
+      setUser({ ...user, nickname: editNickname.trim() || null, slug, is_public: editPublic, display_name: editNickname.trim() || user.first_name });
+      setEditing(false);
+    }
+    setSaving(false);
+  };
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!user || !e.target.files?.[0]) return;
+    setUploadingAvatar(true);
+    const sb = getSupabase();
+    if (!sb) { setUploadingAvatar(false); return; }
+
+    const file = e.target.files[0];
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${user.id}.${ext}`;
+
+    const { error: uploadError } = await sb.storage.from("avatars").upload(path, file, { upsert: true });
+    if (uploadError) { console.error("Avatar upload error:", uploadError); setUploadingAvatar(false); return; }
+
+    const { data: urlData } = sb.storage.from("avatars").getPublicUrl(path);
+    const avatarUrl = urlData.publicUrl + "?t=" + Date.now();
+
+    await sb.from("registrations").update({ avatar_url: avatarUrl }).eq("id", user.id);
+    setUser({ ...user, avatar_url: avatarUrl });
+    setUploadingAvatar(false);
+  };
+
+  const handleCopyReferral = () => {
+    if (!user?.referral_code) return;
+    const url = `https://cyclerun.app?ref=${user.referral_code}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setReferralCopied(true);
+      setTimeout(() => setReferralCopied(false), 2000);
+    });
+  };
+
+  const isDE = locale === "de";
+
   return (
     <div className="creator-page">
       <SubpageNav rightLabel={t("g.leaderboard")} rightHref="/leaderboard" />
@@ -154,24 +251,112 @@ export default function ProfileContent() {
             </div>
           ) : user && (
             <>
-              {/* Level + Name Header */}
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.5rem" }}>
-                <div style={{
-                  width: 56, height: 56, borderRadius: "50%",
-                  background: "linear-gradient(135deg, var(--accent-1), var(--accent-2))",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "1.5rem", fontWeight: 800, color: "#000",
-                }}>
-                  {user.level}
+              {/* Profile Card */}
+              <div className="info-card" style={{ padding: "1.25rem", marginBottom: "1rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                  {/* Avatar */}
+                  <label style={{ position: "relative", cursor: "pointer", flexShrink: 0 }}>
+                    <input type="file" accept="image/*" onChange={handleAvatarUpload} style={{ display: "none" }} />
+                    {user.avatar_url ? (
+                      <img src={user.avatar_url} alt="" style={{
+                        width: 64, height: 64, borderRadius: "50%", objectFit: "cover",
+                        border: "3px solid var(--accent-1)",
+                      }} />
+                    ) : (
+                      <div style={{
+                        width: 64, height: 64, borderRadius: "50%",
+                        background: "linear-gradient(135deg, var(--accent-1), var(--accent-2))",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        fontSize: "1.5rem", fontWeight: 800, color: "#000",
+                      }}>
+                        {user.level}
+                      </div>
+                    )}
+                    <span style={{
+                      position: "absolute", bottom: -2, right: -2, background: "var(--bg-card)",
+                      borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center",
+                      justifyContent: "center", fontSize: "0.7rem", border: "2px solid var(--border)",
+                    }}>
+                      {uploadingAvatar ? "..." : "📷"}
+                    </span>
+                  </label>
+                  {/* Name + Level */}
+                  <div style={{ flex: 1 }}>
+                    <h1 style={{ fontSize: "1.6rem", fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
+                      {user.nickname || user.display_name || user.first_name}
+                    </h1>
+                    <span style={{ color: "var(--accent-1)", fontWeight: 600, fontSize: "0.85rem" }}>
+                      {t("g.level", { n: user.level })} — {levelName}
+                    </span>
+                    {user.slug && user.is_public && (
+                      <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: 2 }}>
+                        <Link href={`/u/${user.slug}`} style={{ color: "var(--text-muted)" }}>cyclerun.app/u/{user.slug}</Link>
+                      </div>
+                    )}
+                  </div>
+                  {/* Edit Button */}
+                  <button onClick={() => setEditing(!editing)} className="btn-ghost" style={{ padding: "0.4rem 0.6rem", fontSize: "0.8rem" }}>
+                    {editing ? "✕" : "✏️"}
+                  </button>
                 </div>
-                <div>
-                  <h1 style={{ fontSize: "1.8rem", fontWeight: 800, margin: 0, lineHeight: 1.2 }}>
-                    {user.display_name || user.first_name}
-                  </h1>
-                  <span style={{ color: "var(--accent-1)", fontWeight: 600, fontSize: "0.9rem" }}>
-                    {t("g.level", { n: user.level })} — {levelName}
-                  </span>
+
+                {/* Quick Stats Row */}
+                <div style={{ display: "flex", gap: "1rem", marginTop: "0.75rem", justifyContent: "center", fontSize: "0.8rem", color: "var(--text-muted)" }}>
+                  <span>👍 {upvoteCount} {isDE ? "Likes" : "Likes"}</span>
+                  <span>🪙 {user.credits} Credits</span>
+                  <span>👥 {referralCount} {isDE ? "geworben" : "referred"}</span>
                 </div>
+
+                {/* Edit Section */}
+                {editing && (
+                  <div style={{ marginTop: "1rem", borderTop: "1px solid var(--border)", paddingTop: "1rem" }}>
+                    <div style={{ marginBottom: "0.75rem" }}>
+                      <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block", marginBottom: 4 }}>
+                        {isDE ? "Nickname" : "Nickname"}
+                      </label>
+                      <input
+                        type="text" value={editNickname} onChange={(e) => setEditNickname(e.target.value)}
+                        placeholder={isDE ? "Dein Nickname..." : "Your nickname..."}
+                        maxLength={30}
+                        style={{
+                          width: "100%", padding: "0.5rem 0.75rem", borderRadius: 8,
+                          border: "1px solid var(--border)", background: "var(--bg)", color: "var(--text-primary)",
+                          fontSize: "0.9rem",
+                        }}
+                      />
+                      {editNickname.trim() && (
+                        <div style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginTop: 4 }}>
+                          {isDE ? "Profil-URL:" : "Profile URL:"} cyclerun.app/u/{editNickname.trim().toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-")}
+                        </div>
+                      )}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.75rem" }}>
+                      <button
+                        onClick={() => setEditPublic(!editPublic)}
+                        style={{
+                          width: 40, height: 22, borderRadius: 11, border: "none", cursor: "pointer",
+                          background: editPublic ? "var(--accent-1)" : "var(--border)",
+                          position: "relative", transition: "background 0.2s",
+                        }}
+                      >
+                        <span style={{
+                          position: "absolute", top: 2, left: editPublic ? 20 : 2,
+                          width: 18, height: 18, borderRadius: "50%", background: "#fff",
+                          transition: "left 0.2s",
+                        }} />
+                      </button>
+                      <span style={{ fontSize: "0.85rem" }}>
+                        {editPublic
+                          ? (isDE ? "🌍 Profil öffentlich" : "🌍 Public profile")
+                          : (isDE ? "🔒 Profil privat" : "🔒 Private profile")
+                        }
+                      </span>
+                    </div>
+                    <button onClick={handleSaveProfile} disabled={saving} className="btn-primary" style={{ width: "100%", fontSize: "0.85rem" }}>
+                      {saving ? "..." : (isDE ? "Speichern" : "Save")}
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Level Progress Bar */}
@@ -203,6 +388,36 @@ export default function ProfileContent() {
                   )}
                 </div>
               </div>
+
+              {/* Goal Progress */}
+              {goalProgress ? (
+                <div className="info-card" style={{ padding: "1rem", marginBottom: "1.5rem" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                    <span style={{ fontSize: "0.85rem", fontWeight: 700 }}>🎯 {t("goal.progress")}</span>
+                    <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                      {goalProgress.currentValue} {t("goal.progress.of")} {goalProgress.targetValue} {goalProgress.unit}
+                    </span>
+                  </div>
+                  <div className="progress-bar" style={{ height: 10, borderRadius: 5 }}>
+                    <div className="progress-fill" style={{
+                      width: `${goalProgress.percentage}%`, borderRadius: 5,
+                      background: goalProgress.percentage >= 100
+                        ? "linear-gradient(90deg, #22c55e, #16a34a)"
+                        : "linear-gradient(90deg, var(--accent-1), var(--accent-2))",
+                    }}></div>
+                  </div>
+                  <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: 6, textAlign: "center" }}>
+                    {goalProgress.percentage >= 100
+                      ? (locale === "de" ? "🎉 Ziel erreicht!" : "🎉 Goal reached!")
+                      : `${Math.round(goalProgress.percentage)}%`
+                    }
+                  </div>
+                </div>
+              ) : goalState === null && user.total_sessions >= 1 ? (
+                <Link href="/" className="info-card" style={{ display: "block", padding: "1rem", textAlign: "center", marginBottom: "1.5rem", textDecoration: "none", color: "var(--text-muted)", fontSize: "0.85rem" }}>
+                  🎯 {t("goal.set_goal")} →
+                </Link>
+              ) : null}
 
               {/* Stats Grid */}
               <h2 style={{ fontSize: "1.1rem", fontWeight: 700, margin: "1.5rem 0 0.75rem" }}>{t("g.profile.stats")}</h2>
@@ -277,6 +492,42 @@ export default function ProfileContent() {
                   </div>
                 </div>
               )}
+
+              {/* Referral Card */}
+              <div className="info-card" style={{ padding: "1rem", marginTop: "1.5rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+                  <h2 style={{ fontSize: "1rem", fontWeight: 700, margin: 0 }}>
+                    🎁 {isDE ? "Freunde werben" : "Refer Friends"}
+                  </h2>
+                  <span style={{ fontSize: "0.75rem", color: "var(--accent-1)", fontWeight: 600 }}>
+                    +50 Credits
+                  </span>
+                </div>
+                <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", margin: "0 0 0.75rem", lineHeight: 1.5 }}>
+                  {isDE
+                    ? "Teile deinen Referral-Link. Dein Freund bekommt 25 Credits, du 50. Credits schalten Premium-Strecken frei."
+                    : "Share your referral link. Your friend gets 25 Credits, you get 50. Credits unlock premium routes."
+                  }
+                </p>
+                <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                  <div style={{
+                    flex: 1, padding: "0.5rem 0.75rem", borderRadius: 8,
+                    background: "var(--bg)", border: "1px solid var(--border)",
+                    fontSize: "0.8rem", color: "var(--text-muted)", overflow: "hidden",
+                    textOverflow: "ellipsis", whiteSpace: "nowrap",
+                  }}>
+                    cyclerun.app?ref={user.referral_code}
+                  </div>
+                  <button onClick={handleCopyReferral} className="btn-primary" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem", whiteSpace: "nowrap" }}>
+                    {referralCopied ? "✓" : (isDE ? "Kopieren" : "Copy")}
+                  </button>
+                </div>
+                {referralCount > 0 && (
+                  <div style={{ fontSize: "0.75rem", color: "var(--accent-1)", marginTop: "0.5rem", textAlign: "center" }}>
+                    {isDE ? `${referralCount} Freund${referralCount > 1 ? "e" : ""} geworben — ${referralCount * 50} Credits verdient` : `${referralCount} friend${referralCount > 1 ? "s" : ""} referred — ${referralCount * 50} Credits earned`}
+                  </div>
+                )}
+              </div>
 
               {/* CTA */}
               <div style={{ textAlign: "center", margin: "2rem 0" }}>

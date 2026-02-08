@@ -3104,6 +3104,11 @@ body {
     color: var(--text-primary);
 }
 
+/* ============================================================
+   UNIFIED SITE HEADER + HAMBURGER MENU + LOGIN
+   ============================================================ */
+
+.site-header,
 .creator-nav {
     position: fixed;
     top: 0;
@@ -3113,13 +3118,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 2rem;
-    background: rgba(10, 10, 11, 0.85);
+    padding: 0.75rem 1.25rem;
+    background: rgba(10, 10, 11, 0.9);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.site-header-logo,
 .creator-nav-logo {
     font-size: 1.15rem;
     font-weight: 800;
@@ -3128,11 +3134,322 @@ body {
     text-decoration: none;
 }
 
+.site-header-app,
 .creator-nav-app {
     background: var(--gradient-main);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.site-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Login button (not logged in) */
+.site-header-login {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+.site-header-login:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Avatar button (logged in) */
+.site-header-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-1, #00e5a0);
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.site-header-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.site-header-initials {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #000;
+    background: linear-gradient(135deg, var(--accent-1, #00e5a0), var(--accent-2, #00b4d8));
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hamburger button */
+.site-header-burger {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.site-header-burger:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* ---- Slide-out Menu ---- */
+.site-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    animation: siteMenuFadeIn 0.2s ease;
+}
+@keyframes siteMenuFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.site-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    max-width: 85vw;
+    height: 100dvh;
+    background: var(--bg-card, #111122);
+    border-left: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-y: auto;
+    animation: siteMenuSlideIn 0.25s ease;
+    -webkit-overflow-scrolling: touch;
+}
+@keyframes siteMenuSlideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.site-menu-user {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.site-menu-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.site-menu-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-1);
+    flex-shrink: 0;
+}
+.site-menu-user-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #000;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+}
+
+.site-menu-user-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+.site-menu-user-meta {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.site-menu-login-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.site-menu-login-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.site-menu-section {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.site-menu-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    padding: 0.5rem 1rem 0.25rem;
+}
+
+.site-menu-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background 0.15s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+}
+.site-menu-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.site-menu-badge {
+    margin-left: auto;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-1);
+    background: rgba(0, 229, 160, 0.1);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+}
+
+.site-menu-section-logout {
+    border-bottom: none;
+}
+.site-menu-logout {
+    color: var(--text-muted) !important;
+}
+
+/* ---- Login Modal ---- */
+.site-login-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: siteMenuFadeIn 0.2s ease;
+}
+
+.site-login-card {
+    background: var(--bg-card, #111122);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+}
+
+.site-login-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.site-login-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0 0 0.25rem;
+    color: var(--text-primary);
+}
+
+.site-login-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 1.25rem;
+}
+
+.site-login-input {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg, #0d0d1a);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.site-login-input:focus {
+    border-color: var(--accent-1);
+}
+
+.site-login-error {
+    font-size: 0.8rem;
+    color: #ef4444;
+    margin-bottom: 0.75rem;
+}
+
+.site-login-submit {
+    width: 100%;
+    padding: 0.65rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.site-login-footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+.site-login-footer a {
+    color: var(--accent-1);
+    text-decoration: none;
+}
+.site-login-footer a:hover {
+    text-decoration: underline;
 }
 
 /* Hero */

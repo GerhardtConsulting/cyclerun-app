@@ -8,6 +8,7 @@ import { downloadShareCard, type RideMetrics } from "@/lib/share-card";
 import QRCode from "qrcode";
 import { PairingReceiver, PairingSender, sendState } from "@/lib/phone-pairing";
 import { getSupabase } from "@/lib/supabase";
+import { getNextPrompt, saveGoalResponse, dismissGoalPrompt, fetchGoalState, type GoalPrompt } from "@/lib/goal-capture";
 
 interface DetectionZone {
   x: number;
@@ -1334,11 +1335,92 @@ export class CyclingSimulator {
 
       container.innerHTML = html;
 
+      // Trigger progressive goal capture after a short delay
+      setTimeout(() => this._triggerGoalCapture(userBefore.id, email), 1500);
+
     } catch (err) {
       console.error("Gamification summary error:", err);
       // Fallback: just save the session
       this.saveSession(metrics, email);
     }
+  }
+
+  async _triggerGoalCapture(userId: string, email: string) {
+    try {
+      const sb = getSupabase();
+      if (!sb) return;
+
+      // Get total sessions for phase logic
+      const { data: user } = await sb.from("registrations")
+        .select("total_sessions")
+        .eq("id", userId)
+        .single();
+      if (!user) return;
+
+      const goalState = await fetchGoalState(userId);
+      const prompt = getNextPrompt(goalState, user.total_sessions || 0);
+      if (!prompt) return;
+
+      this._showGoalCapture(userId, prompt);
+    } catch (err) {
+      console.error("Goal capture trigger error:", err);
+    }
+  }
+
+  _showGoalCapture(userId: string, prompt: GoalPrompt) {
+    const overlay = document.getElementById("goalCaptureOverlay");
+    const titleEl = document.getElementById("goalCaptureTitle");
+    const optionsEl = document.getElementById("goalCaptureOptions");
+    const skipBtn = document.getElementById("goalCaptureSkip");
+    if (!overlay || !titleEl || !optionsEl || !skipBtn) return;
+
+    // Set title based on prompt type
+    const titleMap: Record<string, string> = {
+      primary_goal: t("goal.title.primary"),
+      frequency: t("goal.title.frequency"),
+      specific_target: t("goal.title.target"),
+      mood: t("goal.title.mood"),
+    };
+    titleEl.textContent = titleMap[prompt.type] || "";
+
+    // Build option buttons
+    optionsEl.innerHTML = prompt.options.map((opt) => `
+      <button class="goal-option-btn" data-value="${opt.value}" style="
+        display:flex;flex-direction:column;align-items:center;gap:0.25rem;
+        padding:0.75rem 1rem;border-radius:12px;border:1px solid var(--border);
+        background:var(--bg-card);color:var(--text-primary);cursor:pointer;
+        min-width:${prompt.type === "mood" ? "52px" : "80px"};font-size:0.85rem;
+        transition:all 0.15s ease;
+      ">
+        <span style="font-size:${prompt.type === "mood" ? "1.8rem" : "1.5rem"}">${opt.emoji}</span>
+        <span>${t(opt.labelKey)}</span>
+      </button>
+    `).join("");
+
+    // Attach click handlers
+    optionsEl.querySelectorAll(".goal-option-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const value = (btn as HTMLElement).dataset.value;
+        if (!value) return;
+
+        // Visual feedback
+        (btn as HTMLElement).style.borderColor = "var(--accent-1)";
+        (btn as HTMLElement).style.background = "rgba(249,115,22,0.1)";
+
+        await saveGoalResponse(userId, prompt.type, value);
+        setTimeout(() => overlay.classList.remove("active"), 300);
+      });
+    });
+
+    // Skip handler
+    const newSkipBtn = skipBtn.cloneNode(true) as HTMLElement;
+    skipBtn.replaceWith(newSkipBtn);
+    newSkipBtn.addEventListener("click", async () => {
+      await dismissGoalPrompt(userId);
+      overlay.classList.remove("active");
+    });
+
+    overlay.classList.add("active");
   }
 
   closeSummary(target: "welcome" | "ride") {
@@ -1522,14 +1604,19 @@ export class CyclingSimulator {
     };
 
     this.pairingReceiver.onRemoteStream = (stream) => {
+      console.log("[Pairing] onRemoteStream received, tracks:", stream.getTracks().map(t => `${t.kind}:${t.readyState}`));
       // Show phone camera feed in the preview area
       const preview = document.getElementById("camPermPreview");
       const video = document.getElementById("step1Video") as HTMLVideoElement;
       if (video && preview) {
         video.srcObject = stream;
+        video.play().catch(() => {});
         preview.style.display = "block";
         // Store stream as webcamStream so the simulator uses it for detection
         this.webcamStream = stream;
+        console.log("[Pairing] Stream assigned to step1Video");
+      } else {
+        console.warn("[Pairing] Video or preview element not found!", { video: !!video, preview: !!preview });
       }
 
       // Hide pairing panel, show success state
@@ -1545,8 +1632,12 @@ export class CyclingSimulator {
 
       // Auto-advance after a short delay so user can see the feed
       setTimeout(() => {
-        const overlay = document.getElementById("cameraPermOverlay");
-        if (overlay) overlay.classList.remove("active");
+        // Hide camera permission overlay — camera is already connected via phone
+        document.getElementById("cameraPermOverlay")?.classList.remove("active");
+
+        // Skip Step 1 (camera selection) — phone camera is already connected
+        // Go directly to Step 2 (setup type), same as what happens after Step 1 "Next"
+        this.showStep(2);
       }, 2000);
     };
 
@@ -1655,6 +1746,15 @@ export class CyclingSimulator {
       localStorage.setItem("cyclerun_name", firstName);
       localStorage.setItem("cyclerun_email", email);
       this.isRegistered = true;
+
+      // Process referral code if present in URL
+      const refCode = new URLSearchParams(window.location.search).get("ref");
+      if (refCode && !error) {
+        const { data: newUser } = await sb.from("registrations").select("id").eq("email", email).single();
+        if (newUser) {
+          await sb.rpc("process_referral", { p_referred_id: newUser.id, p_referral_code: refCode });
+        }
+      }
 
       document.getElementById("registerOverlay")?.classList.remove("active");
 
