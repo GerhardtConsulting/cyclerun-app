@@ -102,8 +102,7 @@ export default function CycleRunApp() {
           </div>
 
           <h1 className="splash-headline">
-            <span className="splash-headline-main">{t('splash.headline.1')}</span>
-            <span className="splash-headline-accent">{t('splash.headline.2')}</span>
+            {t('splash.headline.1')}<span className="splash-headline-accent">{t('splash.headline.2')}</span>{t('splash.headline.3')}
           </h1>
 
           <p className="splash-sub">{t('splash.sub')}</p>

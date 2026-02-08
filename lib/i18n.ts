@@ -10,8 +10,9 @@ const translations: Record<Locale, Record<string, string>> = {
   en: {
     // Splash
     "splash.chip": "Free Forever — No Hardware Needed",
-    "splash.headline.1": "The Free Smart Trainer",
-    "splash.headline.2": "Alternative.",
+    "splash.headline.1": "The ",
+    "splash.headline.2": "Free",
+    "splash.headline.3": " Smart Trainer Alternative",
     "splash.sub": "No hardware. No subscription. Just your webcam.",
     "splash.tagline": "No smart trainer. No subscription. Just your webcam.",
     "splash.cycle.sub": "Spinning · Ergometer · Indoor Bike",
@@ -485,8 +486,9 @@ const translations: Record<Locale, Record<string, string>> = {
   de: {
     // Splash
     "splash.chip": "Kostenlos & ohne Hardware",
-    "splash.headline.1": "Die kostenlose Smart-Trainer",
-    "splash.headline.2": "Alternative.",
+    "splash.headline.1": "Die ",
+    "splash.headline.2": "kostenlose",
+    "splash.headline.3": " Smart-Trainer Alternative",
     "splash.sub": "Kein Ger\u00e4t. Kein Abo. Nur deine Webcam.",
     "splash.tagline": "Kein Smart Trainer. Kein Abo. Nur deine Webcam.",
     "splash.cycle.sub": "Spinning · Ergometer · Indoor Bike",

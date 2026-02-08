@@ -278,28 +278,18 @@ body {
 }
 
 .splash-headline {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
+    font-size: clamp(2rem, 5.5vw, 3rem);
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    text-align: center;
     margin: 0 0 1rem;
     animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
 
-.splash-headline-main {
-    font-size: clamp(2rem, 5.5vw, 3.2rem);
-    font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: -0.04em;
-    line-height: 1.1;
-}
-
 .splash-headline-accent {
-    font-size: clamp(2.2rem, 6.5vw, 3.8rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.05;
-    background: var(--gradient-main);
+    background: linear-gradient(135deg, #f9a856 0%, #f97316 60%, #e05a30 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -307,7 +297,7 @@ body {
 
 .splash-sub {
     font-size: clamp(0.9rem, 2vw, 1.05rem);
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.45);
     margin-bottom: 2.5rem;
     letter-spacing: -0.01em;
     animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
@@ -557,7 +547,7 @@ body {
 }
 
 .gradient-text {
-    background: var(--gradient-main);
+    background: linear-gradient(135deg, #f9a856 0%, #f97316 60%, #e05a30 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -3589,7 +3579,7 @@ body {
 }
 
 .gradient-text {
-    background: var(--gradient-main);
+    background: linear-gradient(135deg, #f9a856 0%, #f97316 60%, #e05a30 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
