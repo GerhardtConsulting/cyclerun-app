@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SubpageNav from "@/components/SubpageNav";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -14,8 +16,9 @@ export const metadata: Metadata = {
 
 export default function Impressum() {
   return (
+    <>
+    <SubpageNav />
     <div className="legal-page">
-      <Link href="/" className="legal-back">← Zurück zu CycleRun</Link>
 
       <h1>Impressum</h1>
       <p className="legal-date">Angaben gemäß § 5 DDG</p>
@@ -57,5 +60,7 @@ export default function Impressum() {
         <li>Alle verwendeten Technologien sind frei verfügbar.</li>
       </ul>
     </div>
+    <SubpageFooter />
+    </>
   );
 }

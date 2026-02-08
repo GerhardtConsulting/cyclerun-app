@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import { PairingReceiver, pollState, type TVState } from "@/lib/phone-pairing";
 import { initLocale, setLocale, getLocale, onLocaleChange, t, type Locale } from "@/lib/i18n";
+import SubpageFooter from "@/components/SubpageFooter";
 
 function FlagEN() {
   return (
@@ -381,25 +382,8 @@ export default function TVPage() {
         </div>
       </div>
 
-      {/* ============ FOOTER (DSGVO / Impressum) ============ */}
-      <footer className="site-footer site-footer-extended" id="siteFooter">
-        <div className="footer-grid">
-          <div className="footer-col">
-            <strong className="footer-col-title">CycleRun</strong>
-            <Link href="/">Home</Link>
-            <Link href="/tv">TV Mode</Link>
-            <Link href="/roadmap">Roadmap</Link>
-          </div>
-          <div className="footer-col">
-            <strong className="footer-col-title">{locale === "de" ? "Rechtliches" : "Legal"}</strong>
-            <Link href="/datenschutz">{t('footer.privacy')}</Link>
-            <Link href="/impressum">{t('footer.legal')}</Link>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span className="footer-copy">{t('footer.copy')}</span>
-        </div>
-      </footer>
+      {/* ============ FOOTER ============ */}
+      {phase === "qr" && <SubpageFooter />}
     </>
   );
 }

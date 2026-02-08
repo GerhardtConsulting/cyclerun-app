@@ -2569,7 +2569,7 @@ body {
    LEGAL PAGES
    ============================================ */
 
-.legal-page { max-width: 800px; margin: 0 auto; padding: 3rem 2rem; color: var(--text-secondary); }
+.legal-page { max-width: 800px; margin: 0 auto; padding: 5rem 2rem 3rem; color: var(--text-secondary); }
 .legal-page h1 { color: var(--text-primary); font-size: 2rem; margin-bottom: 0.5rem; }
 .legal-page .legal-date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 3rem; }
 .legal-page h2 { color: var(--text-primary); font-size: 1.25rem; margin-top: 2.5rem; margin-bottom: 1rem; }
@@ -3152,11 +3152,11 @@ body {
 .site-header-login {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     color: var(--text-primary);
-    padding: 0.35rem 0.75rem;
+    padding: 0.4rem 0.85rem;
     border-radius: 8px;
     font-size: 0.8rem;
     font-weight: 600;
@@ -3164,8 +3164,8 @@ body {
     transition: background 0.2s, border-color 0.2s;
 }
 .site-header-login:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Avatar button (logged in) */

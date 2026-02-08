@@ -1,5 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import SubpageNav from "@/components/SubpageNav";
+import SubpageFooter from "@/components/SubpageFooter";
 
 export const metadata: Metadata = {
   title: "Datenschutzerklärung",
@@ -14,8 +16,9 @@ export const metadata: Metadata = {
 
 export default function Datenschutz() {
   return (
+    <>
+    <SubpageNav />
     <div className="legal-page">
-      <Link href="/" className="legal-back">← Zurück zu CycleRun</Link>
 
       <h1>Datenschutzerklärung</h1>
       <p className="legal-date">Stand: Februar 2026</p>
@@ -117,5 +120,7 @@ export default function Datenschutz() {
       <h2>10. Änderungen</h2>
       <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen. Die aktuelle Version ist stets auf dieser Seite verfügbar.</p>
     </div>
+    <SubpageFooter />
+    </>
   );
 }
