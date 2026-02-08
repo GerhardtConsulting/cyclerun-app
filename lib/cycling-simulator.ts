@@ -1548,7 +1548,7 @@ export class CyclingSimulator {
 
   // ============ CAST TO SCREEN ============
 
-  toggleCast() {
+  async toggleCast() {
     const overlay = document.getElementById("rideCastOverlay");
     const btn = document.getElementById("rideCastBtn");
 
@@ -1560,8 +1560,31 @@ export class CyclingSimulator {
 
     // Generate 4-digit code
     this.castCode = String(Math.floor(1000 + Math.random() * 9000));
+    const castUrl = `https://cyclerun.app/cast?code=${this.castCode}`;
+
     const codeEl = document.getElementById("rideCastCode");
     if (codeEl) codeEl.textContent = this.castCode.split("").join(" ");
+
+    const urlEl = document.getElementById("rideCastUrl");
+    if (urlEl) urlEl.textContent = castUrl;
+
+    // Generate QR code
+    const qrEl = document.getElementById("rideCastQr");
+    if (qrEl) {
+      try {
+        const canvas = document.createElement("canvas");
+        await QRCode.toCanvas(canvas, castUrl, {
+          width: 140,
+          margin: 2,
+          color: { dark: "#ffffffee", light: "#00000000" },
+        });
+        qrEl.innerHTML = "";
+        qrEl.appendChild(canvas);
+      } catch (err) {
+        console.error("[Cast] QR generation failed", err);
+      }
+    }
+
     if (overlay) overlay.style.display = "block";
     if (btn) btn.classList.add("active");
 

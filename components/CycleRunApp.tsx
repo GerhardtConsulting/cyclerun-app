@@ -594,9 +594,10 @@ export default function CycleRunApp() {
           <span>Cast</span>
         </button>
         <div id="rideCastOverlay" className="ride-cast-overlay" style={{ display: "none" }}>
+          <div id="rideCastQr" className="ride-cast-qr"></div>
           <div className="ride-cast-code" id="rideCastCode">----</div>
+          <div className="ride-cast-url" id="rideCastUrl">cyclerun.app/cast</div>
           <div className="ride-cast-hint">{t('cast.hint')}</div>
-          <div className="ride-cast-url">cyclerun.app/cast</div>
         </div>
 
         <video id="rideVideo" loop muted></video>

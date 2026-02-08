@@ -5633,21 +5633,30 @@ body {
     animation: fadeInDown 0.3s ease;
 }
 
+.ride-cast-qr {
+    margin-bottom: 0.5rem;
+}
+
+.ride-cast-qr canvas {
+    border-radius: 8px;
+}
+
 .ride-cast-code {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 800;
     letter-spacing: 0.3em;
     color: var(--accent-1);
-    margin-bottom: 0.25rem;
-}
-
-.ride-cast-hint {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.15rem;
 }
 
 .ride-cast-url {
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 0.35rem;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.35rem;
+    word-break: break-all;
+}
+
+.ride-cast-hint {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
 }
