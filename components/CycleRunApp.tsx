@@ -591,21 +591,6 @@ export default function CycleRunApp() {
           cyclerun<span className="header-logo-app">.app</span>
         </div>
 
-        {/* Cast to screen button */}
-        <button id="rideCastBtn" className="ride-cast-btn" title={t('cast.tooltip')}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M2 16.1A5 5 0 015.9 20M2 12.05A9 9 0 019.95 20M2 8V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2h-6" />
-            <circle cx="2" cy="20" r="0" fill="currentColor" />
-          </svg>
-          <span>Cast</span>
-        </button>
-        <div id="rideCastOverlay" className="ride-cast-overlay" style={{ display: "none" }}>
-          <div id="rideCastQr" className="ride-cast-qr"></div>
-          <div className="ride-cast-code" id="rideCastCode">----</div>
-          <div className="ride-cast-url" id="rideCastUrl">cyclerun.app/cast</div>
-          <div className="ride-cast-hint">{t('cast.hint')}</div>
-        </div>
-
         <video id="rideVideo" loop muted></video>
 
         {/* Gear shift — right side */}
@@ -624,6 +609,12 @@ export default function CycleRunApp() {
 
         {/* Control buttons — top right */}
         <div className="ride-controls">
+          <button id="rideCastBtn" className="btn-control" title={t('cast.tooltip')} aria-label="Cast">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M2 16.1A5 5 0 015.9 20M2 12.05A9 9 0 019.95 20M2 8V6a2 2 0 012-2h16a2 2 0 012 2v12a2 2 0 01-2 2h-6" />
+              <circle cx="2" cy="20" r="0" fill="currentColor" />
+            </svg>
+          </button>
           <button id="toggleWebcam" className="btn-control" aria-label="Toggle webcam">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" /><circle cx="12" cy="13" r="4" /></svg>
           </button>
@@ -633,6 +624,14 @@ export default function CycleRunApp() {
           <button id="stopRide" className="btn-control" aria-label="Stop ride">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="4" y="4" width="16" height="16" rx="2" /></svg>
           </button>
+        </div>
+
+        {/* Cast overlay — appears when casting */}
+        <div id="rideCastOverlay" className="ride-cast-overlay" style={{ display: "none" }}>
+          <div id="rideCastQr" className="ride-cast-qr"></div>
+          <div className="ride-cast-code" id="rideCastCode">----</div>
+          <div className="ride-cast-url" id="rideCastUrl">cyclerun.app/cast</div>
+          <div className="ride-cast-hint">{t('cast.hint')}</div>
         </div>
 
         <div id="hud" className="hud">
@@ -817,11 +816,29 @@ export default function CycleRunApp() {
               <p className="summary-share-hint">{t('ride.summary.share.hint')}</p>
             </div>
 
-            <div id="summarySavePrompt" className="summary-save-prompt">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
-              <div>
-                <strong>{t('ride.summary.save')}</strong>
-                <p>{t('ride.summary.save.hint')}</p>
+            {/* Inline claim form for unregistered users — no redirect */}
+            <div id="summaryClaim" className="summary-claim">
+              <div className="summary-claim-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                <strong>{t('claim.title')}</strong>
+              </div>
+              <p className="summary-claim-desc">{t('claim.desc')}</p>
+              <form id="summaryClaimForm" className="summary-claim-form">
+                <div className="summary-claim-row">
+                  <input type="text" id="claimName" placeholder={t('reg.first')} required className="summary-claim-input" />
+                  <input type="email" id="claimEmail" placeholder={t('reg.email')} required className="summary-claim-input" />
+                </div>
+                <label className="summary-claim-consent">
+                  <input type="checkbox" id="claimConsent" required />
+                  <span>{t('reg.consent')} <Link href="/datenschutz" target="_blank">{t('reg.privacy')}</Link>{t('reg.consent.2')}</span>
+                </label>
+                <button type="submit" className="btn-primary btn-full summary-claim-submit" id="claimSubmitBtn">
+                  {t('claim.submit')}
+                </button>
+              </form>
+              <div id="summaryClaimSuccess" className="summary-claim-success" style={{ display: "none" }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" strokeWidth="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+                <span>{t('claim.success')}</span>
               </div>
             </div>
 

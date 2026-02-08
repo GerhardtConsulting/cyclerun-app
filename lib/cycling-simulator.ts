@@ -251,6 +251,7 @@ export class CyclingSimulator {
     document.getElementById("summaryDone")?.addEventListener("click", () => this.closeSummary("welcome"));
     document.getElementById("summaryRideAgain")?.addEventListener("click", () => this.closeSummary("ride"));
     document.getElementById("downloadShareCard")?.addEventListener("click", () => this.handleShareCard());
+    document.getElementById("summaryClaimForm")?.addEventListener("submit", (e) => this.handleSummaryClaim(e));
   }
 
   // ============ SCREEN MANAGEMENT ============
@@ -483,7 +484,7 @@ export class CyclingSimulator {
     if (!this.webcamStream) return;
 
     video.srcObject = this.webcamStream;
-    video.play();
+    video.play().catch(() => {});
 
     const setupCanvas = () => {
       const rect = video.getBoundingClientRect();
@@ -924,7 +925,7 @@ export class CyclingSimulator {
     if (!this.webcamStream) return;
 
     video.srcObject = this.webcamStream;
-    video.play();
+    video.play().catch(() => {});
 
     video.onloadedmetadata = () => {
       canvas.width = video.videoWidth;
@@ -1018,7 +1019,7 @@ export class CyclingSimulator {
     this.speedSamples = [];
     this.previousFrame = null;
 
-    video.play();
+    video.play().catch(() => {});
 
     this.startPhysicsLoop();
     this._startTVStateLoop();
@@ -1126,7 +1127,7 @@ export class CyclingSimulator {
 
     if (this.isPaused) {
       this.isPaused = false;
-      video.play();
+      video.play().catch(() => {});
       if (btn) btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>';
     } else {
       this.isPaused = true;
@@ -1191,9 +1192,14 @@ export class CyclingSimulator {
       this._showGamificationSummary(email, metrics);
     }
 
-    // Show save prompt only if not registered
-    const savePrompt = document.getElementById("summarySavePrompt");
-    if (savePrompt) savePrompt.style.display = this.isRegistered ? "none" : "";
+    // Show claim form only if not registered
+    const claimEl = document.getElementById("summaryClaim");
+    if (claimEl) claimEl.style.display = this.isRegistered ? "none" : "";
+    // Reset claim form state
+    const claimForm = document.getElementById("summaryClaimForm") as HTMLFormElement;
+    const claimSuccess = document.getElementById("summaryClaimSuccess");
+    if (claimForm) claimForm.style.display = "";
+    if (claimSuccess) claimSuccess.style.display = "none";
 
     // Show summary overlay
     document.getElementById("rideSummary")?.classList.add("active");
@@ -1762,6 +1768,77 @@ export class CyclingSimulator {
       clearInterval(this._tvStateInterval);
       this._tvStateInterval = null;
     }
+  }
+
+  async handleSummaryClaim(e: Event) {
+    e.preventDefault();
+
+    const name = (document.getElementById("claimName") as HTMLInputElement)?.value?.trim();
+    const email = (document.getElementById("claimEmail") as HTMLInputElement)?.value?.trim();
+    const consent = (document.getElementById("claimConsent") as HTMLInputElement)?.checked;
+    if (!name || !email || !consent) return;
+
+    const btn = document.getElementById("claimSubmitBtn") as HTMLButtonElement;
+    if (btn) { btn.disabled = true; btn.textContent = t('claim.saving'); }
+
+    try {
+      const sb = getSupabase();
+      if (!sb) throw new Error("Supabase not loaded");
+
+      const { error } = await sb.from("registrations").insert({
+        first_name: name,
+        email: email,
+        preferred_sport: this.selectedSport || "cycling",
+        locale: navigator.language || "en",
+        consent_privacy: true,
+        consent_data_processing: true,
+        newsletter_opt_in: false,
+      });
+
+      if (error && error.code !== "23505") throw error;
+
+      // Notify admin
+      fetch("/api/admin/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: "registration",
+          details: { Name: name, Email: email, Source: "post-ride-claim" },
+        }),
+      }).catch(() => {});
+
+      localStorage.setItem("cyclerun_registered", "true");
+      localStorage.setItem("cyclerun_name", name);
+      localStorage.setItem("cyclerun_email", email);
+      this.isRegistered = true;
+
+      // Retroactively save the last ride
+      const lastRide = (window as unknown as Record<string, unknown>).__cyclerunLastRide as Record<string, unknown> | undefined;
+      if (lastRide) {
+        this._showGamificationSummary(email, lastRide);
+      }
+
+      // Show success, hide form
+      const form = document.getElementById("summaryClaimForm");
+      const success = document.getElementById("summaryClaimSuccess");
+      if (form) form.style.display = "none";
+      if (success) success.style.display = "";
+
+    } catch (err) {
+      console.error("Claim error:", err);
+      // Still mark as registered locally so data isn't lost
+      localStorage.setItem("cyclerun_registered", "true");
+      localStorage.setItem("cyclerun_name", name);
+      localStorage.setItem("cyclerun_email", email);
+      this.isRegistered = true;
+
+      const form = document.getElementById("summaryClaimForm");
+      const success = document.getElementById("summaryClaimSuccess");
+      if (form) form.style.display = "none";
+      if (success) success.style.display = "";
+    }
+
+    if (btn) { btn.disabled = false; btn.textContent = t('claim.submit'); }
   }
 
   async handleRegistration(e: Event) {

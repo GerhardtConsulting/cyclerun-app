@@ -198,6 +198,13 @@ const translations: Record<Locale, Record<string, string>> = {
     "nudge.dismiss": "Not now",
     "disconnect.tooltip": "Not registered — stats won't be saved",
 
+    // Post-ride claim
+    "claim.title": "Save Your Ride",
+    "claim.desc": "Enter your email to keep your stats, badges, and ride history.",
+    "claim.submit": "Claim My Data",
+    "claim.success": "Saved! Your ride data is secured.",
+    "claim.saving": "Saving...",
+
     // Cast to screen
     "cast.tooltip": "Cast video to TV or second screen",
     "cast.hint": "Open on your TV or second screen",
@@ -673,6 +680,13 @@ const translations: Record<Locale, Record<string, string>> = {
     "nudge.cta": "Registrieren",
     "nudge.dismiss": "Sp\u00e4ter",
     "disconnect.tooltip": "Nicht registriert \u2014 Statistiken werden nicht gespeichert",
+
+    // Post-ride claim
+    "claim.title": "Fahrt speichern",
+    "claim.desc": "Gib deine E-Mail ein, um Statistiken, Badges und Fahrverlauf zu behalten.",
+    "claim.submit": "Meine Daten sichern",
+    "claim.success": "Gespeichert! Deine Fahrdaten sind gesichert.",
+    "claim.saving": "Wird gespeichert...",
 
     // Cast to screen
     "cast.tooltip": "Video auf TV oder zweiten Bildschirm streamen",
