@@ -68,7 +68,22 @@ export default function CycleRunApp() {
       document.getElementById("cookieConsent")?.classList.remove("active");
     });
 
-    return unsub;
+    // Splash idle registration prompt — show after 45s if not registered
+    const isRegistered = localStorage.getItem("cyclerun_registered") === "true";
+    let splashTimer: ReturnType<typeof setTimeout> | null = null;
+    if (!isRegistered) {
+      splashTimer = setTimeout(() => {
+        const welcomeScreen = document.getElementById("welcomeScreen");
+        if (welcomeScreen?.classList.contains("active")) {
+          document.getElementById("registerOverlay")?.classList.add("active");
+        }
+      }, 45_000);
+    }
+
+    return () => {
+      unsub();
+      if (splashTimer) clearTimeout(splashTimer);
+    };
   }, []);
 
   return (
@@ -693,8 +708,11 @@ export default function CycleRunApp() {
         </button>
 
         {/* Registration Popup */}
-        <div id="registerOverlay" className="register-overlay">
+        <div id="registerOverlay" className="register-overlay" onClick={(e) => { if (e.target === e.currentTarget) document.getElementById("registerOverlay")?.classList.remove("active"); }}>
           <div className="register-card">
+            <button className="register-close" onClick={() => document.getElementById("registerOverlay")?.classList.remove("active")} aria-label="Close">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
             <div className="register-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
             </div>
