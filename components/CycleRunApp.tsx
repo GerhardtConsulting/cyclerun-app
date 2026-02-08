@@ -632,6 +632,7 @@ export default function CycleRunApp() {
           <div className="ride-cast-code" id="rideCastCode">----</div>
           <div className="ride-cast-url" id="rideCastUrl">cyclerun.app/cast</div>
           <div className="ride-cast-hint">{t('cast.hint')}</div>
+          <div id="rideCastLocalWarn" className="ride-cast-local-warn" style={{ display: "none" }}>{t('cast.local_warn')}</div>
         </div>
 
         <div id="hud" className="hud">

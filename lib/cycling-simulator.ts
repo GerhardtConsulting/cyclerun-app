@@ -1594,6 +1594,14 @@ export class CyclingSimulator {
     if (overlay) overlay.style.display = "block";
     if (btn) btn.classList.add("active");
 
+    // Show local video warning if blob URL
+    const rideVideo = document.getElementById("rideVideo") as HTMLVideoElement;
+    const localWarn = document.getElementById("rideCastLocalWarn");
+    if (localWarn) {
+      const src = rideVideo?.src || rideVideo?.currentSrc || "";
+      localWarn.style.display = src.startsWith("blob:") ? "block" : "none";
+    }
+
     // Start sending cast state every 500ms
     this._castInterval = setInterval(() => {
       if (!this.castCode || !this.isRiding) return;

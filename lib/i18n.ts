@@ -208,6 +208,7 @@ const translations: Record<Locale, Record<string, string>> = {
     // Cast to screen
     "cast.tooltip": "Cast video to TV or second screen",
     "cast.hint": "Open on your TV or second screen",
+    "cast.local_warn": "Local video files can't be cast. Use a video URL for full screen.",
 
     // Phone pairing
     "pair.title": "Connect Your Phone Camera",
@@ -693,6 +694,7 @@ const translations: Record<Locale, Record<string, string>> = {
     // Cast to screen
     "cast.tooltip": "Video auf TV oder zweiten Bildschirm streamen",
     "cast.hint": "\u00d6ffne auf deinem TV oder zweiten Bildschirm",
+    "cast.local_warn": "Lokale Videodateien k\u00f6nnen nicht gecastet werden. Nutze eine Video-URL f\u00fcr Vollbild.",
 
     // Phone pairing
     "pair.title": "Handy-Kamera verbinden",

@@ -5664,6 +5664,15 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     margin-top: 0.5rem;
 }
 
+.cast-fallback-hint {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 1.5rem;
+    max-width: 400px;
+    text-align: center;
+    line-height: 1.5;
+}
+
 .cast-hud {
     position: absolute;
     bottom: 2rem;
@@ -5759,4 +5768,15 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
 .ride-cast-hint {
     font-size: 0.65rem;
     color: rgba(255, 255, 255, 0.4);
+}
+
+.ride-cast-local-warn {
+    font-size: 0.65rem;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    border-radius: 6px;
+    padding: 0.35rem 0.6rem;
+    margin-top: 0.5rem;
+    line-height: 1.4;
 }

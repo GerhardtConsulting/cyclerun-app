@@ -185,11 +185,14 @@ function CastInner() {
 
   // ---- PLAYING (fullscreen video + HUD) ----
   const videoUrl = castState?.videoUrl || "";
-  const hasVideo = !!videoUrl && !videoUrl.startsWith("blob:");
+  const isBlob = videoUrl.startsWith("blob:");
+  const hasVideo = !!videoUrl && !isBlob;
+  const [videoError, setVideoError] = useState(false);
+  const showFallback = !hasVideo || videoError;
 
   return (
     <div className="cast-fullscreen">
-      {hasVideo ? (
+      {hasVideo && !videoError ? (
         <video
           ref={videoRef}
           className="cast-video"
@@ -197,17 +200,32 @@ function CastInner() {
           muted
           loop
           playsInline
+          onError={() => setVideoError(true)}
         />
       ) : (
         <div className="cast-video-fallback">
           <div className="cast-fallback-speed">{(castState?.speed ?? 0).toFixed(1)}</div>
           <div className="cast-fallback-unit">km/h</div>
+          {isBlob && (
+            <div className="cast-fallback-hint">
+              {isDE
+                ? "Lokale Videos können nicht gecastet werden — Metriken werden live synchronisiert"
+                : "Local videos can't be cast — metrics are synced live"}
+            </div>
+          )}
+          {videoError && (
+            <div className="cast-fallback-hint">
+              {isDE
+                ? "Video konnte nicht geladen werden — Metriken werden live synchronisiert"
+                : "Video failed to load — metrics are synced live"}
+            </div>
+          )}
         </div>
       )}
       {/* HUD overlay */}
       {castState && (
         <div className="cast-hud">
-          {hasVideo && (
+          {!showFallback && (
             <div className="cast-hud-item cast-hud-speed">
               <span className="cast-hud-value">{(castState.speed ?? 0).toFixed(1)}</span>
               <span className="cast-hud-label">km/h</span>
