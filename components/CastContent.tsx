@@ -14,6 +14,7 @@ function CastInner() {
   const [errorMsg, setErrorMsg] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
   const [castState, setCastState] = useState<CastState | null>(null);
+  const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -187,7 +188,6 @@ function CastInner() {
   const videoUrl = castState?.videoUrl || "";
   const isBlob = videoUrl.startsWith("blob:");
   const hasVideo = !!videoUrl && !isBlob;
-  const [videoError, setVideoError] = useState(false);
   const showFallback = !hasVideo || videoError;
 
   return (
