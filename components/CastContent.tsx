@@ -4,17 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { pollCastState, type CastState } from "@/lib/phone-pairing";
 import { initLocale, t, type Locale } from "@/lib/i18n";
 
-function getUrlCode(): string | null {
-  try {
-    const m = window.location.search.match(/[?&]code=(\d{4})/);
-    return m ? m[1] : null;
-  } catch { return null; }
-}
-
 function CastInner() {
-  const urlCode = getUrlCode();
-  const [code, setCode] = useState(urlCode || "");
-  const [status, setStatus] = useState<"input" | "connecting" | "playing" | "error">(urlCode ? "connecting" : "input");
+  const [code, setCode] = useState("");
+  const [status, setStatus] = useState<"input" | "connecting" | "playing" | "error">("input");
   const [errorMsg, setErrorMsg] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
   const [castState, setCastState] = useState<CastState | null>(null);
@@ -26,13 +18,48 @@ function CastInner() {
   const loadedUrlRef = useRef("");
   const startedRef = useRef(false);
   const videoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const codeRef = useRef("");
 
+  // Read URL code on client only (useEffect never runs on server)
   useEffect(() => {
     setLocale(initLocale());
-    if (urlCode && !startedRef.current) {
+
+    // Parse ?code= from URL — manual regex, no URLSearchParams (TV compat)
+    let urlCode = "";
+    try {
+      const m = window.location.search.match(/[?&]code=(\d{4})/);
+      if (m) urlCode = m[1];
+    } catch {}
+
+    if (urlCode) {
+      codeRef.current = urlCode;
+      setCode(urlCode);
       startedRef.current = true;
       doStartCast(urlCode);
     }
+
+    // Listen for number key presses from TV remote directly
+    function onKeyDown(e: KeyboardEvent) {
+      if (startedRef.current) return;
+      if (e.key >= "0" && e.key <= "9") {
+        const cur = codeRef.current;
+        if (cur.length < 4) {
+          const next = cur + e.key;
+          codeRef.current = next;
+          setCode(next);
+          if (next.length === 4) {
+            startedRef.current = true;
+            doStartCast(next);
+          }
+        }
+      } else if (e.key === "Backspace") {
+        const next = codeRef.current.slice(0, -1);
+        codeRef.current = next;
+        setCode(next);
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -63,7 +90,7 @@ function CastInner() {
       const state = await pollCastState(castCode);
       if (state) setCastState(state);
     }, 500);
-  };
+  }
 
   // Sync video with cast state
   useEffect(() => {
@@ -120,6 +147,43 @@ function CastInner() {
 
   const isDE = locale === "de";
 
+  // Helper: handle button press (works for both click and Enter keydown)
+  function pressDigit(n: number) {
+    if (startedRef.current) return;
+    const cur = codeRef.current;
+    if (cur.length >= 4) return;
+    const next = cur + n;
+    codeRef.current = next;
+    setCode(next);
+    if (next.length === 4) {
+      startedRef.current = true;
+      doStartCast(next);
+    }
+  }
+
+  function pressDelete() {
+    const next = codeRef.current.slice(0, -1);
+    codeRef.current = next;
+    setCode(next);
+  }
+
+  function pressOK() {
+    const cur = codeRef.current;
+    if (cur.length === 4 && !startedRef.current) {
+      startedRef.current = true;
+      doStartCast(cur);
+    }
+  }
+
+  function btnProps(action: () => void) {
+    return {
+      tabIndex: 0,
+      onClick: (e: React.MouseEvent) => { e.preventDefault(); action(); },
+      onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); action(); } },
+      onMouseDown: (e: React.MouseEvent) => { e.preventDefault(); action(); },
+    };
+  }
+
   // ---- INPUT SCREEN ----
   if (status === "input" || status === "error") {
     return (
@@ -141,31 +205,12 @@ function CastInner() {
           </div>
 
           <div className="cast-numpad">
-            {[1,2,3,4,5,6,7,8,9,null,0,"ok"].map((n, i) => {
-              if (n === null) return (
-                <button key="del" className="cast-numpad-btn cast-numpad-del" tabIndex={0}
-                  onClick={() => setCode((c) => c.slice(0, -1))}
-                >←</button>
-              );
-              if (n === "ok") return (
-                <button key="ok" className="cast-numpad-btn cast-numpad-go" tabIndex={0}
-                  disabled={code.length !== 4}
-                  onClick={() => { if (code.length === 4) doStartCast(code); }}
-                >OK</button>
-              );
-              return (
-                <button key={n} className="cast-numpad-btn" tabIndex={0}
-                  onClick={() => {
-                    setCode((c) => {
-                      if (c.length >= 4) return c;
-                      const next = c + n;
-                      if (next.length === 4) setTimeout(() => doStartCast(next), 50);
-                      return next;
-                    });
-                  }}
-                >{n}</button>
-              );
-            })}
+            {[1,2,3,4,5,6,7,8,9].map((n) => (
+              <button key={n} className="cast-numpad-btn" {...btnProps(() => pressDigit(n))}>{n}</button>
+            ))}
+            <button className="cast-numpad-btn cast-numpad-del" {...btnProps(pressDelete)}>←</button>
+            <button className="cast-numpad-btn" {...btnProps(() => pressDigit(0))}>0</button>
+            <button className="cast-numpad-btn cast-numpad-go" disabled={code.length !== 4} {...btnProps(pressOK)}>OK</button>
           </div>
 
           {status === "error" && <p className="cast-error">{errorMsg}</p>}
