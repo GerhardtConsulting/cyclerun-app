@@ -414,6 +414,13 @@ export class CyclingSimulator {
     } catch { /* ignore enumeration errors */ }
   }
 
+  updateCameraLabel() {
+    const labelEl = document.getElementById("cameraLabelText");
+    if (!labelEl) return;
+    const track = this.webcamStream?.getVideoTracks()[0];
+    labelEl.textContent = track?.label || "Camera";
+  }
+
   async switchCamera(deviceId: string) {
     if (this.webcamStream) {
       this.webcamStream.getTracks().forEach(t => t.stop());
@@ -423,6 +430,7 @@ export class CyclingSimulator {
         video: { deviceId: { exact: deviceId }, width: { ideal: 640 }, height: { ideal: 480 } },
       });
       this.selectedCameraId = deviceId;
+      this.updateCameraLabel();
       const video = document.getElementById("step1Video") as HTMLVideoElement;
       if (video) video.srcObject = this.webcamStream;
 
@@ -472,6 +480,9 @@ export class CyclingSimulator {
       mirrorVideo.srcObject = this.webcamStream;
       preview.style.display = "block";
     }
+
+    // Show selected camera name
+    this.updateCameraLabel();
 
     const stepStatus = document.getElementById("cameraStatus");
     if (stepStatus) {

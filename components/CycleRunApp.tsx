@@ -318,6 +318,10 @@ export default function CycleRunApp() {
                   <div id="cameraStatus" className="form-status"></div>
                   <div id="cameraPreview" className="camera-preview" style={{ display: "none" }}>
                     <video id="step1VideoMirror" autoPlay muted playsInline></video>
+                    <div id="cameraLabel" className="camera-label">
+                      <span className="camera-label-dot"></span>
+                      <span id="cameraLabelText"></span>
+                    </div>
                   </div>
                 </div>
 

@@ -1059,8 +1059,26 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    max-height: 200px;
-    object-fit: cover;
+    max-height: 280px;
+    object-fit: contain;
+    background: #000;
+}
+
+.camera-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.camera-label-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+    flex-shrink: 0;
 }
 
 .step-action {
