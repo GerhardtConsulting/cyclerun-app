@@ -5524,29 +5524,33 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     margin-bottom: 1.5rem;
 }
 
-.cast-digits {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.cast-digit-input {
-    width: 56px;
-    height: 64px;
+.cast-code-input {
+    width: 100%;
+    max-width: 260px;
+    height: 72px;
     text-align: center;
-    font-size: 1.75rem;
-    font-weight: 700;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.4em;
     color: var(--text-primary);
     background: var(--bg-muted);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-md);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
     outline: none;
     transition: border-color 0.2s;
+    margin: 0 auto 1.5rem;
+    display: block;
+    font-family: inherit;
 }
 
-.cast-digit-input:focus {
+.cast-code-input::placeholder {
+    color: rgba(255, 255, 255, 0.15);
+    letter-spacing: 0.4em;
+}
+
+.cast-code-input:focus {
     border-color: var(--accent-1);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
 .cast-error {

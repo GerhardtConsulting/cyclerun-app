@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { pollCastState, type CastState } from "@/lib/phone-pairing";
 import { initLocale, t, type Locale } from "@/lib/i18n";
 
 function CastInner() {
   const [code, setCode] = useState("");
-  const [digits, setDigits] = useState(["", "", "", ""]);
   const [status, setStatus] = useState<"input" | "connecting" | "playing" | "error">("input");
   const [errorMsg, setErrorMsg] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
@@ -15,7 +14,6 @@ function CastInner() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const lastSyncRef = useRef(0);
   const loadedUrlRef = useRef("");
   const startedRef = useRef(false);
@@ -27,7 +25,6 @@ function CastInner() {
       const params = new URLSearchParams(window.location.search);
       const urlCode = params.get("code");
       if (urlCode && urlCode.length === 4) {
-        setDigits(urlCode.split(""));
         setCode(urlCode);
         if (!startedRef.current) {
           startedRef.current = true;
@@ -46,28 +43,6 @@ function CastInner() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
-
-  const handleDigit = useCallback((index: number, value: string) => {
-    if (!/^\d?$/.test(value)) return;
-    const newDigits = [...digits];
-    newDigits[index] = value;
-    setDigits(newDigits);
-
-    if (value && index < 3) {
-      inputRefs.current[index + 1]?.focus();
-    }
-
-    const fullCode = newDigits.join("");
-    if (fullCode.length === 4 && newDigits.every((d) => d)) {
-      setCode(fullCode);
-    }
-  }, [digits]);
-
-  const handleKeyDown = useCallback((index: number, e: React.KeyboardEvent) => {
-    if (e.key === "Backspace" && !digits[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  }, [digits]);
 
   const startCast = async (castCode: string) => {
     setStatus("connecting");
@@ -165,29 +140,33 @@ function CastInner() {
             </svg>
           </div>
           <h1 className="cast-title">{isDE ? "Cast-Code eingeben" : "Enter Cast Code"}</h1>
-          <p className="cast-subtitle">{isDE ? "Gib den 4-stelligen Code ein, der auf deinem Trainingsgerät angezeigt wird." : "Enter the 4-digit code shown on your training device."}</p>
+          <p className="cast-subtitle">{isDE ? "4-stelliger Code von deinem Trainingsgerät" : "4-digit code from your training device"}</p>
 
-          <div className="cast-digits">
-            {digits.map((d, i) => (
-              <input
-                key={i}
-                ref={(el) => { inputRefs.current[i] = el; }}
-                className="cast-digit-input"
-                type="tel"
-                maxLength={1}
-                value={d}
-                onChange={(e) => handleDigit(i, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(i, e)}
-                autoFocus={i === 0}
-              />
-            ))}
-          </div>
+          <input
+            className="cast-code-input"
+            type="tel"
+            maxLength={4}
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="0000"
+            autoFocus
+            autoComplete="off"
+            value={code}
+            onChange={(e) => {
+              const val = e.target.value.replace(/\D/g, "").slice(0, 4);
+              setCode(val);
+              if (val.length === 4 && !startedRef.current) {
+                startedRef.current = true;
+                startCast(val);
+              }
+            }}
+          />
 
           {status === "error" && <p className="cast-error">{errorMsg}</p>}
 
           <button
             className="btn-primary btn-lg btn-full"
-            onClick={() => { if (code.length === 4) startCast(code); }}
+            onClick={() => { if (code.length === 4) { startedRef.current = true; startCast(code); } }}
             disabled={code.length !== 4}
           >
             {isDE ? "Verbinden" : "Connect"}
