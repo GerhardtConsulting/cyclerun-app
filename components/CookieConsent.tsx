@@ -2,29 +2,18 @@
 
 import { useState, useEffect } from "react";
 
-const GA_ID = "G-WL522VY008";
 const CONSENT_KEY = "cyclerun_cookie_consent";
 
 type ConsentState = "pending" | "accepted" | "declined";
 
-/* ── Google gtag helper ────────────────────────────────── */
-// Must use `arguments` (not ...args) so dataLayer items match
-// the format the gtag.js script expects.
-function ensureGtag() {
+/* ── gtag helper ────────────────────────────────────── */
+// gtag.js + consent defaults are loaded in layout.tsx <head>.
+// This component only updates the consent state.
+function gtag(...args: unknown[]) {
   const w = window as unknown as Record<string, unknown>;
-  if (typeof w.gtag === "function") return;
-  w.dataLayer = (w.dataLayer as unknown[]) || [];
-  // eslint-disable-next-line prefer-rest-params
-  w.gtag = function () { (w.dataLayer as IArguments[]).push(arguments); };
-}
-
-function gtag(..._args: unknown[]) {
-  // Thin wrapper that calls the real window.gtag which uses `arguments`.
-  // We call ensureGtag first, then forward via apply so the Arguments
-  // object (not an Array) lands in dataLayer.
-  ensureGtag();
-  const w = window as unknown as Record<string, (...a: unknown[]) => void>;
-  w.gtag(..._args);
+  if (typeof w.gtag === "function") {
+    (w.gtag as (...a: unknown[]) => void)(...args);
+  }
 }
 
 function getConsent(): ConsentState {
@@ -32,45 +21,12 @@ function getConsent(): ConsentState {
   return (localStorage.getItem(CONSENT_KEY) as ConsentState) || "pending";
 }
 
-/* ── Consent Mode v2 defaults + gtag.js load ─────────── */
-// The script is ALWAYS loaded so Google can verify the tag.
-// With analytics_storage:"denied", GA4 sets NO cookies and
-// collects NO identifiable data until consent is granted.
-if (typeof window !== "undefined") {
-  ensureGtag();
-  // 1. Set consent defaults BEFORE script loads
-  gtag("consent", "default", {
-    analytics_storage: "denied",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
-    wait_for_update: 500,
-  });
-  // 2. Load gtag.js immediately (consent mode controls behavior)
-  if (!document.getElementById("ga-script")) {
-    const s = document.createElement("script");
-    s.id = "ga-script";
-    s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-    document.head.appendChild(s);
-  }
-  // 3. Configure GA4
-  gtag("js", new Date());
-  gtag("config", GA_ID, {
-    cookie_flags: "SameSite=Lax;Secure",
-  });
-}
-
 function grantConsent() {
-  gtag("consent", "update", {
-    analytics_storage: "granted",
-  });
+  gtag("consent", "update", { analytics_storage: "granted" });
 }
 
 function revokeConsent() {
-  gtag("consent", "update", {
-    analytics_storage: "denied",
-  });
+  gtag("consent", "update", { analytics_storage: "denied" });
   // Clear any GA cookies that were set while consent was granted
   const cookies = document.cookie.split(";");
   for (const c of cookies) {

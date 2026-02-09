@@ -76,6 +76,7 @@ export class CyclingSimulator {
   private _started: boolean;
   castCode: string | null;
   private _castInterval: ReturnType<typeof setInterval> | null;
+  selectedCameraId: string | null;
 
   constructor() {
     this.wizardStep = 1;
@@ -109,6 +110,7 @@ export class CyclingSimulator {
     this._tvStateInterval = null;
     this.castCode = null;
     this._castInterval = null;
+    this.selectedCameraId = null;
 
     this.riderWeight = 75;
     this.riderHeight = 175;
@@ -340,6 +342,12 @@ export class CyclingSimulator {
         },
       });
 
+      // Store the active camera's deviceId
+      const track = this.webcamStream.getVideoTracks()[0];
+      if (track) {
+        this.selectedCameraId = track.getSettings().deviceId || null;
+      }
+
       // Show preview in permission overlay
       const permPreview = document.getElementById("camPermPreview");
       const permVideo = document.getElementById("step1Video") as HTMLVideoElement;
@@ -396,6 +404,9 @@ export class CyclingSimulator {
           const opt = document.createElement("option");
           opt.value = cam.deviceId;
           opt.textContent = cam.label || `Camera ${i + 1}`;
+          if (this.selectedCameraId && cam.deviceId === this.selectedCameraId) {
+            opt.selected = true;
+          }
           select.appendChild(opt);
         });
         wrapper.style.display = "block";
@@ -411,6 +422,7 @@ export class CyclingSimulator {
       this.webcamStream = await navigator.mediaDevices.getUserMedia({
         video: { deviceId: { exact: deviceId }, width: { ideal: 640 }, height: { ideal: 480 } },
       });
+      this.selectedCameraId = deviceId;
       const video = document.getElementById("step1Video") as HTMLVideoElement;
       if (video) video.srcObject = this.webcamStream;
 
@@ -423,6 +435,29 @@ export class CyclingSimulator {
       }
     } catch (err) {
       console.error("Camera switch error:", err);
+    }
+  }
+
+  async ensureStream(): Promise<MediaStream | null> {
+    const alive = this.webcamStream?.getVideoTracks().some(t => t.readyState === "live");
+    if (alive) return this.webcamStream;
+
+    // Stream tracks ended — re-request with the stored camera
+    console.log("[Camera] Stream lost, re-requesting", this.selectedCameraId ? "saved camera" : "default");
+    try {
+      if (this.webcamStream) {
+        this.webcamStream.getTracks().forEach(t => t.stop());
+      }
+      this.webcamStream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          ...(this.selectedCameraId ? { deviceId: { exact: this.selectedCameraId } } : {}),
+          width: { ideal: 640 }, height: { ideal: 480 },
+        },
+      });
+      return this.webcamStream;
+    } catch (err) {
+      console.error("[Camera] Re-request failed:", err);
+      return null;
     }
   }
 
@@ -477,13 +512,14 @@ export class CyclingSimulator {
 
   // ============ STEP 3: ZONE SETUP ============
 
-  initZoneSetup() {
+  async initZoneSetup() {
     const video = document.getElementById("zoneSetupVideo") as HTMLVideoElement;
     const canvas = document.getElementById("zoneCanvas") as HTMLCanvasElement;
 
-    if (!this.webcamStream) return;
+    const stream = await this.ensureStream();
+    if (!stream) return;
 
-    video.srcObject = this.webcamStream;
+    video.srcObject = stream;
     video.play().catch(() => {});
 
     const setupCanvas = () => {
@@ -918,13 +954,14 @@ export class CyclingSimulator {
 
   // ============ STEP 4: CALIBRATION ============
 
-  initCalibration() {
+  async initCalibration() {
     const video = document.getElementById("calibrationVideo") as HTMLVideoElement;
     const canvas = document.getElementById("calibrationCanvas") as HTMLCanvasElement;
 
-    if (!this.webcamStream) return;
+    const stream = await this.ensureStream();
+    if (!stream) return;
 
-    video.srcObject = this.webcamStream;
+    video.srcObject = stream;
     video.play().catch(() => {});
 
     video.onloadedmetadata = () => {
@@ -1029,8 +1066,9 @@ export class CyclingSimulator {
     const minimapVideo = document.getElementById("webcamMinimapVideo") as HTMLVideoElement;
     const minimapCanvas = document.getElementById("minimapCanvas") as HTMLCanvasElement;
 
-    if (this.webcamStream && minimapVideo) {
-      minimapVideo.srcObject = this.webcamStream;
+    const stream = await this.ensureStream();
+    if (stream && minimapVideo) {
+      minimapVideo.srcObject = stream;
       minimapVideo.play().catch(() => {});
 
       const trySetSize = () => {

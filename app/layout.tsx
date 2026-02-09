@@ -30,6 +30,22 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* Google Consent Mode v2 defaults + GA4 config — MUST be before gtag.js */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+            wait_for_update: 500
+          });
+          gtag('js', new Date());
+          gtag('config', 'G-WL522VY008', { cookie_flags: 'SameSite=Lax;Secure' });
+        `}} />
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WL522VY008" />
         <JsonLd data={[
           schemas.webApplication(),
           schemas.faqPage(homepageFaqs),
