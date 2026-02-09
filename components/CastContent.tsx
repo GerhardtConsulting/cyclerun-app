@@ -141,26 +141,31 @@ function CastInner() {
           </div>
 
           <div className="cast-numpad">
-            {[1,2,3,4,5,6,7,8,9].map((n) => (
-              <button key={n} className="cast-numpad-btn" onClick={() => {
-                if (code.length < 4) {
-                  const next = code + n;
-                  setCode(next);
-                  if (next.length === 4) { startedRef.current = true; doStartCast(next); }
-                }
-              }}>{n}</button>
-            ))}
-            <button className="cast-numpad-btn cast-numpad-del" onClick={() => setCode(code.slice(0, -1))}>←</button>
-            <button className="cast-numpad-btn" onClick={() => {
-              if (code.length < 4) {
-                const next = code + "0";
-                setCode(next);
-                if (next.length === 4) { startedRef.current = true; doStartCast(next); }
-              }
-            }}>0</button>
-            <button className="cast-numpad-btn cast-numpad-go" disabled={code.length !== 4} onClick={() => {
-              if (code.length === 4) { startedRef.current = true; doStartCast(code); }
-            }}>OK</button>
+            {[1,2,3,4,5,6,7,8,9,null,0,"ok"].map((n, i) => {
+              if (n === null) return (
+                <button key="del" className="cast-numpad-btn cast-numpad-del" tabIndex={0}
+                  onClick={() => setCode((c) => c.slice(0, -1))}
+                >←</button>
+              );
+              if (n === "ok") return (
+                <button key="ok" className="cast-numpad-btn cast-numpad-go" tabIndex={0}
+                  disabled={code.length !== 4}
+                  onClick={() => { if (code.length === 4) doStartCast(code); }}
+                >OK</button>
+              );
+              return (
+                <button key={n} className="cast-numpad-btn" tabIndex={0}
+                  onClick={() => {
+                    setCode((c) => {
+                      if (c.length >= 4) return c;
+                      const next = c + n;
+                      if (next.length === 4) setTimeout(() => doStartCast(next), 50);
+                      return next;
+                    });
+                  }}
+                >{n}</button>
+              );
+            })}
           </div>
 
           {status === "error" && <p className="cast-error">{errorMsg}</p>}
