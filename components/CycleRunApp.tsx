@@ -46,7 +46,7 @@ export default function CycleRunApp() {
     const tvKeywords = ["smart-tv", "smarttv", "netcast", "webos", "tizen", "vidaa", "hbbtv", "viera", "bravia", "roku", "firetv", "fire tv", "appletv", "chromecast", "androidtv", "android tv"];
     const isTV = tvKeywords.some((kw) => ua.includes(kw));
     if (isTV && !window.location.search.includes("tv=")) {
-      window.location.href = "/tv";
+      window.location.href = "/cast";
       return;
     }
 

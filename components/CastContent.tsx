@@ -15,11 +15,14 @@ function CastInner() {
   const [locale, setLocale] = useState<Locale>("en");
   const [castState, setCastState] = useState<CastState | null>(null);
   const [videoError, setVideoError] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const lastSyncRef = useRef(0);
   const loadedUrlRef = useRef("");
+  const startedRef = useRef(false);
+  const videoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     setLocale(initLocale());
@@ -27,14 +30,22 @@ function CastInner() {
     if (urlCode && urlCode.length === 4) {
       setDigits(urlCode.split(""));
       setCode(urlCode);
+      // Auto-connect immediately
+      if (!startedRef.current) {
+        startedRef.current = true;
+        startCast(urlCode);
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
-  // Auto-connect when code is set from URL
+  // Auto-connect when code is set from digit input
   useEffect(() => {
-    if (code.length === 4 && status === "input") {
+    if (code.length === 4 && status === "input" && !startedRef.current) {
+      startedRef.current = true;
       startCast(code);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   const handleDigit = useCallback((index: number, value: string) => {
@@ -63,9 +74,16 @@ function CastInner() {
     setStatus("connecting");
     setErrorMsg("");
 
-    // Poll once to check if code exists
-    const initial = await pollCastState(castCode);
+    // Retry up to 3 times (TV might load before PC starts casting)
+    let initial: CastState | null = null;
+    for (let attempt = 0; attempt < 3; attempt++) {
+      initial = await pollCastState(castCode);
+      if (initial) break;
+      await new Promise((r) => setTimeout(r, 1500));
+    }
+
     if (!initial) {
+      startedRef.current = false;
       setStatus("error");
       setErrorMsg(locale === "de" ? "Kein aktiver Cast gefunden. Starte erst einen Cast auf deinem Trainingsgerät." : "No active cast found. Start a cast on your training device first.");
       return;
@@ -90,9 +108,16 @@ function CastInner() {
     // Load new video only if URL actually changed (track with ref, not video.src)
     if (url && url !== loadedUrlRef.current && !url.startsWith("blob:")) {
       loadedUrlRef.current = url;
+      setVideoLoaded(false);
       video.src = url;
       video.load();
       video.play().catch(() => {});
+      // Timeout: if video doesn't load in 5s, show fallback HUD
+      if (videoTimeoutRef.current) clearTimeout(videoTimeoutRef.current);
+      videoTimeoutRef.current = setTimeout(() => {
+        if (!video.videoWidth) setVideoError(true);
+      }, 5000);
+      video.onloadeddata = () => { setVideoLoaded(true); if (videoTimeoutRef.current) clearTimeout(videoTimeoutRef.current); };
       return; // let it load first before syncing playback
     }
 
@@ -119,10 +144,11 @@ function CastInner() {
     }
   }, [castState]);
 
-  // Cleanup polling on unmount
+  // Cleanup polling + video timeout on unmount
   useEffect(() => {
     return () => {
       if (pollRef.current) clearInterval(pollRef.current);
+      if (videoTimeoutRef.current) clearTimeout(videoTimeoutRef.current);
     };
   }, []);
 
