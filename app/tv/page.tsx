@@ -201,7 +201,48 @@ export default function TVPage() {
               </div>
             </div>
 
-            <div className="splash-trust">
+            {/* Cast Code Entry — for PC→TV casting */}
+            <div style={{ margin: "1.5rem auto 0", maxWidth: 400, borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "1.5rem", textAlign: "center" }}>
+              <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", marginBottom: "0.75rem" }}>
+                {locale === "de" ? "Oder Cast-Code vom PC eingeben:" : "Or enter Cast Code from PC:"}
+              </p>
+              <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center" }}>
+                {[0, 1, 2, 3].map((i) => (
+                  <input
+                    key={i}
+                    id={`castDigit${i}`}
+                    type="tel"
+                    maxLength={1}
+                    style={{
+                      width: 48, height: 56, textAlign: "center", fontSize: "1.5rem", fontWeight: 700,
+                      background: "var(--bg-elevated)", border: "1px solid rgba(255,255,255,0.1)",
+                      borderRadius: 8, color: "var(--text-primary)", fontFamily: "inherit",
+                    }}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      if (!/^\d?$/.test(val)) { e.target.value = ""; return; }
+                      if (val && i < 3) {
+                        (document.getElementById(`castDigit${i + 1}`) as HTMLInputElement)?.focus();
+                      }
+                      // Auto-connect when all 4 digits entered
+                      if (val && i === 3) {
+                        const code = [0,1,2,3].map(j => (document.getElementById(`castDigit${j}`) as HTMLInputElement)?.value || "").join("");
+                        if (code.length === 4) {
+                          window.location.href = `/cast?code=${code}`;
+                        }
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Backspace" && !(e.target as HTMLInputElement).value && i > 0) {
+                        (document.getElementById(`castDigit${i - 1}`) as HTMLInputElement)?.focus();
+                      }
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="splash-trust" style={{ marginTop: "1.5rem" }}>
               <span>{t('splash.trust.local')}</span>
               <span className="splash-trust-dot"></span>
               <span>{t('splash.trust.free')}</span>
