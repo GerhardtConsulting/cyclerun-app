@@ -1,8 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  async redirects() {
+    return [
+      {
+        source: "/tv",
+        destination: "/cast",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

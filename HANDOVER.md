@@ -45,7 +45,7 @@ resend 6.9.1, qrcode 1.5.4, babel-plugin-react-compiler 1.0.0
 | `/roadmap` | ○ Static | `RoadmapContent.tsx` | ✅ | WebPage |
 | `/changelog` | ○ Static | `ChangelogContent.tsx` | ✅ | — |
 | `/pair` | ○ Static | `pair/page.tsx` | — | — |
-| `/tv` | ○ Static | `tv/page.tsx` | — | — |
+| `/tv` | ○ Static | Redirect → `/cast` | — | — |
 | `/datenschutz` | ○ Static | `DatenschutzContent.tsx` | ✅ (DE) | — |
 | `/impressum` | ○ Static | inline | ✅ (DE) | — |
 
@@ -92,7 +92,7 @@ resend 6.9.1, qrcode 1.5.4, babel-plugin-react-compiler 1.0.0
 **17 Guides**: `/guide/[slug]`  
 **= 34 URLs in der Sitemap**
 
-Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/[slug]`, `/store/[id]`, `/store`, `/creator/dashboard`, `/admin`
+Nicht in Sitemap (absichtlich): `/pair`, `/profile`, `/leaderboard`, `/u/[slug]`, `/store/[id]`, `/store`, `/creator/dashboard`, `/admin`
 
 ---
 
@@ -177,14 +177,15 @@ Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/
 - Kamera-Vorschau auf Phone + Stream zum PC
 - PC überspringt nach Pairing Step 1 → direkt zu Step 2
 
-**TV Mode** (`/tv`):
-- QR-Code generieren → Phone verbindet sich
-- Wizard-Status-Sync via `pair_state` Tabelle (500ms Polling)
-- Ride-HUD auf TV: Speed, RPM, Distanz, Zeit, Gang
-- Webcam-Minimap während der Fahrt
-- Smart-TV Auto-Detection via User-Agent
+**Cast Mode** (`/cast`) — Second Screen für TV/Monitor:
+- PC startet Cast → 4-stelliger Code + QR-Code
+- TV öffnet `/cast?code=XXXX` → auto-connect, Ride-HUD (Speed, RPM, Distanz, Zeit, Gang)
+- On-Screen-Numpad für TV-Fernbedienung (falls kein QR)
+- Video-Sync + Fallback-HUD wenn Video nicht lädt
+- Smart-TV Auto-Detection via User-Agent → redirect zu `/cast`
+- `/tv` redirected permanent zu `/cast`
 
-**Dateien**: `lib/phone-pairing.ts` — `PairingSender` (Phone) + `PairingReceiver` (PC/TV)
+**Dateien**: `components/CastContent.tsx`, `lib/phone-pairing.ts` — `PairingSender` (Phone) + `PairingReceiver` (PC/TV)
 
 ### 4.8 Cookie Consent & Google Analytics (GA4)
 
@@ -281,7 +282,7 @@ Nicht in Sitemap (absichtlich): `/pair`, `/tv`, `/profile`, `/leaderboard`, `/u/
 
 ```
 Allow: /
-Disallow: /admin, /profile, /pair, /tv, /api/, /u/
+Disallow: /admin, /profile, /pair, /api/, /u/
 Sitemap: https://cyclerun.app/sitemap.xml
 ```
 
@@ -319,7 +320,7 @@ Alle Seiten nutzen `title.template: "%s | CycleRun"` — Brand-Suffix wird autom
 | `/roadmap` | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `/changelog` | ✅ | ✅ | — | ✅ | ✅ |
 | `/pair` | — | — | — | — | — |
-| `/tv` | — | — | — | — | — |
+| `/tv` | Redirect → `/cast` | — | — | — | — |
 | `/leaderboard` | ✅ | ✅ | — | ✅ en/de/x-default | noindex, follow |
 
 ### hreflang
@@ -622,9 +623,7 @@ git push origin main    # Vercel Auto-Deploy
 4. **Server-Side Metadata nur EN** — Titles/Descriptions in `export const metadata` sind nur Englisch
    - Akzeptabel für SSG + Client-Side i18n, aber nicht optimal für DE-Google-Suche
 
-5. **`/pair` + `/tv` ohne Metadata** — Interne Tools, aber `<title>` wäre nice-to-have
-
-6. **TV-Mode Footer** — Hat noch einen eigenen kleinen Footer statt SubpageFooter
+5. **`/pair` ohne Metadata** — Internes Tool, aber `<title>` wäre nice-to-have
 
 7. **UserMenu.tsx** — Legacy-Datei, kann gelöscht werden (ersetzt durch SubpageNav)
 

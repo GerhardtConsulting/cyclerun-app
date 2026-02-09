@@ -41,7 +41,7 @@ export default function CycleRunApp() {
     setLocaleState(detected);
     document.documentElement.lang = detected;
 
-    // TV device auto-detection: redirect to /tv only for confirmed Smart TV user agents
+    // TV device auto-detection: redirect to /cast for confirmed Smart TV user agents
     const ua = navigator.userAgent.toLowerCase();
     const tvKeywords = ["smart-tv", "smarttv", "netcast", "webos", "tizen", "vidaa", "hbbtv", "viera", "bravia", "roku", "firetv", "fire tv", "appletv", "chromecast", "androidtv", "android tv"];
     const isTV = tvKeywords.some((kw) => ua.includes(kw));
