@@ -462,6 +462,15 @@ export class CyclingSimulator {
           width: { ideal: 640 }, height: { ideal: 480 },
         },
       });
+
+      // TV mode: restart sender with new stream
+      if (this.tvCode && this.tvSender && this.webcamStream) {
+        this.tvSender.destroy();
+        this.tvSender = new PairingSender(this.tvCode);
+        this.tvSender.onStatusChange = (s) => console.log("[TV] Sender status:", s);
+        this.tvSender.startWithStream(this.webcamStream);
+      }
+
       return this.webcamStream;
     } catch (err) {
       console.error("[Camera] Re-request failed:", err);

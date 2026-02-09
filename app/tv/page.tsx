@@ -69,18 +69,20 @@ export default function TVPage() {
     receiver.onStatusChange = (s) => {
       if (s === "phone-joined" || s === "connecting") {
         setPhase("connecting");
+        // Start state polling immediately — don't wait for WebRTC
+        if (!statePollerRef.current) {
+          statePollerRef.current = setInterval(async () => {
+            const st = await pollState(code);
+            if (st) {
+              setTvState(st);
+              if (st.phase === "riding") setPhase("riding");
+              else if (st.phase === "finished") setPhase("finished");
+              else if (st.phase === "wizard") setPhase("wizard");
+            }
+          }, 500);
+        }
       } else if (s === "connected") {
         setPhase("wizard");
-        if (statePollerRef.current) clearInterval(statePollerRef.current);
-        statePollerRef.current = setInterval(async () => {
-          const st = await pollState(code);
-          if (st) {
-            setTvState(st);
-            if (st.phase === "riding") setPhase("riding");
-            else if (st.phase === "finished") setPhase("finished");
-            else if (st.phase === "wizard") setPhase("wizard");
-          }
-        }, 500);
       }
     };
 
@@ -274,9 +276,12 @@ export default function TVPage() {
                     />
                   </div>
                 ) : (
-                  <div style={{ textAlign: "center" }}>
-                    <p className="splash-tagline">Waiting for camera stream...</p>
-                    <div className="loading-spinner" style={{ margin: "1rem auto" }}></div>
+                  <div style={{ textAlign: "center", padding: "2rem" }}>
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-1)" strokeWidth="1.5" style={{ margin: "0 auto 1rem", display: "block" }}>
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" /><line x1="12" y1="18" x2="12.01" y2="18" />
+                    </svg>
+                    <p style={{ fontSize: "1.1rem", color: "var(--text-primary)", marginBottom: "0.5rem" }}>{t('tv.phone.connected')}</p>
+                    <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>{t('tv.wizard.hint')}</p>
                   </div>
                 )}
               </div>
