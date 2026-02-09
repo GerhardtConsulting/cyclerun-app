@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
 import { pollCastState, type CastState } from "@/lib/phone-pairing";
 import { initLocale, t, type Locale } from "@/lib/i18n";
-import { Suspense } from "react";
 
 function CastInner() {
-  const searchParams = useSearchParams();
   const [code, setCode] = useState("");
   const [digits, setDigits] = useState(["", "", "", ""]);
   const [status, setStatus] = useState<"input" | "connecting" | "playing" | "error">("input");
@@ -26,18 +23,20 @@ function CastInner() {
 
   useEffect(() => {
     setLocale(initLocale());
-    const urlCode = searchParams.get("code");
-    if (urlCode && urlCode.length === 4) {
-      setDigits(urlCode.split(""));
-      setCode(urlCode);
-      // Auto-connect immediately
-      if (!startedRef.current) {
-        startedRef.current = true;
-        startCast(urlCode);
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const urlCode = params.get("code");
+      if (urlCode && urlCode.length === 4) {
+        setDigits(urlCode.split(""));
+        setCode(urlCode);
+        if (!startedRef.current) {
+          startedRef.current = true;
+          startCast(urlCode);
+        }
       }
-    }
+    } catch { /* old browser fallback — manual entry */ }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, []);
 
   // Auto-connect when code is set from digit input
   useEffect(() => {
@@ -289,9 +288,5 @@ function CastInner() {
 }
 
 export default function CastContent() {
-  return (
-    <Suspense fallback={<div className="cast-page"><div className="cast-spinner"></div></div>}>
-      <CastInner />
-    </Suspense>
-  );
+  return <CastInner />;
 }
