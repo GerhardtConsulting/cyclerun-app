@@ -180,6 +180,23 @@ const translations: Record<Locale, Record<string, string>> = {
     "doip.check": "Check your inbox and spam folder.",
     "doip.error": "Could not send email. Please try again.",
 
+    // DSGVO / Privacy Rights
+    "privacy.title": "Your Data & Privacy",
+    "privacy.subtitle": "GDPR Art. 15-17 — Your rights at a glance",
+    "privacy.export.title": "Download Your Data",
+    "privacy.export.desc": "Get a complete export of all your data (Art. 15 Right of Access)",
+    "privacy.export.btn": "Request Data Export",
+    "privacy.export.sent": "Export sent to your email!",
+    "privacy.delete.title": "Delete Your Account",
+    "privacy.delete.desc": "Permanently delete all your data (Art. 17 Right to Erasure)",
+    "privacy.delete.btn": "Delete Account",
+    "privacy.delete.confirm": "Type DELETE to confirm",
+    "privacy.delete.warning": "This action cannot be undone. All your rides, badges, and progress will be permanently deleted.",
+    "privacy.delete.success": "Account deleted. You will receive a confirmation email.",
+    "privacy.transparency": "Transparency",
+    "privacy.transparency.link": "View our transparency report",
+    "privacy.contact": "For privacy questions: datenschutz@cyclerun.app",
+
     // Cookie
     "cookie.title": "Your privacy matters.",
     "cookie.text": "CycleRun only uses technically necessary cookies and localStorage. No tracking, no ads, no Google Analytics.",
@@ -686,6 +703,23 @@ const translations: Record<Locale, Record<string, string>> = {
     "doip.sent": "Bestätigungsmail gesendet!",
     "doip.check": "Prüfe deinen Posteingang und Spam-Ordner.",
     "doip.error": "E-Mail konnte nicht gesendet werden. Bitte versuche es erneut.",
+
+    // DSGVO / Privacy Rights
+    "privacy.title": "Deine Daten & Privatsphäre",
+    "privacy.subtitle": "DSGVO Art. 15-17 — Deine Rechte im Überblick",
+    "privacy.export.title": "Daten herunterladen",
+    "privacy.export.desc": "Erhalte einen vollständigen Export aller deiner Daten (Art. 15 Auskunftsrecht)",
+    "privacy.export.btn": "Datenexport anfordern",
+    "privacy.export.sent": "Export an deine E-Mail gesendet!",
+    "privacy.delete.title": "Account löschen",
+    "privacy.delete.desc": "Lösche alle deine Daten dauerhaft (Art. 17 Recht auf Löschung)",
+    "privacy.delete.btn": "Account löschen",
+    "privacy.delete.confirm": "Tippe LÖSCHEN zur Bestätigung",
+    "privacy.delete.warning": "Diese Aktion kann nicht rückgängig gemacht werden. Alle deine Fahrten, Badges und Fortschritte werden dauerhaft gelöscht.",
+    "privacy.delete.success": "Account gelöscht. Du erhältst eine Bestätigungs-E-Mail.",
+    "privacy.transparency": "Transparenz",
+    "privacy.transparency.link": "Transparenzbericht ansehen",
+    "privacy.contact": "Bei Datenschutzfragen: datenschutz@cyclerun.app",
 
     // Cookie
     "cookie.title": "Datenschutz ist uns wichtig.",

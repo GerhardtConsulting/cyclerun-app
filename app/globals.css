@@ -2650,6 +2650,50 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     color: rgba(255, 255, 255, 0.1);
 }
 
+.subpage-footer-trust {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    margin-bottom: 1rem;
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.trust-badge:hover {
+    border-color: rgba(34, 197, 94, 0.3);
+    background: rgba(34, 197, 94, 0.05);
+}
+
+.trust-badge-icon {
+    font-size: 0.9rem;
+}
+
+.trust-badge-text {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.trust-badge:hover .trust-badge-text {
+    color: #22c55e;
+}
+
 .subpage-footer-bottom {
     text-align: center;
     padding-top: 1.25rem;

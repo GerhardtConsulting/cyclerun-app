@@ -53,6 +53,26 @@ export default function SubpageFooter() {
           </div>
         </div>
 
+        {/* Trust Badges */}
+        <div className="subpage-footer-trust">
+          <Link href={isDE ? "/transparenz" : "/transparency"} className="trust-badge">
+            <span className="trust-badge-icon">🔐</span>
+            <span className="trust-badge-text">SSL</span>
+          </Link>
+          <Link href={isDE ? "/transparenz" : "/transparency"} className="trust-badge">
+            <span className="trust-badge-icon">🇪🇺</span>
+            <span className="trust-badge-text">{isDE ? "DSGVO" : "GDPR"}</span>
+          </Link>
+          <Link href={isDE ? "/transparenz" : "/transparency"} className="trust-badge">
+            <span className="trust-badge-icon">🚫</span>
+            <span className="trust-badge-text">{isDE ? "Kein Tracking" : "No Tracking"}</span>
+          </Link>
+          <Link href={isDE ? "/transparenz" : "/transparency"} className="trust-badge">
+            <span className="trust-badge-icon">💻</span>
+            <span className="trust-badge-text">{isDE ? "100% Lokal" : "100% Local"}</span>
+          </Link>
+        </div>
+
         <div className="subpage-footer-cta">
           <p>{t("sub.footer.ready")} <Link href="/" className="subpage-footer-cta-link">{t("sub.footer.ride_link")}</Link></p>
           <span className="subpage-footer-divider">&middot;</span>

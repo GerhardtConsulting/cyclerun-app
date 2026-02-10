@@ -629,6 +629,9 @@ export default function ProfileContent() {
                 )}
               </div>
 
+              {/* DSGVO / Privacy Section */}
+              <PrivacySection user={user} isDE={isDE} />
+
               {/* CTA */}
               <div style={{ textAlign: "center", margin: "2rem 0" }}>
                 <Link href="/" className="btn-primary btn-lg">{t("sub.start_riding")}</Link>
@@ -650,6 +653,186 @@ function StatCard({ label, value, accent }: { label: string; value: string; acce
     <div className="info-card" style={{ padding: "0.75rem", textAlign: "center" }}>
       <div style={{ fontSize: "1.3rem", fontWeight: 800, color: accent ? "var(--accent-1)" : "var(--text)" }}>{value}</div>
       <div style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>{label}</div>
+    </div>
+  );
+}
+
+function PrivacySection({ user, isDE }: { user: { email: string }; isDE: boolean }) {
+  const [exportLoading, setExportLoading] = useState(false);
+  const [exportSent, setExportSent] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState("");
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(false);
+
+  const handleExport = async () => {
+    setExportLoading(true);
+    try {
+      await fetch("/api/data-export", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: user.email }),
+      });
+      setExportSent(true);
+    } catch {
+      // Silent fail
+    }
+    setExportLoading(false);
+  };
+
+  const handleDelete = async () => {
+    const confirmPhrase = isDE ? "LÖSCHEN" : "DELETE";
+    if (deleteConfirm !== confirmPhrase) return;
+    
+    setDeleteLoading(true);
+    try {
+      const res = await fetch("/api/delete-account", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: user.email, confirmPhrase: deleteConfirm }),
+      });
+      if (res.ok) {
+        setDeleteSuccess(true);
+        // Clear local storage and redirect
+        localStorage.removeItem("cyclerun_email");
+        localStorage.removeItem("cyclerun_registered");
+        localStorage.removeItem("cyclerun_name");
+        setTimeout(() => window.location.href = "/", 2000);
+      }
+    } catch {
+      // Silent fail
+    }
+    setDeleteLoading(false);
+  };
+
+  return (
+    <div className="info-card" style={{ padding: "1.25rem", marginTop: "2rem" }}>
+      <h2 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        🔒 {isDE ? "Deine Daten & Privatsphäre" : "Your Data & Privacy"}
+      </h2>
+      <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", margin: "0 0 1rem" }}>
+        {isDE ? "DSGVO Art. 15-17 — Deine Rechte im Überblick" : "GDPR Art. 15-17 — Your rights at a glance"}
+      </p>
+
+      {/* Data Export */}
+      <div style={{
+        background: "rgba(255,255,255,0.02)", border: "1px solid var(--border)",
+        borderRadius: 10, padding: "1rem", marginBottom: "0.75rem",
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+          <div>
+            <div style={{ fontWeight: 600, fontSize: "0.9rem", marginBottom: "0.15rem" }}>
+              📥 {isDE ? "Daten herunterladen" : "Download Your Data"}
+            </div>
+            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+              {isDE ? "Art. 15 Auskunftsrecht" : "Art. 15 Right of Access"}
+            </div>
+          </div>
+          {exportSent ? (
+            <div style={{ fontSize: "0.8rem", color: "#22c55e", fontWeight: 600 }}>
+              ✓ {isDE ? "An E-Mail gesendet!" : "Sent to email!"}
+            </div>
+          ) : (
+            <button
+              onClick={handleExport}
+              disabled={exportLoading}
+              className="btn-ghost"
+              style={{ padding: "0.4rem 0.85rem", fontSize: "0.75rem" }}
+            >
+              {exportLoading ? "..." : (isDE ? "Anfordern" : "Request")}
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Delete Account */}
+      <div style={{
+        background: deleteOpen ? "rgba(239,68,68,0.05)" : "rgba(255,255,255,0.02)",
+        border: deleteOpen ? "1px solid rgba(239,68,68,0.2)" : "1px solid var(--border)",
+        borderRadius: 10, padding: "1rem",
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+          <div>
+            <div style={{ fontWeight: 600, fontSize: "0.9rem", marginBottom: "0.15rem" }}>
+              🗑️ {isDE ? "Account löschen" : "Delete Your Account"}
+            </div>
+            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+              {isDE ? "Art. 17 Recht auf Löschung" : "Art. 17 Right to Erasure"}
+            </div>
+          </div>
+          {!deleteOpen && !deleteSuccess && (
+            <button
+              onClick={() => setDeleteOpen(true)}
+              className="btn-ghost"
+              style={{ padding: "0.4rem 0.85rem", fontSize: "0.75rem", color: "#ef4444", borderColor: "rgba(239,68,68,0.3)" }}
+            >
+              {isDE ? "Löschen" : "Delete"}
+            </button>
+          )}
+        </div>
+
+        {deleteOpen && !deleteSuccess && (
+          <div style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid rgba(239,68,68,0.15)" }}>
+            <p style={{ fontSize: "0.8rem", color: "#ef4444", marginBottom: "0.75rem", lineHeight: 1.5 }}>
+              ⚠️ {isDE
+                ? "Diese Aktion kann nicht rückgängig gemacht werden. Alle deine Fahrten, Badges und Fortschritte werden dauerhaft gelöscht."
+                : "This action cannot be undone. All your rides, badges, and progress will be permanently deleted."
+              }
+            </p>
+            <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", flexWrap: "wrap" }}>
+              <input
+                type="text"
+                value={deleteConfirm}
+                onChange={(e) => setDeleteConfirm(e.target.value.toUpperCase())}
+                placeholder={isDE ? "LÖSCHEN eingeben" : "Type DELETE"}
+                style={{
+                  flex: 1, minWidth: 150, padding: "0.5rem 0.75rem", borderRadius: 8,
+                  background: "var(--bg)", border: "1px solid rgba(239,68,68,0.3)",
+                  fontSize: "0.85rem", color: "var(--text)", fontFamily: "monospace",
+                }}
+              />
+              <button
+                onClick={handleDelete}
+                disabled={deleteLoading || deleteConfirm !== (isDE ? "LÖSCHEN" : "DELETE")}
+                style={{
+                  padding: "0.5rem 1rem", fontSize: "0.8rem", fontWeight: 600,
+                  background: deleteConfirm === (isDE ? "LÖSCHEN" : "DELETE") ? "#ef4444" : "rgba(239,68,68,0.2)",
+                  color: "#fff", border: "none", borderRadius: 8, cursor: "pointer",
+                  opacity: deleteConfirm === (isDE ? "LÖSCHEN" : "DELETE") ? 1 : 0.5,
+                }}
+              >
+                {deleteLoading ? "..." : (isDE ? "Endgültig löschen" : "Delete permanently")}
+              </button>
+              <button
+                onClick={() => { setDeleteOpen(false); setDeleteConfirm(""); }}
+                className="btn-ghost"
+                style={{ padding: "0.5rem 0.75rem", fontSize: "0.8rem" }}
+              >
+                {isDE ? "Abbrechen" : "Cancel"}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {deleteSuccess && (
+          <div style={{ marginTop: "0.75rem", fontSize: "0.85rem", color: "#22c55e", fontWeight: 600 }}>
+            ✓ {isDE ? "Account gelöscht. Du erhältst eine Bestätigungs-E-Mail." : "Account deleted. You will receive a confirmation email."}
+          </div>
+        )}
+      </div>
+
+      {/* Links */}
+      <div style={{ marginTop: "1rem", display: "flex", gap: "1rem", flexWrap: "wrap", fontSize: "0.75rem" }}>
+        <Link href="/transparenz" style={{ color: "var(--accent-1)", textDecoration: "none" }}>
+          📊 {isDE ? "Transparenzbericht" : "Transparency Report"}
+        </Link>
+        <Link href="/datenschutz" style={{ color: "var(--text-muted)", textDecoration: "none" }}>
+          {isDE ? "Datenschutzerklärung" : "Privacy Policy"}
+        </Link>
+        <span style={{ color: "var(--text-muted)" }}>
+          ✉️ datenschutz@cyclerun.app
+        </span>
+      </div>
     </div>
   );
 }
