@@ -147,41 +147,18 @@ function CastInner() {
 
   const isDE = locale === "de";
 
-  // Helper: handle button press (works for both click and Enter keydown)
-  function pressDigit(n: number) {
-    if (startedRef.current) return;
-    const cur = codeRef.current;
-    if (cur.length >= 4) return;
-    const next = cur + n;
-    codeRef.current = next;
-    setCode(next);
-    if (next.length === 4) {
-      startedRef.current = true;
-      doStartCast(next);
-    }
+  function handleInput(val: string) {
+    const clean = val.replace(/\D/g, "").slice(0, 4);
+    codeRef.current = clean;
+    setCode(clean);
   }
 
-  function pressDelete() {
-    const next = codeRef.current.slice(0, -1);
-    codeRef.current = next;
-    setCode(next);
-  }
-
-  function pressOK() {
+  function handleConnect() {
     const cur = codeRef.current;
     if (cur.length === 4 && !startedRef.current) {
       startedRef.current = true;
       doStartCast(cur);
     }
-  }
-
-  function btnProps(action: () => void) {
-    return {
-      tabIndex: 0,
-      onClick: (e: React.MouseEvent) => { e.preventDefault(); action(); },
-      onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); action(); } },
-      onMouseDown: (e: React.MouseEvent) => { e.preventDefault(); action(); },
-    };
   }
 
   // ---- INPUT SCREEN ----
@@ -198,22 +175,27 @@ function CastInner() {
           <h1 className="cast-title">{isDE ? "Cast-Code eingeben" : "Enter Cast Code"}</h1>
           <p className="cast-subtitle">{isDE ? "4-stelliger Code von deinem Trainingsgerät" : "4-digit code from your training device"}</p>
 
-          <div className="cast-code-display">
-            {code.padEnd(4, "·").split("").map((ch, i) => (
-              <span key={i} className={`cast-code-char${ch !== "·" ? " filled" : ""}`}>{ch}</span>
-            ))}
-          </div>
-
-          <div className="cast-numpad">
-            {[1,2,3,4,5,6,7,8,9].map((n) => (
-              <button key={n} className="cast-numpad-btn" {...btnProps(() => pressDigit(n))}>{n}</button>
-            ))}
-            <button className="cast-numpad-btn cast-numpad-del" {...btnProps(pressDelete)}>←</button>
-            <button className="cast-numpad-btn" {...btnProps(() => pressDigit(0))}>0</button>
-            <button className="cast-numpad-btn cast-numpad-go" disabled={code.length !== 4} {...btnProps(pressOK)}>OK</button>
-          </div>
+          <input
+            className="cast-code-input"
+            type="number"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="0000"
+            autoComplete="off"
+            value={code}
+            onChange={(e) => handleInput(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") handleConnect(); }}
+          />
 
           {status === "error" && <p className="cast-error">{errorMsg}</p>}
+
+          <button
+            className="btn-primary btn-lg btn-full"
+            disabled={code.length !== 4}
+            onClick={handleConnect}
+          >
+            {isDE ? "Verbinden" : "Connect"}
+          </button>
         </div>
       </div>
     );

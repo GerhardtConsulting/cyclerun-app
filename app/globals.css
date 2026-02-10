@@ -5524,81 +5524,41 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     margin-bottom: 1.5rem;
 }
 
-.cast-code-display {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-.cast-code-char {
-    width: 52px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.cast-code-input {
+    width: 100%;
+    max-width: 240px;
+    height: 64px;
+    text-align: center;
     font-size: 2rem;
     font-weight: 800;
-    color: rgba(255, 255, 255, 0.15);
-    background: var(--bg-muted);
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-md);
-}
-
-.cast-code-char.filled {
-    color: var(--text-primary);
-    border-color: var(--accent-1);
-}
-
-.cast-numpad {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    max-width: 280px;
-    margin: 0 auto 1rem;
-}
-
-.cast-numpad-btn {
-    height: 56px;
-    font-size: 1.4rem;
-    font-weight: 700;
-    font-family: inherit;
+    letter-spacing: 0.3em;
     color: var(--text-primary);
     background: var(--bg-muted);
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: all 0.15s;
-}
-
-.cast-numpad-btn:hover,
-.cast-numpad-btn:focus {
-    background: var(--bg-hover);
-    border-color: var(--accent-1);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+    transition: border-color 0.2s;
+    margin: 0 auto 1.5rem;
+    display: block;
+    font-family: inherit;
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
-.cast-numpad-del {
-    font-size: 1.2rem;
-    color: var(--text-muted);
+.cast-code-input::-webkit-outer-spin-button,
+.cast-code-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.cast-numpad-go {
-    background: var(--accent-1);
-    color: #000;
+.cast-code-input::placeholder {
+    color: rgba(255, 255, 255, 0.15);
+    letter-spacing: 0.3em;
+}
+
+.cast-code-input:focus {
     border-color: var(--accent-1);
-}
-
-.cast-numpad-go:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
-.cast-numpad-go:not(:disabled):hover,
-.cast-numpad-go:not(:disabled):focus {
-    background: var(--accent-2);
-    border-color: var(--accent-2);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
 .cast-error {
