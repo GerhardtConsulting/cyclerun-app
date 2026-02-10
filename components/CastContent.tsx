@@ -11,6 +11,7 @@ function CastInner() {
   const [castState, setCastState] = useState<CastState | null>(null);
   const [videoError, setVideoError] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [debugLines, setDebugLines] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -20,31 +21,50 @@ function CastInner() {
   const startedRef = useRef(false);
   const videoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  function dbg(msg: string) {
+    setDebugLines((prev) => [...prev.slice(-8), msg]);
+  }
+
   useEffect(() => {
     setLocale(initLocale());
+    dbg("init: useEffect fired");
 
     // Parse ?code= from URL — manual regex, no URLSearchParams (TV compat)
     let urlCode = "";
     try {
-      const m = window.location.search.match(/[?&]code=(\d{4})/);
+      const search = window.location.search || "";
+      const href = window.location.href || "";
+      dbg("url: " + href);
+      const m = search.match(/[?&]code=(\d{4})/);
       if (m) urlCode = m[1];
-    } catch {}
+      dbg("urlCode: " + (urlCode || "(none)"));
+    } catch (e: unknown) {
+      dbg("url parse error: " + String(e));
+    }
 
     if (urlCode) {
+      dbg("auto-connect with URL code: " + urlCode);
       startedRef.current = true;
       doStartCast(urlCode);
       return;
     }
 
     // Poll the input DOM element every 500ms for its value.
-    // This is the most bulletproof approach for TV browsers (Sony/Opera/Vewd)
-    // that may not fire onChange, onSubmit, or onClick events reliably.
+    dbg("starting input poll...");
     inputPollRef.current = setInterval(() => {
       if (startedRef.current) return;
       const el = inputRef.current;
-      if (!el) return;
-      const val = el.value.replace(/\D/g, "");
+      if (!el) {
+        dbg("poll: inputRef is null");
+        return;
+      }
+      const raw = el.value;
+      const val = raw.replace(/\D/g, "");
+      if (val.length > 0) {
+        dbg("poll: value=" + raw + " clean=" + val + " len=" + val.length);
+      }
       if (val.length === 4) {
+        dbg("4 digits detected! connecting: " + val);
         startedRef.current = true;
         doStartCast(val);
       }
@@ -54,32 +74,44 @@ function CastInner() {
   }, []);
 
   async function doStartCast(castCode: string) {
-    setStatus("connecting");
-    setErrorMsg("");
+    try {
+      dbg("doStartCast(" + castCode + ")");
+      setStatus("connecting");
+      setErrorMsg("");
 
-    // Retry up to 3 times (TV might load before PC starts casting)
-    let initial: CastState | null = null;
-    for (let attempt = 0; attempt < 3; attempt++) {
-      initial = await pollCastState(castCode);
-      if (initial) break;
-      await new Promise((r) => setTimeout(r, 1500));
-    }
+      // Retry up to 3 times (TV might load before PC starts casting)
+      let initial: CastState | null = null;
+      for (let attempt = 0; attempt < 3; attempt++) {
+        dbg("attempt " + (attempt + 1) + "/3 ...");
+        initial = await pollCastState(castCode);
+        dbg("result: " + (initial ? "found" : "null"));
+        if (initial) break;
+        await new Promise((r) => setTimeout(r, 1500));
+      }
 
-    if (!initial) {
+      if (!initial) {
+        startedRef.current = false;
+        setStatus("error");
+        setErrorMsg(locale === "de" ? "Kein aktiver Cast gefunden. Starte erst einen Cast auf deinem Trainingsgerät." : "No active cast found. Start a cast on your training device first.");
+        dbg("no cast found after 3 retries");
+        return;
+      }
+
+      dbg("cast found! starting playback");
+      setStatus("playing");
+      setCastState(initial);
+
+      // Start polling
+      pollRef.current = setInterval(async () => {
+        const state = await pollCastState(castCode);
+        if (state) setCastState(state);
+      }, 500);
+    } catch (e: unknown) {
+      dbg("ERROR: " + String(e));
       startedRef.current = false;
       setStatus("error");
-      setErrorMsg(locale === "de" ? "Kein aktiver Cast gefunden. Starte erst einen Cast auf deinem Trainingsgerät." : "No active cast found. Start a cast on your training device first.");
-      return;
+      setErrorMsg("Error: " + String(e));
     }
-
-    setStatus("playing");
-    setCastState(initial);
-
-    // Start polling
-    pollRef.current = setInterval(async () => {
-      const state = await pollCastState(castCode);
-      if (state) setCastState(state);
-    }, 500);
   }
 
   // Sync video with cast state
@@ -168,6 +200,12 @@ function CastInner() {
           />
 
           {status === "error" && <p className="cast-error">{errorMsg}</p>}
+
+          {debugLines.length > 0 && (
+            <div style={{ marginTop: "1.5rem", padding: "0.75rem", background: "rgba(0,0,0,0.6)", borderRadius: "8px", textAlign: "left", fontSize: "0.75rem", fontFamily: "monospace", color: "#0f0", lineHeight: 1.6, maxHeight: "200px", overflow: "auto" }}>
+              {debugLines.map((l, i) => <div key={i}>{l}</div>)}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -180,6 +218,11 @@ function CastInner() {
         <div className="cast-card">
           <div className="cast-spinner"></div>
           <p className="cast-subtitle">{isDE ? "Verbinde..." : "Connecting..."}</p>
+          {debugLines.length > 0 && (
+            <div style={{ marginTop: "1.5rem", padding: "0.75rem", background: "rgba(0,0,0,0.6)", borderRadius: "8px", textAlign: "left", fontSize: "0.75rem", fontFamily: "monospace", color: "#0f0", lineHeight: 1.6, maxHeight: "200px", overflow: "auto" }}>
+              {debugLines.map((l, i) => <div key={i}>{l}</div>)}
+            </div>
+          )}
         </div>
       </div>
     );
