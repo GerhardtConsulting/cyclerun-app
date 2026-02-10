@@ -73,12 +73,14 @@ const CSS = `
   .big-unit { font-size: 2rem; font-weight: 600; color: rgba(255,255,255,0.4); margin-top: 0.5rem; }
   .hint { font-size: 0.85rem; color: rgba(255,255,255,0.35); margin-top: 2rem; text-align: center; line-height: 1.5; }
 
-  .hud { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 2.5rem; padding: 1rem 2rem; background: rgba(0,0,0,0.7); border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); z-index: 10; }
+  .video-wrap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+  .hud { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 2.5rem; padding: 1rem 2rem; background: rgba(0,0,0,0.85); border-radius: 16px; border: 1px solid rgba(255,255,255,0.15); z-index: 100; }
   .hud-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
   .hud-val { font-size: 1.75rem; font-weight: 800; color: #fff; }
   .hud-lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); }
-  .logo { position: absolute; top: 1.5rem; left: 1.5rem; z-index: 10; font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,0.4); letter-spacing: -0.03em; }
+  .logo { position: absolute; top: 1.5rem; left: 1.5rem; z-index: 100; font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,0.4); letter-spacing: -0.03em; }
   .logo span { color: #f97316; }
+  .debug { position: absolute; top: 1.5rem; right: 1.5rem; z-index: 100; padding: 1rem; background: rgba(0,0,0,0.9); border: 1px solid #f97316; border-radius: 8px; font-size: 0.75rem; font-family: monospace; color: #fff; max-width: 300px; word-break: break-all; }
 `;
 
 function htmlShell(body: string, title = "Cast | CycleRun", extra = "") {
@@ -132,11 +134,13 @@ export async function GET(request: Request) {
     const isPlayable = !!videoUrl && !isBlob && !ytId;
     const hasVideo = !!ytId || isPlayable;
     const startSec = Math.floor(state.currentTime ?? 0);
-    const refreshSec = hasVideo ? 5 : 2;
+    // Longer refresh = less black flashes, but less frequent updates
+    const refreshSec = 10;
 
     let videoHtml = "";
     if (ytId) {
-      videoHtml = `<iframe class="video" src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&start=${startSec}&loop=1&playlist=${ytId}&modestbranding=1&rel=0&showinfo=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      // Wrap iframe in container to fix z-index issues
+      videoHtml = `<div class="video-wrap"><iframe class="video" src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&start=${startSec}&loop=1&playlist=${ytId}&modestbranding=1&rel=0&showinfo=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
     } else if (isPlayable) {
       videoHtml = `<video class="video" src="${videoUrl}#t=${startSec}" autoplay muted playsinline></video>`;
     } else {
@@ -148,17 +152,33 @@ export async function GET(request: Request) {
         </div>`;
     }
 
+    // Debug panel to see what data we're receiving
+    const debugHtml = `
+      <div class="debug">
+        <div><strong>DEBUG</strong></div>
+        <div>speed: ${state.speed}</div>
+        <div>rpm: ${state.rpm}</div>
+        <div>distance: ${state.distance}</div>
+        <div>rideTime: ${state.rideTime}</div>
+        <div>gear: ${state.gear}</div>
+        <div>currentTime: ${state.currentTime}</div>
+        <div>videoUrl: ${videoUrl.substring(0, 50)}...</div>
+        <div>ytId: ${ytId || "none"}</div>
+        <div>isBlob: ${isBlob}</div>
+      </div>`;
+
     const body = `
       <div class="fs">
         ${videoHtml}
         <div class="hud">
-          ${hasVideo ? `<div class="hud-item"><span class="hud-val">${(state.speed ?? 0).toFixed(1)}</span><span class="hud-lbl">km/h</span></div>` : ""}
+          <div class="hud-item"><span class="hud-val">${(state.speed ?? 0).toFixed(1)}</span><span class="hud-lbl">km/h</span></div>
           <div class="hud-item"><span class="hud-val">${state.rpm ?? 0}</span><span class="hud-lbl">RPM</span></div>
           <div class="hud-item"><span class="hud-val">${(state.distance ?? 0).toFixed(2)}</span><span class="hud-lbl">km</span></div>
-          ${state.rideTime != null ? `<div class="hud-item"><span class="hud-val">${pad2(mins)}:${pad2(secs)}</span><span class="hud-lbl">Zeit</span></div>` : ""}
-          ${state.gear != null ? `<div class="hud-item"><span class="hud-val">${state.gear}</span><span class="hud-lbl">Gang</span></div>` : ""}
+          <div class="hud-item"><span class="hud-val">${pad2(mins)}:${pad2(secs)}</span><span class="hud-lbl">Zeit</span></div>
+          <div class="hud-item"><span class="hud-val">${state.gear ?? "-"}</span><span class="hud-lbl">Gang</span></div>
         </div>
         <div class="logo">cyclerun<span>.app</span></div>
+        ${debugHtml}
       </div>`;
 
     return new Response(
