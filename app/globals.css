@@ -2078,7 +2078,27 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     font-size: 0.95rem;
     color: var(--text-secondary);
     line-height: 1.5;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
+}
+
+.register-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.06), rgba(234, 88, 12, 0.02));
+    border: 1px solid rgba(249, 115, 22, 0.12);
+    border-radius: var(--radius-md);
+}
+
+.register-benefit {
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .register-form {
@@ -5773,4 +5793,423 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     padding: 0.35rem 0.6rem;
     margin-top: 0.5rem;
     line-height: 1.4;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   DASHBOARD — Strava-like Analytics Dashboard
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+.dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem 4rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dashboard-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.dashboard-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0.25rem 0 0;
+}
+
+/* Bento Grid Stats */
+.dashboard-bento {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.bento-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.bento-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.bento-large {
+    grid-column: span 1;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.08), rgba(234, 88, 12, 0.03));
+    border-color: rgba(249, 115, 22, 0.15);
+}
+
+.bento-accent {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(234, 88, 12, 0.05));
+    border-color: rgba(249, 115, 22, 0.2);
+}
+
+.bento-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.bento-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.bento-large .bento-value {
+    font-size: 3rem;
+    color: var(--accent-1);
+}
+
+.bento-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+}
+
+.bento-sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+.bento-level {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-1);
+}
+
+.bento-level-name {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+}
+
+/* Dashboard Sections */
+.dashboard-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Weekly Activity Chart */
+.weekly-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 120px;
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.weekly-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+}
+
+.weekly-bar {
+    width: 100%;
+    max-width: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px 6px 0 0;
+    margin: 0 4px;
+    position: relative;
+    transition: height 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.weekly-bar.active {
+    background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+}
+
+.weekly-bar-value {
+    position: absolute;
+    top: -1.5rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-1);
+}
+
+.weekly-bar-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+.weekly-summary {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+}
+
+.weekly-stat {
+    text-align: center;
+}
+
+.weekly-stat-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.weekly-stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-top: 0.15rem;
+}
+
+/* Rides List */
+.rides-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ride-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.ride-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.ride-card.selected {
+    border-color: var(--accent-1);
+    background: rgba(249, 115, 22, 0.05);
+}
+
+.ride-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ride-sport-icon {
+    font-size: 1.5rem;
+}
+
+.ride-info {
+    flex: 1;
+}
+
+.ride-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.ride-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+}
+
+.ride-distance {
+    text-align: right;
+}
+
+.ride-distance-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-1);
+}
+
+.ride-distance-unit {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-left: 0.15rem;
+}
+
+/* Ride Details (Expanded) */
+.ride-details {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    animation: fadeIn 0.2s ease;
+}
+
+.ride-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.ride-stat {
+    text-align: center;
+}
+
+.ride-stat-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    display: block;
+}
+
+.ride-stat-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+    margin-top: 0.15rem;
+}
+
+/* Mini Chart in Ride Card */
+.ride-chart {
+    margin-top: 1rem;
+}
+
+.ride-chart-placeholder {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    position: relative;
+}
+
+.mini-chart {
+    width: 100%;
+    height: 60px;
+}
+
+.chart-label {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+/* Quick Actions */
+.dashboard-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.action-card:hover {
+    border-color: var(--accent-1);
+    transform: translateY(-2px);
+}
+
+.action-icon {
+    font-size: 1.5rem;
+}
+
+.action-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--accent-1);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .dashboard-bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bento-large {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+    
+    .ride-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .weekly-summary {
+        gap: 1.5rem;
+    }
 }

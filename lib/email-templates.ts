@@ -304,14 +304,24 @@ export function registrationWelcomeEmail(locale: string, firstName: string, unsu
         </tr>
       </table>
 
+      <!-- Quick Start Steps -->
+      <div style="${S.bentoBoxAccent}">
+        <p style="${S.bentoLabel}">${isDE ? "Schnellstart in 3 Schritten" : "Quick Start in 3 Steps"}</p>
+        <p style="${S.step}">
+          <span style="${S.stepNum}">1</span>${isDE ? "Webcam auf Kniehöhe, 1-2m Abstand" : "Webcam at knee height, 1-2m distance"}<br>
+          <span style="${S.stepNum}">2</span>${isDE ? "Gutes Licht — Tageslicht oder helle Lampe" : "Good light — daylight or bright lamp"}<br>
+          <span style="${S.stepNum}">3</span>${isDE ? "Erkennungszonen auf Knie/Pedale platzieren — fertig!" : "Place detection zones on knees/pedals — done!"}
+        </p>
+      </div>
+
       <p style="${S.p}">${isDE
-        ? "Starte jetzt deine nächste Session — alles was du brauchst, ist dein Browser und eine Webcam."
-        : "Start your next session now — all you need is your browser and a webcam."
+        ? "Alles was du brauchst, ist dein Browser und eine Webcam. Kein Smart Trainer, keine Sensoren, kein Abo."
+        : "All you need is your browser and a webcam. No smart trainer, no sensors, no subscription."
       }</p>
 
       <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:28px 0;">
         <tr><td align="center">
-          <a href="${BRAND.baseUrl}" style="${S.cta}">${isDE ? "Nächste Fahrt starten" : "Start your next ride"}</a>
+          <a href="${BRAND.baseUrl}" style="${S.cta}">${isDE ? "Erste Fahrt starten" : "Start your first ride"}</a>
         </td></tr>
       </table>
 

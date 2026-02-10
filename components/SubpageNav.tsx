@@ -224,6 +224,10 @@ export default function SubpageNav(props: SubpageNavProps) {
             {user && (
               <div className="site-menu-section">
                 <div className="site-menu-label">{isDE ? "Mein Bereich" : "My Account"}</div>
+                <Link href="/dashboard" className="site-menu-link" onClick={closeMenu}>
+                  {isDE ? "Dashboard" : "Dashboard"}
+                  <span className="site-menu-badge" style={{ background: "linear-gradient(135deg, #f97316, #ea580c)" }}>NEU</span>
+                </Link>
                 <Link href="/profile" className="site-menu-link" onClick={closeMenu}>
                   {isDE ? "Profil" : "Profile"}
                 </Link>

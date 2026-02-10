@@ -148,16 +148,19 @@ const translations: Record<Locale, Record<string, string>> = {
     "video.privacy": "Your video stays on your device. Nothing is uploaded to our servers.",
 
     // Registration
-    "reg.title": "Keep riding for free",
-    "reg.subtitle": "Register now to continue your training and save your stats.",
+    "reg.title": "Track your progress",
+    "reg.subtitle": "Save rides, earn badges, climb the leaderboard — all free.",
+    "reg.benefit1": "📊 Track every ride with detailed stats",
+    "reg.benefit2": "🏆 Earn badges and level up",
+    "reg.benefit3": "🔥 Build your streak and stay motivated",
     "reg.first": "First name",
     "reg.last": "Last name (optional)",
     "reg.email": "Email address",
     "reg.consent": "I agree to the",
     "reg.privacy": "Privacy Policy",
     "reg.consent.2": ". My data will only be used to improve the product.",
-    "reg.submit": "Register for free & continue riding",
-    "reg.hint": "No password needed. No costs. Free forever.",
+    "reg.submit": "Create Free Account",
+    "reg.hint": "No password. No credit card. Free forever.",
 
     // Cookie
     "cookie.title": "Your privacy matters.",
@@ -634,16 +637,19 @@ const translations: Record<Locale, Record<string, string>> = {
     "video.privacy": "Dein Video bleibt auf deinem Gerät. Es wird nichts auf unsere Server hochgeladen.",
 
     // Registration
-    "reg.title": "Kostenlos weiterfahren",
-    "reg.subtitle": "Registriere dich jetzt, um dein Training fortzusetzen und deine Statistiken zu speichern.",
+    "reg.title": "Tracke deinen Fortschritt",
+    "reg.subtitle": "Speichere Fahrten, verdiene Badges, steige im Ranking auf — kostenlos.",
+    "reg.benefit1": "📊 Detaillierte Statistiken für jede Fahrt",
+    "reg.benefit2": "🏆 Badges sammeln und aufleveln",
+    "reg.benefit3": "🔥 Streak aufbauen und motiviert bleiben",
     "reg.first": "Vorname",
     "reg.last": "Nachname (optional)",
     "reg.email": "E-Mail-Adresse",
     "reg.consent": "Ich stimme der",
     "reg.privacy": "Datenschutzerklärung",
     "reg.consent.2": " zu. Meine Daten werden nur zur Verbesserung des Produkts verwendet.",
-    "reg.submit": "Kostenfrei registrieren & weiterfahren",
-    "reg.hint": "Kein Passwort nötig. Keine Kosten. Für immer kostenlos.",
+    "reg.submit": "Kostenloses Konto erstellen",
+    "reg.hint": "Kein Passwort. Keine Kreditkarte. Für immer kostenlos.",
 
     // Cookie
     "cookie.title": "Datenschutz ist uns wichtig.",

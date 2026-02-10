@@ -729,10 +729,16 @@ export default function CycleRunApp() {
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
             </button>
             <div className="register-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             </div>
             <h2>{t('reg.title')}</h2>
             <p className="register-subtitle">{t('reg.subtitle')}</p>
+
+            <div className="register-benefits">
+              <div className="register-benefit">{t('reg.benefit1')}</div>
+              <div className="register-benefit">{t('reg.benefit2')}</div>
+              <div className="register-benefit">{t('reg.benefit3')}</div>
+            </div>
 
             <form id="registerForm" className="register-form">
               <div className="register-row">
