@@ -5561,6 +5561,25 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
     box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
+.cast-submit-btn {
+    width: 100%;
+    max-width: 240px;
+    height: 52px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    color: #000;
+    background: var(--accent-1);
+    border: 2px solid var(--accent-1);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+}
+
+.cast-submit-btn:focus {
+    outline: 3px solid rgba(249, 115, 22, 0.5);
+    outline-offset: 2px;
+}
+
 .cast-error {
     color: #ef4444;
     font-size: 0.85rem;
