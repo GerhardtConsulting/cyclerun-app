@@ -288,8 +288,8 @@ function DataItem({ title, desc, legal }: { title: string; desc: string; legal: 
 function NoDataItem({ text }: { text: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.9rem" }}>
-      <span style={{ color: "#22c55e" }}>✓</span>
-      <span>{text}</span>
+      <span style={{ color: "#ef4444", fontSize: "0.85rem" }}>✗</span>
+      <span style={{ color: "var(--text-muted)" }}>{text}</span>
     </div>
   );
 }
