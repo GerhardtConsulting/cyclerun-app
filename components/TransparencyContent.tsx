@@ -85,11 +85,38 @@ export default function TransparencyContent() {
             accent
           >
             <NoDataItem text={isDE ? "Kamera-Bilder oder -Videos" : "Camera images or videos"} />
-            <NoDataItem text={isDE ? "Tracking-Daten oder Cookies von Drittanbietern" : "Third-party tracking data or cookies"} />
-            <NoDataItem text={isDE ? "Google Analytics oder ähnliche Tools" : "Google Analytics or similar tools"} />
             <NoDataItem text={isDE ? "Werbedaten oder Werbe-IDs" : "Advertising data or ad IDs"} />
             <NoDataItem text={isDE ? "Standortdaten (GPS)" : "Location data (GPS)"} />
-            <NoDataItem text={isDE ? "Daten an Dritte weitergegeben" : "Data shared with third parties"} />
+            <NoDataItem text={isDE ? "Daten an Dritte verkauft" : "Data sold to third parties"} />
+          </Section>
+
+          {/* Analytics Disclosure */}
+          <Section
+            title={isDE ? "Analytics & Cookies" : "Analytics & Cookies"}
+            icon="📊"
+          >
+            <DataItem
+              title="Google Analytics 4"
+              desc={isDE
+                ? "Anonymisierte Nutzungsstatistiken zur Verbesserung der App. Nur mit deiner Einwilligung aktiviert (Consent Mode v2)."
+                : "Anonymous usage statistics to improve the app. Only activated with your consent (Consent Mode v2)."
+              }
+              legal="Art. 6(1)(a) DSGVO"
+            />
+            <DataItem
+              title={isDE ? "Technisch notwendige Cookies" : "Technically necessary cookies"}
+              desc={isDE
+                ? "localStorage für Spracheinstellung und Login-Status. Keine Tracking-Cookies ohne Einwilligung."
+                : "localStorage for language settings and login status. No tracking cookies without consent."
+              }
+              legal="Art. 6(1)(f) DSGVO"
+            />
+            <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: "0.5rem", padding: "0.75rem", background: "rgba(255,255,255,0.02)", borderRadius: 8 }}>
+              {isDE
+                ? "💡 Du kannst deine Einwilligung jederzeit widerrufen — lösche einfach die Cookies in deinem Browser."
+                : "💡 You can withdraw your consent at any time — just delete the cookies in your browser."
+              }
+            </div>
           </Section>
 
           {/* Technology Stack */}

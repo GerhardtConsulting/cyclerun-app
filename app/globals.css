@@ -2548,6 +2548,27 @@ body:has(#setupScreen.active) .site-header { display: none !important; }
 }
 
 /* ============================================
+   SUBPAGE LAYOUT (Shared across all subpages)
+   ============================================ */
+
+.subpage {
+    min-height: 100vh;
+    background: var(--bg-base);
+    color: var(--text-primary);
+}
+
+.subpage-main {
+    padding-top: 80px; /* Space for fixed header (56px height + 24px buffer) */
+    min-height: calc(100vh - 80px);
+}
+
+@media (max-width: 768px) {
+    .subpage-main {
+        padding-top: 72px; /* Slightly less on mobile */
+    }
+}
+
+/* ============================================
    SUBPAGE FOOTER (Shared across blog, routes, guides)
    ============================================ */
 

@@ -64,8 +64,8 @@ export default function SubpageFooter() {
             <span className="trust-badge-text">{isDE ? "DSGVO" : "GDPR"}</span>
           </Link>
           <Link href={isDE ? "/transparenz" : "/transparency"} className="trust-badge">
-            <span className="trust-badge-icon">🚫</span>
-            <span className="trust-badge-text">{isDE ? "Kein Tracking" : "No Tracking"}</span>
+            <span className="trust-badge-icon">✓</span>
+            <span className="trust-badge-text">{isDE ? "Opt-in Analytics" : "Opt-in Analytics"}</span>
           </Link>
           <Link href={isDE ? "/transparenz" : "/transparency"} className="trust-badge">
             <span className="trust-badge-icon">💻</span>
