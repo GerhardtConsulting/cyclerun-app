@@ -99,11 +99,12 @@ export default async function CastPage({
     const secs = (state.rideTime ?? 0) % 60;
     const videoUrl = state.videoUrl || "";
     const ytId = parseYouTubeId(videoUrl);
-    const isDirect = !ytId && isDirectVideoUrl(videoUrl);
-    const hasVideo = !!ytId || isDirect;
+    const isBlob = videoUrl.startsWith("blob:");
+    const isPlayableUrl = !!videoUrl && !isBlob && !ytId;
+    const hasVideo = !!ytId || isPlayableUrl;
     const startSec = Math.floor(state.currentTime ?? 0);
-    // Refresh slower when video is playing (less disruptive), faster for metrics-only
-    const refreshSec = hasVideo ? 10 : 2;
+    // Refresh every 5s for video (re-syncs position), every 2s for metrics-only
+    const refreshSec = hasVideo ? 5 : 2;
 
     return (
       <div className="cast-fullscreen">
@@ -117,7 +118,7 @@ export default async function CastPage({
             allowFullScreen
             style={{ border: "none" }}
           />
-        ) : isDirect ? (
+        ) : isPlayableUrl ? (
           <video
             className="cast-video"
             src={`${videoUrl}#t=${startSec}`}
@@ -129,6 +130,12 @@ export default async function CastPage({
           <div className="cast-video-fallback">
             <div className="cast-fallback-speed">{(state.speed ?? 0).toFixed(1)}</div>
             <div className="cast-fallback-unit">km/h</div>
+            {isBlob && (
+              <div className="cast-fallback-hint">
+                Lokale Videos können nicht auf den TV gecastet werden.
+                <br />Verwende eine Video-URL für TV-Cast.
+              </div>
+            )}
           </div>
         )}
 
