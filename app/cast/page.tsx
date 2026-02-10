@@ -51,6 +51,16 @@ function pad2(n: number) {
   return n.toString().padStart(2, "0");
 }
 
+function parseYouTubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
+function isDirectVideoUrl(url: string): boolean {
+  if (!url || url.startsWith("blob:")) return false;
+  return /\.(mp4|webm|ogg|m3u8)(\?|#|$)/i.test(url) || url.includes("/video/");
+}
+
 export default async function CastPage({
   searchParams,
 }: {
@@ -84,18 +94,51 @@ export default async function CastPage({
       );
     }
 
-    // Active cast found — render HUD, auto-refresh every 2s
+    // Active cast found — render HUD + video
     const mins = Math.floor((state.rideTime ?? 0) / 60);
     const secs = (state.rideTime ?? 0) % 60;
+    const videoUrl = state.videoUrl || "";
+    const ytId = parseYouTubeId(videoUrl);
+    const isDirect = !ytId && isDirectVideoUrl(videoUrl);
+    const hasVideo = !!ytId || isDirect;
+    const startSec = Math.floor(state.currentTime ?? 0);
+    // Refresh slower when video is playing (less disruptive), faster for metrics-only
+    const refreshSec = hasVideo ? 10 : 2;
 
     return (
       <div className="cast-fullscreen">
-        <meta httpEquiv="refresh" content={`2;url=/cast?code=${code}`} />
-        <div className="cast-video-fallback">
-          <div className="cast-fallback-speed">{(state.speed ?? 0).toFixed(1)}</div>
-          <div className="cast-fallback-unit">km/h</div>
-        </div>
+        <meta httpEquiv="refresh" content={`${refreshSec};url=/cast?code=${code}`} />
+
+        {ytId ? (
+          <iframe
+            className="cast-video"
+            src={`https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&start=${startSec}&loop=1&playlist=${ytId}&modestbranding=1&rel=0&showinfo=0`}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            style={{ border: "none" }}
+          />
+        ) : isDirect ? (
+          <video
+            className="cast-video"
+            src={`${videoUrl}#t=${startSec}`}
+            autoPlay
+            muted
+            playsInline
+          />
+        ) : (
+          <div className="cast-video-fallback">
+            <div className="cast-fallback-speed">{(state.speed ?? 0).toFixed(1)}</div>
+            <div className="cast-fallback-unit">km/h</div>
+          </div>
+        )}
+
         <div className="cast-hud">
+          {hasVideo && (
+            <div className="cast-hud-item cast-hud-speed">
+              <span className="cast-hud-value">{(state.speed ?? 0).toFixed(1)}</span>
+              <span className="cast-hud-label">km/h</span>
+            </div>
+          )}
           <div className="cast-hud-item">
             <span className="cast-hud-value">{state.rpm ?? 0}</span>
             <span className="cast-hud-label">RPM</span>
