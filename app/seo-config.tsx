@@ -224,6 +224,50 @@ export const schemas = {
       inLanguage: ["en", "de"],
     };
   },
+
+  aboutPage(opts: { name: string; description: string; path: string; lastReviewed?: string }): Record<string, unknown> {
+    return {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: opts.name,
+      description: opts.description,
+      url: `${SITE.url}${opts.path}`,
+      isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url },
+      lastReviewed: opts.lastReviewed ?? new Date().toISOString().split("T")[0],
+      inLanguage: ["en", "de"],
+      mainEntity: {
+        "@type": "Organization",
+        name: SITE.name,
+        url: SITE.url,
+      },
+    };
+  },
+
+  privacyPolicy(opts: { path: string; locale: "en" | "de" }): Record<string, unknown> {
+    const isDE = opts.locale === "de";
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: isDE ? "Transparenzbericht" : "Transparency Report",
+      description: isDE
+        ? "Wie CycleRun deine Daten verarbeitet und deine Privatsphäre schützt. DSGVO-konform."
+        : "How CycleRun processes your data and protects your privacy. GDPR compliant.",
+      url: `${SITE.url}${opts.path}`,
+      isPartOf: { "@type": "WebSite", name: SITE.name, url: SITE.url },
+      inLanguage: opts.locale,
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["h1", "h2", ".trust-badge-text"],
+      },
+      about: {
+        "@type": "Thing",
+        name: isDE ? "Datenschutz und Transparenz" : "Privacy and Transparency",
+        description: isDE
+          ? "DSGVO Art. 15-17: Auskunftsrecht, Recht auf Berichtigung, Recht auf Löschung"
+          : "GDPR Art. 15-17: Right of Access, Right to Rectification, Right to Erasure",
+      },
+    };
+  },
 };
 
 /* ------------------------------------------------------------------ */
