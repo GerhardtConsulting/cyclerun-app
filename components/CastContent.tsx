@@ -5,7 +5,6 @@ import { pollCastState, type CastState } from "@/lib/phone-pairing";
 import { initLocale, t, type Locale } from "@/lib/i18n";
 
 function CastInner() {
-  const [code, setCode] = useState("");
   const [status, setStatus] = useState<"input" | "connecting" | "playing" | "error">("input");
   const [errorMsg, setErrorMsg] = useState("");
   const [locale, setLocale] = useState<Locale>("en");
@@ -13,14 +12,14 @@ function CastInner() {
   const [videoError, setVideoError] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const inputPollRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const lastSyncRef = useRef(0);
   const loadedUrlRef = useRef("");
   const startedRef = useRef(false);
   const videoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const codeRef = useRef("");
 
-  // Read URL code on client only (useEffect never runs on server)
   useEffect(() => {
     setLocale(initLocale());
 
@@ -32,11 +31,25 @@ function CastInner() {
     } catch {}
 
     if (urlCode) {
-      codeRef.current = urlCode;
-      setCode(urlCode);
       startedRef.current = true;
       doStartCast(urlCode);
+      return;
     }
+
+    // Poll the input DOM element every 500ms for its value.
+    // This is the most bulletproof approach for TV browsers (Sony/Opera/Vewd)
+    // that may not fire onChange, onSubmit, or onClick events reliably.
+    inputPollRef.current = setInterval(() => {
+      if (startedRef.current) return;
+      const el = inputRef.current;
+      if (!el) return;
+      const val = el.value.replace(/\D/g, "");
+      if (val.length === 4) {
+        startedRef.current = true;
+        doStartCast(val);
+      }
+    }, 500);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -114,34 +127,16 @@ function CastInner() {
     }
   }, [castState]);
 
-  // Cleanup polling + video timeout on unmount
+  // Cleanup all intervals + timeouts on unmount
   useEffect(() => {
     return () => {
       if (pollRef.current) clearInterval(pollRef.current);
+      if (inputPollRef.current) clearInterval(inputPollRef.current);
       if (videoTimeoutRef.current) clearTimeout(videoTimeoutRef.current);
     };
   }, []);
 
   const isDE = locale === "de";
-
-  function handleInput(val: string) {
-    const clean = val.replace(/\D/g, "").slice(0, 4);
-    codeRef.current = clean;
-    setCode(clean);
-    if (clean.length === 4 && !startedRef.current) {
-      startedRef.current = true;
-      doStartCast(clean);
-    }
-  }
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const cur = codeRef.current;
-    if (cur.length === 4 && !startedRef.current) {
-      startedRef.current = true;
-      doStartCast(cur);
-    }
-  }
 
   // ---- INPUT SCREEN ----
   if (status === "input" || status === "error") {
@@ -155,31 +150,24 @@ function CastInner() {
             </svg>
           </div>
           <h1 className="cast-title">{isDE ? "Cast-Code eingeben" : "Enter Cast Code"}</h1>
-          <p className="cast-subtitle">{isDE ? "4-stelliger Code von deinem Trainingsgerät" : "4-digit code from your training device"}</p>
+          <p className="cast-subtitle">
+            {isDE
+              ? "4-stelligen Code eingeben — verbindet automatisch"
+              : "Enter 4-digit code — connects automatically"}
+          </p>
 
-          <form onSubmit={handleSubmit}>
-            <input
-              className="cast-code-input"
-              type="tel"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              maxLength={4}
-              placeholder="0000"
-              autoComplete="off"
-              value={code}
-              onChange={(e) => handleInput(e.target.value)}
-            />
+          <input
+            ref={inputRef}
+            className="cast-code-input"
+            type="tel"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            maxLength={4}
+            placeholder="0000"
+            autoComplete="off"
+          />
 
-            {status === "error" && <p className="cast-error">{errorMsg}</p>}
-
-            <button
-              type="submit"
-              className="btn-primary btn-lg btn-full"
-              disabled={code.length !== 4}
-            >
-              {isDE ? "Verbinden" : "Connect"}
-            </button>
-          </form>
+          {status === "error" && <p className="cast-error">{errorMsg}</p>}
         </div>
       </div>
     );
