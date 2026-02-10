@@ -37,29 +37,6 @@ function CastInner() {
       startedRef.current = true;
       doStartCast(urlCode);
     }
-
-    // Listen for number key presses from TV remote directly
-    function onKeyDown(e: KeyboardEvent) {
-      if (startedRef.current) return;
-      if (e.key >= "0" && e.key <= "9") {
-        const cur = codeRef.current;
-        if (cur.length < 4) {
-          const next = cur + e.key;
-          codeRef.current = next;
-          setCode(next);
-          if (next.length === 4) {
-            startedRef.current = true;
-            doStartCast(next);
-          }
-        }
-      } else if (e.key === "Backspace") {
-        const next = codeRef.current.slice(0, -1);
-        codeRef.current = next;
-        setCode(next);
-      }
-    }
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -151,9 +128,14 @@ function CastInner() {
     const clean = val.replace(/\D/g, "").slice(0, 4);
     codeRef.current = clean;
     setCode(clean);
+    if (clean.length === 4 && !startedRef.current) {
+      startedRef.current = true;
+      doStartCast(clean);
+    }
   }
 
-  function handleConnect() {
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
     const cur = codeRef.current;
     if (cur.length === 4 && !startedRef.current) {
       startedRef.current = true;
@@ -175,27 +157,29 @@ function CastInner() {
           <h1 className="cast-title">{isDE ? "Cast-Code eingeben" : "Enter Cast Code"}</h1>
           <p className="cast-subtitle">{isDE ? "4-stelliger Code von deinem Trainingsgerät" : "4-digit code from your training device"}</p>
 
-          <input
-            className="cast-code-input"
-            type="number"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            placeholder="0000"
-            autoComplete="off"
-            value={code}
-            onChange={(e) => handleInput(e.target.value)}
-            onKeyDown={(e) => { if (e.key === "Enter") handleConnect(); }}
-          />
+          <form onSubmit={handleSubmit}>
+            <input
+              className="cast-code-input"
+              type="tel"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              maxLength={4}
+              placeholder="0000"
+              autoComplete="off"
+              value={code}
+              onChange={(e) => handleInput(e.target.value)}
+            />
 
-          {status === "error" && <p className="cast-error">{errorMsg}</p>}
+            {status === "error" && <p className="cast-error">{errorMsg}</p>}
 
-          <button
-            className="btn-primary btn-lg btn-full"
-            disabled={code.length !== 4}
-            onClick={handleConnect}
-          >
-            {isDE ? "Verbinden" : "Connect"}
-          </button>
+            <button
+              type="submit"
+              className="btn-primary btn-lg btn-full"
+              disabled={code.length !== 4}
+            >
+              {isDE ? "Verbinden" : "Connect"}
+            </button>
+          </form>
         </div>
       </div>
     );
