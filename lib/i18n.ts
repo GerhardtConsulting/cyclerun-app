@@ -142,10 +142,20 @@ const translations: Record<Locale, Record<string, string>> = {
     "video.url.label": "Paste Video URL",
     "video.url.placeholder": "https://example.com/ride.mp4",
     "video.url.load": "Load",
-    "video.url.hint": "Direct link to MP4 or WebM file",
+    "video.url.hint": "YouTube URL or direct link to MP4/WebM",
     "video.upload.label": "Upload from Device",
     "video.upload.btn": "Choose local video file",
     "video.privacy": "Your video stays on your device. Nothing is uploaded to our servers.",
+
+    // YouTube
+    "yt.checking": "Checking video...",
+    "yt.valid": "Video available",
+    "yt.embeddable": "Ready to play",
+    "yt.not_embeddable": "Embedding disabled by uploader",
+    "yt.not_found": "Video not found or private",
+    "yt.error": "Could not verify video",
+    "yt.disclaimer": "Streamed from YouTube. Subject to YouTube ToS.",
+    "yt.disclaimer.long": "This video is streamed directly from YouTube. CycleRun does not host or store video content. Playback is subject to YouTube's Terms of Service.",
 
     // Registration
     "reg.title": "Track your progress",
@@ -639,10 +649,20 @@ const translations: Record<Locale, Record<string, string>> = {
     "video.url.label": "Video-URL einfügen",
     "video.url.placeholder": "https://beispiel.de/fahrt.mp4",
     "video.url.load": "Laden",
-    "video.url.hint": "Direktlink zu MP4 oder WebM Datei",
+    "video.url.hint": "YouTube-URL oder Direktlink zu MP4/WebM",
     "video.upload.label": "Von Gerät hochladen",
     "video.upload.btn": "Lokale Videodatei wählen",
     "video.privacy": "Dein Video bleibt auf deinem Gerät. Es wird nichts auf unsere Server hochgeladen.",
+
+    // YouTube
+    "yt.checking": "Video wird geprüft...",
+    "yt.valid": "Video verfügbar",
+    "yt.embeddable": "Bereit zum Abspielen",
+    "yt.not_embeddable": "Einbettung vom Uploader deaktiviert",
+    "yt.not_found": "Video nicht gefunden oder privat",
+    "yt.error": "Video konnte nicht geprüft werden",
+    "yt.disclaimer": "Von YouTube gestreamt. YouTube-AGB gelten.",
+    "yt.disclaimer.long": "Dieses Video wird direkt von YouTube gestreamt. CycleRun hostet keine Videoinhalte. Die Wiedergabe unterliegt den YouTube-Nutzungsbedingungen.",
 
     // Registration
     "reg.title": "Tracke deinen Fortschritt",
