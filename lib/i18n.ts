@@ -162,6 +162,14 @@ const translations: Record<Locale, Record<string, string>> = {
     "reg.submit": "Create Free Account",
     "reg.hint": "No password. No credit card. Free forever.",
 
+    // Email confirmation (DOIP)
+    "doip.title": "Confirm your email",
+    "doip.text": "Please confirm your email address to save your progress permanently. Without confirmation, your data may be deleted after 48 hours.",
+    "doip.resend": "Resend confirmation email",
+    "doip.sent": "Confirmation email sent!",
+    "doip.check": "Check your inbox and spam folder.",
+    "doip.error": "Could not send email. Please try again.",
+
     // Cookie
     "cookie.title": "Your privacy matters.",
     "cookie.text": "CycleRun only uses technically necessary cookies and localStorage. No tracking, no ads, no Google Analytics.",
@@ -650,6 +658,14 @@ const translations: Record<Locale, Record<string, string>> = {
     "reg.consent.2": " zu. Meine Daten werden nur zur Verbesserung des Produkts verwendet.",
     "reg.submit": "Kostenloses Konto erstellen",
     "reg.hint": "Kein Passwort. Keine Kreditkarte. Für immer kostenlos.",
+
+    // Email confirmation (DOIP)
+    "doip.title": "Bestätige deine E-Mail",
+    "doip.text": "Bitte bestätige deine E-Mail-Adresse, um deinen Fortschritt dauerhaft zu speichern. Ohne Bestätigung können deine Daten nach 48 Stunden gelöscht werden.",
+    "doip.resend": "Bestätigungsmail erneut senden",
+    "doip.sent": "Bestätigungsmail gesendet!",
+    "doip.check": "Prüfe deinen Posteingang und Spam-Ordner.",
+    "doip.error": "E-Mail konnte nicht gesendet werden. Bitte versuche es erneut.",
 
     // Cookie
     "cookie.title": "Datenschutz ist uns wichtig.",

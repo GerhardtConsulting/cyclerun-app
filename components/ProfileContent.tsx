@@ -13,6 +13,8 @@ interface UserProfile {
   id: string;
   display_name: string | null;
   first_name: string;
+  email: string;
+  email_confirmed: boolean;
   total_energy: number;
   total_sessions: number;
   total_distance_km: number;
@@ -81,6 +83,9 @@ export default function ProfileContent() {
   const [saving, setSaving] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [referralCopied, setReferralCopied] = useState(false);
+  const [resendingEmail, setResendingEmail] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState(false);
+  const [resendError, setResendError] = useState("");
 
   const loadProfile = useCallback(async () => {
     const email = typeof window !== "undefined" ? localStorage.getItem("cyclerun_email") : null;
@@ -96,7 +101,7 @@ export default function ProfileContent() {
     // Fetch user
     const { data: userData } = await sb
       .from("registrations")
-      .select("id, display_name, first_name, total_energy, total_sessions, total_distance_km, total_duration_seconds, current_streak, longest_streak, streak_freeze_available, level, avatar_url, nickname, slug, is_public, referral_code, credits, onboarding_completed")
+      .select("id, display_name, first_name, email, email_confirmed, total_energy, total_sessions, total_distance_km, total_duration_seconds, current_streak, longest_streak, streak_freeze_available, level, avatar_url, nickname, slug, is_public, referral_code, credits, onboarding_completed")
       .eq("email", email)
       .single();
 
@@ -285,6 +290,63 @@ export default function ProfileContent() {
                     >
                       {isDE ? "Verstanden" : "Got it"}
                     </button>
+                  </div>
+                </div>
+              )}
+
+              {/* DOIP Warning Banner — DSGVO-compliant email confirmation reminder */}
+              {!user.email_confirmed && (
+                <div style={{
+                  background: "linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.05))",
+                  border: "1px solid rgba(251,191,36,0.25)",
+                  borderRadius: 14, padding: "1.25rem", marginBottom: "1rem",
+                }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
+                    <span style={{ fontSize: "1.5rem" }}>⚠️</span>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: "0.35rem", color: "#fbbf24" }}>
+                        {t("doip.title")}
+                      </h3>
+                      <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", lineHeight: 1.5, marginBottom: "0.75rem" }}>
+                        {t("doip.text")}
+                      </p>
+                      {resendSuccess ? (
+                        <div style={{ fontSize: "0.85rem", color: "#22c55e" }}>
+                          ✓ {t("doip.sent")} {t("doip.check")}
+                        </div>
+                      ) : resendError ? (
+                        <div style={{ fontSize: "0.85rem", color: "#ef4444", marginBottom: "0.5rem" }}>
+                          {t("doip.error")}
+                        </div>
+                      ) : null}
+                      <button
+                        className="btn-primary"
+                        style={{ padding: "0.5rem 1rem", fontSize: "0.8rem", marginTop: resendSuccess ? 0 : "0.25rem" }}
+                        disabled={resendingEmail || resendSuccess}
+                        onClick={async () => {
+                          if (!user.email) return;
+                          setResendingEmail(true);
+                          setResendError("");
+                          try {
+                            const res = await fetch("/api/resend-confirmation", {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({ email: user.email }),
+                            });
+                            if (res.ok) {
+                              setResendSuccess(true);
+                            } else {
+                              setResendError(t("doip.error"));
+                            }
+                          } catch {
+                            setResendError(t("doip.error"));
+                          }
+                          setResendingEmail(false);
+                        }}
+                      >
+                        {resendingEmail ? "..." : t("doip.resend")}
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}

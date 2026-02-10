@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { useLocale } from "@/lib/useLocale";
+import { t } from "@/lib/i18n";
 import SubpageNav from "@/components/SubpageNav";
 import SubpageFooter from "@/components/SubpageFooter";
 import { getSupabase } from "@/lib/supabase";
@@ -30,6 +31,8 @@ interface UserStats {
   current_streak: number;
   longest_streak: number;
   first_name: string;
+  email: string;
+  email_confirmed: boolean;
 }
 
 interface WeeklyData {
@@ -77,6 +80,9 @@ export default function DashboardContent() {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [weeklyData, setWeeklyData] = useState<WeeklyData[]>([]);
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
+  const [resendingEmail, setResendingEmail] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState(false);
+  const [resendError, setResendError] = useState("");
 
   const loadDashboard = useCallback(async () => {
     const email = typeof window !== "undefined" ? localStorage.getItem("cyclerun_email") : null;
@@ -92,7 +98,7 @@ export default function DashboardContent() {
     // Fetch user stats
     const { data: userData } = await sb
       .from("registrations")
-      .select("id, first_name, total_sessions, total_distance_km, total_duration_seconds, total_energy, level, current_streak, longest_streak")
+      .select("id, first_name, email, email_confirmed, total_sessions, total_distance_km, total_duration_seconds, total_energy, level, current_streak, longest_streak")
       .eq("email", email)
       .single();
 
@@ -204,6 +210,63 @@ export default function DashboardContent() {
               {isDE ? "Neue Fahrt" : "New Ride"}
             </Link>
           </div>
+
+          {/* DOIP Warning Banner — DSGVO-compliant email confirmation reminder */}
+          {stats && !stats.email_confirmed && (
+            <div style={{
+              background: "linear-gradient(135deg, rgba(251,191,36,0.1), rgba(245,158,11,0.05))",
+              border: "1px solid rgba(251,191,36,0.25)",
+              borderRadius: 14, padding: "1rem 1.25rem", marginBottom: "1.5rem",
+            }}>
+              <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
+                <span style={{ fontSize: "1.25rem" }}>⚠️</span>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ fontSize: "0.9rem", fontWeight: 700, marginBottom: "0.25rem", color: "#fbbf24" }}>
+                    {t("doip.title")}
+                  </h3>
+                  <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.5, marginBottom: "0.5rem" }}>
+                    {t("doip.text")}
+                  </p>
+                  {resendSuccess ? (
+                    <div style={{ fontSize: "0.8rem", color: "#22c55e" }}>
+                      ✓ {t("doip.sent")} {t("doip.check")}
+                    </div>
+                  ) : resendError ? (
+                    <div style={{ fontSize: "0.8rem", color: "#ef4444", marginBottom: "0.35rem" }}>
+                      {t("doip.error")}
+                    </div>
+                  ) : null}
+                  <button
+                    className="btn-primary"
+                    style={{ padding: "0.4rem 0.85rem", fontSize: "0.75rem" }}
+                    disabled={resendingEmail || resendSuccess}
+                    onClick={async () => {
+                      if (!stats.email) return;
+                      setResendingEmail(true);
+                      setResendError("");
+                      try {
+                        const res = await fetch("/api/resend-confirmation", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({ email: stats.email }),
+                        });
+                        if (res.ok) {
+                          setResendSuccess(true);
+                        } else {
+                          setResendError(t("doip.error"));
+                        }
+                      } catch {
+                        setResendError(t("doip.error"));
+                      }
+                      setResendingEmail(false);
+                    }}
+                  >
+                    {resendingEmail ? "..." : t("doip.resend")}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Stats Overview - Bento Grid */}
           <div className="dashboard-bento">
