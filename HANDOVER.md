@@ -595,7 +595,7 @@ git push origin main    # Vercel Auto-Deploy
 |---------|-----------|--------|
 | Cookie Consent | `components/CookieConsent.tsx` | Einzige Implementierung, eingebunden in `app/layout.tsx` |
 | Google Analytics | `components/CookieConsent.tsx` | GA4 Script wird dort dynamisch geladen |
-| Registrierung | `/api/register` Route | Alle Einstiegspunkte nutzen diese API |
+| Registrierung | `/api/register` Route | Alle Einstiegspunkte nutzen diese API |https://github.com/Greenlightfitness/greenlight-fitness-app
 | Login | `components/SubpageNav.tsx` | Login-Modal ist dort eingebaut |
 | Navigation Header | `components/SubpageNav.tsx` | Einziger Header für ALLE Seiten |
 | Navigation Footer | `components/SubpageFooter.tsx` | Einziger Footer für ALLE Seiten |

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import LocaleSync from "@/components/LocaleSync";
 import CookieConsent from "@/components/CookieConsent";
-import { defaultMetadata, JsonLd, schemas, homepageFaqs } from "@/app/seo-config";
+import { defaultMetadata, JsonLd, schemas } from "@/app/seo-config";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -48,7 +48,6 @@ export default function RootLayout({
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-WL522VY008" />
         <JsonLd data={[
           schemas.webApplication(),
-          schemas.faqPage(homepageFaqs),
           schemas.organization(),
         ]} />
       </head>
