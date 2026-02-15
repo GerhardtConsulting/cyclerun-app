@@ -30,7 +30,7 @@ function withAlternates(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date("2026-02-08");
+  const now = new Date("2026-02-15");
 
   const staticPages: MetadataRoute.Sitemap = [
     withAlternates(BASE, { lastModified: now, changeFrequency: "weekly", priority: 1.0 }),
@@ -39,10 +39,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     withAlternates(`${BASE}/routes`, { lastModified: now, changeFrequency: "weekly", priority: 0.8 }),
     withAlternates(`${BASE}/guide`, { lastModified: now, changeFrequency: "weekly", priority: 0.9 }),
     withAlternates(`${BASE}/store`, { lastModified: now, changeFrequency: "daily", priority: 0.9 }),
+    withAlternates(`${BASE}/leaderboard`, { lastModified: now, changeFrequency: "daily", priority: 0.8 }),
     withAlternates(`${BASE}/roadmap`, { lastModified: now, changeFrequency: "weekly", priority: 0.7 }),
     withAlternates(`${BASE}/changelog`, { lastModified: now, changeFrequency: "weekly", priority: 0.7 }),
     withAlternates(`${BASE}/datenschutz`, { lastModified: now, changeFrequency: "yearly", priority: 0.3 }),
     withAlternates(`${BASE}/impressum`, { lastModified: now, changeFrequency: "yearly", priority: 0.3 }),
+    withAlternates(`${BASE}/transparenz`, { lastModified: now, changeFrequency: "yearly", priority: 0.4 }),
+    withAlternates(`${BASE}/transparency`, { lastModified: now, changeFrequency: "yearly", priority: 0.4 }),
   ];
 
   const blogPages: MetadataRoute.Sitemap = getAllBlogSlugs().map((slug) =>
